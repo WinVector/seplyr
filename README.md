@@ -3,12 +3,6 @@ This document describes the [`R`](https://www.r-project.org) package [`seplyr`](
 
 The idea is this package lets you program over `dplyr` 0.7.\* without needing a Ph.D. in computer science.
 
-To install this packing in `R` please try the following command (assumes you have `devtools` already installed, and may trigger a re-install of `dplyr`):
-
-``` r
-devtools::install_github('WinVector/seplyr')
-```
-
 In `dplyr` if you know the names of columns when you are writing code you can write code such as the following.
 
 ``` r
@@ -81,7 +75,7 @@ print(group_by_se)
  #    groupingSyms <- rlang::syms(groupingVars)
  #    group_by(.data = .data, !!!groupingSyms, add = add)
  #  }
- #  <bytecode: 0x7fea5ff11ed8>
+ #  <bytecode: 0x7fdb7cd77148>
  #  <environment: namespace:seplyr>
 ```
 
