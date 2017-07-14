@@ -19,3 +19,5 @@ Suggests: knitr,
     rmarkdown,
     testthat
 VignetteBuilder: knitr
+ByteCompile: true
+

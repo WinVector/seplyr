@@ -1,12 +1,20 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-This document describe the [`R`](https://www.r-project.org) package `seplyr` which supplies *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs.
+This document describe the [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) which supplies *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs.
 
 The idea is this package lets you program over `dplyr` 0.7.\* without needing a Ph.D. in computer science.
+
+To install this packing in `R` please try the following command (assumes you have `devtools` already installed, and may trigger a re-install of `dplyr`):
+
+``` r
+devtools::install_github('WinVector/seplyr')
+```
 
 In `dplyr` if you know the names of columns when you are writing code you can write code such as the following.
 
 ``` r
 suppressPackageStartupMessages(library("dplyr"))
+packageVersion("dplyr")
+ #  [1] '0.7.1.9000'
 
 datasets::mtcars %>% 
   group_by(cyl, gear) %>% 
@@ -46,6 +54,7 @@ datasets::mtcars %>%
 If you don't want to try and digest entire theory of quasi-quoting (the `rlang::syms()`) and splicing (the `!!!`) then you can use `seplyr` which conveniently wraps the operations as follows:
 
 ``` r
+# devtools::install_github('WinVector/seplyr')
 library("seplyr")
 
 datasets::mtcars %>% 
@@ -72,6 +81,7 @@ print(group_by_se)
  #    groupingSyms <- rlang::syms(groupingVars)
  #    group_by(.data = .data, !!!groupingSyms, add = add)
  #  }
+ #  <bytecode: 0x7fa208508ae0>
  #  <environment: namespace:seplyr>
 ```
 
