@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-This document describe the [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) which supplies *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs.
+This document describes the [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) which supplies *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs.
 
 The idea is this package lets you program over `dplyr` 0.7.\* without needing a Ph.D. in computer science.
 
@@ -81,7 +81,7 @@ print(group_by_se)
  #    groupingSyms <- rlang::syms(groupingVars)
  #    group_by(.data = .data, !!!groupingSyms, add = add)
  #  }
- #  <bytecode: 0x7fddf7b8a8a8>
+ #  <bytecode: 0x7fabe24d08a8>
  #  <environment: namespace:seplyr>
 ```
 
