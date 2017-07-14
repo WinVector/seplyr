@@ -72,7 +72,7 @@ datasets::mtcars %>%
  #  6  18.1     6   225   105  2.76 3.460 20.22     1     0     3     1
 ```
 
-And that is it. `seplyr::group_by_se()` performs the wrapping for you without you having to work through the details of `rlang`. If you are interested in the details `sepyr` itself is a good tutorial. For example you can examine `seplyr`'s implementation to see the necessary notations:
+And that is it. `seplyr::group_by_se()` performs the wrapping for you without you having to work through the details of `rlang`. If you are interested in the details `seplyr` itself is a good tutorial. For example you can examine `seplyr`'s implementation to see the necessary notations:
 
 ``` r
 print(group_by_se)
@@ -81,7 +81,7 @@ print(group_by_se)
  #    groupingSyms <- rlang::syms(groupingVars)
  #    group_by(.data = .data, !!!groupingSyms, add = add)
  #  }
- #  <bytecode: 0x7fabe24d08a8>
+ #  <bytecode: 0x7fea5ff11ed8>
  #  <environment: namespace:seplyr>
 ```
 
