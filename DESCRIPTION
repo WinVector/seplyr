@@ -1,23 +1,23 @@
 Package: seplyr
 Type: Package
-Title: Standard Evaluation Interfaces for Common Dplyr Tasks
+Title: Standard Evaluation Interfaces for Common 'dplyr' Tasks
 Version: 0.1.0
 Author: John Mount
 Maintainer: John Mount <jmount@win-vector.com>
-Description:     The seplyr (standard evaluation data.frame dplyr) package supplies
-    standard evaluation adapter methods for important common dplyr methods
+Description:     The 'seplyr' (standard evaluation data.frame 'dplyr') package supplies
+    standard evaluation adapter methods for important common 'dplyr' methods
     that currently have a non-standard programming interface. This allows
-    the analyst to use dplyr to perform fundamental data transformation
+    the analyst to use 'dplyr' to perform fundamental data transformation
     steps such as arranging rows, grouping rows, aggregating selecting
-    columns without having to use learn the details of rlang/tidyeval
+    columns without having to use learn the details of 'rlang'/'tidyeval'
     non-standard evaluation and without continuing to rely on now
-    deprecated dplyr "underscore verbs."
-    In addition the seplyr package supplies several new "key operations
-    bound together" methods.  These include group_summarize (which
+    deprecated 'dplyr' "underscore verbs."
+    In addition the 'seplyr' package supplies several new "key operations
+    bound together" methods.  These include 'group_summarize()' (which
     combines grouping, arranging and calculation in an atomic unit),
-    add_group_summaries (which joins grouped summaries into a data.frame
-    in a well documented manner), and add_group_indices (which adds
-    per-group identifies to a data frame without depending on row-order).
+    'add_group_summaries()' (which joins grouped summaries into a 'data.frame'
+    in a well documented manner), and 'add_group_indices()' (which adds
+    per-group identifies to a 'data.frame' without depending on row-order).
 License: GPL-3
 Encoding: UTF-8
 Depends:

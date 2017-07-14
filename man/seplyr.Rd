@@ -6,20 +6,20 @@
 \alias{seplyr-package}
 \title{\code{seplyr}: Standard Evaluation Interfaces for Common \code{dplyr} Verbs}
 \description{
-The seplyr (standard evaluation data.frame dplyr) package supplies
-standard evaluation adapter methods for important common dplyr methods
+The \code{seplyr} (standard evaluation data.frame \code{dplyr}) package supplies
+standard evaluation adapter methods for important common \code{dplyr} methods
 that currently have a non-standard programming interface. This allows
-the analyst to use dplyr to perform fundamental data transformation
+the analyst to use \code{dplyr} to perform fundamental data transformation
 steps such as arranging rows, grouping rows, aggregating selecting
-columns without having to use learn the details of rlang/tidyeval
+columns without having to use learn the details of \code{rlang}/\code{tidyeval}
 non-standard evaluation and without continuing to rely on now
-deprecated dplyr "underscore verbs."
+deprecated \code{dplyr} "underscore verbs."
 }
 \details{
-In addition the seplyr package supplies several new "key operations
-bound together" methods.  These include group_summarize (which
+In addition the \code{seplyr} package supplies several new "key operations
+bound together" methods.  These include \code{group_summarize()} (which
 combines grouping, arranging and calculation in an atomic unit),
-add_group_summaries (which joins grouped summaries into a data.frame
-in a well documented manner), and add_group_indices (which adds
-per-group identifies to a data frame without depending on row-order).
+\code{add_group_summaries()} (which joins grouped summaries into a \code{data.frame}
+in a well documented manner), and \code{add_group_indices()} (which adds
+per-group identifies to a \code{data.frame} without depending on row-order).
 }
