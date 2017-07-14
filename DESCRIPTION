@@ -1,0 +1,21 @@
+Package: seplyr
+Type: Package
+Title: Standard Evaluation Interfaces for Common Dplyr Verbs
+Version: 0.1.0
+Author: John Mount
+Maintainer: John Mount <jmount@win-vector.com>
+Description: Supplies replacement interfaces for dplyr that take
+    variable names as simple strings.
+License: GPL-3
+Encoding: UTF-8
+Depends:
+    dplyr (>= 0.7.1)
+Imports:
+    rlang (>= 0.1.1),
+    datasets
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr
