@@ -13,6 +13,7 @@
 #'
 #' groupingVars = c("cyl", "gear")
 #' datasets::mtcars %>%
+#'   # dplyr doesn't currently export tibble::rownames_to_column()
 #'   { mutate(., CarName = rownames(.) ) } %>%
 #'   select_se(c('CarName', 'cyl', 'gear', 'hp', 'wt')) %>%
 #'   add_group_indices(groupingVars = groupingVars,
