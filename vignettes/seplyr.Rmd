@@ -58,3 +58,4 @@ In addition to the series of adapters we also supply a number of useful new verb
  * `add_group_summaries()` Adds per-group summaries to data.
  * `add_group_indices()` Adds a column of per-group ids to data.
  * `add_in_group_indices()` Adds a column of in-group rank ids to data.
+ * `add_rank_indices()` Adds rank indices to data.

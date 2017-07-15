@@ -19,7 +19,7 @@ add_in_group_indices(.data, ..., groupingVars, arrangeTerms = NULL,
 \item{orderColumn}{character name of column to add in-group order marks to.}
 }
 \value{
-.data with group identifying column added.
+.data with in group order indices added (no ties).
 }
 \description{
 Group a data frame and add in-group indices as a column.
@@ -35,7 +35,8 @@ datasets::mtcars \%>\%
                     indexColumn = 'groupID') \%>\%
   add_in_group_indices(groupingVars = groupingVars,
                        arrangeTerms = c('desc(hp)', 'wt'),
-                       orderColumn = 'orderInGroup')
+                       orderColumn = 'orderInGroup') \%>\%
+  arrange_se(c('groupID', 'orderInGroup'))
 
 
 }

@@ -6,7 +6,7 @@
 #' @param groupingVars character vector of column names to group by.
 #' @param arrangeTerms character vector of column expressions to arrange by.
 #' @param orderColumn character name of column to add in-group order marks to.
-#' @return .data with group identifying column added.
+#' @return .data with in group order indices added (no ties).
 #'
 #' @examples
 #'
@@ -19,7 +19,8 @@
 #'                     indexColumn = 'groupID') %>%
 #'   add_in_group_indices(groupingVars = groupingVars,
 #'                        arrangeTerms = c('desc(hp)', 'wt'),
-#'                        orderColumn = 'orderInGroup')
+#'                        orderColumn = 'orderInGroup') %>%
+#'   arrange_se(c('groupID', 'orderInGroup'))
 #'
 #'
 #' @export
@@ -30,7 +31,7 @@ add_in_group_indices <- function(.data,
                                  arrangeTerms = NULL,
                                  orderColumn) {
   .data <- ungroup(.data) # just in case
-  if(length(list(...))) {
+  if(length(list(...))>0) {
     stop("seplyr::add_in_group_indices unexpected arguments")
   }
   `:=` <- NULL # don't let look like an unbound reference to CRAN checker
