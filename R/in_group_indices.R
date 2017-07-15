@@ -17,7 +17,7 @@
 #'   select_se(c('CarName', 'cyl', 'gear', 'hp', 'wt')) %>%
 #'   add_group_indices(groupingVars = groupingVars,
 #'                     indexColumn = 'groupID') %>%
-#'   add_in_group_indices(groupingVars = groupingVars,
+#'   add_group_sub_indices(groupingVars = groupingVars,
 #'                        arrangeTerms = c('desc(hp)', 'wt'),
 #'                        orderColumn = 'orderInGroup') %>%
 #'   arrange_se(c('groupID', 'orderInGroup'))
@@ -25,14 +25,14 @@
 #'
 #' @export
 #'
-add_in_group_indices <- function(.data,
+add_group_sub_indices <- function(.data,
                                  ...,
                                  groupingVars,
                                  arrangeTerms = NULL,
                                  orderColumn) {
   .data <- ungroup(.data) # just in case
   if(length(list(...))>0) {
-    stop("seplyr::add_in_group_indices unexpected arguments")
+    stop("seplyr::add_group_sub_indices unexpected arguments")
   }
   `:=` <- NULL # don't let look like an unbound reference to CRAN checker
   if(is.null(arrangeTerms)) {

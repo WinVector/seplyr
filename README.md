@@ -87,7 +87,7 @@ print(group_by_se)
  #    groupingSyms <- rlang::syms(groupingVars)
  #    group_by(.data = .data, !!!groupingSyms, add = add)
  #  }
- #  <bytecode: 0x7fcb16a6ec28>
+ #  <bytecode: 0x7ff15e636028>
  #  <environment: namespace:seplyr>
 ```
 
@@ -98,7 +98,7 @@ In addition to the series of adapters we also supply a number of useful new verb
 -   `group_summarize()` Binds grouping, arrangement, and summarization together for clear documentation of intent.
 -   `add_group_summaries()` Adds per-group summaries to data.
 -   `add_group_indices()` Adds a column of per-group ids to data.
--   `add_in_group_indices()` Adds a column of in-group rank ids to data.
+-   `add_group_sub_indices()` Adds a column of in-group rank ids to data.
 -   `add_rank_indices()` Adds rank indices to data.
 
 `seplyr` is designed to be a thin package that passes all work to `dplyr`. If you want a package that works around `dplyr` implementation differences on different data sources I suggest trying our own [`replyr`](https://CRAN.R-project.org/package=replyr) package.
