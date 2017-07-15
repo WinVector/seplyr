@@ -3,6 +3,18 @@ This document describes the [`R`](https://www.r-project.org) package [`seplyr`](
 
 The idea is this package lets you program over `dplyr` 0.7.\* without needing a Ph.D. in computer science.
 
+To install this packing in `R` please either install from [CRAN](https://CRAN.R-project.org/package=seplyr) with:
+
+``` r
+   install.packages('seplyr')
+```
+
+or from [GitHub](https://github.com/WinVector/seplyr):
+
+``` r
+   devtools::install_github('WinVector/seplyr')
+```
+
 In `dplyr` if you know the names of columns when you are writing code you can write code such as the following.
 
 ``` r
@@ -75,7 +87,7 @@ print(group_by_se)
  #    groupingSyms <- rlang::syms(groupingVars)
  #    group_by(.data = .data, !!!groupingSyms, add = add)
  #  }
- #  <bytecode: 0x7fdb7cd77148>
+ #  <bytecode: 0x7fe98067f340>
  #  <environment: namespace:seplyr>
 ```
 
