@@ -1,8 +1,11 @@
 #' \code{seplyr}: Standard Evaluation Interfaces for Common \code{dplyr} Verbs
 #'
+#'
 #' The \code{seplyr} (standard evaluation data.frame \code{dplyr}) package supplies
 #' standard evaluation adapter methods for important common \code{dplyr} methods
-#' that currently have a non-standard programming interface. This allows
+#' that currently have a non-standard programming interface.
+#'
+#' This package allows
 #' the analyst to use \code{dplyr} to perform fundamental data transformation
 #' steps such as arranging rows, grouping rows, aggregating selecting
 #' columns without having to use learn the details of \code{rlang}/\code{tidyeval}

@@ -8,14 +8,16 @@
 \description{
 The \code{seplyr} (standard evaluation data.frame \code{dplyr}) package supplies
 standard evaluation adapter methods for important common \code{dplyr} methods
-that currently have a non-standard programming interface. This allows
+that currently have a non-standard programming interface.
+}
+\details{
+This package allows
 the analyst to use \code{dplyr} to perform fundamental data transformation
 steps such as arranging rows, grouping rows, aggregating selecting
 columns without having to use learn the details of \code{rlang}/\code{tidyeval}
 non-standard evaluation and without continuing to rely on now
 deprecated \code{dplyr} "underscore verbs."
-}
-\details{
+
 In addition the \code{seplyr} package supplies several new "key operations
 bound together" methods.  These include \code{group_summarize()} (which
 combines grouping, arranging and calculation in an atomic unit),
