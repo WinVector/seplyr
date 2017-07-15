@@ -25,6 +25,7 @@ Arrange a data frame and rank indexes.
 
 
 datasets::mtcars \%>\%
+  # tibble::rownames_to_column() not currently re-exported by dplyr
   { mutate(., CarName = rownames(.) ) } \%>\%
   select_se(c('CarName', 'hp', 'wt')) \%>\%
   add_rank_indices(arrangeTerms = c('desc(hp)', 'wt'),
