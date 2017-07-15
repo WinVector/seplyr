@@ -1,7 +1,8 @@
 Package: seplyr
 Type: Package
 Title: Standard Evaluation Interfaces for Common 'dplyr' Tasks
-Version: 0.1.0
+Version: 0.1.1
+Date: 2017-07-15
 Author: John Mount
 Maintainer: John Mount <jmount@win-vector.com>
 Description:     The 'seplyr' (standard evaluation data.frame 'dplyr') package supplies

@@ -9,7 +9,7 @@ arrange_se(.data, arrangeTerms)
 \arguments{
 \item{.data}{data.frame}
 
-\item{arrangeTerms}{character vector of column expressions to group by.}
+\item{arrangeTerms}{character vector of column expressions to arrange by.}
 }
 \value{
 .data grouped by columns named in groupingVars

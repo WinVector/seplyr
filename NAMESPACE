@@ -2,6 +2,7 @@
 
 export(add_group_indices)
 export(add_group_summaries)
+export(add_in_group_indices)
 export(arrange_se)
 export(distinct_se)
 export(group_by_se)

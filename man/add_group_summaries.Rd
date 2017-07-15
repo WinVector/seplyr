@@ -13,7 +13,7 @@ add_group_summaries(d, groupingVars, ..., arrangeTerms = NULL)
 
 \item{...}{list of dplyr::mutate() expressions.}
 
-\item{arrangeTerms}{character vector of column expressions to group by.}
+\item{arrangeTerms}{character optional vector of column expressions to arrange by.}
 }
 \value{
 d with grouped summaries added as extra columns

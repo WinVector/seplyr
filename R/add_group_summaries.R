@@ -8,7 +8,7 @@
 #'
 #' @param d data.frame
 #' @param groupingVars character vector of column names to group by.
-#' @param arrangeTerms character vector of column expressions to group by.
+#' @param arrangeTerms character optional vector of column expressions to arrange by.
 #' @param ... list of dplyr::mutate() expressions.
 #' @return d with grouped summaries added as extra columns
 #'

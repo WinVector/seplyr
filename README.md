@@ -87,44 +87,18 @@ print(group_by_se)
  #    groupingSyms <- rlang::syms(groupingVars)
  #    group_by(.data = .data, !!!groupingSyms, add = add)
  #  }
- #  <bytecode: 0x7fe98067f340>
+ #  <bytecode: 0x7fa6682f2460>
  #  <environment: namespace:seplyr>
 ```
 
-And of course we try to supply some usable help entries, example `help(group_by_se)`:
+And of course we try to supply some usable help entries, such as: `help(group_by_se)`.
 
-    group_by standard interface.
+In addition to the series of adapters we also supply a number of useful new verbs including:
 
-    Description
-
-     Group a data frame by the groupingVars. Author: John Mount, Win-Vector LLC.
-
-    Usage
-
-     group_by_se(.data, groupingVars, add = FALSE)
-     
-    Arguments
-
-     .data  data.frame
-     groupingVars   character vector of column names to group by.
-     add    logical, passed to group_by
-     
-    Value
-
-     .data grouped by columns named in groupingVars
-
-    Examples
-
-     group_by_se(datasets::mtcars, c("cyl", "gear")) %>%
-       head()
-     # roughly equivalent to:
-     # do.call(group_by_, c(list(datasets::mtcars), c('cyl', 'gear')))
-
-In addition to a series of adapters we also supply a number of useful new verbs including:
-
--   `add_group_indices()` Adds a column of per-group ids to data.
--   `add_group_summaries()` Adds per-group summaries to data.
 -   `group_summarize()` Binds grouping, arrangement, and summarization together for clear documentation of intent.
+-   `add_group_summaries()` Adds per-group summaries to data.
+-   `add_group_indices()` Adds a column of per-group ids to data.
+-   `add_in_group_indices()` Adds a column of in-group rank ids to data.
 
 `seplyr` is designed to be a thin package that passes all work to `dplyr`. If you want a package that works around `dplyr` implementation differences on different data sources I suggest trying our own [`replyr`](https://CRAN.R-project.org/package=replyr) package.
 

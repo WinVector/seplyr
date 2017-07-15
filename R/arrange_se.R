@@ -6,7 +6,7 @@
 #' Author: John Mount, Win-Vector LLC.
 #'
 #' @param .data data.frame
-#' @param arrangeTerms character vector of column expressions to group by.
+#' @param arrangeTerms character vector of column expressions to arrange by.
 #' @return .data grouped by columns named in groupingVars
 #'
 #' @examples
