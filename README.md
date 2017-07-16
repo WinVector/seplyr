@@ -23,66 +23,62 @@ packageVersion("dplyr")
  #  [1] '0.7.1.9000'
 
 datasets::mtcars %>% 
-  group_by(cyl, gear) %>% 
+  arrange(cyl, desc(gear)) %>% 
   head()
- #  # A tibble: 6 x 11
- #  # Groups:   cyl, gear [4]
- #      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
- #    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
- #  1  21.0     6   160   110  3.90 2.620 16.46     0     1     4     4
- #  2  21.0     6   160   110  3.90 2.875 17.02     0     1     4     4
- #  3  22.8     4   108    93  3.85 2.320 18.61     1     1     4     1
- #  4  21.4     6   258   110  3.08 3.215 19.44     1     0     3     1
- #  5  18.7     8   360   175  3.15 3.440 17.02     0     0     3     2
- #  6  18.1     6   225   105  2.76 3.460 20.22     1     0     3     1
+ #     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+ #  1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+ #  2 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+ #  3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+ #  4 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+ #  5 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+ #  6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
 ```
 
 In `dplyr` `0.7.*` if the names of the columns are coming from a variable set elsewhere you would to need to use a tool (such as `rlang`/`tidyeval`) to substitute those names in as show below.
 
 ``` r
-groupingVars <- c('cyl', 'gear') # assume this is set elsewhere
+# assume this is set elsewhere
+orderTerms <- c('cyl', 'desc(gear)')
 
+# convert into splice-able types
+orderQs <- lapply(orderTerms,
+                  function(si) { rlang::parse_expr(si) })
+# pipe
 datasets::mtcars %>% 
-  group_by(!!!rlang::syms(groupingVars)) %>% 
+  arrange(!!!orderQs) %>% 
   head()
- #  # A tibble: 6 x 11
- #  # Groups:   cyl, gear [4]
- #      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
- #    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
- #  1  21.0     6   160   110  3.90 2.620 16.46     0     1     4     4
- #  2  21.0     6   160   110  3.90 2.875 17.02     0     1     4     4
- #  3  22.8     4   108    93  3.85 2.320 18.61     1     1     4     1
- #  4  21.4     6   258   110  3.08 3.215 19.44     1     0     3     1
- #  5  18.7     8   360   175  3.15 3.440 17.02     0     0     3     2
- #  6  18.1     6   225   105  2.76 3.460 20.22     1     0     3     1
+ #     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+ #  1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+ #  2 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+ #  3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+ #  4 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+ #  5 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+ #  6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
 ```
 
-If you don't want to try and digest entire theory of quasi-quoting (the `rlang::syms()`) and splicing (the `!!!`) then you can use `seplyr` which conveniently and legibly wraps the operations as follows:
+If you don't want to try and digest entire theory of quasi-quoting and splicing (the `!!!` operator) then you can use `seplyr` which conveniently and legibly wraps the operations as follows:
 
 ``` r
 # devtools::install_github('WinVector/seplyr')
 library("seplyr")
 
 datasets::mtcars %>% 
-  group_by_se(groupingVars) %>% 
+  arrange_se(orderTerms) %>% 
   head()
- #  # A tibble: 6 x 11
- #  # Groups:   cyl, gear [4]
- #      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
- #    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
- #  1  21.0     6   160   110  3.90 2.620 16.46     0     1     4     4
- #  2  21.0     6   160   110  3.90 2.875 17.02     0     1     4     4
- #  3  22.8     4   108    93  3.85 2.320 18.61     1     1     4     1
- #  4  21.4     6   258   110  3.08 3.215 19.44     1     0     3     1
- #  5  18.7     8   360   175  3.15 3.440 17.02     0     0     3     2
- #  6  18.1     6   225   105  2.76 3.460 20.22     1     0     3     1
+ #     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+ #  1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+ #  2 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+ #  3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+ #  4 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+ #  5 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+ #  6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
 ```
 
 And that is it.
 
 ------------------------------------------------------------------------
 
-`seplyr::group_by_se()` performs the wrapping for you without you having to work through the details of `rlang`. If you are interested in the details `seplyr` itself is a good tutorial. For example you can examine `seplyr`'s implementation to see the necessary notations (using a command such as `print(group_by_se)`). And, of course, we try to supply some usable help entries, such as: `help(group_by_se)`. Some more discussion of the ideas can be found [here](http://www.win-vector.com/blog/2017/07/dplyr-0-7-made-simpler/).
+`seplyr::arrange_se()` performs the wrapping for you without you having to work through the details of `rlang`. If you are interested in the details `seplyr` itself is a good tutorial. For example you can examine `seplyr`'s implementation to see the necessary notations (using a command such as `print(arrange_se)`). And, of course, we try to supply some usable help entries, such as: `help(arrange_se)`. Some more discussion of the ideas can be found [here](http://www.win-vector.com/blog/2017/07/dplyr-0-7-made-simpler/).
 
 The current set of SE adapters includes (all commands of the form `NAME_se()` being adapters for a `dplyr::NAME()` method):
 
