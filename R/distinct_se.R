@@ -3,6 +3,8 @@
 #'
 #' Group a data frame and add per-group indices as a column.
 #'
+#' @seealso \code{\link[dplyr]{distinct}}
+#'
 #' @param .data data.frame
 #' @param groupingVars character vector of column names to group by.
 #' @param .keep_all logical, passed to dplyr::distinct.

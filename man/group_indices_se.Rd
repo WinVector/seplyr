@@ -24,3 +24,6 @@ Group a data frame by the groupingVars and add group labels.
 group_indices_se(datasets::mtcars, c("cyl", "gear"))
 
 }
+\seealso{
+\code{\link[dplyr]{group_indices}}
+}

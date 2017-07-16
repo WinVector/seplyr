@@ -22,3 +22,6 @@ select columns.
 datasets::mtcars \%>\% select_se(c("cyl", "gear")) \%>\% head()
 
 }
+\seealso{
+\code{\link[dplyr]{select}}
+}

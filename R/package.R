@@ -25,5 +25,6 @@
 NULL
 
 #' @importFrom dplyr arrange distinct group_by group_indices left_join mutate rename select summarize ungroup
+#' @importFrom dplyr add_count add_tally count tally
 #' @importFrom rlang parse_expr sym syms
 NULL

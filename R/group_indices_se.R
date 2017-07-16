@@ -3,6 +3,8 @@
 #'
 #' Group a data frame by the groupingVars and add group labels.
 #'
+#' @seealso \code{\link[dplyr]{group_indices}}
+#'
 #' @param .data data.frame
 #' @param groupingVars character vector of column names to group by.
 #' @param add logical, passed to group_by

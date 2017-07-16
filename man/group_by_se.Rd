@@ -18,7 +18,6 @@ group_by_se(.data, groupingVars, add = FALSE)
 }
 \description{
 Group a data frame by the groupingVars.
-Author: John Mount, Win-Vector LLC.
 }
 \examples{
 
@@ -27,4 +26,7 @@ group_by_se(datasets::mtcars, c("cyl", "gear")) \%>\%
 # roughly equivalent to:
 # do.call(group_by_, c(list(datasets::mtcars), c('cyl', 'gear')))
 
+}
+\seealso{
+\code{\link[dplyr]{group_by}}
 }

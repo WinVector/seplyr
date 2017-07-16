@@ -24,3 +24,6 @@ Group a data frame and add per-group indices as a column.
 distinct_se(datasets::mtcars, c("cyl", "gear"))
 
 }
+\seealso{
+\code{\link[dplyr]{distinct}}
+}

@@ -3,6 +3,8 @@
 #'
 #' rename columns.
 #'
+#' @seealso \code{\link[dplyr]{rename}}
+#'
 #' @param .data data.frame
 #' @param mapping named character vector of columns to rename (new news on the left, original names on the right).
 #' @return .data with renamed columns

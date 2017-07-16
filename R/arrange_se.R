@@ -3,7 +3,8 @@
 #'
 #' Arange a data frame by the arrangeTerms.  Accepts arbitrary text as
 #' arrangeTerms to allow forms such as "desc(gear)".
-#' Author: John Mount, Win-Vector LLC.
+#'
+#' @seealso \code{\link[dplyr]{arrange}}
 #'
 #' @param .data data.frame
 #' @param arrangeTerms character vector of column expressions to arrange by.

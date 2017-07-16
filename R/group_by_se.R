@@ -2,7 +2,8 @@
 #' group_by standard interface.
 #'
 #' Group a data frame by the groupingVars.
-#' Author: John Mount, Win-Vector LLC.
+#'
+#' @seealso \code{\link[dplyr]{group_by}}
 #'
 #' @param .data data.frame
 #' @param groupingVars character vector of column names to group by.

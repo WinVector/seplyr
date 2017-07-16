@@ -2,6 +2,8 @@
 #'
 #' select columns.
 #'
+#' @seealso \code{\link[dplyr]{select}}
+#'
 #' @param .data data.frame
 #' @param colNames character vector of columns to keep
 #' @return .data with only selected columns

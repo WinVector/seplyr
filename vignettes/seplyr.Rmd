@@ -71,6 +71,10 @@ The current set of SE adapters includes (all commands of the form `NAME_se()` be
  * `group_indices_se()`
  * `rename_se()`
  * `select_se()`
+ * `tally_se()`
+ * `add_tally_se()`
+ * `count_se()`
+ * `add_count_se()`
 
 In addition to the series of adapters we also supply a number of useful new verbs including:
 

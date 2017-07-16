@@ -22,3 +22,6 @@ rename columns.
 datasets::mtcars \%>\% rename_se(c("cylinders" = "cyl", "gears" = "gear")) \%>\% head()
 
 }
+\seealso{
+\code{\link[dplyr]{rename}}
+}

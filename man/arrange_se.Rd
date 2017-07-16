@@ -17,7 +17,6 @@ arrange_se(.data, arrangeTerms)
 \description{
 Arange a data frame by the arrangeTerms.  Accepts arbitrary text as
 arrangeTerms to allow forms such as "desc(gear)".
-Author: John Mount, Win-Vector LLC.
 }
 \examples{
 
@@ -26,4 +25,7 @@ arrange_se(datasets::mtcars, c("cyl", "desc(gear)")) \%>\%
 # roughly equivilent to:
 # arrange(datasets::mtcars, cyl, desc(gear)) \%>\% head()
 
+}
+\seealso{
+\code{\link[dplyr]{arrange}}
 }
