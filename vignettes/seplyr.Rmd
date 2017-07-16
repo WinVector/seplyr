@@ -48,9 +48,9 @@ And that is it.
 
 ******
 
-`seplyr::group_by_se()` performs the wrapping for you without you having to work through the details of `rlang`.  If you are interested in the details `seplyr` itself is a good tutorial.  For example you can examine `seplyr`'s implementation to see the necessary notations (using a command such as `print(group_by_se)`). And, of course, we try to supply some usable help entries, such as: `help(group_by_se)`.
+`seplyr::group_by_se()` performs the wrapping for you without you having to work through the details of `rlang`.  If you are interested in the details `seplyr` itself is a good tutorial.  For example you can examine `seplyr`'s implementation to see the necessary notations (using a command such as `print(group_by_se)`). And, of course, we try to supply some usable help entries, such as: `help(group_by_se)`. Some more discussion of the ideas can be found [here](http://www.win-vector.com/blog/2017/07/dplyr-0-7-made-simpler/).
 
-The current set of SE adapters includes (all commands of the form `NAME_se()` being adapters for a `dplyr::NAME()`):
+The current set of SE adapters includes (all commands of the form `NAME_se()` being adapters for a `dplyr::NAME()` method):
 
  * `arrange_se()`
  * `distinct_se()`
