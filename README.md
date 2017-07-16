@@ -104,3 +104,5 @@ In addition to the series of adapters we also supply a number of useful new verb
 -   `add_rank_indices()` Adds rank indices to data.
 
 `seplyr` is designed to be a thin package that passes all work to `dplyr`. If you want a package that works around `dplyr` implementation differences on different data sources I suggest trying our own [`replyr`](https://CRAN.R-project.org/package=replyr) package.
+
+Some inspiration comes from [Sebastian Kranz's `s_dplyr`](https://gist.github.com/skranz/9681509).
