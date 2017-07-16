@@ -93,7 +93,7 @@ The current set of SE adapters includes (all commands of the form `NAME_se()` be
 -   `count_se()`
 -   `add_count_se()`
 
-Only two of the above are completely redundant (`seplyr::group_by_se()` essentially working as `dplyr::group_by_at()` and `seplyr::select_se()` essentially working as `dplyr::select_at()`; others either having different semantics or no matching `dplyr::*_at()` method). Roughly all `seplyr` is trying to do is give a uniform first-class standard interface to all of the primary deprecated underscore suffixed verbs (such as `dplyr::arrange_`).
+Only two of the above are completely redundant. `seplyr::group_by_se()` essentially works as `dplyr::group_by_at()` and `seplyr::select_se()` essentially works as `dplyr::select_at()`. The others either have different semantics or currently (as of `dplyr` `0.7.1`) no matching `dplyr::*_at()` method. Roughly all `seplyr` is trying to do is give a uniform first-class standard interface to all of the primary deprecated underscore suffixed verbs (such as `dplyr::arrange_`).
 
 In addition to the series of adapters we also supply a number of useful new verbs including:
 
