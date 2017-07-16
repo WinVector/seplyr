@@ -3,7 +3,7 @@
 #'
 #' Group a data frame by the groupingVars.
 #'
-#' @seealso \code{\link[dplyr]{group_by}}
+#' @seealso \code{\link[dplyr]{group_by}}, \code{\link[dplyr]{group_by_at}}
 #'
 #' @param .data data.frame
 #' @param groupingVars character vector of column names to group by.
@@ -12,10 +12,10 @@
 #'
 #' @examples
 #'
-#' group_by_se(datasets::mtcars, c("cyl", "gear")) %>%
+#' datasets::mtcars %>%
+#'   group_by_se(c("cyl", "gear")) %>%
 #'   head()
-#' # roughly equivalent to:
-#' # do.call(group_by_, c(list(datasets::mtcars), c('cyl', 'gear')))
+#' # essentially group_by_at()
 #'
 #' @export
 #'

@@ -19,9 +19,12 @@ select columns.
 }
 \examples{
 
-datasets::mtcars \%>\% select_se(c("cyl", "gear")) \%>\% head()
+datasets::mtcars \%>\%
+   select_se(c("cyl", "gear")) \%>\%
+   head()
+# essentially dplyr::select_at()
 
 }
 \seealso{
-\code{\link[dplyr]{select}}
+\code{\link[dplyr]{select}}, \code{\link[dplyr]{select_at}}
 }

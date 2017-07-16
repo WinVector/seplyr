@@ -2,7 +2,7 @@
 #'
 #' select columns.
 #'
-#' @seealso \code{\link[dplyr]{select}}
+#' @seealso \code{\link[dplyr]{select}}, \code{\link[dplyr]{select_at}}
 #'
 #' @param .data data.frame
 #' @param colNames character vector of columns to keep
@@ -10,7 +10,10 @@
 #'
 #' @examples
 #'
-#' datasets::mtcars %>% select_se(c("cyl", "gear")) %>% head()
+#' datasets::mtcars %>%
+#'    select_se(c("cyl", "gear")) %>%
+#'    head()
+#' # essentially dplyr::select_at()
 #'
 #' @export
 #'

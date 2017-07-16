@@ -21,7 +21,7 @@ Group a data frame and add per-group indices as a column.
 }
 \examples{
 
-distinct_se(datasets::mtcars, c("cyl", "gear"))
+datasets::mtcars \%>\% distinct_se(c("cyl", "gear"))
 
 }
 \seealso{

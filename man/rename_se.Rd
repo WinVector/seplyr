@@ -15,13 +15,14 @@ rename_se(.data, mapping)
 .data with renamed columns
 }
 \description{
-rename columns.
+rename columns (much different syntax than \code{\link[dplyr]{rename_at}}).
 }
 \examples{
 
-datasets::mtcars \%>\% rename_se(c("cylinders" = "cyl", "gears" = "gear")) \%>\% head()
+datasets::mtcars \%>\%
+   rename_se(c("cylinders" = "cyl", "gears" = "gear")) \%>\% head()
 
 }
 \seealso{
-\code{\link[dplyr]{rename}}
+\code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}
 }

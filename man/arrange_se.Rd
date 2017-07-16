@@ -16,16 +16,18 @@ arrange_se(.data, arrangeTerms)
 }
 \description{
 Arange a data frame by the arrangeTerms.  Accepts arbitrary text as
-arrangeTerms to allow forms such as "desc(gear)".
+arrangeTerms to allow forms such as "desc(gear)"
+(unlike \code{\link[dplyr]{arrange_at}}).
 }
 \examples{
 
-arrange_se(datasets::mtcars, c("cyl", "desc(gear)")) \%>\%
+datasets::mtcars \%>\%
+  arrange_se(c("cyl", "desc(gear)")) \%>\%
   head()
 # roughly equivilent to:
 # arrange(datasets::mtcars, cyl, desc(gear)) \%>\% head()
 
 }
 \seealso{
-\code{\link[dplyr]{arrange}}
+\code{\link[dplyr]{arrange}}, \code{\link[dplyr]{arrange_at}}
 }

@@ -12,7 +12,7 @@
 #'
 #' @examples
 #'
-#' distinct_se(datasets::mtcars, c("cyl", "gear"))
+#' datasets::mtcars %>% distinct_se(c("cyl", "gear"))
 #'
 #' @export
 #'
