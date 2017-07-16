@@ -37,7 +37,7 @@ datasets::mtcars %>%
  #  6  18.1     6   225   105  2.76 3.460 20.22     1     0     3     1
 ```
 
-If instead the names of the columns are coming from a variable set elsewhere you need to use a tool to substitute those names in as show below.
+In `dplyr` `0.7.*` if the names of the columns are coming from a variable set elsewhere you would to need to use a tool (such as `rlang`/`tidyeval`) to substitute those names in as show below.
 
 ``` r
 groupingVars <- c('cyl', 'gear') # assume this is set elsewhere
@@ -57,7 +57,7 @@ datasets::mtcars %>%
  #  6  18.1     6   225   105  2.76 3.460 20.22     1     0     3     1
 ```
 
-If you don't want to try and digest entire theory of quasi-quoting (the `rlang::syms()`) and splicing (the `!!!`) then you can use `seplyr` which conveniently wraps the operations as follows:
+If you don't want to try and digest entire theory of quasi-quoting (the `rlang::syms()`) and splicing (the `!!!`) then you can use `seplyr` which conveniently and legibly wraps the operations as follows:
 
 ``` r
 # devtools::install_github('WinVector/seplyr')
@@ -78,20 +78,20 @@ datasets::mtcars %>%
  #  6  18.1     6   225   105  2.76 3.460 20.22     1     0     3     1
 ```
 
-And that is it. `seplyr::group_by_se()` performs the wrapping for you without you having to work through the details of `rlang`. If you are interested in the details `seplyr` itself is a good tutorial. For example you can examine `seplyr`'s implementation to see the necessary notations:
+And that is it.
 
-``` r
-print(group_by_se)
- #  function(.data, groupingVars, add = FALSE) {
- #    # convert char vector into spliceable vector
- #    groupingSyms <- rlang::syms(groupingVars)
- #    group_by(.data = .data, !!!groupingSyms, add = add)
- #  }
- #  <bytecode: 0x7f8be5c195c0>
- #  <environment: namespace:seplyr>
-```
+------------------------------------------------------------------------
 
-And of course we try to supply some usable help entries, such as: `help(group_by_se)`.
+`seplyr::group_by_se()` performs the wrapping for you without you having to work through the details of `rlang`. If you are interested in the details `seplyr` itself is a good tutorial. For example you can examine `seplyr`'s implementation to see the necessary notations (using a command such as `print(group_by_se)`). And, of course, we try to supply some usable help entries, such as: `help(group_by_se)`.
+
+The current set of SE adapters includes (all commands of the form `NAME_se()` being adapters for a `dplyr::NAME()`):
+
+-   `arange_se()`
+-   `distinct_se()`
+-   `group_by_se()`
+-   `group_indices_se()`
+-   `rename_se()`
+-   `select_se()`
 
 In addition to the series of adapters we also supply a number of useful new verbs including:
 
