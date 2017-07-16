@@ -13,5 +13,8 @@
 #' @export
 #'
 select_se <- function(.data, colNames) {
-  select(.data, one_of(colNames))
+  # select(.data, one_of(colNames))
+  # convert char vector into spliceable vector
+  colSyms <- rlang::syms(colNames)
+  select(.data, !!!colSyms)
 }

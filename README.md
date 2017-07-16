@@ -87,7 +87,7 @@ print(group_by_se)
  #    groupingSyms <- rlang::syms(groupingVars)
  #    group_by(.data = .data, !!!groupingSyms, add = add)
  #  }
- #  <bytecode: 0x7fcfe3a20428>
+ #  <bytecode: 0x7f8be5c195c0>
  #  <environment: namespace:seplyr>
 ```
 
@@ -102,13 +102,3 @@ In addition to the series of adapters we also supply a number of useful new verb
 -   `add_rank_indices()` Adds rank indices to data.
 
 `seplyr` is designed to be a thin package that passes all work to `dplyr`. If you want a package that works around `dplyr` implementation differences on different data sources I suggest trying our own [`replyr`](https://CRAN.R-project.org/package=replyr) package.
-
-------------------------------------------------------------------------
-
-One (*very* advanced) caveat is given below. If you are working with normal in-memory data the following should not matter.
-
-The caveat is: `seplyr` is an `R` package that declares a dependency on `dplyr`.
-
-I *think* this means that `seplyr` is always calling the `dplyr` version of any non-`S3` verbs even if another package (such as `sparklyr` or `dbplyr`) has attempted to override them. I believe run-time `S3` dispatch will correctly re-dispatch to class labeled derived methods. If all relevant package have correct override hygiene there should not be any problems.
-
-If you have any problems working with helper packages (such as `dbplyr` or `sparklyr`) you can try apply `base::source()` to all of the `*.R` files in [`seplyr/R`](https://github.com/WinVector/seplyr/tree/master/R) instead of loading the package.

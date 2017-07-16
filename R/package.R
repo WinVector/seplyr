@@ -24,6 +24,6 @@
 #' @name seplyr
 NULL
 
-#' @importFrom dplyr arrange desc distinct group_by group_indices left_join mutate one_of rename select summarize ungroup
+#' @importFrom dplyr arrange distinct group_by group_indices left_join mutate rename select summarize ungroup
 #' @importFrom rlang parse_expr sym syms
 NULL
