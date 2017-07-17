@@ -16,8 +16,7 @@ filter_se(.data, filterTerms)
 }
 \description{
 Filter a data frame by the filterTerms.  Accepts arbitrary text as
-filterTerms to allow forms such as "desc(gear)"
-(unlike \code{\link[dplyr]{filter_at}}).
+filterTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 }
 \examples{
 
