@@ -1,0 +1,54 @@
+---
+title: "rename_se"
+author: "John Mount"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rename_se}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+[`seplyr`](https://github.com/WinVector/seplyr) is an attempt to work with the [`dplyr` `0.7.*`]( https://CRAN.R-project.org/package=dplyr) [`R`](https://www.r-project.org) package through standard evaluation interfaces with a minimum of change and minimum of cognitive friction.  Beyond championing standard evaluation it attempts to introduce as few of its own opinions as possible.
+
+A case in point is `dplyr::rename()`/`seplyr::rename_se()`.  `dplyr::rename()` is used as follows.
+
+```{r rename1}
+suppressPackageStartupMessages(library("dplyr"))
+
+datasets::mtcars %>%
+  rename(cylinders = cyl, gears = gear) %>%
+  head()
+```
+
+Notice `dplyr::rename()` renamings are written as assignments making them very similar to `dplyr::mutate()`.  This is the reverse from how `R` usually handles list or mapping structures.
+In named vectors or named lists keys are written on the left and values are written on the right as follows.
+
+```{r map1}
+mp <- c("cyl" = "cylinders", "gear" = "gears")
+print(mp)
+```
+
+Because `seplyr` is intended to be a set of adapters for `dplyr` we simply adopt `dplyr::rename()`'s convention.  This allows the user to mechanically translate their experience and expectations from scripting over `dplyr::rename()` to directly use `seplyr::rename_se()` as follows.
+
+```{r rename2}
+library("seplyr")
+
+datasets::mtcars %>%
+  rename_se(c("cylinders" = "cyl", "gears" = "gear")) %>%
+  head()
+```
+
+We hope this makes it easy to translate one-off analyses into re-usable scripts by incrementally replacing known variable names with parametric versions.
+
+In contrast `dplyr::rename_at()` has its own notation that seem to not imitate `dplyr::rename()`.  The same operation using `dplyr::rename_at()` is something like the following.
+
+```{r rename3}
+datasets::mtcars %>%
+  rename_at(names(mp), function(si) { mp[si] }) %>%
+  head()
+```
+
+This is sensible, but is very different than `dplyr::rename()`.
+
+
