@@ -84,6 +84,7 @@ The current set of SE adapters includes (all commands of the form `NAME_se()` be
 
 -   `arrange_se()`
 -   `distinct_se()`
+-   `filter_se()`
 -   `group_by_se()`
 -   `group_indices_se()`
 -   `rename_se()`
@@ -94,6 +95,24 @@ The current set of SE adapters includes (all commands of the form `NAME_se()` be
 -   `add_count_se()`
 
 Only two of the above are completely redundant. `seplyr::group_by_se()` essentially works as `dplyr::group_by_at()` and `seplyr::select_se()` essentially works as `dplyr::select_at()`. The others either have different semantics or currently (as of `dplyr` `0.7.1`) no matching `dplyr::*_at()` method. Roughly all `seplyr` is trying to do is give a uniform first-class standard interface to all of the primary deprecated underscore suffixed verbs (such as `dplyr::arrange_`).
+
+For now we are avoiding direct adapters for `dplyr::mutate()` and `dplyr::summarize()` as we think the best was to work with these verbs may be a combination of their `dplyr::*_at()` forms plus a `seplyr::rename_se()`. For example:
+
+``` r
+datasets::iris %>%
+  group_by_se(c('Species')) %>%
+  summarize_at(c("Sepal.Length", "Sepal.Width"), funs(mean)) %>%
+  rename_se(c("Mean.Speal.Length" = "Sepal.Length", 
+              "Mean.Sepal.Width" =  "Sepal.Width"))
+ #  # A tibble: 3 x 3
+ #       Species Mean.Speal.Length Mean.Sepal.Width
+ #        <fctr>             <dbl>            <dbl>
+ #  1     setosa             5.006            3.428
+ #  2 versicolor             5.936            2.770
+ #  3  virginica             6.588            2.974
+```
+
+In the above the `rename_se()` is simply changing the column names to what we want (because we did not specify this in the `summarize_at()` step).
 
 In addition to the series of adapters we also supply a number of useful new verbs including:
 

@@ -24,7 +24,7 @@
 arrange_se <- function(.data, arrangeTerms) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
-  arrangeTerms <- lapply(arrangeTerms,
-                         function(si) { rlang::parse_expr(si) })
-  arrange(.data = .data, !!!arrangeTerms)
+  arrangeQ <- lapply(arrangeTerms,
+                     function(si) { rlang::parse_expr(si) })
+  arrange(.data = .data, !!!arrangeQ)
 }
