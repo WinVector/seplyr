@@ -2,9 +2,12 @@
 % Please edit documentation in R/group_summarize.R
 \name{group_summarize}
 \alias{group_summarize}
+\alias{group_summarise}
 \title{group_by and summarize as an atomic action.}
 \usage{
 group_summarize(d, groupingVars, ..., arrangeTerms = NULL)
+
+group_summarise(d, groupingVars, ..., arrangeTerms = NULL)
 }
 \arguments{
 \item{d}{data.frame}

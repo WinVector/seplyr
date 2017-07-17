@@ -27,3 +27,9 @@ summarize_se <- function(.data, summarizeTerms) {
                     function(si) { rlang::parse_expr(si) })
   summarize(.data = .data, !!!summarizeQ)
 }
+
+
+#' @rdname summarize_se
+#' @export
+summarise_se <- summarize_se
+

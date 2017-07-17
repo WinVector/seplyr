@@ -2,9 +2,12 @@
 % Please edit documentation in R/summarize_se.R
 \name{summarize_se}
 \alias{summarize_se}
+\alias{summarise_se}
 \title{summarize standard interface.}
 \usage{
 summarize_se(.data, summarizeTerms)
+
+summarise_se(.data, summarizeTerms)
 }
 \arguments{
 \item{.data}{data.frame}

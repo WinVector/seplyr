@@ -39,3 +39,8 @@ group_summarize <- function(d, groupingVars, ...,
   # work around https://github.com/tidyverse/dplyr/issues/2963
   ungroup(ds)
 }
+
+
+#' @rdname group_summarize
+#' @export
+group_summarise <- group_summarize
