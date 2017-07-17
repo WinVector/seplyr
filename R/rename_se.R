@@ -3,7 +3,7 @@
 #'
 #' rename columns (much different syntax than \code{\link[dplyr]{rename_at}}).
 #'
-#' @seealso \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}
+#' @seealso \code{\link{rename_mp}}, \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}
 #'
 #' @param .data data.frame
 #' @param mapping named character vector of columns to rename (new news on the left, original names on the right; this may seem reversed but it matches dplyr::rename()).
@@ -23,10 +23,35 @@
 #'
 rename_se <- function(.data, mapping) {
   mp <- lapply(mapping, rlang::sym)
-  return(do.call(rename, c(list(.data) , mp)))
-  # # alternate impl
-  # mp <- rlang::syms(names(mapping))
-  # names(mp) <- as.character(mapping)
-  # mapfn <- function(ci) { mp[ci] }
-  # return(rename_at(.tbl = .data, .vars = names(mp), mapfn))
+  do.call(rename, c(list(.data) , mp))
+}
+
+
+#' rename map interface.
+#'
+#' rename columns (much different syntax than \code{\link[dplyr]{rename}}).
+#'
+#' @seealso \code{\link{rename_se}}, \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}
+#'
+#' @param .data data.frame
+#' @param mapping named character vector of columns to rename (original news on the left, news names on the right; this reverse of dplyr::rename()).
+#' @return .data with renamed columns
+#'
+#' @examples
+#'
+#' mapping <- c("cyl" = "cylinders", "gear" = "gears")
+#' datasets::mtcars %>%
+#'    rename_mp(mapping) %>%
+#'    head()
+#' # # sames as:
+#' # datasets::mtcars %>%
+#' #    rename(cylinders = cyl, gears = gear) %>%
+#' #    head()
+#'
+#' @export
+#'
+rename_mp <- function(.data, mapping) {
+  mp <- lapply(mapping, rlang::sym)
+  mapfn <- function(ci) { mp[ci] }
+  rename_at(.tbl = .data, .vars = names(mp), mapfn)
 }
