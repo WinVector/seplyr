@@ -1,10 +1,10 @@
 ---
-title: "seplr"
+title: "seplyr"
 author: "John Mount"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{seplr}
+  %\VignetteIndexEntry{seplyr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
