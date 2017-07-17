@@ -41,7 +41,7 @@ datasets::mtcars %>%
 
 We hope this makes it easy to translate one-off analyses into re-usable scripts by incrementally replacing known variable names with parametric versions.
 
-In contrast `dplyr::rename_at()` has its own notation that seem to not imitate `dplyr::rename()`.  The same operation using `dplyr::rename_at()` is something like the following.
+In contrast `dplyr::rename_at()` has its own notation that seems to not imitate `dplyr::rename()`.  The same operation using `dplyr::rename_at()` is something like the following.
 
 ```{r rename3}
 datasets::mtcars %>%
@@ -49,6 +49,6 @@ datasets::mtcars %>%
   head()
 ```
 
-This is sensible, but is very different than `dplyr::rename()`.
+This is sensible, but is very different than `dplyr::rename()`.  Thus there remains a need for a standard analogue.
 
 
