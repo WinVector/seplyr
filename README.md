@@ -82,21 +82,23 @@ And that is it.
 
 The current set of SE adapters includes (all commands of the form `NAME_se()` being adapters for a `dplyr::NAME()` method):
 
+-   `add_count_se()`
+-   `add_tally_se()`
 -   `arrange_se()`
+-   `count_se()`
 -   `distinct_se()`
 -   `filter_se()`
 -   `group_by_se()`
 -   `group_indices_se()`
+-   `mutate_se()`
 -   `rename_se()`
 -   `select_se()`
+-   `summarize_se()`
 -   `tally_se()`
--   `add_tally_se()`
--   `count_se()`
--   `add_count_se()`
 
 Only two of the above are completely redundant. `seplyr::group_by_se()` essentially works as `dplyr::group_by_at()` and `seplyr::select_se()` essentially works as `dplyr::select_at()`. The others either have different semantics or currently (as of `dplyr` `0.7.1`) no matching `dplyr::*_at()` method. Roughly all `seplyr` is trying to do is give a uniform first-class standard interface to all of the primary deprecated underscore suffixed verbs (such as `dplyr::arrange_`).
 
-For now we are avoiding direct adapters for `dplyr::mutate()` and `dplyr::summarize()` as we think the best was to work with these verbs may be a combination of their `dplyr::*_at()` forms plus a `seplyr::rename_se()`. For example:
+For now we are not emphasizing adapters for `dplyr::mutate()` and `dplyr::summarize()` as we think in some cases the best was to work with these verbs may be a combination of their `dplyr::*_at()` forms plus a `seplyr::rename_se()`. For example:
 
 ``` r
 datasets::iris %>%
