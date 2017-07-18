@@ -36,13 +36,19 @@ datasets::mtcars %>%
  #  6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
 ```
 
-In `dplyr` `0.7.*` if the names of the columns are coming from a variable set elsewhere you would to need to use a tool (such as `rlang`/`tidyeval`) to substitute those names in as show below.
+In `dplyr` `0.7.*` if the names of the columns are coming from a variable set elsewhere you would to need to use a toolto substitute those names in as show below. One such tool is `rlang`/`tidyeval` (though we strongly prefer [`seplyr`](https://github.com/WinVector/seplyr/blob/master/README.md) and [`wrapr::let()`](https://github.com/WinVector/wrapr/blob/master/README.md))), `rlang`/`tidyeval` works as follows (for comparison only, this is *not* our suggested workflow).
 
 ``` r
-# assume this is set elsewhere
+# Assume this is set elsewhere,
+# supplied by a user, function argument, or control file.
 orderTerms <- c('cyl', 'desc(gear)')
 
-# convert into splice-able types
+# Now convert into splice-able types, the idea is the use
+# supplies variable names that we later convert to "quosures"
+# for use in `dplyr` 0.7.* generic code.
+# This code is near the pipe under the rule:
+# "If you are close enough to form a quosure, 
+#  you are close enough to re-code the function."
 orderQs <- lapply(orderTerms,
                   function(si) { rlang::parse_expr(si) })
 # pipe
