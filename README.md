@@ -36,7 +36,7 @@ datasets::mtcars %>%
  #  6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
 ```
 
-In `dplyr` `0.7.*` if the names of the columns are coming from a variable set elsewhere you would to need to use a toolto substitute those names in as show below. One such tool is `rlang`/`tidyeval` (though we strongly prefer [`seplyr`](https://github.com/WinVector/seplyr/blob/master/README.md) and [`wrapr::let()`](https://github.com/WinVector/wrapr/blob/master/README.md))), `rlang`/`tidyeval` works as follows (for comparison only, this is *not* our suggested workflow).
+In `dplyr` `0.7.*` if the names of the columns are coming from a variable set elsewhere you would to need to use a tool to substitute those names in. One such tool is `rlang`/`tidyeval` (though we strongly prefer [`seplyr`](https://github.com/WinVector/seplyr/blob/master/README.md) and [`wrapr::let()`](https://github.com/WinVector/wrapr/blob/master/README.md))), `rlang`/`tidyeval` works as follows (for comparison only, this is *not* our suggested workflow).
 
 ``` r
 # Assume this is set elsewhere,
@@ -48,7 +48,7 @@ orderTerms <- c('cyl', 'desc(gear)')
 # for use in `dplyr` 0.7.* generic code.
 # This code is near the pipe under the rule:
 # "If you are close enough to form a quosure, 
-#  you are close enough to re-code the function."
+#  you are close enough to re-code the analysis"
 orderQs <- lapply(orderTerms,
                   function(si) { rlang::parse_expr(si) })
 # pipe
