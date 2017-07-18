@@ -103,7 +103,7 @@ Only two of the above are completely redundant. `seplyr::group_by_se()` essentia
 
 We also have a few methods that work around a few of the minor inconvenience of working with variable names as strings:
 
--   `deslect()`
+-   `deselect()`
 -   `rename_mp()`
 
 For now we are not emphasizing `seplyr::mutate_se()` and `seplyr::summarize_se()` as we think in some cases the best was to work with these verbs may be a combination of their `dplyr::*_at()` forms plus a `seplyr::rename_se()`. For example:
