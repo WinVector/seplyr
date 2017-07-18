@@ -9,8 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+This document describes the [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) which supplies *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs.
+`seplyr` stands for "standard evaluation dplyr" ("standard" meaning we prefer explicit user provided strings over [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html) capture of un-evaluated user code) or "string edition dplyr."
 
-The idea is [`seplyr`](https://github.com/WinVector/seplyr) package lets you program over `dplyr` 0.7.* without needing a Ph.D. in computer science.
+The idea is this package lets you program over `dplyr` 0.7.* without needing a Ph.D. in computer science.
 
 In `dplyr` if you know the names of columns when you are writing code you can write code such as the following.
 
@@ -70,7 +72,7 @@ The current set of SE adapters includes (all commands of the form `NAME_se()` be
  * `select_se()`
  * `summarize_se()`
  * `tally_se()`
- * `transumute_se()`
+ * `transmute_se()`
 
 Only two of the above are completely redundant. `seplyr::group_by_se()` essentially works as `dplyr::group_by_at()` and `seplyr::select_se()` essentially works as `dplyr::select_at()`. The others either have different semantics or currently (as of `dplyr` `0.7.1`) no matching `dplyr::*_at()` method.  Roughly all `seplyr` is trying to do is give a uniform first-class standard interface to all of the primary deprecated underscore suffixed verbs (such as `dplyr::arrange_`).
 
