@@ -6,7 +6,7 @@
 #' @seealso \code{\link{rename_mp}}, \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}
 #'
 #' @param .data data.frame
-#' @param mapping named character vector of columns to rename (new news on the left, original names on the right; this may seem reversed but it matches dplyr::rename()).
+#' @param mapping named character vector of columns to rename (new names on the left, original names on the right; this may seem reversed but it matches dplyr::rename()).
 #' @return .data with renamed columns
 #'
 #' @examples
@@ -34,7 +34,7 @@ rename_se <- function(.data, mapping) {
 #' @seealso \code{\link{rename_se}}, \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}
 #'
 #' @param .data data.frame
-#' @param mapping named character vector of columns to rename (original news on the left, news names on the right; this reverse of dplyr::rename()).
+#' @param mapping named character vector of columns to rename (original names on the left, new names on the right; this reverse of dplyr::rename()).
 #' @return .data with renamed columns
 #'
 #' @examples

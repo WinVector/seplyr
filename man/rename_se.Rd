@@ -9,7 +9,7 @@ rename_se(.data, mapping)
 \arguments{
 \item{.data}{data.frame}
 
-\item{mapping}{named character vector of columns to rename (new news on the left, original names on the right; this may seem reversed but it matches dplyr::rename()).}
+\item{mapping}{named character vector of columns to rename (new names on the left, original names on the right; this may seem reversed but it matches dplyr::rename()).}
 }
 \value{
 .data with renamed columns
