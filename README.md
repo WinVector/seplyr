@@ -118,10 +118,10 @@ For now we are not emphasizing `seplyr::mutate_se()` and `seplyr::summarize_se()
 datasets::iris %>%
   group_by_at("Species") %>%
   summarize_at(c("Sepal.Length", "Sepal.Width"), funs(mean)) %>%
-  rename_se(c(Mean.Speal.Length = "Sepal.Length", 
+  rename_se(c(Mean.Sepal.Length = "Sepal.Length", 
               Mean.Sepal.Width =  "Sepal.Width"))
  #  # A tibble: 3 x 3
- #       Species Mean.Speal.Length Mean.Sepal.Width
+ #       Species Mean.Sepal.Length Mean.Sepal.Width
  #        <fctr>             <dbl>            <dbl>
  #  1     setosa             5.006            3.428
  #  2 versicolor             5.936            2.770
@@ -135,10 +135,10 @@ However, we can also perform the above directly with `seplyr::summarize_se()` as
 ``` r
 datasets::iris %>%
   group_by_se("Species") %>%
-  summarize_se(c(Mean.Speal.Length = "mean(Sepal.Length)", 
+  summarize_se(c(Mean.Sepal.Length = "mean(Sepal.Length)", 
                  Mean.Sepal.Width =  "mean(Sepal.Width)"))
  #  # A tibble: 3 x 3
- #       Species Mean.Speal.Length Mean.Sepal.Width
+ #       Species Mean.Sepal.Length Mean.Sepal.Width
  #        <fctr>             <dbl>            <dbl>
  #  1     setosa             5.006            3.428
  #  2 versicolor             5.936            2.770
