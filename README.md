@@ -76,7 +76,7 @@ datasets::mtcars %>%
  #  6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
 ```
 
-And that is it.
+The idea is: the above code looks very much like simple `dplyr` code used running an analysis, and yet is very easy to [parameterize](http://www.win-vector.com/blog/2016/12/parametric-variable-names-and-dplyr/) and re-use in a script or package.
 
 ------------------------------------------------------------------------
 
@@ -110,10 +110,10 @@ For now we are not emphasizing `seplyr::mutate_se()` and `seplyr::summarize_se()
 
 ``` r
 datasets::iris %>%
-  group_by_se(c('Species')) %>%
+  group_by_se("Species") %>%
   summarize_at(c("Sepal.Length", "Sepal.Width"), funs(mean)) %>%
-  rename_se(c("Mean.Speal.Length" = "Sepal.Length", 
-              "Mean.Sepal.Width" =  "Sepal.Width"))
+  rename_se(c(Mean.Speal.Length = "Sepal.Length", 
+              Mean.Sepal.Width =  "Sepal.Width"))
  #  # A tibble: 3 x 3
  #       Species Mean.Speal.Length Mean.Sepal.Width
  #        <fctr>             <dbl>            <dbl>
@@ -123,6 +123,21 @@ datasets::iris %>%
 ```
 
 In the above the `rename_se()` is simply changing the column names to what we want (because we did not specify this in the `summarize_at()` step).
+
+However, we can also perform the above directly with `seplyr::summarize_se()` as follows.
+
+``` r
+datasets::iris %>%
+  group_by_se("Species") %>%
+  summarize_se(c(Mean.Speal.Length = "mean(Sepal.Length)", 
+                 Mean.Sepal.Width =  "mean(Sepal.Width)"))
+ #  # A tibble: 3 x 3
+ #       Species Mean.Speal.Length Mean.Sepal.Width
+ #        <fctr>             <dbl>            <dbl>
+ #  1     setosa             5.006            3.428
+ #  2 versicolor             5.936            2.770
+ #  3  virginica             6.588            2.974
+```
 
 In addition to the series of adapters we also supply a number of useful new verbs including:
 
@@ -134,4 +149,4 @@ In addition to the series of adapters we also supply a number of useful new verb
 
 `seplyr` is designed to be a thin package that passes all work to `dplyr`. If you want a package that works around `dplyr` implementation differences on different data sources I suggest trying our own [`replyr`](https://CRAN.R-project.org/package=replyr) package.
 
-Some inspiration comes from [Sebastian Kranz's `s_dplyr`](https://gist.github.com/skranz/9681509).
+Some inspiration comes from [Sebastian Kranz's `s_dplyr`](https://gist.github.com/skranz/9681509). Another alternative is using [`wrapr::let()`](https://github.com/WinVector/wrapr/blob/master/README.md).
