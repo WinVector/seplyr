@@ -110,7 +110,7 @@ For now we are not emphasizing `seplyr::mutate_se()` and `seplyr::summarize_se()
 
 ``` r
 datasets::iris %>%
-  group_by_se("Species") %>%
+  group_by_at("Species") %>%
   summarize_at(c("Sepal.Length", "Sepal.Width"), funs(mean)) %>%
   rename_se(c(Mean.Speal.Length = "Sepal.Length", 
               Mean.Sepal.Width =  "Sepal.Width"))
