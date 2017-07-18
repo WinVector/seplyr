@@ -5,6 +5,7 @@ Version: 0.1.1
 Date: 2017-07-15
 Author: John Mount
 Maintainer: John Mount <jmount@win-vector.com>
+URL: https://github.com/WinVector/seplyr
 Description:     The 'seplyr' (standard evaluation data.frame 'dplyr') package supplies
     standard evaluation adapter methods for important common 'dplyr' methods
     that currently have a non-standard programming interface. This allows
