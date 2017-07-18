@@ -15,7 +15,7 @@ deselect(.data, colNames)
 .data without deselected columns
 }
 \description{
-deselect columns.
+deselect columns.  To keep columns please see \code{\link{select_se}}.
 }
 \examples{
 

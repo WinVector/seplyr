@@ -1,6 +1,6 @@
 #' select standard interface.
 #'
-#' select columns.
+#' select columns.  To remove columns please see \code{\link{deselect}}.
 #'
 #' @seealso \code{\link{deselect}}, \code{\link[dplyr]{select}}, \code{\link[dplyr]{select_at}}
 #'
@@ -26,7 +26,7 @@ select_se <- function(.data, colNames) {
 
 #' deselect standard interface.
 #'
-#' deselect columns.
+#' deselect columns.  To keep columns please see \code{\link{select_se}}.
 #'
 #' @seealso \code{\link{select_se}}, \code{\link[dplyr]{select}}, \code{\link[dplyr]{select_at}}
 #'

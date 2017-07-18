@@ -15,7 +15,7 @@ select_se(.data, colNames)
 .data with only selected columns
 }
 \description{
-select columns.
+select columns.  To remove columns please see \code{\link{deselect}}.
 }
 \examples{
 
