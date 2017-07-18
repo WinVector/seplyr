@@ -26,5 +26,5 @@ datasets::mtcars \%>\%
 
 }
 \seealso{
-\code{\link[dplyr]{select}}, \code{\link[dplyr]{select_at}}
+\code{\link{deselect}}, \code{\link[dplyr]{select}}, \code{\link[dplyr]{select_at}}
 }
