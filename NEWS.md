@@ -1,9 +1,9 @@
 
-`seplyr` 0.1.1 2017-07-18
+`seplyr` 0.1.1 2017-07-21
 
  * Fix some documentation.
  * add add_in_group_indices().
- * add more fns.
+ * add many more adapter fns.
 
 
 `seplyr` 0.1.0 2017-07-14
