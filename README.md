@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-This document describes the [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) which supplies *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs. `seplyr` stands for "standard evaluation dplyr" ("standard" meaning we prefer explicit user provided strings over [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html) capture of un-evaluated user code) or "string edition dplyr."
+This document describes the [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) which supplies *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs. `seplyr` stands for "standard evaluation dplyr" ("standard" meaning we prefer explicit user provided strings over passive [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html) capture of un-evaluated user code) or "string edition dplyr."
 
 The idea is this package lets you program over `dplyr` 0.7.\* without needing a Ph.D. in computer science.
 
@@ -36,7 +36,7 @@ datasets::mtcars %>%
  #  6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
 ```
 
-In `dplyr` `0.7.*` if the names of the columns are coming from a variable set elsewhere you would to need to use a tool to substitute those names in. One such tool is `rlang`/`tidyeval` (though we strongly prefer [`seplyr`](https://github.com/WinVector/seplyr/blob/master/README.md) and [`wrapr::let()`](https://github.com/WinVector/wrapr/blob/master/README.md))), `rlang`/`tidyeval` works as follows (for comparison only, this is *not* our suggested workflow).
+In `dplyr` `0.7.*` if the names of the columns are coming from a variable set elsewhere you would to need to use a tool to substitute those names in. One such tool is `rlang`/`tidyeval` (though we strongly prefer [`seplyr`](https://github.com/WinVector/seplyr/blob/master/README.md) and [`wrapr::let()`](https://github.com/WinVector/wrapr/blob/master/README.md))). `rlang`/`tidyeval` works as follows (for comparison only, this is *not* our suggested workflow).
 
 ``` r
 # Assume this is set elsewhere,
@@ -112,7 +112,7 @@ We also have a few methods that work around a few of the minor inconvenience of 
 -   `deselect()`
 -   `rename_mp()`
 
-For now we are not emphasizing `seplyr::mutate_se()` and `seplyr::summarize_se()` as we think in some cases the best was to work with these verbs may be a combination of their `dplyr::*_at()` forms plus a `seplyr::rename_se()`. For example:
+For now we are not emphasizing `seplyr::mutate_se()` and `seplyr::summarize_se()` as we think in some cases the best ways to work with these verbs may be a combination of their `dplyr::*_at()` forms plus a `seplyr::rename_se()`. For example:
 
 ``` r
 datasets::iris %>%
