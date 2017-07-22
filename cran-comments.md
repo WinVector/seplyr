@@ -16,9 +16,10 @@ R CMD check --as-cran seplyr_0.1.1.tar.gz
 * this is package ‘seplyr’ version ‘0.1.1’
 * package encoding: UTF-8
 
-New submission
+* checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
+Maintainer: ‘John Mount <jmount@win-vector.com>’
 
-Status: 1 NOTE
+Status: OK
 
 ## Reverse dependencies
 
