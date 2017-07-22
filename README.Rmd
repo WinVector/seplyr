@@ -34,8 +34,6 @@ or from [`GitHub`](https://github.com/WinVector/seplyr):
    devtools::install_github('WinVector/seplyr')
 ```
 
-At this early phase in `seplyr` development we suggest using the [`GitHub` version](https://github.com/WinVector/seplyr) (which is much more extensive than the current [`CRAN` version](https://CRAN.R-project.org/package=seplyr )).
-
 In `dplyr` if you know the names of columns when you are writing code you can write code such as the following.
 
 ```{r ex1a}
