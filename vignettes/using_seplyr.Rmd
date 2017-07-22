@@ -14,7 +14,7 @@ vignette: >
 
 To illustrate this we will work an example.
 
-Suppose you had worked out a `dplyr` pipeline that performed an analysis you were interested in.  For example we could take something similar to one of the examples from the [`dplyr` `0.7.0` announcement](https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/).
+Suppose you had worked out a `dplyr` pipeline that performed an analysis you were interested in.  For an example we could take something similar to one of the examples from the [`dplyr` `0.7.0` announcement](https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/).
 
 ```{r exi}
 suppressPackageStartupMessages(library("dplyr"))
@@ -29,27 +29,30 @@ starwars %>%
             count = n())
 ```
 
-The above is colloquially called "an interactive script."  The name comes from the fact that names of variables (such as "`homeworld`") that would only be known from looking at the data and variable names are typed directly into the analysis code.
+The above is colloquially called "an interactive script."  The name comes from the fact that we use names of variables (such as "`homeworld`") that would only be known from looking at the data directly in the analysis code.  Only somebody interacting with the data could write such a script (hence the name).
 
 It has long been considered a point of discomfort to convert such an interactive `dplyr` pipeline into a re-usable script or function.  That is a script or function that specifies column names in some [parametric](http://www.win-vector.com/blog/2017/04/programming-over-r/) or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).
 
-This inessential difficulty is largely a due to the preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.  Non-standard evaluation interfaces are a bit more complicated and bit harder to compose than standard evaluation interfaces (that is interfaces that are referentially transparent or ones that look only at values, not captured code, please see [here](http://www.win-vector.com/blog/2017/06/non-standard-evaluation-and-function-composition-in-r/) for some analysis).
+This inessential difficulty is largely a due to the preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.
 
-`seplyr` is a `dplyr` adapter layer that prefers "slightly clunkier" standard interfaces, which are actually very powerful and can be used to some advantage.
+`seplyr` is a `dplyr` adapter layer that prefers "slightly clunkier" standard interfaces (or [referentially transparent](https://en.wikipedia.org/wiki/Referential_transparency) interfaces), which are actually very powerful and can be used to some advantage.
 
-Let's translate the above example into a re-usable function in small (easy) stages.  First translate the interactive script from `dplyr` notation into `seplyr` notation.  
+The above description and comparisons can come off as needlessly broad and painfully abstract.  Things are much clearer if we move away from theory and return to our practical example.
 
-This step is mechanical (you just read the `help()` of the matching `seplyr` verbs, which have names of the form `*_se()`).  What you have to do is:
+Let's translate the above example into a re-usable function in small (easy) stages.  First translate the interactive script from `dplyr` notation into `seplyr` notation.  This step is a pure [re-factoring](https://en.wikipedia.org/wiki/Code_refactoring), we are changing the code without changing its observable external behavior.
+
+The translation is mechanical in that it is mostly using `seplyr` documentation as a lookup table.  What you have to do is:
 
  * Change `dplyr` verbs to their matching `seplyr` "`*_se()`" adapters.
- * Add a bunch of quote marks around names and expressions.
- * Convert lists of expressions (such as in the `summarize()`) to explicit vectors by adding the "`c()`" notation.
- * Replace "`=`" assignments with "`:=`" assignments.
+ * Add quote marks around names and expressions.
+ * Convert sequences of expressions (such as in the `summarize()`) to explicit vectors by adding the "`c()`" notation.
+ * Replace "`=`" in expressions with "`:=`".
  
 Our converted code looks like the following.
 
 
 ```{r exc}
+# devtools::install_github("WinVector/seplyr")
 library("seplyr")
 
 starwars %>%
@@ -59,9 +62,9 @@ starwars %>%
                  "count" := "n()"))
 ```
 
-This code works the same as the original `dplyr` code.  Obviously at this point all we have done is worked to make the code a bit less pleasant looking; we have yet to see any benefit from this conversion (though we can turn this on its head and say all directly `dplyr` notation is saving us is from having to write a few quote marks).
+This code works the same as the original `dplyr` code.  Obviously at this point all we have done is: worked to make the code a bit less pleasant looking. We have yet to see any benefit from this conversion (though we can turn this on its head and say all the original `dplyr` notation is saving us is from having to write a few quote marks).
 
-The benefit is: this code can incrementally be parameterized and wrapped in a re-usable function very easily.
+The benefit is: this new code can *very easily* be parameterized and wrapped in a re-usable function.  In fact it is now simpler to do than to describe.
 
 For example: suppose ([as in the original example](https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/)) we want to create a function that lets us choose the grouping variable?  This is now easy, we copy the code into a function and replace the explicit value `"homeworld"` with a variable:
 
@@ -77,7 +80,7 @@ starwars_mean <- function(my_var) {
 starwars_mean("hair_color")
 ```
 
-In `seplyr` notation abstraction over the pipeline is easy and mechanical (just replacing values with variables).  For example we can make a completely generic function using `R`'s `paste()` function to build up expressions.
+In `seplyr` programming is easy (just replace values with variables).  For example we can make a completely generic re-usable "grouped mean" function using `R`'s `paste()` function to build up expressions.
 
 ```{r exp3}
 grouped_mean <- function(data, 
@@ -101,11 +104,11 @@ starwars %>%
                value_variables = c("mass", "birth_year"))
 ```
 
-The only part that requires more study and practice was messing around with the expressions using `paste()` (for more details on the string manipulation please try "`help(paste)`").  Notice also we used the "`:=`" operator to bind a list of desired result names to matching calculations (please see "`help(named_map_builder)`" for more details).
+The only part that requires more study and practice was messing around with the expressions using `paste()` (for more details on the string manipulation please try "`help(paste)`").  Notice also we used the "`:=`" operator to bind the list of desired result names to the matching calculations (please see "`help(named_map_builder)`" for more details).
 
-The point is: we did not have to bring in (or study) any deep-theory or heavy-weight tools such as [`rlang`/`tidyeval`](https://CRAN.R-project.org/package=rlang) or [`lazyeval`](https://CRAN.R-project.org/package=lazyeval) to complete our programming task.  Once you are in `seplyr` notation, changes are very easy.  And you can separate translating into `seplyr` notation from the work of designing your wrapper function (breaking your programming work into smaller easier to understand steps).
+The point is: we did not have to bring in (or study) any deep-theory or heavy-weight tools such as [`rlang`/`tidyeval`](https://CRAN.R-project.org/package=rlang) or [`lazyeval`](https://CRAN.R-project.org/package=lazyeval) to complete our programming task.  Once you are in `seplyr` notation, changes are very easy.  You can separate translating into `seplyr` notation from the work of designing your wrapper function (breaking your programming work into smaller easier to understand steps).
 
-The `seplyr` package is simple, powerful, and contains a number of worked examples both in `help()` and `vignette(package='seplyr')` documentation.
+The `seplyr` method is simple, easy to teach, and powerful.  The package contains a number of worked examples both in `help()` and `vignette(package='seplyr')` documentation.
 
 
 
