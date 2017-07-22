@@ -1,0 +1,109 @@
+---
+title: "Using seplyr to Program Over dplyr"
+author: "John Mount"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using seplyr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+[`seplyr`](https://github.com/WinVector/seplyr) is an [`R`](https://www.r-project.org) package that makes it easy to program over [`dplyr` `0.7.*`]( https://CRAN.R-project.org/package=dplyr).
+
+To illustrate this we will work an example.
+
+Suppose you had worked out a `dplyr` pipeline that performed an analysis you were interested in.  For example we could take something similar to one of the examples from the [`dplyr` `0.7.0` announcement](https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/).
+
+```{r exi}
+suppressPackageStartupMessages(library("dplyr"))
+packageVersion("dplyr")
+
+colnames(starwars)
+
+starwars %>%
+  group_by(homeworld) %>%
+  summarise(mean_height = mean(height, na.rm = TRUE),
+            mean_mass = mean(mass, na.rm = TRUE),
+            count = n())
+```
+
+The above is colloquially called "an interactive script."  The name comes from the fact that names of variables (such as "`homeworld`") that would only be known from looking at the data and variable names are typed directly into the analysis code.
+
+It has long been considered a point of discomfort to convert such an interactive `dplyr` pipeline into a re-usable script or function.  That is a script or function that specifies column names in some [parametric](http://www.win-vector.com/blog/2017/04/programming-over-r/) or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).
+
+This inessential difficulty is largely a due to the preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.  Non-standard evaluation interfaces are a bit more complicated and bit harder to compose than standard evaluation interfaces (that is interfaces that are referentially transparent or ones that look only at values, not captured code, please see [here](http://www.win-vector.com/blog/2017/06/non-standard-evaluation-and-function-composition-in-r/) for some analysis).
+
+`seplyr` prefers "slightly clunkier" standard interfaces, which are actually very powerful and can be used to some advantage.
+
+Let's translate the above example into a re-usable function in small (easy) stages.  First translate the interactive script from `dplyr` notation into `seplyr` notation.  
+
+This step is mechanical (you just read the `help()` of the matching `seplyr` verbs, which have names of the form `*_se()`).  What you have to do is:
+
+ * Change `dplyr` verbs to their matching `seplyr` "`*_se()`" analogues.
+ * Add a bunch of quote marks around names and expressions.
+ * Convert lists of expressions (such as in the `summarize()`) to explicit vectors by adding the "`c()`" notation.
+ * Replace "`=`" assignments with "`:=`" assignments.
+ 
+Our converted code looks like the following.
+
+
+```{r exc}
+library("seplyr")
+
+starwars %>%
+  group_by_se("homeworld") %>%
+  summarise_se(c("mean_height" := "mean(height, na.rm = TRUE)",
+                 "mean_mass" := "mean(mass, na.rm = TRUE)",
+                 "count" := "n()"))
+```
+
+This code works the same as the original `dplyr` code.  Obviously at this point all we have done is worked to make the code a bit less pleasant looking; we have yet to see any benefit from this conversion.
+
+The benefit is: this code can incrementally be parameterized and wrapped in a re-usable function very easily.
+
+For example: suppose ([as in the original example](https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/)) we want to create a function that lets us choose the grouping variable?  This is now easy, we copy the code into a function and replace the explicit value `"homeworld"` with a variable:
+
+```{r exp1}
+starwars_mean <- function(my_var) {
+  starwars %>%
+    group_by_se(my_var) %>%
+    summarise_se(c("mean_height" := "mean(height, na.rm = TRUE)",
+                   "mean_mass" := "mean(mass, na.rm = TRUE)",
+                   "count" := "n()"))
+}
+
+starwars_mean("hair_color")
+```
+
+And this is the point: after mechanically translating the `dplyr` pipeline into `seplyr` notation abstraction over the pipeline is also itself easy and mechanical (just replacing values with variables).  For example we can make a completely generic function using `R`'s `paste()` function to build up expressions.
+
+```{r exp3}
+grouped_mean <- function(data, 
+                         grouping_variables, 
+                         value_variables) {
+  result_names <- paste0("mean_", 
+                         value_variables)
+  expressions <- paste0("mean(", 
+                        value_variables, 
+                        ", na.rm = TRUE)")
+  calculation <- result_names := expressions
+  print(calculation) # print for demonstration
+  data %>%
+    group_by_se(grouping_variables) %>%
+    summarise_se(c(calculation,
+                   "count" := "n()"))
+}
+
+starwars %>% 
+  grouped_mean(grouping_variables = "eye_color",
+               value_variables = c("mass", "birth_year"))
+```
+
+The only part that requires more study and practice was messing around with the expressions using `paste()` (for more details on the string manipulation please try "`help(paste)`").  Notice also we used the "`:=`" operator to bind a list of desired result names to matching calculations.
+
+The point is: we did not have to bring in (or study) any deep-theory or heavy-weight tools such as [`rlang`/`tidyeval`](https://CRAN.R-project.org/package=rlang) or [`lazyeval`](https://CRAN.R-project.org/package=lazyeval) to complete our programming task.  Once you are in `seplyr` notation, changes are very easy.  And you can separate translating into `seplyr` notation from the work of designing your wrapper function (breaking your programming work into smaller easier to understand steps).
+
+
+
