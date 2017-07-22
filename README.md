@@ -65,7 +65,6 @@ datasets::mtcars %>%
 If you don't want to try and digest entire theory of quasi-quoting and splicing (the `!!!` operator) then you can use `seplyr` which conveniently and legibly wraps the operations as follows:
 
 ``` r
-# devtools::install_github('WinVector/seplyr')
 library("seplyr")
 
 datasets::mtcars %>% 

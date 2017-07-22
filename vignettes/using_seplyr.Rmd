@@ -20,7 +20,7 @@ Suppose you had worked out a `dplyr` pipeline that performed an analysis you wer
 suppressPackageStartupMessages(library("dplyr"))
 packageVersion("dplyr")
 
-colnames(starwars)
+cat(colnames(starwars), sep = '\n')
 
 starwars %>%
   group_by(homeworld) %>%
@@ -52,7 +52,6 @@ Our converted code looks like the following.
 
 
 ```{r exc}
-# devtools::install_github("WinVector/seplyr")
 library("seplyr")
 
 starwars %>%
@@ -92,7 +91,7 @@ grouped_mean <- function(data,
                         value_variables, 
                         ", na.rm = TRUE)")
   calculation <- result_names := expressions
-  print(calculation) # print for demonstration
+  print(as.list(calculation)) # print for demonstration
   data %>%
     group_by_se(grouping_variables) %>%
     summarize_se(c(calculation,
