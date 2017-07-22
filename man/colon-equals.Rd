@@ -2,6 +2,7 @@
 % Please edit documentation in R/namedMapBuilder.R
 \name{:=}
 \alias{:=}
+\alias{named_map_builder}
 \title{Named map builder.}
 \usage{
 ":="(names, values)

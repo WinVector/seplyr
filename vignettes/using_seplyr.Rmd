@@ -35,13 +35,13 @@ It has long been considered a point of discomfort to convert such an interactive
 
 This inessential difficulty is largely a due to the preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.  Non-standard evaluation interfaces are a bit more complicated and bit harder to compose than standard evaluation interfaces (that is interfaces that are referentially transparent or ones that look only at values, not captured code, please see [here](http://www.win-vector.com/blog/2017/06/non-standard-evaluation-and-function-composition-in-r/) for some analysis).
 
-`seplyr` prefers "slightly clunkier" standard interfaces, which are actually very powerful and can be used to some advantage.
+`seplyr` is a `dplyr` adapter layer that prefers "slightly clunkier" standard interfaces, which are actually very powerful and can be used to some advantage.
 
 Let's translate the above example into a re-usable function in small (easy) stages.  First translate the interactive script from `dplyr` notation into `seplyr` notation.  
 
 This step is mechanical (you just read the `help()` of the matching `seplyr` verbs, which have names of the form `*_se()`).  What you have to do is:
 
- * Change `dplyr` verbs to their matching `seplyr` "`*_se()`" analogues.
+ * Change `dplyr` verbs to their matching `seplyr` "`*_se()`" adapters.
  * Add a bunch of quote marks around names and expressions.
  * Convert lists of expressions (such as in the `summarize()`) to explicit vectors by adding the "`c()`" notation.
  * Replace "`=`" assignments with "`:=`" assignments.
@@ -54,12 +54,12 @@ library("seplyr")
 
 starwars %>%
   group_by_se("homeworld") %>%
-  summarise_se(c("mean_height" := "mean(height, na.rm = TRUE)",
+  summarize_se(c("mean_height" := "mean(height, na.rm = TRUE)",
                  "mean_mass" := "mean(mass, na.rm = TRUE)",
                  "count" := "n()"))
 ```
 
-This code works the same as the original `dplyr` code.  Obviously at this point all we have done is worked to make the code a bit less pleasant looking; we have yet to see any benefit from this conversion.
+This code works the same as the original `dplyr` code.  Obviously at this point all we have done is worked to make the code a bit less pleasant looking; we have yet to see any benefit from this conversion (though we can turn this on its head and say all directly `dplyr` notation is saving us is from having to write a few quote marks).
 
 The benefit is: this code can incrementally be parameterized and wrapped in a re-usable function very easily.
 
@@ -69,7 +69,7 @@ For example: suppose ([as in the original example](https://blog.rstudio.com/2017
 starwars_mean <- function(my_var) {
   starwars %>%
     group_by_se(my_var) %>%
-    summarise_se(c("mean_height" := "mean(height, na.rm = TRUE)",
+    summarize_se(c("mean_height" := "mean(height, na.rm = TRUE)",
                    "mean_mass" := "mean(mass, na.rm = TRUE)",
                    "count" := "n()"))
 }
@@ -77,7 +77,7 @@ starwars_mean <- function(my_var) {
 starwars_mean("hair_color")
 ```
 
-And this is the point: after mechanically translating the `dplyr` pipeline into `seplyr` notation abstraction over the pipeline is also itself easy and mechanical (just replacing values with variables).  For example we can make a completely generic function using `R`'s `paste()` function to build up expressions.
+In `seplyr` notation abstraction over the pipeline is easy and mechanical (just replacing values with variables).  For example we can make a completely generic function using `R`'s `paste()` function to build up expressions.
 
 ```{r exp3}
 grouped_mean <- function(data, 
@@ -92,7 +92,7 @@ grouped_mean <- function(data,
   print(calculation) # print for demonstration
   data %>%
     group_by_se(grouping_variables) %>%
-    summarise_se(c(calculation,
+    summarize_se(c(calculation,
                    "count" := "n()"))
 }
 
@@ -101,9 +101,12 @@ starwars %>%
                value_variables = c("mass", "birth_year"))
 ```
 
-The only part that requires more study and practice was messing around with the expressions using `paste()` (for more details on the string manipulation please try "`help(paste)`").  Notice also we used the "`:=`" operator to bind a list of desired result names to matching calculations.
+The only part that requires more study and practice was messing around with the expressions using `paste()` (for more details on the string manipulation please try "`help(paste)`").  Notice also we used the "`:=`" operator to bind a list of desired result names to matching calculations (please see "`help(named_map_builder)`" for more details).
 
 The point is: we did not have to bring in (or study) any deep-theory or heavy-weight tools such as [`rlang`/`tidyeval`](https://CRAN.R-project.org/package=rlang) or [`lazyeval`](https://CRAN.R-project.org/package=lazyeval) to complete our programming task.  Once you are in `seplyr` notation, changes are very easy.  And you can separate translating into `seplyr` notation from the work of designing your wrapper function (breaking your programming work into smaller easier to understand steps).
+
+The `seplyr` package is simple, powerful, and contains a number of worked examples both in `help()` and `vignette(package='seplyr')` documentation.
+
 
 
 

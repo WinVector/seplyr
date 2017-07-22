@@ -6,6 +6,10 @@
 #' @param values values to assign names to (and return).
 #' @return values with names set.
 #'
+#'
+#' @aliases named_map_builder
+#'
+#'
 #' @examples
 #'
 #'
