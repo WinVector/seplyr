@@ -1,0 +1,60 @@
+---
+title: "Named Map Builder"
+author: "John Mount"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Named Map Builder}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+[`seplyr`](https://github.com/WinVector/seplyr) introduces an operator called "named map builder" that is written as "`:=`".  Named map builder is a *very* simple bit of code that performs a very simple task: it adds names to vectors or lists (making them work more like maps).
+
+Here are some examples:
+
+```{r ex1}
+library("seplyr")
+
+'a' := 5
+
+c('a' := 5, 'b' := 6)
+
+c('a', 'b') := c(5, 6)
+```
+
+The left-side argument of the `:=` operator is called "the names", and the right-side argument is called "the values".  The `:=` operators returns the values with the names set to names.
+
+A great use of the `:=` operator is using it to conveniently build arguments lists for functions such as `seplyr::mutate_se()`.  This works for simple explicit code such as the following.
+
+```{r ex2}
+datasets::iris %>%
+  summarize_se("Mean_Sepal_Length" := "mean(Sepal.Length)")
+```
+
+Slightly more complicated code such as:
+
+```{r ex3}
+datasets::iris %>%
+  group_by_se("Species") %>%
+  summarize_se(c("Mean_Sepal_Length" := "mean(Sepal.Length)",
+                 "Mean_Sepal_Width" := "mean(Sepal.Width)"))
+```
+
+Or even parametric code such as:
+
+```{r ex4}
+resultColumn <- "summary_value"
+datasets::iris %>%
+  group_by_se("Species") %>%
+  summarize_se(resultColumn := "mean(Sepal.Length)")
+```
+
+
+
+To see more please try:
+
+```{r print, eval=FALSE}
+help(`:=`, package = 'seplyr')
+print(`:=`)
+```
