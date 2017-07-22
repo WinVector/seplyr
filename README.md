@@ -22,7 +22,7 @@ In `dplyr` if you know the names of columns when you are writing code you can wr
 ``` r
 suppressPackageStartupMessages(library("dplyr"))
 packageVersion("dplyr")
- #  [1] '0.7.1.9000'
+ #  [1] '0.7.2'
 
 datasets::mtcars %>% 
   arrange(cyl, desc(gear)) %>% 
