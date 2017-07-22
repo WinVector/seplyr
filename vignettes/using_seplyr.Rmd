@@ -33,7 +33,7 @@ The above is colloquially called "an interactive script."  The name comes from t
 
 It has long been considered a point of discomfort to convert such an interactive `dplyr` pipeline into a re-usable script or function.  That is a script or function that specifies column names in some [parametric](http://www.win-vector.com/blog/2017/04/programming-over-r/) or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).
 
-This inessential difficulty is largely a due to the preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.
+This inessential (or conquerable) difficulty is largely a due to the preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.
 
 `seplyr` is a `dplyr` adapter layer that prefers "slightly clunkier" standard interfaces (or [referentially transparent](https://en.wikipedia.org/wiki/Referential_transparency) interfaces), which are actually very powerful and can be used to some advantage.
 
