@@ -118,8 +118,8 @@ For now we are not emphasizing `seplyr::mutate_se()` and `seplyr::summarize_se()
 datasets::iris %>%
   group_by_at("Species") %>%
   summarize_at(c("Sepal.Length", "Sepal.Width"), funs(mean)) %>%
-  rename_se(c(Mean.Sepal.Length = "Sepal.Length", 
-              Mean.Sepal.Width =  "Sepal.Width"))
+  rename_se(c("Mean.Sepal.Length" := "Sepal.Length", 
+              "Mean.Sepal.Width" := "Sepal.Width"))
  #  # A tibble: 3 x 3
  #       Species Mean.Sepal.Length Mean.Sepal.Width
  #        <fctr>             <dbl>            <dbl>
@@ -128,15 +128,15 @@ datasets::iris %>%
  #  3  virginica             6.588            2.974
 ```
 
-In the above the `rename_se()` is simply changing the column names to what we want (because we did not specify this in the `summarize_at()` step).
+In the above the `rename_se()` is simply changing the column names to what we want (because we did not specify this in the `summarize_at()` step). The `:=` operator is just a convenience function for building up maps, we could also have used "`=`" or passed in a named vector built up elsewhere.
 
 However, we can also perform the above directly with `seplyr::summarize_se()` as follows.
 
 ``` r
 datasets::iris %>%
   group_by_se("Species") %>%
-  summarize_se(c(Mean.Sepal.Length = "mean(Sepal.Length)", 
-                 Mean.Sepal.Width =  "mean(Sepal.Width)"))
+  summarize_se(c("Mean.Sepal.Length" := "mean(Sepal.Length)", 
+                 "Mean.Sepal.Width" := "mean(Sepal.Width)"))
  #  # A tibble: 3 x 3
  #       Species Mean.Sepal.Length Mean.Sepal.Width
  #        <fctr>             <dbl>            <dbl>

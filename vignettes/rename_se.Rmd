@@ -35,11 +35,11 @@ Because `seplyr` is intended to be a set of adapters for `dplyr` we simply adopt
 library("seplyr")
 
 datasets::mtcars %>%
-  rename_se(c("cylinders" = "cyl", "gears" = "gear")) %>%
+  rename_se(c("cylinders" := "cyl", "gears" := "gear")) %>%
   head()
 ```
 
-We hope this makes it easy to translate one-off analyses into re-usable scripts by incrementally replacing known variable names with parametric versions.
+We hope this makes it easy to translate one-off analyses into re-usable scripts by incrementally replacing known variable names with parametric versions.  The `:=` operator is just a convenience function for building up maps, we could also have written `rename_se(c("cylinders" = "cyl", "gears" = "gear"))` or passed in a named vector built up elsewhere.
 
 In contrast `dplyr::rename_at()` has its own notation that seems to not imitate `dplyr::rename()`.  The same operation using `dplyr::rename_at()` is something like the following.
 

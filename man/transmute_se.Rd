@@ -21,12 +21,12 @@ transmuteTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 \examples{
 
 datasets::iris \%>\%
-  transmute_se(c(Sepal_Long = "Sepal.Length >= 2 * Sepal.Width",
-              Petal_Short = "Petal.Length <= 3.5")) \%>\%
+  transmute_se(c("Sepal_Long" := "Sepal.Length >= 2 * Sepal.Width",
+              "Petal_Short" := "Petal.Length <= 3.5")) \%>\%
   summary()
 
 
 }
 \seealso{
-\code{\link[dplyr]{transmute}}, \code{\link[dplyr]{transmute_at}}
+\code{\link[dplyr]{transmute}}, \code{\link[dplyr]{transmute_at}}, \code{\link[seplyr]{:=}}
 }
