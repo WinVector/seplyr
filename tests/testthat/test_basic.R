@@ -3,6 +3,7 @@ library('seplyr')
 context("basictest")
 
 test_that("test_basic.R", {
+  suppressPackageStartupMessages(library("dplyr"))
 
   groupingCols <- c("cyl", "gear")
   r1 <- datasets::mtcars %>%
