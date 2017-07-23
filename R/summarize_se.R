@@ -27,7 +27,7 @@ summarize_se <- function(.data, summarizeTerms) {
   # from: https://github.com/tidyverse/rlang/issues/116
   summarizeQ <- lapply(summarizeTerms,
                     function(si) { rlang::parse_expr(si) })
-  summarize(.data = .data, !!!summarizeQ)
+  dplyr::summarize(.data = .data, !!!summarizeQ)
 }
 
 

@@ -25,7 +25,7 @@
 #'
 rename_se <- function(.data, mapping) {
   mp <- lapply(mapping, rlang::sym)
-  do.call(rename, c(list(.data) , mp))
+  do.call(dplyr::rename, c(list(.data) , mp))
 }
 
 
@@ -58,5 +58,5 @@ rename_se <- function(.data, mapping) {
 rename_mp <- function(.data, mapping) {
   mp <- lapply(mapping, rlang::sym)
   mapfn <- function(ci) { mp[ci] }
-  rename_at(.tbl = .data, .vars = names(mp), mapfn)
+  dplyr::rename_at(.tbl = .data, .vars = names(mp), mapfn)
 }

@@ -36,9 +36,9 @@ add_rank_indices <- function(.data,
   # from: https://github.com/tidyverse/rlang/issues/116
   arrangeTerms <- lapply(arrangeTerms,
                          function(si) { rlang::parse_expr(si) })
-  .data <- arrange(.data, !!!arrangeTerms)
+  .data <- dplyr::arrange(.data, !!!arrangeTerms)
   # add ordered row-ids globally
-  d <- mutate(.data, !!orderColumn := 1 )
-  d <- mutate(d, !!orderColumn := cumsum(!!rlang::sym(orderColumn)) )
+  d <- dplyr::mutate(.data, !!orderColumn := 1 )
+  d <- dplyr::mutate(d, !!orderColumn := cumsum(!!rlang::sym(orderColumn)) )
   d
 }

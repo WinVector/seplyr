@@ -28,5 +28,5 @@ mutate_se <- function(.data, mutateTerms) {
   # from: https://github.com/tidyverse/rlang/issues/116
   mutateQ <- lapply(mutateTerms,
                     function(si) { rlang::parse_expr(si) })
-  mutate(.data = .data, !!!mutateQ)
+  dplyr::mutate(.data = .data, !!!mutateQ)
 }

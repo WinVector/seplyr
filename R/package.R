@@ -24,7 +24,3 @@
 #' @name seplyr
 NULL
 
-#' @importFrom dplyr arrange distinct filter group_by group_indices left_join mutate rename rename_at select summarize transmute ungroup
-#' @importFrom dplyr add_count add_tally count tally
-#' @importFrom rlang parse_expr sym syms
-NULL

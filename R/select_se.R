@@ -27,7 +27,7 @@ select_se <- function(.data, colNames) {
   # use full parse instead of sym() to allow -var forms
   colSyms <- lapply(colNames,
                     function(si) { rlang::parse_expr(si) })
-  select(.data, !!!colSyms)
+  dplyr::select(.data, !!!colSyms)
 }
 
 #' deselect standard interface.
@@ -55,5 +55,5 @@ deselect <- function(.data, colNames) {
   # select(.data, one_of(colNames))
   # convert char vector into spliceable vector
   colSyms <- rlang::syms(setdiff(colnames(.data), colNames))
-  select(.data, !!!colSyms)
+  dplyr::select(.data, !!!colSyms)
 }

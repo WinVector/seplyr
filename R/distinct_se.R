@@ -21,5 +21,5 @@
 distinct_se <- function(.data, groupingVars, .keep_all = FALSE) {
   # convert char vector into spliceable vector
   groupingSyms <- rlang::syms(groupingVars)
-  distinct(.data = .data, !!!groupingSyms, .keep_all = .keep_all)
+  dplyr::distinct(.data = .data, !!!groupingSyms, .keep_all = .keep_all)
 }

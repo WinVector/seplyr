@@ -27,5 +27,5 @@ transmute_se <- function(.data, transmuteTerms) {
   # from: https://github.com/tidyverse/rlang/issues/116
   transmuteQ <- lapply(transmuteTerms,
                     function(si) { rlang::parse_expr(si) })
-  transmute(.data = .data, !!!transmuteQ)
+  dplyr::transmute(.data = .data, !!!transmuteQ)
 }

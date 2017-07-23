@@ -28,5 +28,5 @@ arrange_se <- function(.data, arrangeTerms) {
   # from: https://github.com/tidyverse/rlang/issues/116
   arrangeQ <- lapply(arrangeTerms,
                      function(si) { rlang::parse_expr(si) })
-  arrange(.data = .data, !!!arrangeQ)
+  dplyr::arrange(.data = .data, !!!arrangeQ)
 }

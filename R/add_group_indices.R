@@ -15,11 +15,11 @@
 #' @export
 #'
 add_group_indices <- function(.data, groupingVars, indexColumn) {
-  .data <- ungroup(.data) # just in case
+  .data <- dplyr::ungroup(.data) # just in case
   `:=` <- NULL # don't let look like an unbound reference to CRAN checker
-  d <- distinct(select_se(.data, groupingVars))
-  d <- mutate(d, !!indexColumn := 1 )
+  d <- dplyr::distinct(select_se(.data, groupingVars))
+  d <- dplyr::mutate(d, !!indexColumn := 1 )
   d <- arrange_se(d, groupingVars)
-  d <- mutate(d, !!indexColumn := cumsum(!!rlang::sym(indexColumn)) )
-  left_join(.data, d, by = groupingVars)
+  d <- dplyr::mutate(d, !!indexColumn := cumsum(!!rlang::sym(indexColumn)) )
+  dplyr::left_join(.data, d, by = groupingVars)
 }

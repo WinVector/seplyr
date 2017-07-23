@@ -28,5 +28,5 @@ filter_se <- function(.data, filterTerms) {
   # from: https://github.com/tidyverse/rlang/issues/116
   filterQ <- lapply(filterTerms,
                     function(si) { rlang::parse_expr(si) })
-  filter(.data = .data, !!!filterQ)
+  dplyr::filter(.data = .data, !!!filterQ)
 }
