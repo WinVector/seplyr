@@ -28,6 +28,8 @@ The left-side argument of the `:=` operator is called "the names", and the right
 A great use of the `:=` operator is using it to conveniently build arguments lists for functions such as `seplyr::mutate_se()`.  This works for simple explicit code such as the following.
 
 ```{r ex2}
+suppressPackageStartupMessages(library("dplyr"))
+
 datasets::iris %>%
   summarize_se("Mean_Sepal_Length" := "mean(Sepal.Length)")
 ```
