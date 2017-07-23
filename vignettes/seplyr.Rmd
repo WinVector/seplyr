@@ -14,6 +14,18 @@ This document describes the [`R`](https://www.r-project.org) package [`seplyr`](
 
 The idea is this package lets you program over `dplyr` 0.7.* without needing a Ph.D. in computer science.
 
+To install this packing in `R` please either install from [CRAN](https://CRAN.R-project.org/package=seplyr) with:
+
+```{r, eval=FALSE}
+   install.packages('seplyr')
+```
+
+or from [`GitHub`](https://github.com/WinVector/seplyr):
+ 
+```{r, eval=FALSE}
+   devtools::install_github('WinVector/seplyr')
+```
+
 In `dplyr` if you know the names of columns when you are writing code you can write code such as the following.
 
 ```{r ex1a}
@@ -86,7 +98,7 @@ We also have a few methods that work around a few of the minor inconvenience of 
 * `deselect()`
 * `rename_mp()`
 
-For now we are not emphasizing `seplyr::mutate_se()` and `seplyr::summarize_se()` as we think in some cases the best ways to work with these verbs may be a combination of their `dplyr::*_at()` forms plus a `seplyr::rename_se()`.  For example:
+One can combine `seplyr` methods with standard `dplyr` methods (such as `summarize_at()`):
 
 ```{r atex}
 datasets::iris %>%
@@ -96,9 +108,7 @@ datasets::iris %>%
               "Mean.Sepal.Width" := "Sepal.Width"))
 ```
 
-In the above the `rename_se()` is simply changing the column names to what we want (because we did not specify this in the `summarize_at()` step). The `:=` operator is just a convenience function for building up maps, we could also have used "`=`" or passed in a named vector built up elsewhere.
-
-However, we can also perform the above directly with `seplyr::summarize_se()` as follows.
+One also perform the above directly with `seplyr::summarize_se()` as follows.
 
 
 ```{r atexse}

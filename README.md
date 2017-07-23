@@ -109,7 +109,7 @@ We also have a few methods that work around a few of the minor inconvenience of 
 -   `deselect()`
 -   `rename_mp()`
 
-For now we are not emphasizing `seplyr::mutate_se()` and `seplyr::summarize_se()` as we think in some cases the best ways to work with these verbs may be a combination of their `dplyr::*_at()` forms plus a `seplyr::rename_se()`. For example:
+One can combine `seplyr` methods with standard `dplyr` methods (such as `summarize_at()`):
 
 ``` r
 datasets::iris %>%
@@ -125,9 +125,7 @@ datasets::iris %>%
  #  3  virginica             6.588            2.974
 ```
 
-In the above the `rename_se()` is simply changing the column names to what we want (because we did not specify this in the `summarize_at()` step). The `:=` operator is just a convenience function for building up maps, we could also have used "`=`" or passed in a named vector built up elsewhere.
-
-However, we can also perform the above directly with `seplyr::summarize_se()` as follows.
+One also perform the above directly with `seplyr::summarize_se()` as follows.
 
 ``` r
 datasets::iris %>%
