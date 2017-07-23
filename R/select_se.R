@@ -10,6 +10,8 @@
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
+#'
 #' datasets::mtcars %>%
 #'    select_se(c("cyl", "gear")) %>%
 #'    head()
@@ -39,6 +41,8 @@ select_se <- function(.data, colNames) {
 #' @return .data without deselected columns
 #'
 #' @examples
+#'
+#' suppressPackageStartupMessages(library("dplyr"))
 #'
 #' datasets::mtcars %>%
 #'    deselect(c("cyl", "gear")) %>%

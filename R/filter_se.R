@@ -12,7 +12,10 @@
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
+#'
 #' upperBound <- 3.5
+#'
 #' datasets::iris %>%
 #'   filter_se(c("Sepal.Length >= 2 * Sepal.Width",
 #'               "Petal.Length <= upperBound"))

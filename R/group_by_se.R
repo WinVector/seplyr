@@ -12,6 +12,8 @@
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
+#'
 #' datasets::mtcars %>%
 #'   group_by_se(c("cyl", "gear")) %>%
 #'   head()

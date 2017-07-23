@@ -22,9 +22,8 @@ Description:     The 'seplyr' (standard evaluation data.frame 'dplyr') package s
     per-group identifies to a 'data.frame' without depending on row-order).
 License: GPL-3
 Encoding: UTF-8
-Depends:
-    dplyr (>= 0.7.1)
 Imports:
+    dplyr (>= 0.7.1),
     rlang (>= 0.1.1),
     datasets
 LazyData: true

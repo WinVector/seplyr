@@ -13,6 +13,8 @@
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
+#'
 #' datasets::iris %>%
 #'   mutate_se(c("Sepal_Long" := "Sepal.Length >= 2 * Sepal.Width",
 #'               "Petal_Short" := "Petal.Length <= 3.5")) %>%

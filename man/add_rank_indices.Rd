@@ -23,6 +23,7 @@ Arrange a data frame and rank indexes.
 }
 \examples{
 
+suppressPackageStartupMessages(library("dplyr"))
 
 datasets::mtcars \%>\%
   # tibble::rownames_to_column() not currently re-exported by dplyr

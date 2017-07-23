@@ -19,7 +19,10 @@ rename columns (much different syntax than \code{\link[dplyr]{rename}}).
 }
 \examples{
 
+suppressPackageStartupMessages(library("dplyr"))
+
 mapping <- c("cyl" = "cylinders", "gear" = "gears")
+
 datasets::mtcars \%>\%
    rename_mp(mapping) \%>\%
    head()

@@ -11,6 +11,8 @@
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
+#'
 #' datasets::mtcars %>%
 #'    rename_se(c("cylinders" := "cyl", "gears" := "gear")) %>%
 #'    head()
@@ -39,7 +41,10 @@ rename_se <- function(.data, mapping) {
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
+#'
 #' mapping <- c("cyl" = "cylinders", "gear" = "gears")
+#'
 #' datasets::mtcars %>%
 #'    rename_mp(mapping) %>%
 #'    head()

@@ -19,6 +19,8 @@ select columns.  To remove columns please see \code{\link{deselect}}.
 }
 \examples{
 
+suppressPackageStartupMessages(library("dplyr"))
+
 datasets::mtcars \%>\%
    select_se(c("cyl", "gear")) \%>\%
    head()

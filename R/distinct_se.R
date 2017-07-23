@@ -12,6 +12,8 @@
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
+#'
 #' datasets::mtcars %>% distinct_se(c("cyl", "gear"))
 #'
 #' @export

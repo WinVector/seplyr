@@ -30,6 +30,8 @@ Author: John Mount, Win-Vector LLC.
 }
 \examples{
 
+suppressPackageStartupMessages(library("dplyr"))
+
 group_summarize(datasets::mtcars,
                     c("cyl", "gear"),
                     group_mean_mpg = mean(mpg),

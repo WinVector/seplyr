@@ -17,6 +17,8 @@
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
+#'
 #' datasets::mtcars %>% tally_se()
 #' datasets::mtcars %>% tally_se(wt = "cyl")
 #'
@@ -47,6 +49,8 @@ tally_se <- function(x, wt=NULL, sort = FALSE) {
 #' @return .data with only selected columns
 #'
 #' @examples
+#'
+#' suppressPackageStartupMessages(library("dplyr"))
 #'
 #' datasets::iris %>% add_tally_se()
 #'
@@ -81,6 +85,8 @@ add_tally_se <- function(x, wt=NULL, sort = FALSE) {
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
+#'
 #' datasets::mtcars %>% count_se(groupingVars= c('cyl', 'gear'))
 #'
 #' @export
@@ -113,6 +119,8 @@ count_se <- function(x, groupingVars = NULL,
 #' @return .data with only selected columns
 #'
 #' @examples
+#'
+#' suppressPackageStartupMessages(library("dplyr"))
 #'
 #' datasets::iris %>% count_se(wt = "Sepal.Width", groupingVars= c('Species'))
 #'

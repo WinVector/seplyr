@@ -27,6 +27,8 @@ to these \code{dplyr} implementations.
 }
 \examples{
 
+suppressPackageStartupMessages(library("dplyr"))
+
 datasets::mtcars \%>\% tally_se()
 datasets::mtcars \%>\% tally_se(wt = "cyl")
 

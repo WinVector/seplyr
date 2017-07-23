@@ -10,8 +10,10 @@
 #'
 #' @examples
 #'
+#' suppressPackageStartupMessages(library("dplyr"))
 #'
 #' groupingVars = c("cyl", "gear")
+#'
 #' datasets::mtcars %>%
 #'   # dplyr doesn't currently export tibble::rownames_to_column()
 #'   { mutate(., CarName = rownames(.) ) } %>%

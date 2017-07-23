@@ -29,6 +29,8 @@ to these \code{dplyr} implementations.
 }
 \examples{
 
+suppressPackageStartupMessages(library("dplyr"))
+
 datasets::mtcars \%>\% count_se(groupingVars= c('cyl', 'gear'))
 
 }

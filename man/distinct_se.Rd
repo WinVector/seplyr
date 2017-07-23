@@ -21,6 +21,8 @@ Group a data frame and add per-group indices as a column.
 }
 \examples{
 
+suppressPackageStartupMessages(library("dplyr"))
+
 datasets::mtcars \%>\% distinct_se(c("cyl", "gear"))
 
 }
