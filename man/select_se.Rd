@@ -24,6 +24,8 @@ datasets::mtcars \%>\%
    head()
 # essentially dplyr::select_at()
 
+data.frame(a=1, b=2) \%>\% select_se('-b')
+
 }
 \seealso{
 \code{\link{deselect}}, \code{\link[dplyr]{select}}, \code{\link[dplyr]{select_at}}
