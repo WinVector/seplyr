@@ -1,4 +1,9 @@
 
+`seplyr` 0.1.2 2017-07-27
+
+ * Add novelName().
+ * Move dplyr to imports.
+ 
 `seplyr` 0.1.1 2017-07-22
 
  * Fix some documentation.
