@@ -3,7 +3,10 @@ Type: Package
 Title: Standard Evaluation Interfaces for Common 'dplyr' Tasks
 Version: 0.1.2
 Date: 2017-07-27
-Author: John Mount
+Authors@R: c(
+    person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),
+    person(family = "Win-Vector LLC", role = c("cph"))
+    )
 Maintainer: John Mount <jmount@win-vector.com>
 URL: https://github.com/WinVector/seplyr
 Description:     The 'seplyr' (standard evaluation data.frame 'dplyr') package supplies
