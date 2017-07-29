@@ -13,6 +13,7 @@
 #' @examples
 #'
 #' suppressPackageStartupMessages(library("dplyr"))
+#' packageVersion("dplyr")
 #'
 #' upperBound <- 3.5
 #'

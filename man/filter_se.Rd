@@ -21,6 +21,7 @@ filterTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 \examples{
 
 suppressPackageStartupMessages(library("dplyr"))
+packageVersion("dplyr")
 
 upperBound <- 3.5
 
