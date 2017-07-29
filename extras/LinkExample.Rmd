@@ -1,0 +1,108 @@
+---
+title: "Link Score Example"
+output: html_document
+---
+
+## The example: normalizing the predictions of a logistic regression from the underlying links.
+
+```{r ex1}
+d <- data.frame(
+  origRowID = c( 1,   1,   1,   2,   2,   2),
+  catName =   c('a', 'b', 'c', 'a', 'b', 'c'),
+  linkScore = c( 5,   2,  -2,  -3,  -2,   1),
+  stringsAsFactors = FALSE
+)
+
+print(d)
+```
+
+## When we know the names of the columns when writing the code
+
+```{r known}
+suppressPackageStartupMessages(library("dplyr"))
+
+d %>%
+  group_by(origRowID) %>%
+  mutate(probability =
+           exp(linkScore)/sum(exp(linkScore))) %>%
+  arrange(origRowID, catName)
+```
+
+## When we will not know the names of the columns until after we write the code
+
+```{r names}
+groupCol <- "origRowID"
+outcomeCol <- "catName"
+linkScoreCol = "linkScore"
+probScoreCol = "probability"
+```
+
+### wrapr::let solution
+
+```{r let}
+library("wrapr")
+
+let(
+  c(GROUPING_COL = groupCol,
+    OUTCOME_COL = outcomeCol,
+    LINK_COL = linkScoreCol,
+    PROB_COL = probScoreCol),
+  
+  d %>%
+    group_by(GROUPING_COL) %>%
+    mutate(PROB_COL = 
+             exp(LINK_COL)/sum(exp(LINK_COL))) %>%
+    arrange(GROUPING_COL, OUTCOME_COL)
+)
+```
+
+### rlang/tidyeval solution
+
+```{r tidyeval}
+GROUPING_SYM <- rlang::sym(groupCol)
+OUTCOME_SYM <- rlang::sym(outcomeCol)
+LINK_SYM <- rlang::sym(linkScoreCol)
+PROB_SYM = rlang::sym(probScoreCol)
+
+d %>%
+  group_by(!!GROUPING_SYM) %>%
+  mutate(!!PROB_SYM := 
+           exp(!!LINK_SYM)/sum(exp(!!LINK_SYM))) %>%
+  arrange(!!GROUPING_SYM, !!OUTCOME_SYM)
+```
+
+
+
+### seplyr solution
+
+
+```{r seplyr}
+library("seplyr")
+suppressPackageStartupMessages(library("glue"))
+
+d %>%
+  group_by_se(groupCol) %>%
+  mutate_se(probScoreCol := 
+              glue('exp({linkScoreCol})/sum(exp({linkScoreCol}))')) %>%
+  arrange_se(c(groupCol, outcomeCol))
+```
+
+### replyr::replyr_apply_f_mapped solution
+
+```{r replyrf}
+library("replyr")
+
+d %>%
+  replyr_apply_f_mapped(
+    nmap =  c(GROUPING_COL = groupCol,
+              OUTCOME_COL = outcomeCol,
+              LINK_COL = linkScoreCol,
+              PROB_COL = probScoreCol),
+    f = . %>%
+        group_by(GROUPING_COL) %>%
+        mutate(PROB_COL = 
+                 exp(LINK_COL)/sum(exp(LINK_COL))) %>%
+        arrange(GROUPING_COL, OUTCOME_COL)
+  )
+```
+
