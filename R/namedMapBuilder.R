@@ -24,6 +24,11 @@
 #'
 #' @export
 named_map_builder <- function(names, values) {
+  # sepcial case 'a' := c('b', 'c') -> a := 'bc'
+  if((length(values)>1)&&(length(names)==1)) {
+    values <- do.call(paste0, as.list(values))
+  }
+  # main case
   names(values) <- as.character(names)
   values
 }
