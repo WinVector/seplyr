@@ -1,8 +1,8 @@
 Package: seplyr
 Type: Package
 Title: Standard Evaluation Interfaces for Common 'dplyr' Tasks
-Version: 0.1.2
-Date: 2017-07-27
+Version: 0.1.3
+Date: 2017-07-29
 Authors@R: c(
     person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),
     person(family = "Win-Vector LLC", role = c("cph"))

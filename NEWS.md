@@ -1,4 +1,8 @@
 
+`seplyr` 0.1.3 2017-07-29
+
+ * Implicit paste() in some cases.
+
 `seplyr` 0.1.2 2017-07-27
 
  * Add novelName().
