@@ -47,7 +47,6 @@ let(
     OUTCOME_COL = outcomeCol,
     LINK_COL = linkScoreCol,
     PROB_COL = probScoreCol),
-  
   d %>%
     group_by(GROUPING_COL) %>%
     mutate(PROB_COL = 
@@ -90,6 +89,8 @@ d %>%
 ### replyr::replyr_apply_f_mapped solution
 
 ```{r replyrf}
+# requires the development version of replyr 
+# devtools::install_github('WinVector/replyr')
 library("replyr")
 
 d %>%
