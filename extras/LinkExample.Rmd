@@ -132,7 +132,7 @@ d %>%
   arrange_se(c(glue('desc({probScoreCol})'), 
                glue('desc({categoryCol})'))) %>% 
   mutate_se(rankCol := 'row_number()') %>%
-  filter(rank == 1) %>% # filter_se('rankCol == 1') %>% # TODO: filter_se working
+  filter_se(glue('{rankCol} == 1')) %>%
   ungroup() %>%
   select_se(c(idCol, categoryCol, probScoreCol)) %>%
   rename_se(outcomeCol := categoryCol) %>%
@@ -161,7 +161,8 @@ d %>%
       group_by(IDCOL) %>%
       mutate(PROBSCORECOL =
                exp(LINKSCORECOL)/sum(exp(LINKSCORECOL))) %>%
-      arrange(desc(PROBSCORECOL), desc(CATEGORYCOL)) %>%
+      arrange(desc(PROBSCORECOL),
+              desc(CATEGORYCOL)) %>%
       mutate(RANKCOL = row_number()) %>%
       filter(RANKCOL == 1) %>%
       ungroup() %>%
