@@ -8,7 +8,7 @@ Authors@R: c(
     person(family = "Win-Vector LLC", role = c("cph"))
     )
 Maintainer: John Mount <jmount@win-vector.com>
-URL: https://winvector.github.io/seplyr/
+URL: https://github.com/WinVector/seplyr/,  https://winvector.github.io/seplyr/
 BugReports: https://github.com/WinVector/seplyr/issues
 Description:     The 'seplyr' (standard evaluation data.frame 'dplyr') package supplies
     standard evaluation adapter methods for important common 'dplyr' methods

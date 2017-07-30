@@ -87,7 +87,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/WinVector/seplyr/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -139,12 +144,7 @@ filterTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".</p>
 
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%&gt;%</span>
   <span class='fu'>filter_se</span>(<span class='fu'>c</span>(<span class='st'>"Sepal.Length &gt;= 2 * Sepal.Width"</span>,
-              <span class='st'>"Petal.Length &lt;= upperBound"</span>))</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-#&gt; 1          4.9         2.4          3.3         1.0 versicolor
-#&gt; 2          5.0         2.0          3.5         1.0 versicolor
-#&gt; 3          5.7         2.6          3.5         1.0 versicolor
-#&gt; 4          5.0         2.3          3.3         1.0 versicolor
-#&gt; 5          5.1         2.5          3.0         1.1 versicolor</div><div class='input'>
+              <span class='st'>"Petal.Length &lt;= upperBound"</span>))</div><div class='output co'>#&gt; <span class='error'>Error in filter_impl(.data, quo): Evaluation error: object 'upperBound' not found.</span></div><div class='input'>
 
 </div></pre>
   </div>
