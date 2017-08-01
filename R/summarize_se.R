@@ -25,8 +25,12 @@
 summarize_se <- function(.data, summarizeTerms) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
+  env <- parent.frame()
   summarizeQ <- lapply(summarizeTerms,
-                    function(si) { rlang::parse_expr(si) })
+                    function(si) {
+                      rlang::parse_quosure(si,
+                                           env = env)
+                    })
   dplyr::summarize(.data = .data, !!!summarizeQ)
 }
 

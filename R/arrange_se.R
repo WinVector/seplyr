@@ -26,7 +26,11 @@
 arrange_se <- function(.data, arrangeTerms) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
+  env <- parent.frame()
   arrangeQ <- lapply(arrangeTerms,
-                     function(si) { rlang::parse_expr(si) })
+                    function(si) {
+                      rlang::parse_quosure(si,
+                                           env = env)
+                    })
   dplyr::arrange(.data = .data, !!!arrangeQ)
 }

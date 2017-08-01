@@ -26,7 +26,11 @@
 mutate_se <- function(.data, mutateTerms) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
+  env <- parent.frame()
   mutateQ <- lapply(mutateTerms,
-                    function(si) { rlang::parse_expr(si) })
+                    function(si) {
+                      rlang::parse_quosure(si,
+                                           env = env)
+                    })
   dplyr::mutate(.data = .data, !!!mutateQ)
 }

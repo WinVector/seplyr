@@ -25,7 +25,11 @@
 transmute_se <- function(.data, transmuteTerms) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
+  env <- parent.frame()
   transmuteQ <- lapply(transmuteTerms,
-                    function(si) { rlang::parse_expr(si) })
+                       function(si) {
+                         rlang::parse_quosure(si,
+                                              env = env)
+                       })
   dplyr::transmute(.data = .data, !!!transmuteQ)
 }

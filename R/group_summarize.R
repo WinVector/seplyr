@@ -33,9 +33,13 @@ group_summarize <- function(d, groupingVars, ...,
   dg <- dplyr::group_by(d, !!!groupingSyms)
   if(!is.null(arrangeTerms)) {
     # from: https://github.com/tidyverse/rlang/issues/116
-    arrangeTerms <- lapply(arrangeTerms,
-                           function(si) { rlang::parse_expr(si) })
-    dg <- dplyr::arrange(dg, !!!arrangeTerms)
+    env <- parent.frame()
+    arrangeQ <- lapply(arrangeTerms,
+                      function(si) {
+                        rlang::parse_quosure(si,
+                                             env = env)
+                      })
+    dg <- dplyr::arrange(dg, !!!arrangeQ)
   }
   ds <- dplyr::summarize(dg, ...)
   # work around https://github.com/tidyverse/dplyr/issues/2963

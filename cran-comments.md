@@ -5,7 +5,7 @@
 
 ## R CMD check results
 
-R CMD check --as-cran seplyr_0.1.1.tar.gz 
+R CMD check --as-cran seplyr_0.1.3.tar.gz 
 
 * using R version 3.4.1 (2017-06-30)
 * using platform: x86_64-apple-darwin15.6.0 (64-bit)
