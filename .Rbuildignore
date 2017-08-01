@@ -6,3 +6,4 @@
 ^docs$
 ^extras$
 
+^_pkgdown\.yml$
