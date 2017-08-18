@@ -23,10 +23,11 @@ Terms are vectors or lists of the form
 
 suppressPackageStartupMessages(library("dplyr"))
 
+resCol1 <- "Sepal_Long"
 datasets::iris \%>\%
-  mutate_se(c("Sepal_Long" := "Sepal.Length >= 2 * Sepal.Width",
+  mutate_se(c(resCol1 := "Sepal.Length >= 2 * Sepal.Width",
               "Petal_Short" := "Petal.Length <= 3.5")) \%>\%
-  summary()
+  head()
 
 
 }
