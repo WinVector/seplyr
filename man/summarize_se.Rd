@@ -15,7 +15,7 @@ summarise_se(.data, summarizeTerms)
 \item{summarizeTerms}{character vector of column expressions to summarize by.}
 }
 \value{
-.data grouped by columns named in groupingVars
+.data with summarizeTerms summarization applied.
 }
 \description{
 summarize a data frame by the summarizeTerms.  Accepts arbitrary text as

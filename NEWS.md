@@ -1,4 +1,8 @@
 
+# seplyr 0.1.4 2017-08-17
+
+ * Documentation fixes.
+
 # seplyr 0.1.3 2017-07-29
 
  * Implicit paste() in some cases.

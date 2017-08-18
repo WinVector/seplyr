@@ -12,7 +12,7 @@ arrange_se(.data, arrangeTerms)
 \item{arrangeTerms}{character vector of column expressions to arrange by.}
 }
 \value{
-.data grouped by columns named in groupingVars
+.data arrnaged by arrangeTerms
 }
 \description{
 Arange a data frame by the arrangeTerms.  Accepts arbitrary text as

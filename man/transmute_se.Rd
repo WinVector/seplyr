@@ -12,7 +12,7 @@ transmute_se(.data, transmuteTerms)
 \item{transmuteTerms}{character vector of column expressions to transmute by.}
 }
 \value{
-.data grouped by columns named in groupingVars
+.data transumuted by transmuteTerms.
 }
 \description{
 transmute a data frame by the transmuteTerms.  Accepts arbitrary text as

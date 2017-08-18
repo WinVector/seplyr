@@ -14,7 +14,7 @@ add_tally_se(x, wt = NULL, sort = FALSE)
 \item{sort}{logical if TRUE sort result in descending order}
 }
 \value{
-.data with only selected columns
+.data with added column n, containing counts.
 }
 \description{
 Add a new column named "n" with (optionally per-group) sums/counts.

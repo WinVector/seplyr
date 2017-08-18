@@ -12,7 +12,7 @@ filter_se(.data, filterTerms)
 \item{filterTerms}{character vector of column expressions to filter by.}
 }
 \value{
-.data grouped by columns named in groupingVars
+.data filtered by columns named in filterTerms
 }
 \description{
 Filter a data frame by the filterTerms.  Accepts arbitrary text as

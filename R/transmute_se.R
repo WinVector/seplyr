@@ -8,7 +8,7 @@
 #'
 #' @param .data data.frame
 #' @param transmuteTerms character vector of column expressions to transmute by.
-#' @return .data grouped by columns named in groupingVars
+#' @return .data transumuted by transmuteTerms.
 #'
 #' @examples
 #'

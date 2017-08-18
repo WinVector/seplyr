@@ -2,7 +2,7 @@
 % Please edit documentation in R/mutate_se.R
 \name{mutate_se}
 \alias{mutate_se}
-\title{mutate standard interface.}
+\title{mutate standard evaluation interface.}
 \usage{
 mutate_se(.data, mutateTerms)
 }
@@ -12,7 +12,7 @@ mutate_se(.data, mutateTerms)
 \item{mutateTerms}{character vector of column expressions to mutate by.}
 }
 \value{
-.data grouped by columns named in groupingVars
+.data with altered columns.
 }
 \description{
 Mutate a data frame by the mutateTerms.  Accepts arbitrary text as

@@ -8,7 +8,7 @@
 #'
 #' @param .data data.frame
 #' @param filterTerms character vector of column expressions to filter by.
-#' @return .data grouped by columns named in groupingVars
+#' @return .data filtered by columns named in filterTerms
 #'
 #' @examples
 #'

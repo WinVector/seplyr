@@ -9,7 +9,7 @@
 #'
 #' @param .data data.frame
 #' @param arrangeTerms character vector of column expressions to arrange by.
-#' @return .data grouped by columns named in groupingVars
+#' @return .data arrnaged by arrangeTerms
 #'
 #' @examples
 #'

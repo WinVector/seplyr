@@ -13,7 +13,7 @@
 #' @param x data.frame to tally/count
 #' @param wt character optional column name containing row-weights (passed to count/tally)
 #' @param sort logical if TRUE sort result in descending order
-#' @return .data with only selected columns
+#' @return .data with added column n, containing counts.
 #'
 #' @examples
 #'
@@ -46,7 +46,7 @@ tally_se <- function(x, wt=NULL, sort = FALSE) {
 #' @param x data.frame to tally/count
 #' @param wt character optional column name containing row-weights (passed to count/tally)
 #' @param sort logical if TRUE sort result in descending order
-#' @return .data with only selected columns
+#' @return .data with added column n, containing counts.
 #'
 #' @examples
 #'
@@ -81,7 +81,7 @@ add_tally_se <- function(x, wt=NULL, sort = FALSE) {
 #' @param groupingVars character vector of column names to group by.
 #' @param wt character optional column name containing row-weights (passed to count/tally)
 #' @param sort logical if TRUE sort result in descending order
-#' @return .data with only selected columns
+#' @return .data with added column n, containing counts.
 #'
 #' @examples
 #'
@@ -116,7 +116,7 @@ count_se <- function(x, groupingVars = NULL,
 #' @param groupingVars character vector of column names to group by.
 #' @param wt character optional column name containing row-weights (passed to count/tally)
 #' @param sort logical if TRUE sort result in descending order
-#' @return .data with only selected columns
+#' @return .data with added column n, containing counts.
 #'
 #' @examples
 #'

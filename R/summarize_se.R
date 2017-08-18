@@ -8,7 +8,7 @@
 #'
 #' @param .data data.frame
 #' @param summarizeTerms character vector of column expressions to summarize by.
-#' @return .data grouped by columns named in groupingVars
+#' @return .data with summarizeTerms summarization applied.
 #'
 #' @examples
 #'
