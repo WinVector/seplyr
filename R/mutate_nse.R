@@ -1,11 +1,17 @@
 
 
 # remove one level of quoting from a string
-dequote_str <- function(nexpr) {
+dequote_str <- function(nexpr, env) {
   # look for "'x'" forms, if so strip off one level of quotes
   nc <- nchar(nexpr)
+  regexp <- '[^\\]([\\][\\])*[\\][\'|"]$'
+  # avoid last quote escaped situation
+  #  grep(regexp, '"\\\\"') # integer(0)
+  #  grep(regexp, '"\\"') # integer(1)
   if((nc>=3) && (substr(nexpr,1,1)==substr(nexpr,nc,nc)) &&
-     (substr(nexpr,1,1) %in% c('"', "'"))) {
+     (substr(nexpr,1,1) %in% c('"', "'")) &&
+     (length(grep(regexp,nexpr)==0))) {
+    # exception an odd number of escapes before the last quote
     return(substr(nexpr,2,nc-1))
   }
   val <- NULL
@@ -41,7 +47,7 @@ prep_deref <- function(lexpr, env) {
     for(i in seq_len(length(nms))) {
       ki <- as.character(nms[[i]])
       if(length(ki)>0) {
-        ri <- as.character(dequote_str(ki))
+        ri <- as.character(dequote_str(ki, env))
         if((length(ri)>0)&&(ri!=ki)) {
           nms[[i]] <- ri
         }
@@ -58,7 +64,7 @@ prep_deref <- function(lexpr, env) {
   }
   # try to strip quotes off, producing either a symbol or string
   if(is.character(nexpr)) {
-   return(dequote_str(nexpr))
+   return(dequote_str(nexpr, env))
   }
   if(is.symbol(nexpr)) { # same as is.name()
     val <- NULL
