@@ -14,13 +14,13 @@ dequote_str <- function(nexpr) {
     error = function(e) { NULL }
   )
   if((!is.null(val)) && (is.character(val)) && (length(val)==1)) {
-    return(val)
+    return(as.symbol(val))
   }
   return(as.symbol(nexpr))
 }
 
 #' Substitute language elements by one-expand_expr.
-#' #'
+#'
 #'
 #' @param lexpr language item
 #' @param env environment to look in
