@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mutate standard evaluation interface. — mutate_se • seplyr</title>
+<title>mutate non-standard evaluation interface. — mutate_nse • seplyr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,7 +101,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>mutate standard evaluation interface.</h1>
+    <h1>mutate non-standard evaluation interface.</h1>
     </div>
 
     
@@ -110,7 +110,7 @@ mutateTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".
 Terms are vectors or lists of the form "lhs := rhs".</p>
     
 
-    <pre class="usage"><span class='fu'>mutate_se</span>(<span class='no'>.data</span>, <span class='no'>mutateTerms</span>)</pre>
+    <pre class="usage"><span class='fu'>mutate_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -120,8 +120,8 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
       <td><p>data.frame</p></td>
     </tr>
     <tr>
-      <th>mutateTerms</th>
-      <td><p>character vector of column expressions to mutate by.</p></td>
+      <th>...</th>
+      <td><p>expressions to mutate by.</p></td>
     </tr>
     </table>
     
@@ -139,23 +139,12 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
 <span class='fu'>suppressPackageStartupMessages</span>(<span class='fu'>library</span>(<span class='st'>"dplyr"</span>))
 
 <span class='no'>resCol1</span> <span class='kw'>&lt;-</span> <span class='st'>"Sepal_Long"</span>
+<span class='no'>ratio</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>
+<span class='no'>compCol1</span> <span class='kw'>&lt;-</span> <span class='st'>"Sepal.Width"</span>
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>mutate_se</span>(<span class='fu'>c</span>(<span class='no'>resCol1</span> <span class='kw'>:=</span> <span class='st'>"Sepal.Length &gt;= 2 * Sepal.Width"</span>,
-              <span class='st'>"Petal_Short"</span> <span class='kw'>:=</span> <span class='st'>"Petal.Length &lt;= 3.5"</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>head</span>()</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal_Long
-#&gt; 1          5.1         3.5          1.4         0.2  setosa      FALSE
-#&gt; 2          4.9         3.0          1.4         0.2  setosa      FALSE
-#&gt; 3          4.7         3.2          1.3         0.2  setosa      FALSE
-#&gt; 4          4.6         3.1          1.5         0.2  setosa      FALSE
-#&gt; 5          5.0         3.6          1.4         0.2  setosa      FALSE
-#&gt; 6          5.4         3.9          1.7         0.4  setosa      FALSE
-#&gt;   Petal_Short
-#&gt; 1        TRUE
-#&gt; 2        TRUE
-#&gt; 3        TRUE
-#&gt; 4        TRUE
-#&gt; 5        TRUE
-#&gt; 6        TRUE</div><div class='input'>
+  <span class='fu'>mutate_nse</span>(<span class='no'>resCol1</span> <span class='kw'>:=</span> <span class='st'>"Sepal.Length"</span> <span class='kw'>&gt;=</span> <span class='no'>ratio</span> * <span class='no'>compCol1</span>,
+             <span class='st'>"Petal_Short"</span> <span class='kw'>:=</span> <span class='st'>"Petal.Length"</span> <span class='kw'>&lt;=</span> <span class='fl'>3.5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>head</span>()</div><div class='output co'>#&gt; <span class='error'>Error in mutate_impl(.data, dots): Evaluation error: object 'ratio' not found.</span></div><div class='input'>
 
 </div></pre>
   </div>
