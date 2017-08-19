@@ -1,7 +1,8 @@
 
-# seplyr 0.1.4 2017-08-17
+# seplyr 0.1.4 2017-08-19
 
  * Documentation fixes.
+ * add mutate_nse()
 
 # seplyr 0.1.3 2017-07-29
 

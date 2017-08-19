@@ -1,5 +1,24 @@
 
 
+# remove one level of quoting from a string
+dequote_str <- function(nexpr) {
+  # look for "'x'" forms, if so strip off one level of quotes
+  nc <- nchar(nexpr)
+  if((nc>=3) && (substr(nexpr,1,1)==substr(nexpr,nc,nc)) &&
+     (substr(nexpr,1,1) %in% c('"', "'"))) {
+    return(substr(nexpr,2,nc-1))
+  }
+  val <- NULL
+  tryCatch(
+    val <- get(nexpr, envir = env),
+    error = function(e) { NULL }
+  )
+  if((!is.null(val)) && (is.character(val)) && (length(val)==1)) {
+    return(val)
+  }
+  return(as.symbol(nexpr))
+}
+
 #' Substitute language elements by one-expand_expr.
 #' #'
 #'
@@ -16,29 +35,30 @@ prep_deref <- function(lexpr, env) {
   if(n<=0) {
     return(nexpr)
   }
+  # left-hand sides of lists/calls are represented as keys
+  nms <- names(nexpr)
+  if(length(nms)>0) {
+    for(i in seq_len(length(nms))) {
+      ki <- as.character(nms[[i]])
+      if(length(ki)>0) {
+        ri <- as.character(dequote_str(ki))
+        if((length(ri)>0)&&(ri!=ki)) {
+          nms[[i]] <- ri
+        }
+      }
+    }
+    names(nexpr) <- nms
+  }
+  # establish n==1 invarient
   if(n>1) {
     for(i in seq_len(n)) {
       nexpr[[i]] <- prep_deref(nexpr[[i]], env)
     }
     return(nexpr)
   }
-  # try to strip chars off, producing either a symbol or string
+  # try to strip quotes off, producing either a symbol or string
   if(is.character(nexpr)) {
-    # look for "'x'" forms, if so strip off one level of quotes
-    nc <- nchar(nexpr)
-    if((nc>=3) && (substr(nexpr,1,1)==substr(nexpr,nc,nc)) &&
-       (substr(nexpr,1,1) %in% c('"', "'"))) {
-      return(substr(nexpr,2,nc-1))
-    }
-    val <- NULL
-    tryCatch(
-      val <- get(nexpr, envir = env),
-      error = function(e) { NULL }
-    )
-    if((!is.null(val)) && (is.character(val)) && (length(val)==1)) {
-      return(val)
-    }
-    return(as.symbol(nexpr))
+   return(dequote_str(nexpr))
   }
   if(is.symbol(nexpr)) { # same as is.name()
     val <- NULL
@@ -51,16 +71,7 @@ prep_deref <- function(lexpr, env) {
     }
     return(nexpr)
   }
-  if(is.expression(nexpr) || is.call(nexpr)) {
-    # from help(is.expression):
-    #   "As an object of mode "expression" is a list"
-    # as x[[1]] isn't x for lists  (which is not true for vectors as 1[[1]]  is 1)
-    # we know we can try to recurse without an obvious infinite loop
-    for(i in seq_len(n)) {
-      nexpr[[i]] <- prep_deref(nexpr[[i]], env)
-    }
-    return(nexpr)
-  }
+  # fallback
   return(nexpr)
 }
 
@@ -109,7 +120,7 @@ expand_expr <- function(expr, env = parent.frame()) {
 #' datasets::iris %>%
 #'   mutate_nse(resCol1 := "Sepal.Length" >= ratio * compCol1,
 #'              "Petal_Short" := "Petal.Length" <= 3.5) %>%
-#'   head()
+#'   summary()
 #'
 #'
 #' @export

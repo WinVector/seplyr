@@ -29,7 +29,7 @@ compCol1 <- "Sepal.Width"
 datasets::iris \%>\%
   mutate_nse(resCol1 := "Sepal.Length" >= ratio * compCol1,
              "Petal_Short" := "Petal.Length" <= 3.5) \%>\%
-  head()
+  summary()
 
 
 }
