@@ -19,6 +19,8 @@ values with names set.
 }
 \description{
 Set names of right-argument to be left-argument, and return right argument.
+Has a special case for length-1 name sets.
+Called from \code{:=} operator.
 }
 \examples{
 
@@ -33,5 +35,9 @@ c('a', 'b') := c('1', '2')
 name <- 'a'
 name := '5'
 # equivalent to: c('a' = '5')
+
+# fn version, see makeFunction_se
+g <- c(x,y) := { x + 3*y }
+g(1,100)
 
 }

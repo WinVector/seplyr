@@ -2,7 +2,8 @@
 # seplyr 0.1.4 2017-08-21
 
  * Documentation fixes.
- * add mutate_nse()
+ * add mutate_nse().
+ * add lambda def.
 
 # seplyr 0.1.3 2017-07-29
 
