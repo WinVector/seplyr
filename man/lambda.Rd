@@ -5,16 +5,16 @@
 \alias{λ}
 \title{Build an anonymous function.}
 \usage{
-lambda(params, body, env = parent.frame())
+lambda(params, env = parent.frame())
 
-λ(params, env = parent.frame())
+λ(params, body, env = parent.frame())
 }
 \arguments{
 \item{params}{formal parameters of function, unbound names.}
 
-\item{body}{subsituted body of function to map arguments into.}
-
 \item{env}{environment to work in}
+
+\item{body}{subsituted body of function to map arguments into.}
 }
 \value{
 user defined function.
@@ -24,9 +24,11 @@ Build an anonymous function.
 }
 \examples{
 
-sapply(1:4, lambda(x, x^2))
+# example: square numbers
+sapply(1:4, lambda(x)(x^2))
 
 
-sapply(1:4, λ(x)(x^2))
+# example: square numbers
+sapply(1:4, λ(x, x^2))
 
 }
