@@ -1,9 +1,13 @@
 
+# seplyr 0.1.5 2017-08-21
+
+ * add lambda fn.
+ 
 # seplyr 0.1.4 2017-08-21
 
  * Documentation fixes.
  * add mutate_nse().
- * add lambda def.
+ * add lambda operator.
 
 # seplyr 0.1.3 2017-07-29
 

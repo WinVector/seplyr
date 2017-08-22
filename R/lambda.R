@@ -36,3 +36,36 @@ makeFunction_se <- function(params, body, env = parent.frame()) {
   eval(call('function', as.pairlist(formals), body), env)
 }
 
+#' Build an anonymous function.
+#'
+#' @param params formal parameters of function, unbound names.
+#' @param body subsituted body of function to map arguments into.
+#' @param env environment to work in
+#' @return user defined function.
+#'
+#' @examples
+#'
+#' sapply(1:4, lambda(x, x^2))
+#'
+#' @export
+#'
+#'
+lambda <- function(params, body, env = parent.frame()) {
+  makeFunction_se(substitute(params), substitute(body), env)
+}
+
+#' @examples
+#'
+#' sapply(1:4, λ(x)(x^2))
+#'
+#' @export
+#'
+#' @rdname lambda
+#'
+λ <- function(params, env = parent.frame()) {
+  params <- substitute(params)
+  force(env)
+  function(body) {
+    makeFunction_se(params, substitute(body), env)
+  }
+}
