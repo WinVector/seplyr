@@ -93,3 +93,12 @@ lambda <- function(..., body = NULL, env = parent.frame()) {
   params <- lapply(args[-1], as.name)
   makeFunction_se(params, body, env)
 }
+
+#' @export
+`:=.formula` <- function(args, values) {
+  env = parent.frame()
+  params <- setdiff(as.character(all.vars(substitute(args))),
+                    '~')
+  body <- substitute(values)
+  makeFunction_se(params, body, env)
+}
