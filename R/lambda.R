@@ -38,22 +38,34 @@ makeFunction_se <- function(params, body, env = parent.frame()) {
 
 #' Build an anonymous function.
 #'
-#' @param params formal parameters of function, unbound names.
+#' Mostly just a place-holder so λ-form has somewhere safe to hang its help entry.
+#'
+#' @param ... formal parameters of function, unbound names, followed by function body (code/language).
 #' @param body subsituted body of function to map arguments into.
 #' @param env environment to work in
 #' @return user defined function.
 #'
 #' @examples
 #'
+#' #lambda-syntax: lambda(arg [, arg]* [, env=env])(body)
+#'
 #' # example: square numbers
 #' sapply(1:4, lambda(x)(x^2))
+#'
+#' # example more than one argumnet
+#' f <- lambda(x, y)(x+y)
+#' f(2,4)
 #'
 #' @export
 #'
 #'
-lambda <- function(params, env = parent.frame()) {
-  params <- substitute(params)
+lambda <- function(..., body = NULL, env = parent.frame()) {
+  args <- substitute(list(...))
+  params <- lapply(args[-1], as.name)
   force(env)
+  if(!missing(body)) {
+    return(makeFunction_se(params,substitute(body), env))
+  }
   function(body) {
     makeFunction_se(params, substitute(body), env)
   }
@@ -61,13 +73,23 @@ lambda <- function(params, env = parent.frame()) {
 
 #' @examples
 #'
+#' # λ-syntax: λ(arg [, arg]*, body [, env=env])
+#'
 #' # example: square numbers
 #' sapply(1:4, λ(x, x^2))
+#'
+#' # example more than one argumnet
+#' f <-  λ(x, y, x + 2*y)
+#' f(2,4)
 #'
 #' @export
 #'
 #' @rdname lambda
 #'
-λ <- function(params, body, env = parent.frame()) {
-  makeFunction_se(substitute(params), substitute(body), env)
+λ <- function(..., env = parent.frame()) {
+  args <- substitute(list(...))
+  body <- args[[length(args)]]
+  args <- args[-length(args)]
+  params <- lapply(args[-1], as.name)
+  makeFunction_se(params, body, env)
 }

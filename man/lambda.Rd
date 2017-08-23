@@ -5,30 +5,42 @@
 \alias{λ}
 \title{Build an anonymous function.}
 \usage{
-lambda(params, env = parent.frame())
+lambda(..., body = NULL, env = parent.frame())
 
-λ(params, body, env = parent.frame())
+λ(..., env = parent.frame())
 }
 \arguments{
-\item{params}{formal parameters of function, unbound names.}
-
-\item{env}{environment to work in}
+\item{...}{formal parameters of function, unbound names, followed by function body (code/language).}
 
 \item{body}{subsituted body of function to map arguments into.}
+
+\item{env}{environment to work in}
 }
 \value{
 user defined function.
 }
 \description{
-Build an anonymous function.
+Mostly just a place-holder so λ-form has somewhere safe to hang its help entry.
 }
 \examples{
+
+#lambda-syntax: lambda(arg [, arg]* [, env=env])(body)
 
 # example: square numbers
 sapply(1:4, lambda(x)(x^2))
 
+# example more than one argumnet
+f <- lambda(x, y)(x+y)
+f(2,4)
+
+
+# λ-syntax: λ(arg [, arg]*, body [, env=env])
 
 # example: square numbers
 sapply(1:4, λ(x, x^2))
+
+# example more than one argumnet
+f <-  λ(x, y, x + 2*y)
+f(2,4)
 
 }
