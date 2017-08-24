@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-[`seplyr`](https://github.com/WinVector/seplyr) introduces an operator called "named map builder" that is written as "`:=`".  Named map builder is a *very* simple bit of code that performs a very simple task: it adds names to vectors or lists (making them work more like maps).
+[`wrapr`](https://github.com/WinVector/wrapr) introduces an operator called "named map builder" that is written as "`:=`".  Named map builder is a *very* simple bit of code that performs a very simple task: it adds names to vectors or lists (making them work more like maps).
 
 Here are some examples:
 
@@ -67,5 +67,5 @@ datasets::iris %>%
 To see more please try:
 
 ```{r print, eval=FALSE}
-help(`:=`, package = 'seplyr')
+help(`:=`, package = 'wrapr')
 ```
