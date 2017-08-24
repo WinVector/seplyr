@@ -43,4 +43,8 @@ sapply(1:4, λ(x, x^2))
 f <-  λ(x, y, x + 2*y)
 f(2,4)
 
+# formula interface syntax: [~arg|arg(~arg)+] := body
+f <- x~y := x + 3 * y
+f(5, 47)
+
 }

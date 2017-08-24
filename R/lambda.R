@@ -82,6 +82,10 @@ lambda <- function(..., body = NULL, env = parent.frame()) {
 #' f <-  λ(x, y, x + 2*y)
 #' f(2,4)
 #'
+#' # formula interface syntax: [~arg|arg(~arg)+] := body
+#' f <- x~y := x + 3 * y
+#' f(5, 47)
+#'
 #' @export
 #'
 #' @rdname lambda
@@ -93,6 +97,7 @@ lambda <- function(..., body = NULL, env = parent.frame()) {
   params <- lapply(args[-1], as.name)
   makeFunction_se(params, body, env)
 }
+
 
 #' @export
 `:=.formula` <- function(args, values) {
