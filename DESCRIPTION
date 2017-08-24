@@ -40,7 +40,5 @@ Suggests: glue,
     testthat
 VignetteBuilder: knitr
 ByteCompile: true
-Remotes:
-    WinVector/wrapr
 
 
