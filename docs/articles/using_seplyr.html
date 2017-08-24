@@ -81,7 +81,7 @@
       <h1>Using seplyr to Program Over dplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-08-23</h4>
+            <h4 class="date">2017-08-24</h4>
           </div>
 
     
@@ -108,10 +108,10 @@
 ## vehicles
 ## starships</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(homeworld) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(homeworld) %&gt;%
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarise</a></span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
             <span class="dt">mean_mass =</span> <span class="kw">mean</span>(mass, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
-            <span class="dt">count =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>())</code></pre></div>
+            <span class="dt">count =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/n">n</a></span>())</code></pre></div>
 <pre><code>## # A tibble: 49 x 4
 ##         homeworld mean_height mean_mass count
 ##             &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -136,7 +136,7 @@
 <ul>
 <li>Change <code>dplyr</code> verbs to their matching <code>seplyr</code> “<code>*_se()</code>” adapters.</li>
 <li>Add quote marks around names and expressions.</li>
-<li>Convert sequences of expressions (such as in the <code><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>) to explicit vectors by adding the “<code>c()</code>” notation.</li>
+<li>Convert sequences of expressions (such as in the <code><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarize()</a></code>) to explicit vectors by adding the “<code>c()</code>” notation.</li>
 <li>Replace “<code>=</code>” in expressions with “<code>:=</code>”.</li>
 </ul>
 <p>Our converted code looks like the following.</p>

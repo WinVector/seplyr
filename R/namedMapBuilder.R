@@ -74,7 +74,7 @@ named_map_builder <- function(names, values) {
 #' @export
 `:=.list` <- named_map_builder
 
-#' @export
-`:=.name` <- named_map_builder
+#' #' @export
+#' `:=.name` <- named_map_builder
 
 

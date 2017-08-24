@@ -2,17 +2,12 @@
 % Please edit documentation in R/lambda.R
 \name{lambda}
 \alias{lambda}
-\alias{λ}
 \title{Build an anonymous function.}
 \usage{
-lambda(..., body = NULL, env = parent.frame())
-
-λ(..., env = parent.frame())
+lambda(..., env = parent.frame())
 }
 \arguments{
 \item{...}{formal parameters of function, unbound names, followed by function body (code/language).}
-
-\item{body}{subsituted body of function to map arguments into.}
 
 \item{env}{environment to work in}
 }
@@ -20,27 +15,19 @@ lambda(..., body = NULL, env = parent.frame())
 user defined function.
 }
 \description{
-Mostly just a place-holder so λ-form has somewhere safe to hang its help entry.
+Mostly just a place-holder so lambda-symbol form has somewhere safe to hang its help entry.
 }
 \examples{
 
-#lambda-syntax: lambda(arg [, arg]* [, env=env])(body)
+#lambda-syntax: lambda(arg [, arg]*, body [, env=env])
+# also works with lambda character as function name
+# print(intToUtf8(0x03BB))
 
 # example: square numbers
-sapply(1:4, lambda(x)(x^2))
+sapply(1:4, lambda(x, x^2))
 
 # example more than one argumnet
-f <- lambda(x, y)(x+y)
-f(2,4)
-
-
-# λ-syntax: λ(arg [, arg]*, body [, env=env])
-
-# example: square numbers
-sapply(1:4, λ(x, x^2))
-
-# example more than one argumnet
-f <-  λ(x, y, x + 2*y)
+f <- lambda(x, y, x+y)
 f(2,4)
 
 # formula interface syntax: [~arg|arg(~arg)+] := body

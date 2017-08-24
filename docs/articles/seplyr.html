@@ -81,7 +81,7 @@
       <h1>seplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-08-23</h4>
+            <h4 class="date">2017-08-24</h4>
           </div>
 
     
@@ -98,7 +98,7 @@
 <span class="kw">packageVersion</span>(<span class="st">"dplyr"</span>)</code></pre></div>
 <pre><code>## [1] '0.7.2.9000'</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::mtcars %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(cyl, <span class="kw"><a href="http://dplyr.tidyverse.org/reference/desc.html">desc</a></span>(gear)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(cyl, <span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/desc">desc</a></span>(gear)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre></div>
 <pre><code>##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 ## 1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
@@ -122,7 +122,7 @@ orderQs &lt;-<span class="st"> </span><span class="kw">lapply</span>(orderTerms,
                   function(si) { rlang::<span class="kw">parse_expr</span>(si) })
 <span class="co"># pipe</span>
 datasets::mtcars %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(!!!orderQs) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(!!!orderQs) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre></div>
 <pre><code>##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 ## 1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
@@ -164,16 +164,16 @@ datasets::mtcars %&gt;%<span class="st"> </span>
 <li><code><a href="../reference/tally_se.html">tally_se()</a></code></li>
 <li><code><a href="../reference/transmute_se.html">transmute_se()</a></code></li>
 </ul>
-<p>Only two of the above are completely redundant. <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/group_by_se">seplyr::group_by_se()</a></code> essentially works as <code><a href="http://dplyr.tidyverse.org/reference/group_by_all.html">dplyr::group_by_at()</a></code> and <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/select_se">seplyr::select_se()</a></code> essentially works as <code><a href="http://dplyr.tidyverse.org/reference/select_all.html">dplyr::select_at()</a></code>. The others either have different semantics or currently (as of <code>dplyr</code> <code>0.7.1</code>) no matching <code>dplyr::*_at()</code> method. Roughly all <code>seplyr</code> is trying to do is give a uniform first-class standard interface to all of the primary deprecated underscore suffixed verbs (such as <code><a href="http://dplyr.tidyverse.org/reference/se-deprecated.html">dplyr::arrange_</a></code>).</p>
+<p>Only two of the above are completely redundant. <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/group_by_se">seplyr::group_by_se()</a></code> essentially works as <code><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by_all">dplyr::group_by_at()</a></code> and <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/select_se">seplyr::select_se()</a></code> essentially works as <code><a href="http://www.rdocumentation.org/packages/dplyr/topics/select_all">dplyr::select_at()</a></code>. The others either have different semantics or currently (as of <code>dplyr</code> <code>0.7.1</code>) no matching <code>dplyr::*_at()</code> method. Roughly all <code>seplyr</code> is trying to do is give a uniform first-class standard interface to all of the primary deprecated underscore suffixed verbs (such as <code><a href="http://www.rdocumentation.org/packages/dplyr/topics/se-deprecated">dplyr::arrange_</a></code>).</p>
 <p>We also have a few methods that work around a few of the minor inconvenience of working with variable names as strings:</p>
 <ul>
 <li><code><a href="../reference/deselect.html">deselect()</a></code></li>
 <li><code><a href="../reference/rename_mp.html">rename_mp()</a></code></li>
 </ul>
-<p>One can combine <code>seplyr</code> methods with standard <code>dplyr</code> methods (such as <code><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at()</a></code>):</p>
+<p>One can combine <code>seplyr</code> methods with standard <code>dplyr</code> methods (such as <code><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise_all">summarize_at()</a></code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::iris %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by_all.html">group_by_at</a></span>(<span class="st">"Species"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at</a></span>(<span class="kw">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>), <span class="kw"><a href="http://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(mean)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by_all">group_by_at</a></span>(<span class="st">"Species"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise_all">summarize_at</a></span>(<span class="kw">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>), <span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/funs">funs</a></span>(mean)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(<span class="kw">c</span>(<span class="st">"Mean.Sepal.Length"</span> :<span class="er">=</span><span class="st"> "Sepal.Length"</span>, 
               <span class="st">"Mean.Sepal.Width"</span> :<span class="er">=</span><span class="st"> "Sepal.Width"</span>))</code></pre></div>
 <pre><code>## # A tibble: 3 x 3

@@ -142,7 +142,7 @@
 
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/mtcars'>mtcars</a></span> <span class='kw'>%&gt;%</span>
   <span class='co'># tibble::rownames_to_column() not currently re-exported by dplyr</span>
-  { <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>.</span>, <span class='kw'>CarName</span> <span class='kw'>=</span> <span class='fu'>rownames</span>(<span class='no'>.</span>) ) } <span class='kw'>%&gt;%</span>
+  { <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/mutate'>mutate</a></span>(<span class='no'>.</span>, <span class='kw'>CarName</span> <span class='kw'>=</span> <span class='fu'>rownames</span>(<span class='no'>.</span>) ) } <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='select_se.html'>select_se</a></span>(<span class='fu'>c</span>(<span class='st'>'CarName'</span>, <span class='st'>'hp'</span>, <span class='st'>'wt'</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>add_rank_indices</span>(<span class='kw'>arrangeTerms</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'desc(hp)'</span>, <span class='st'>'wt'</span>),
                    <span class='kw'>orderColumn</span> <span class='kw'>=</span> <span class='st'>'rankID'</span>) <span class='kw'>%&gt;%</span>
