@@ -1,7 +1,7 @@
 
-# seplyr 0.1.5 2017-08-21
+# seplyr 0.1.5 2017-08-24
 
- * add lambda fn.
+ * add wrapr dependency (for named map builder, and lambda abstraction).
  
 # seplyr 0.1.4 2017-08-21
 

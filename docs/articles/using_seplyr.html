@@ -108,10 +108,10 @@
 ## vehicles
 ## starships</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(homeworld) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarise</a></span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(homeworld) %&gt;%
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
             <span class="dt">mean_mass =</span> <span class="kw">mean</span>(mass, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
-            <span class="dt">count =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/n">n</a></span>())</code></pre></div>
+            <span class="dt">count =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>())</code></pre></div>
 <pre><code>## # A tibble: 49 x 4
 ##         homeworld mean_height mean_mass count
 ##             &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -136,13 +136,13 @@
 <ul>
 <li>Change <code>dplyr</code> verbs to their matching <code>seplyr</code> “<code>*_se()</code>” adapters.</li>
 <li>Add quote marks around names and expressions.</li>
-<li>Convert sequences of expressions (such as in the <code><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarize()</a></code>) to explicit vectors by adding the “<code>c()</code>” notation.</li>
+<li>Convert sequences of expressions (such as in the <code><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>) to explicit vectors by adding the “<code>c()</code>” notation.</li>
 <li>Replace “<code>=</code>” in expressions with “<code>:=</code>”.</li>
 </ul>
 <p>Our converted code looks like the following.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"seplyr"</span>)
-
-starwars %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"seplyr"</span>)</code></pre></div>
+<pre><code>## Loading required package: wrapr</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(<span class="st">"homeworld"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="kw">c</span>(<span class="st">"mean_height"</span> :<span class="er">=</span><span class="st"> "mean(height, na.rm = TRUE)"</span>,
                  <span class="st">"mean_mass"</span> :<span class="er">=</span><span class="st"> "mean(mass, na.rm = TRUE)"</span>,

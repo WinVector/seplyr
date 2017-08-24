@@ -24,3 +24,8 @@
 #' @name seplyr
 NULL
 
+#' @importFrom wrapr := let lambda
+NULL
+
+
+

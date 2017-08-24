@@ -4,7 +4,7 @@
 #' transmute a data frame by the transmuteTerms.  Accepts arbitrary text as
 #' transmuteTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 #'
-#' @seealso \code{\link[dplyr]{transmute}}, \code{\link[dplyr]{transmute_at}}, \code{\link[seplyr]{:=}}
+#' @seealso \code{\link[dplyr]{transmute}}, \code{\link[dplyr]{transmute_at}}, \code{\link[wrapr]{:=}}
 #'
 #' @param .data data.frame
 #' @param transmuteTerms character vector of column expressions to transmute by.

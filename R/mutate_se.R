@@ -5,7 +5,7 @@
 #' mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 #' Terms are vectors or lists of the form "lhs := rhs".
 #'
-#' @seealso \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[seplyr]{:=}}
+#' @seealso \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
 #'
 #' @param .data data.frame
 #' @param mutateTerms character vector of column expressions to mutate by.

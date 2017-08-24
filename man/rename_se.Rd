@@ -31,5 +31,5 @@ datasets::mtcars \%>\%
 
 }
 \seealso{
-\code{\link{rename_mp}}, \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}, \code{\link[seplyr]{:=}}
+\code{\link{rename_mp}}, \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}, \code{\link[wrapr]{:=}}
 }

@@ -33,5 +33,5 @@ datasets::iris \%>\%
 
 }
 \seealso{
-\code{\link[dplyr]{summarize}}, \code{\link[dplyr]{summarize_at}}, \code{\link[seplyr]{:=}}
+\code{\link[dplyr]{summarize}}, \code{\link[dplyr]{summarize_at}}, \code{\link[wrapr]{:=}}
 }

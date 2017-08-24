@@ -3,7 +3,7 @@
 #'
 #' rename columns (much different syntax than \code{\link[dplyr]{rename_at}}).
 #'
-#' @seealso \code{\link{rename_mp}}, \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}, \code{\link[seplyr]{:=}}
+#' @seealso \code{\link{rename_mp}}, \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}, \code{\link[wrapr]{:=}}
 #'
 #' @param .data data.frame
 #' @param mapping named character vector of columns to rename (new names on the left, original names on the right; this may seem reversed but it matches dplyr::rename()).

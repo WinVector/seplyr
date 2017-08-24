@@ -14,6 +14,7 @@ orderTerms <- c('cyl', 'desc(gear)')
 # load packages
 suppressPackageStartupMessages(library("dplyr"))
 library("seplyr")
+ #  Loading required package: wrapr
 
 # where we are actually working (perhaps in a re-usable
 # script or function)

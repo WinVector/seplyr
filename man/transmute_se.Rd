@@ -30,5 +30,5 @@ datasets::iris \%>\%
 
 }
 \seealso{
-\code{\link[dplyr]{transmute}}, \code{\link[dplyr]{transmute_at}}, \code{\link[seplyr]{:=}}
+\code{\link[dplyr]{transmute}}, \code{\link[dplyr]{transmute_at}}, \code{\link[wrapr]{:=}}
 }

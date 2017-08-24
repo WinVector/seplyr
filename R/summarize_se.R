@@ -4,7 +4,7 @@
 #' summarize a data frame by the summarizeTerms.  Accepts arbitrary text as
 #' summarizeTerms to allow forms such as "mean(Sepal.Length)".
 #'
-#' @seealso \code{\link[dplyr]{summarize}}, \code{\link[dplyr]{summarize_at}}, \code{\link[seplyr]{:=}}
+#' @seealso \code{\link[dplyr]{summarize}}, \code{\link[dplyr]{summarize_at}}, \code{\link[wrapr]{:=}}
 #'
 #' @param .data data.frame
 #' @param summarizeTerms character vector of column expressions to summarize by.
