@@ -2,6 +2,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 The [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) supplies *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs. `seplyr` stands for "standard evaluation dplyr" ("standard" meaning we prefer explicit user provided strings over passive [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html) capture of un-evaluated user code) or "string edition dplyr."
 
+![](tools/safety.png)
+
 To get started we suggest visiting the [`seplyr` site](https://winvector.github.io/seplyr/), and checking out [some examples](https://winvector.github.io/seplyr/articles/seplyr.html).
 
 One quick example:
