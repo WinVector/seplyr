@@ -19,11 +19,10 @@ rename columns (much different syntax than \code{\link[dplyr]{rename_at}}).
 }
 \examples{
 
-suppressPackageStartupMessages(library("dplyr"))
 
-datasets::mtcars \%>\%
-   rename_se(c("cylinders" := "cyl", "gears" := "gear")) \%>\%
-   head()
+datasets::mtcars \%.>\%
+   rename_se(., c("cylinders" := "cyl", "gears" := "gear")) \%.>\%
+   head(.)
 # # sames as:
 # datasets::mtcars \%>\%
 #    rename(cylinders = cyl, gears = gear) \%>\%

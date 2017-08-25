@@ -81,7 +81,7 @@
       <h1>seplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-08-24</h4>
+            <h4 class="date">2017-08-25</h4>
           </div>
 
     
@@ -134,9 +134,9 @@ datasets::mtcars %&gt;%<span class="st"> </span>
 <p>If you don’t want to try and digest entire theory of quasi-quoting and splicing (the <code>!!!</code> operator) then you can use <code>seplyr</code> which conveniently and legibly wraps the operations as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"seplyr"</span>)</code></pre></div>
 <pre><code>## Loading required package: wrapr</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::mtcars %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/arrange_se.html">arrange_se</a></span>(orderTerms) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">head</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::mtcars %.&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/arrange_se.html">arrange_se</a></span>(., orderTerms) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(.)</code></pre></div>
 <pre><code>##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 ## 1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
 ## 2 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
@@ -171,11 +171,11 @@ datasets::mtcars %&gt;%<span class="st"> </span>
 <li><code><a href="../reference/rename_mp.html">rename_mp()</a></code></li>
 </ul>
 <p>One can combine <code>seplyr</code> methods with standard <code>dplyr</code> methods (such as <code><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at()</a></code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::iris %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by_all.html">group_by_at</a></span>(<span class="st">"Species"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at</a></span>(<span class="kw">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>), <span class="kw"><a href="http://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(mean)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(<span class="kw">c</span>(<span class="st">"Mean.Sepal.Length"</span> :<span class="er">=</span><span class="st"> "Sepal.Length"</span>, 
-              <span class="st">"Mean.Sepal.Width"</span> :<span class="er">=</span><span class="st"> "Sepal.Width"</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::iris %.&gt;%
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by_all.html">group_by_at</a></span>(., <span class="st">"Species"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at</a></span>(., <span class="kw">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>), <span class="kw"><a href="http://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(mean)) %.&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(., <span class="kw">c</span>(<span class="st">"Mean.Sepal.Length"</span> :<span class="er">=</span><span class="st"> "Sepal.Length"</span>, 
+                 <span class="st">"Mean.Sepal.Width"</span> :<span class="er">=</span><span class="st"> "Sepal.Width"</span>))</code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##      Species Mean.Sepal.Length Mean.Sepal.Width
 ##       &lt;fctr&gt;             &lt;dbl&gt;            &lt;dbl&gt;
@@ -183,10 +183,10 @@ datasets::mtcars %&gt;%<span class="st"> </span>
 ## 2 versicolor             5.936            2.770
 ## 3  virginica             6.588            2.974</code></pre>
 <p>One also perform the above directly with <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/summarize_se">seplyr::summarize_se()</a></code> as follows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::iris %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(<span class="st">"Species"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="kw">c</span>(<span class="st">"Mean.Sepal.Length"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>, 
-                 <span class="st">"Mean.Sepal.Width"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Width)"</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::iris %.&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"Species"</span>) %.&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="kw">c</span>(<span class="st">"Mean.Sepal.Length"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>, 
+                    <span class="st">"Mean.Sepal.Width"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Width)"</span>))</code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##      Species Mean.Sepal.Length Mean.Sepal.Width
 ##       &lt;fctr&gt;             &lt;dbl&gt;            &lt;dbl&gt;
@@ -208,7 +208,7 @@ datasets::mtcars %&gt;%<span class="st"> </span>
 </ul>
 <p><code>seplyr</code> is designed to be a thin package that passes all work to <code>dplyr</code>. If you want a package that works around <code>dplyr</code> implementation differences on different data sources I suggest trying our own <a href="https://CRAN.R-project.org/package=replyr"><code>replyr</code></a> package. Another alternative is using <a href="https://github.com/WinVector/wrapr/blob/master/README.md"><code><a href="http://www.rdocumentation.org/packages/wrapr/topics/let">wrapr::let()</a></code></a>.</p>
 <p><code>seplyr</code> methods are short and have examples in their help, so always try both help and printing the method (for example: <code>help(select_se)</code> and <code>print(select_se)</code>). Printing methods can show you how to use <code>dplyr</code> directly with <code>rlang</code>/<code>tidyeval</code> methodology (allowing you to skip <code>seplyr</code>).</p>
-<p>Some inspiration comes from <a href="https://gist.github.com/skranz/9681509">Sebastian Kranz’s <code>s_dplyr</code></a>.</p>
+<p>Some inspiration comes from <a href="https://gist.github.com/skranz/9681509">Sebastian Kranz’s <code>s_dplyr</code></a>. Please see <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>help("%.&gt;%", package="wrapr")</code></a> for details on “dot pipe.”</p>
 </div>
   </div>
 

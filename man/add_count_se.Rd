@@ -29,9 +29,8 @@ to these \code{dplyr} implementations.
 }
 \examples{
 
-suppressPackageStartupMessages(library("dplyr"))
 
-datasets::iris \%>\% count_se(wt = "Sepal.Width", groupingVars= c('Species'))
+datasets::iris \%.>\% count_se(., wt = "Sepal.Width", groupingVars= c('Species'))
 
 }
 \seealso{

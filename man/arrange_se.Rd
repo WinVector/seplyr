@@ -21,11 +21,9 @@ arrangeTerms to allow forms such as "desc(gear)"
 }
 \examples{
 
-suppressPackageStartupMessages(library("dplyr"))
-
-datasets::mtcars \%>\%
-  arrange_se(c("cyl", "desc(gear)")) \%>\%
-  head()
+datasets::mtcars \%.>\%
+  arrange_se(., c("cyl", "desc(gear)")) \%.>\%
+  head(.)
 # roughly equivilent to:
 # arrange(datasets::mtcars, cyl, desc(gear)) \%>\% head()
 

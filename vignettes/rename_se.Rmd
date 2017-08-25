@@ -34,9 +34,9 @@ Because `seplyr` is intended to be a set of adapters for `dplyr` we simply adopt
 ```{r rename2}
 library("seplyr")
 
-datasets::mtcars %>%
-  rename_se(c("cylinders" := "cyl", "gears" := "gear")) %>%
-  head()
+datasets::mtcars %.>%
+  rename_se(., c("cylinders" := "cyl", "gears" := "gear")) %.>%
+  head(.)
 ```
 
 We hope this makes it easy to translate one-off analyses into re-usable scripts by incrementally replacing known variable names with parametric versions.  The `:=` operator is just a convenience function for building up maps, we could also have written `rename_se(c("cylinders" = "cyl", "gears" = "gear"))` or passed in a named vector built up elsewhere.
@@ -54,10 +54,12 @@ This is sensible, but is very different than `dplyr::rename()`.  Thus there rema
 For convenience we also supply an adapter with the above mapping semantics.
 
 ```{r rename4}
-datasets::mtcars %>%
-  rename_mp(mp) %>%
-  head()
+datasets::mtcars %.>%
+  rename_mp(., mp) %.>%
+  head(.)
 ```
+
+Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html) for details on "dot pipe."
 
 
 

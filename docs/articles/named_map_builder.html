@@ -81,7 +81,7 @@
       <h1>Named Map Builder</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-08-24</h4>
+            <h4 class="date">2017-08-25</h4>
           </div>
 
     
@@ -89,9 +89,9 @@
 <div class="contents">
 <p><a href="https://github.com/WinVector/wrapr"><code>wrapr</code></a> introduces an operator called “named map builder” that is written as “<code>:=</code>”. Named map builder is a <em>very</em> simple bit of code that performs a very simple task: it adds names to vectors or lists (making them work more like maps).</p>
 <p>Here are some examples:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"seplyr"</span>)</code></pre></div>
-<pre><code>## Loading required package: wrapr</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">'a'</span> :<span class="er">=</span><span class="st"> </span><span class="dv">5</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"wrapr"</span>)
+
+<span class="st">'a'</span> :<span class="er">=</span><span class="st"> </span><span class="dv">5</span></code></pre></div>
 <pre><code>## a 
 ## 5</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">'a'</span> :<span class="er">=</span><span class="st"> </span><span class="dv">5</span>, <span class="st">'b'</span> :<span class="er">=</span><span class="st"> </span><span class="dv">6</span>)</code></pre></div>
@@ -108,17 +108,17 @@ key :<span class="er">=</span><span class="st"> 'value'</span></code></pre></div
 ## "value"</code></pre>
 <p>Notice the value inside the variable <code>key</code> was used as the array name, this differs from what is easily done with <code>R</code>’s native <code>c(key = 'value')</code> style notation.</p>
 <p>A great use of the <code>:=</code> operator is using it to conveniently build arguments lists for functions such as <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/mutate_se">seplyr::mutate_se()</a></code>. This works for simple explicit code such as the following.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"seplyr"</span>)
 
-datasets::iris %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="st">"Mean_Sepal_Length"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
+datasets::iris %.&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="st">"Mean_Sepal_Length"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
 <pre><code>##   Mean_Sepal_Length
 ## 1          5.843333</code></pre>
 <p>Slightly more complicated code such as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::iris %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(<span class="st">"Species"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="kw">c</span>(<span class="st">"Mean_Sepal_Length"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>,
-                 <span class="st">"Mean_Sepal_Width"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Width)"</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::iris %.&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"Species"</span>) %.&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="kw">c</span>(<span class="st">"Mean_Sepal_Length"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>,
+                    <span class="st">"Mean_Sepal_Width"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Width)"</span>))</code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##      Species Mean_Sepal_Length Mean_Sepal_Width
 ##       &lt;fctr&gt;             &lt;dbl&gt;            &lt;dbl&gt;
@@ -127,17 +127,16 @@ datasets::iris %&gt;%
 ## 3  virginica             6.588            2.974</code></pre>
 <p>Or even parametric code such as:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resultColumn &lt;-<span class="st"> "summary_value"</span>
-datasets::iris %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(<span class="st">"Species"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(resultColumn :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
+datasets::iris %.&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"Species"</span>) %.&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., resultColumn :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##      Species summary_value
 ##       &lt;fctr&gt;         &lt;dbl&gt;
 ## 1     setosa         5.006
 ## 2 versicolor         5.936
 ## 3  virginica         6.588</code></pre>
-<p>To see more please try:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(<span class="st">`</span><span class="dt">:=</span><span class="st">`</span>, <span class="dt">package =</span> <span class="st">'wrapr'</span>)</code></pre></div>
+<p>For more details please see: <a href="https://winvector.github.io/wrapr/reference/named_map_builder.html"><code>help(</code>:=<code>, package = 'wrapr')</code></a> and <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>help("%.&gt;%", package="wrapr")</code></a>.</p>
 </div>
   </div>
 

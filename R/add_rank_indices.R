@@ -9,15 +9,14 @@
 #'
 #' @examples
 #'
-#' suppressPackageStartupMessages(library("dplyr"))
 #'
-#' datasets::mtcars %>%
+#' datasets::mtcars %.>%
 #'   # tibble::rownames_to_column() not currently re-exported by dplyr
-#'   { mutate(., CarName = rownames(.) ) } %>%
-#'   select_se(c('CarName', 'hp', 'wt')) %>%
-#'   add_rank_indices(arrangeTerms = c('desc(hp)', 'wt'),
-#'                    orderColumn = 'rankID') %>%
-#'   arrange_se(c('rankID'))
+#'   mutate_se(., "CarName" := "rownames(.)" ) %.>%
+#'   select_se(., c('CarName', 'hp', 'wt')) %.>%
+#'   add_rank_indices(., arrangeTerms = c('desc(hp)', 'wt'),
+#'                    orderColumn = 'rankID') %.>%
+#'   arrange_se(., 'rankID')
 #'
 #'
 #' @export

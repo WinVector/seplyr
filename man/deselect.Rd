@@ -19,11 +19,10 @@ deselect columns.  To keep columns please see \code{\link{select_se}}.
 }
 \examples{
 
-suppressPackageStartupMessages(library("dplyr"))
 
-datasets::mtcars \%>\%
-   deselect(c("cyl", "gear")) \%>\%
-   head()
+datasets::mtcars \%.>\%
+   deselect(., c("cyl", "gear")) \%.>\%
+   head(.)
 # essentially dplyr::select( datasets::mtcars, -cyl, -gear)
 
 }

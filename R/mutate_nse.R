@@ -118,15 +118,16 @@ expand_expr <- function(expr, env = parent.frame()) {
 #'
 #' @examples
 #'
-#' suppressPackageStartupMessages(library("dplyr"))
 #'
 #' resCol1 <- "Sepal_Long"
 #' ratio <- 2
 #' compCol1 <- "Sepal.Width"
-#' datasets::iris %>%
-#'   mutate_nse(resCol1 := "Sepal.Length" >= ratio * compCol1,
-#'              "Petal_Short" := "Petal.Length" <= 3.5) %>%
-#'   summary()
+#'
+#'
+#' datasets::iris %.>%
+#'   mutate_nse(., resCol1 := "Sepal.Length" >= ratio * compCol1,
+#'                 "Petal_Short" := "Petal.Length" <= 3.5) %.>%
+#'   summary(.)
 #'
 #'
 #' @export

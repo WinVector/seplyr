@@ -11,11 +11,10 @@
 #'
 #' @examples
 #'
-#' suppressPackageStartupMessages(library("dplyr"))
 #'
-#' datasets::mtcars %>%
-#'    rename_se(c("cylinders" := "cyl", "gears" := "gear")) %>%
-#'    head()
+#' datasets::mtcars %.>%
+#'    rename_se(., c("cylinders" := "cyl", "gears" := "gear")) %.>%
+#'    head(.)
 #' # # sames as:
 #' # datasets::mtcars %>%
 #' #    rename(cylinders = cyl, gears = gear) %>%
@@ -41,13 +40,12 @@ rename_se <- function(.data, mapping) {
 #'
 #' @examples
 #'
-#' suppressPackageStartupMessages(library("dplyr"))
 #'
 #' mapping <- c("cyl" = "cylinders", "gear" = "gears")
 #'
-#' datasets::mtcars %>%
-#'    rename_mp(mapping) %>%
-#'    head()
+#' datasets::mtcars %.>%
+#'    rename_mp(., mapping) %.>%
+#'    head(.)
 #' # # sames as:
 #' # datasets::mtcars %>%
 #' #    rename(cylinders = cyl, gears = gear) %>%

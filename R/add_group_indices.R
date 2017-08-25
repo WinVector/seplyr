@@ -8,8 +8,6 @@
 #'
 #' @examples
 #'
-#' suppressPackageStartupMessages(library("dplyr"))
-#'
 #' add_group_indices(datasets::mtcars, c("cyl", "gear"), 'groupID')
 #'
 #' @export

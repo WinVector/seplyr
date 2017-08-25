@@ -15,13 +15,12 @@
 #'
 #' @examples
 #'
-#' suppressPackageStartupMessages(library("dplyr"))
 #'
 #' group_summarize(datasets::mtcars,
 #'                     c("cyl", "gear"),
 #'                     group_mean_mpg = mean(mpg),
-#'                     group_mean_disp = mean(disp)) %>%
-#'   head()
+#'                     group_mean_disp = mean(disp)) %.>%
+#'   head(.)
 #'
 #' @export
 #'

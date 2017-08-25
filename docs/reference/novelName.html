@@ -132,6 +132,8 @@
     <pre class="examples"><div class='input'>
 <span class='co'># basic op</span>
 <span class='fu'>novelName</span>(<span class='st'>'b'</span>, <span class='fu'>c</span>(<span class='st'>'a'</span>, <span class='st'>'b'</span>, <span class='st'>'c'</span>))</div><div class='output co'>#&gt; [1] "b_1"</div><div class='input'>
+
+
 <span class='co'># complex application (converting logistic</span>
 <span class='co'># links to probabilities).</span>
 <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(
@@ -139,7 +141,9 @@
   <span class='kw'>resultLabel</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'a'</span>, <span class='st'>'b'</span> , <span class='st'>'a'</span>, <span class='st'>'b'</span>),
   <span class='kw'>linkValue</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>5</span>, <span class='fl'>2</span>, -<span class='fl'>2</span>, -<span class='fl'>1</span>),
   <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
 <span class='no'>totColName</span> <span class='kw'>&lt;-</span> <span class='fu'>novelName</span>(<span class='st'>'t'</span>, <span class='fu'>colnames</span>(<span class='no'>d</span>))
+
 <span class='no'>d</span> <span class='kw'>-&gt;</span><span class='no'>.</span>;
   <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='no'>totColName</span> <span class='kw'>:=</span> <span class='st'>"exp(linkValue)"</span>)) <span class='kw'>-&gt;</span><span class='no'>.</span>;
   <span class='fu'><a href='group_by_se.html'>group_by_se</a></span>(<span class='no'>.</span>, <span class='st'>"exampleId"</span>) <span class='kw'>-&gt;</span><span class='no'>.</span>;

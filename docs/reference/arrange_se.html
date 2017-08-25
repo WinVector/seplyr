@@ -136,11 +136,9 @@ arrangeTerms to allow forms such as "desc(gear)"
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>suppressPackageStartupMessages</span>(<span class='fu'>library</span>(<span class='st'>"dplyr"</span>))
-
-<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/mtcars'>mtcars</a></span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>arrange_se</span>(<span class='fu'>c</span>(<span class='st'>"cyl"</span>, <span class='st'>"desc(gear)"</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>head</span>()</div><div class='output co'>#&gt;    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/mtcars'>mtcars</a></span> <span class='kw'>%.&gt;%</span>
+  <span class='fu'>arrange_se</span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='st'>"cyl"</span>, <span class='st'>"desc(gear)"</span>)) <span class='kw'>%.&gt;%</span>
+  <span class='fu'>head</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #&gt; 1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
 #&gt; 2 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
 #&gt; 3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1

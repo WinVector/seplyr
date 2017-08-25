@@ -22,6 +22,8 @@ Generate a name with a prefix disjoint from a set of names
 # basic op
 novelName('b', c('a', 'b', 'c'))
 
+
+
 # complex application (converting logistic
 # links to probabilities).
 d <- data.frame(
@@ -29,7 +31,9 @@ d <- data.frame(
   resultLabel = c('a', 'b' , 'a', 'b'),
   linkValue = c(-5, 2, -2, -1),
   stringsAsFactors = FALSE)
+
 totColName <- novelName('t', colnames(d))
+
 d ->.;
   mutate_se(., c(totColName := "exp(linkValue)")) ->.;
   group_by_se(., "exampleId") ->.;

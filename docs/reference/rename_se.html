@@ -134,11 +134,10 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>suppressPackageStartupMessages</span>(<span class='fu'>library</span>(<span class='st'>"dplyr"</span>))
 
-<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/mtcars'>mtcars</a></span> <span class='kw'>%&gt;%</span>
-   <span class='fu'>rename_se</span>(<span class='fu'>c</span>(<span class='st'>"cylinders"</span> <span class='kw'>:=</span> <span class='st'>"cyl"</span>, <span class='st'>"gears"</span> <span class='kw'>:=</span> <span class='st'>"gear"</span>)) <span class='kw'>%&gt;%</span>
-   <span class='fu'>head</span>()</div><div class='output co'>#&gt;                    mpg cylinders disp  hp drat    wt  qsec vs am gears carb
+<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/mtcars'>mtcars</a></span> <span class='kw'>%.&gt;%</span>
+   <span class='fu'>rename_se</span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='st'>"cylinders"</span> <span class='kw'>:=</span> <span class='st'>"cyl"</span>, <span class='st'>"gears"</span> <span class='kw'>:=</span> <span class='st'>"gear"</span>)) <span class='kw'>%.&gt;%</span>
+   <span class='fu'>head</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;                    mpg cylinders disp  hp drat    wt  qsec vs am gears carb
 #&gt; Mazda RX4         21.0         6  160 110 3.90 2.620 16.46  0  1     4    4
 #&gt; Mazda RX4 Wag     21.0         6  160 110 3.90 2.875 17.02  0  1     4    4
 #&gt; Datsun 710        22.8         4  108  93 3.85 2.320 18.61  1  1     4    1

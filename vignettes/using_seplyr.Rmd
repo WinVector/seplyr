@@ -117,7 +117,7 @@ if(requireNamespace('glue', quietly = TRUE)) {
     data %>%
       group_by_se(grouping_variables) %>%
       summarize_se(c(glue("mean_{value_variables}") := 
-                       glue("mean({value_variables}, na.rm = TRUE)"),
+                     glue("mean({value_variables}, na.rm = TRUE)"),
                      "count" := "n()"))
   }
   
@@ -129,8 +129,9 @@ if(requireNamespace('glue', quietly = TRUE)) {
 
 The point is: we did not have to bring in (or study) any deep-theory or heavy-weight tools such as [`rlang`/`tidyeval`](https://CRAN.R-project.org/package=rlang) or [`lazyeval`](https://CRAN.R-project.org/package=lazyeval) to complete our programming task.  Once you are in `seplyr` notation, changes are very easy.  You can separate translating into `seplyr` notation from the work of designing your wrapper function (breaking your programming work into smaller easier to understand steps).
 
-The `seplyr` method is simple, easy to teach, and powerful.  The package contains a number of worked examples both in `help()` and `vignette(package='seplyr')` documentation.
-
+The `seplyr` methodology is simple, easy to teach, and powerful.  The package contains a number of worked examples both in `help()` and [`vignette(package='seplyr')`](https://winvector.github.io/seplyr/articles/seplyr.html) documentation.
+For more details please also see: [`help(`:=`, package = 'wrapr')`](https://winvector.github.io/wrapr/reference/named_map_builder.html) and 
+[`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html).
 
 
 

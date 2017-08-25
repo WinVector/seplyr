@@ -12,15 +12,14 @@ One quick example:
 orderTerms <- c('cyl', 'desc(gear)')
 
 # load packages
-suppressPackageStartupMessages(library("dplyr"))
 library("seplyr")
  #  Loading required package: wrapr
 
 # where we are actually working (perhaps in a re-usable
 # script or function)
-datasets::mtcars %>% 
-  arrange_se(orderTerms) %>% 
-  head()
+datasets::mtcars %.>% 
+  arrange_se(., orderTerms) %.>% 
+  head(.)
  #     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
  #  1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
  #  2 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
@@ -43,3 +42,5 @@ or from [`GitHub`](https://github.com/WinVector/seplyr):
 ``` r
    devtools::install_github('WinVector/seplyr')
 ```
+
+Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html) for details on "dot pipe."

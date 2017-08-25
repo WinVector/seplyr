@@ -27,9 +27,8 @@ to these \code{dplyr} implementations.
 }
 \examples{
 
-suppressPackageStartupMessages(library("dplyr"))
 
-datasets::iris \%>\% add_tally_se()
+datasets::iris \%.>\% add_tally_se(.)
 
 }
 \seealso{

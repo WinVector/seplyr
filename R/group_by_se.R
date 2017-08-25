@@ -12,11 +12,10 @@
 #'
 #' @examples
 #'
-#' suppressPackageStartupMessages(library("dplyr"))
 #'
-#' datasets::mtcars %>%
-#'   group_by_se(c("cyl", "gear")) %>%
-#'   head()
+#' datasets::mtcars %.>%
+#'   group_by_se(., c("cyl", "gear")) %.>%
+#'   head(.)
 #' # essentially group_by_at()
 #'
 #' @export

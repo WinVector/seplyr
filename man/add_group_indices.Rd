@@ -21,8 +21,6 @@ Group a data frame and add per-group indices as a column.
 }
 \examples{
 
-suppressPackageStartupMessages(library("dplyr"))
-
 add_group_indices(datasets::mtcars, c("cyl", "gear"), 'groupID')
 
 }

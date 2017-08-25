@@ -10,14 +10,13 @@
 #'
 #' @examples
 #'
-#' suppressPackageStartupMessages(library("dplyr"))
 #'
-#' datasets::mtcars %>%
-#'    select_se(c("cyl", "gear")) %>%
-#'    head()
+#' datasets::mtcars %.>%
+#'    select_se(., c("cyl", "gear")) %.>%
+#'    head(.)
 #' # essentially dplyr::select_at()
 #'
-#' data.frame(a=1, b=2) %>% select_se('-b')
+#' data.frame(a=1, b=2) %.>% select_se(., '-b')
 #'
 #' @export
 #'
@@ -52,11 +51,10 @@ select_se <- function(.data, colNames) {
 #'
 #' @examples
 #'
-#' suppressPackageStartupMessages(library("dplyr"))
 #'
-#' datasets::mtcars %>%
-#'    deselect(c("cyl", "gear")) %>%
-#'    head()
+#' datasets::mtcars %.>%
+#'    deselect(., c("cyl", "gear")) %.>%
+#'    head(.)
 #' # essentially dplyr::select( datasets::mtcars, -cyl, -gear)
 #'
 #' @export

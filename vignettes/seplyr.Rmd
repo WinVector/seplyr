@@ -63,9 +63,9 @@ If you don't want to try and digest entire theory of quasi-quoting and splicing 
 ```{r ex1c}
 library("seplyr")
 
-datasets::mtcars %>% 
-  arrange_se(orderTerms) %>% 
-  head()
+datasets::mtcars %.>% 
+  arrange_se(., orderTerms) %>% 
+  head(.)
 ```
 
 The idea is: the above code looks very much like simple `dplyr` code used running an analysis, and yet is very easy to [parameterize](http://www.win-vector.com/blog/2016/12/parametric-variable-names-and-dplyr/) and re-use in a script or package.
@@ -101,21 +101,20 @@ We also have a few methods that work around a few of the minor inconvenience of 
 One can combine `seplyr` methods with standard `dplyr` methods (such as `summarize_at()`):
 
 ```{r atex}
-datasets::iris %>%
-  group_by_at("Species") %>%
-  summarize_at(c("Sepal.Length", "Sepal.Width"), funs(mean)) %>%
-  rename_se(c("Mean.Sepal.Length" := "Sepal.Length", 
-              "Mean.Sepal.Width" := "Sepal.Width"))
+datasets::iris %.>%
+  group_by_at(., "Species") %>%
+  summarize_at(., c("Sepal.Length", "Sepal.Width"), funs(mean)) %.>%
+  rename_se(., c("Mean.Sepal.Length" := "Sepal.Length", 
+                 "Mean.Sepal.Width" := "Sepal.Width"))
 ```
 
 One also perform the above directly with `seplyr::summarize_se()` as follows.
 
-
 ```{r atexse}
-datasets::iris %>%
-  group_by_se("Species") %>%
-  summarize_se(c("Mean.Sepal.Length" := "mean(Sepal.Length)", 
-                 "Mean.Sepal.Width" := "mean(Sepal.Width)"))
+datasets::iris %.>%
+  group_by_se(., "Species") %.>%
+  summarize_se(., c("Mean.Sepal.Length" := "mean(Sepal.Length)", 
+                    "Mean.Sepal.Width" := "mean(Sepal.Width)"))
 ```
 
 In addition to the series of adapters we also supply a number of useful new verbs including:
@@ -130,5 +129,7 @@ In addition to the series of adapters we also supply a number of useful new verb
 
 `seplyr` methods are short and have examples in their help, so always try both help and printing the method (for example: `help(select_se)` and `print(select_se)`). Printing methods can show you how to use `dplyr` directly with `rlang`/`tidyeval` methodology (allowing you to skip `seplyr`).
 
-Some inspiration comes from [Sebastian Kranz's `s_dplyr`](https://gist.github.com/skranz/9681509).  
+Some inspiration comes from [Sebastian Kranz's `s_dplyr`](https://gist.github.com/skranz/9681509). 
+Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html) for details on "dot pipe."
+
 

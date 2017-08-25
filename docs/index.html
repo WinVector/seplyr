@@ -91,15 +91,14 @@
 orderTerms &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'cyl'</span>, <span class="st">'desc(gear)'</span>)
 
 <span class="co"># load packages</span>
-<span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))
 <span class="kw">library</span>(<span class="st">"seplyr"</span>)
  <span class="co">#  Loading required package: wrapr</span>
 
 <span class="co"># where we are actually working (perhaps in a re-usable</span>
 <span class="co"># script or function)</span>
-datasets::mtcars %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/arrange_se.html">arrange_se</a></span>(orderTerms) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">head</span>()
+datasets::mtcars %.&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/arrange_se.html">arrange_se</a></span>(., orderTerms) %.&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(.)
  <span class="co">#     mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
  <span class="co">#  1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span>
  <span class="co">#  2 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span>
@@ -112,6 +111,7 @@ datasets::mtcars %&gt;%<span class="st"> </span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   <span class="kw">install.packages</span>(<span class="st">'seplyr'</span>)</code></pre></div>
 <p>or from <a href="https://github.com/WinVector/seplyr"><code>GitHub</code></a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   devtools::<span class="kw">install_github</span>(<span class="st">'WinVector/seplyr'</span>)</code></pre></div>
+<p>Please see <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>help("%.&gt;%", package="wrapr")</code></a> for details on “dot pipe.”</p>
 </div>
   </div>
 

@@ -28,14 +28,13 @@ One quick example:
 orderTerms <- c('cyl', 'desc(gear)')
 
 # load packages
-suppressPackageStartupMessages(library("dplyr"))
 library("seplyr")
 
 # where we are actually working (perhaps in a re-usable
 # script or function)
-datasets::mtcars %>% 
-  arrange_se(orderTerms) %>% 
-  head()
+datasets::mtcars %.>% 
+  arrange_se(., orderTerms) %.>% 
+  head(.)
 ```
 
 The concept is: in writing re-usable code or scripts you pretend you do not know the actual column names you will be asked to work with (that these will be supplied as values later at analysis time).  This forces you to write scripts that can be used even if data changes, and are re-usable on new data you did not know about when writing the script.
@@ -53,4 +52,6 @@ or from [`GitHub`](https://github.com/WinVector/seplyr):
 ```{r, eval=FALSE}
    devtools::install_github('WinVector/seplyr')
 ```
+
+Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html) for details on "dot pipe."
 

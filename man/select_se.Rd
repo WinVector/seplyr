@@ -19,14 +19,13 @@ select columns.  To remove columns please see \code{\link{deselect}}.
 }
 \examples{
 
-suppressPackageStartupMessages(library("dplyr"))
 
-datasets::mtcars \%>\%
-   select_se(c("cyl", "gear")) \%>\%
-   head()
+datasets::mtcars \%.>\%
+   select_se(., c("cyl", "gear")) \%.>\%
+   head(.)
 # essentially dplyr::select_at()
 
-data.frame(a=1, b=2) \%>\% select_se('-b')
+data.frame(a=1, b=2) \%.>\% select_se(., '-b')
 
 }
 \seealso{
