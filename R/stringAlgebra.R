@@ -95,11 +95,11 @@ deref_str <- function(str, env) {
 #'
 #' @param lexpr language item
 #' @param env environment to look in
-#' @return R language element with derefs
+#' @return R language element with dequotes and derefs
 #'
 #' @noRd
 #'
-prep_deref <- function(lexpr, env) {
+prep_deref <- function(lexpr, env = parent.frame()) {
   nexpr <- lexpr
   n <- length(nexpr)
   # just in case (establishes an invarient of n>=1)
