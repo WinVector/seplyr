@@ -1,0 +1,84 @@
+---
+title: "String Algebra"
+author: "John Mount"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{String Algebra}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+[`seplyr`](https://winvector.github.io/seplyr/index.html) supplies the function 
+`seplyr::expand_expr()` which implements what we call "the string algebra."  
+What this function does is: it takes an expression of mixed terms including variables
+refering to names, quoted strings, and general expression terms.  It then "dequotes"
+all of the variables refering to quoted strings and  "dereferences" variables 
+thought to be refering to names.  The entire expression is then return as a single string.
+
+This is easiest to see with an example:
+
+```{r stra1}
+library("seplyr")
+
+ratio <- 2
+compCol1 <- "Sepal.Width"
+expr <- expand_expr("Sepal.Length" >= ratio * compCol1)
+print(expr)
+```
+
+Notice in the above one layer of quoting was removed from `"Sepal.Length"` and the name
+referred to by "`compCol1`" was substituted into the expression. "`ratio`" was left
+alone as it was not refering to a string (and hence can not be a name, unbound or free variables
+are also left alone).  So as we see the substitution performed does depend on what values
+are present in the environment.
+
+After the substitution the returned quoted expression is exactly in the form `seplyr` expects.
+For example:
+
+```{r mu1}
+resCol1 <- "Sepal_Long"
+
+datasets::iris %.>%
+  mutate_se(., 
+            resCol1 := expr) %.>%
+  head(.)
+```
+
+`seplyr` also provided an number of `seplyr::*_nse()` convience forms wrapping all of these steps into
+one operation.  For example:
+
+```{r mu2}
+datasets::iris %.>%
+  mutate_nse(., 
+             resCol1 := "Sepal.Length" >= ratio * compCol1) %.>%
+  head(.)
+```
+
+To use string literals you merely need one extra layer of quoting:
+
+```{r mu3}
+"is_setosa" := expand_expr(Species == "'setosa'")
+datasets::iris %.>%
+  transmute_nse(., 
+             "is_setosa" := Species == "'setosa'") %.>%
+  summary(.)
+```
+
+The purpose of all of the above is to mix names that are known while we are 
+writing the code (these are quoted) with names that may not be known until later
+(i.e., column names supplied as parameters).  This allows the easy creation of 
+useful generic functions such as:
+
+```{r f1}
+countMatches <- function(data, columnName, targetValue) {
+  targetSym <- paste0('"', targetValue, '"') # extra quotes
+  data %.>%
+    transmute_nse(., "match" := columnName == targetSym) %.>%
+    summary(.)
+}
+
+countMatches(datasets::iris, "Species", "setosa")
+```
+
+

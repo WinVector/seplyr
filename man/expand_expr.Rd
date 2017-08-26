@@ -15,7 +15,12 @@ expand_expr(expr, env = parent.frame())
 string
 }
 \description{
-Prepare an expression for standard evaluation.
+Combine string-variable values and quoted terms to produce
+a concrete string reading for value orietend string evaluation
+(stringified standard evaluation).  We also call this the
+string algebra.  This method powers the \code{seplyr::*_nse()}
+methods and helps build string expressions without needing
+\code{paste0())} or \code{glue::glue()}.
 }
 \examples{
 
