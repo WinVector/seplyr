@@ -27,5 +27,34 @@ NULL
 #' @importFrom wrapr := let lambda
 NULL
 
+#' @importFrom dplyr all_equal bind_rows bind_cols inner_join left_join right_join full_join semi_join anti_join
+
+#' @export
+dplyr::all_equal
+
+#' @export
+dplyr::bind_rows
+
+#' @export
+dplyr::bind_cols
+
+#' @export
+dplyr::inner_join
+
+#' @export
+dplyr::left_join
+
+#' @export
+dplyr::right_join
+
+#' @export
+dplyr::full_join
+
+#' @export
+dplyr::semi_join
+
+#' @export
+dplyr::anti_join
+
 
 
