@@ -9,7 +9,7 @@ mutate_nse(.data, ...)
 \arguments{
 \item{.data}{data.frame}
 
-\item{...}{expressions to mutate by.}
+\item{...}{stringified expressions to mutate by.}
 }
 \value{
 .data with altered columns.
@@ -35,5 +35,5 @@ datasets::iris \%.>\%
 
 }
 \seealso{
-\code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
+\code{\link{mutate_se}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
 }

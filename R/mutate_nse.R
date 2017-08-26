@@ -5,10 +5,10 @@
 #' mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 #' Terms are vectors or lists of the form "lhs := rhs".
 #'
-#' @seealso \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
+#' @seealso \code{\link{mutate_se}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
 #'
 #' @param .data data.frame
-#' @param ... expressions to mutate by.
+#' @param ... stringified expressions to mutate by.
 #' @return .data with altered columns.
 #'
 #' @examples
@@ -36,15 +36,17 @@ mutate_nse <- function(.data, ...) {
   res <- .data
   len <- length(mutateTerms)
   if(len>1) {
+    lhs <- vector(len-1, mode='list')
+    rhs <- vector(len-1, mode='list')
     for(i in (2:len)) {
       ei <- mutateTerms[[i]]
       if((length(ei)!=3)||(as.character(ei[[1]])!=':=')) {
         stop("mutate_nse terms must be of the form: sym := expr")
       }
-      lhs <- as.character(prep_deref(ei[[2]], env))
-      rhs <- deparse(prep_deref(ei[[3]], env))
-      res <- mutate_se(res, lhs := rhs)
+      lhs[[i-1]] <- as.character(prep_deref(ei[[2]], env))
+      rhs[[i-1]] <- deparse(prep_deref(ei[[3]], env))
     }
+    res <- mutate_se(res, lhs := rhs)
   }
   res
 }
