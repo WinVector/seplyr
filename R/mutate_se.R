@@ -19,7 +19,7 @@
 #'
 #' datasets::iris %.>%
 #'   mutate_se(., c(resCol1 := "Sepal.Length >= 2 * Sepal.Width",
-#'               "Petal_Short" := "Petal.Length <= 3.5")) %.>%
+#'                  "Petal_Short" := "Petal.Length <= 3.5")) %.>%
 #'   head(.)
 #'
 #'
