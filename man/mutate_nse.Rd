@@ -4,12 +4,14 @@
 \alias{mutate_nse}
 \title{mutate non-standard evaluation interface.}
 \usage{
-mutate_nse(.data, ...)
+mutate_nse(.data, ..., env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{...}{stringified expressions to mutate by.}
+
+\item{env}{environment to work in.}
 }
 \value{
 .data with altered columns.

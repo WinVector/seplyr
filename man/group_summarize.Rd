@@ -5,9 +5,11 @@
 \alias{group_summarise}
 \title{group_by and summarize as an atomic action.}
 \usage{
-group_summarize(d, groupingVars, ..., arrangeTerms = NULL)
+group_summarize(d, groupingVars, ..., arrangeTerms = NULL,
+  env = parent.frame())
 
-group_summarise(d, groupingVars, ..., arrangeTerms = NULL)
+group_summarise(d, groupingVars, ..., arrangeTerms = NULL,
+  env = parent.frame())
 }
 \arguments{
 \item{d}{data.frame}
@@ -17,6 +19,8 @@ group_summarise(d, groupingVars, ..., arrangeTerms = NULL)
 \item{...}{list of dplyr::mutate() expressions.}
 
 \item{arrangeTerms}{character optional vector of column expressions to arrange by.}
+
+\item{env}{environment to work in.}
 }
 \value{
 d summarized by groups

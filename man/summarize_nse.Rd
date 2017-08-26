@@ -2,14 +2,19 @@
 % Please edit documentation in R/summarize_nse.R
 \name{summarize_nse}
 \alias{summarize_nse}
+\alias{summarise_nse}
 \title{summarize non-standard evaluation interface.}
 \usage{
-summarize_nse(.data, ...)
+summarize_nse(.data, ..., env = parent.frame())
+
+summarise_nse(.data, ..., env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{...}{stringified expressions to summarize by.}
+
+\item{env}{environment to work in.}
 }
 \value{
 .data with summarized columns.

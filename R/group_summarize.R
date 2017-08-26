@@ -11,6 +11,7 @@
 #' @param groupingVars character vector of column names to group by.
 #' @param ... list of dplyr::mutate() expressions.
 #' @param arrangeTerms character optional vector of column expressions to arrange by.
+#' @param env environment to work in.
 #' @return d summarized by groups
 #'
 #' @examples
@@ -25,14 +26,14 @@
 #' @export
 #'
 group_summarize <- function(d, groupingVars, ...,
-                            arrangeTerms = NULL) {
+                            arrangeTerms = NULL,
+                            env = parent.frame()) {
   # convert char vector into spliceable vector
   groupingSyms <- rlang::syms(groupingVars)
   d <- dplyr::ungroup(d) # just in case
   dg <- dplyr::group_by(d, !!!groupingSyms)
   if(!is.null(arrangeTerms)) {
     # from: https://github.com/tidyverse/rlang/issues/116
-    env <- parent.frame()
     arrangeQ <- lapply(arrangeTerms,
                       function(si) {
                         rlang::parse_quosure(si,

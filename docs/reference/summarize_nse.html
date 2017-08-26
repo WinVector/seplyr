@@ -110,7 +110,9 @@ summarizeTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".
 Terms are vectors or lists of the form "lhs := rhs".</p>
     
 
-    <pre class="usage"><span class='fu'>summarize_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>summarize_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())
+
+<span class='fu'>summarise_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -122,6 +124,10 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
     <tr>
       <th>...</th>
       <td><p>stringified expressions to summarize by.</p></td>
+    </tr>
+    <tr>
+      <th>env</th>
+      <td><p>environment to work in.</p></td>
     </tr>
     </table>
     

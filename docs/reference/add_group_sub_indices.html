@@ -108,8 +108,8 @@
     <p>Group a data frame and add in-group indices as a column.</p>
     
 
-    <pre class="usage"><span class='fu'>add_group_sub_indices</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='no'>groupingVars</span>, <span class='kw'>arrangeTerms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>orderColumn</span>)</pre>
+    <pre class="usage"><span class='fu'>add_group_sub_indices</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='no'>groupingVars</span>, <span class='no'>orderColumn</span>,
+  <span class='kw'>arrangeTerms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -127,12 +127,16 @@
       <td><p>character vector of column names to group by.</p></td>
     </tr>
     <tr>
+      <th>orderColumn</th>
+      <td><p>character name of column to add in-group order marks to.</p></td>
+    </tr>
+    <tr>
       <th>arrangeTerms</th>
       <td><p>character vector of column expressions to arrange by.</p></td>
     </tr>
     <tr>
-      <th>orderColumn</th>
-      <td><p>character name of column to add in-group order marks to.</p></td>
+      <th>env</th>
+      <td><p>environment to work in.</p></td>
     </tr>
     </table>
     

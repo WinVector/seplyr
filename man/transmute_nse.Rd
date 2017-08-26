@@ -4,12 +4,14 @@
 \alias{transmute_nse}
 \title{transmute non-standard evaluation interface.}
 \usage{
-transmute_nse(.data, ...)
+transmute_nse(.data, ..., env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{...}{stringified expressions to transmute by.}
+
+\item{env}{environment to work in.}
 }
 \value{
 .data with altered columns(other columns dropped).

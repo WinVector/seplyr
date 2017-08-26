@@ -9,6 +9,7 @@
 #'
 #' @param .data data.frame
 #' @param ... stringified expressions to transmute by.
+#' @param env environment to work in.
 #' @return .data with altered columns(other columns dropped).
 #'
 #' @examples
@@ -27,10 +28,9 @@
 #'
 #' @export
 #'
-transmute_nse <- function(.data, ...) {
+transmute_nse <- function(.data, ...,  env = parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
-  env <- parent.frame()
   transmuteTerms <- substitute(list(...))
   # transmuteTerms is a list of k+1 items, first is "list" the rest are captured expressions
   res <- .data

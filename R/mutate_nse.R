@@ -9,6 +9,7 @@
 #'
 #' @param .data data.frame
 #' @param ... stringified expressions to mutate by.
+#' @param env environment to work in.
 #' @return .data with altered columns.
 #'
 #' @examples
@@ -27,10 +28,9 @@
 #'
 #' @export
 #'
-mutate_nse <- function(.data, ...) {
+mutate_nse <- function(.data, ...,  env = parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
-  env <- parent.frame()
   mutateTerms <- substitute(list(...))
   # mutateTerms is a list of k+1 items, first is "list" the rest are captured expressions
   res <- .data

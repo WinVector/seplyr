@@ -4,8 +4,9 @@
 #' @param .data data.frame
 #' @param ... force later arguments to bind by name.
 #' @param groupingVars character vector of column names to group by.
-#' @param arrangeTerms character vector of column expressions to arrange by.
 #' @param orderColumn character name of column to add in-group order marks to.
+#' @param arrangeTerms character vector of column expressions to arrange by.
+#' @param env environment to work in.
 #' @return .data with in group order indices added (no ties).
 #'
 #' @examples
@@ -30,8 +31,9 @@
 add_group_sub_indices <- function(.data,
                                  ...,
                                  groupingVars,
+                                 orderColumn,
                                  arrangeTerms = NULL,
-                                 orderColumn) {
+                                 env = parent.frame()) {
   .data <- dplyr::ungroup(.data) # just in case
   if(length(list(...))>0) {
     stop("seplyr::add_group_sub_indices unexpected arguments")
@@ -41,7 +43,6 @@ add_group_sub_indices <- function(.data,
     arrangeTerms <- colnames(.data)
   }
   # from: https://github.com/tidyverse/rlang/issues/116
-  env <- parent.frame()
   arrangeQ <- lapply(arrangeTerms,
                     function(si) {
                       rlang::parse_quosure(si,

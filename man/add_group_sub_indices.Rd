@@ -4,8 +4,8 @@
 \alias{add_group_sub_indices}
 \title{Group a data frame and add in-group indices as a column.}
 \usage{
-add_group_sub_indices(.data, ..., groupingVars, arrangeTerms = NULL,
-  orderColumn)
+add_group_sub_indices(.data, ..., groupingVars, orderColumn,
+  arrangeTerms = NULL, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
@@ -14,9 +14,11 @@ add_group_sub_indices(.data, ..., groupingVars, arrangeTerms = NULL,
 
 \item{groupingVars}{character vector of column names to group by.}
 
+\item{orderColumn}{character name of column to add in-group order marks to.}
+
 \item{arrangeTerms}{character vector of column expressions to arrange by.}
 
-\item{orderColumn}{character name of column to add in-group order marks to.}
+\item{env}{environment to work in.}
 }
 \value{
 .data with in group order indices added (no ties).

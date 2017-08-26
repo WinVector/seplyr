@@ -9,6 +9,7 @@
 #'
 #' @param .data data.frame
 #' @param ... stringified expressions to summarize by.
+#' @param env environment to work in.
 #' @return .data with summarized columns.
 #'
 #' @examples
@@ -25,10 +26,9 @@
 #'
 #' @export
 #'
-summarize_nse <- function(.data, ...) {
+summarize_nse <- function(.data, ..., env = parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
-  env <- parent.frame()
   summarizeTerms <- substitute(list(...))
   # summarizeTerms is a list of k+1 items, first is "list" the rest are captured expressions
   res <- .data
@@ -49,3 +49,6 @@ summarize_nse <- function(.data, ...) {
   res
 }
 
+#' @rdname summarize_nse
+#' @export
+summarise_nse <- summarize_nse
