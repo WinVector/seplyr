@@ -1,7 +1,8 @@
 
-# seplyr 0.1.5 2017-08-24
+# seplyr 0.1.5 2017-08-26
 
  * add wrapr dependency (for named map builder, and lambda abstraction).
+ * finish string algebra and add more *_nse() methods.
  
 # seplyr 0.1.4 2017-08-21
 

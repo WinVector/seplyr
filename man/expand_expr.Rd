@@ -16,9 +16,10 @@ string
 }
 \description{
 Combine string-variable values and quoted terms to produce
-a concrete string reading for value orietend string evaluation
+a concrete string reading for value oriented string evaluation
 (stringified standard evaluation).  We also call this the
-string algebra.  This method powers the \code{seplyr::*_nse()}
+string algebra or string interpolation.
+This method powers the \code{seplyr::*_nse()}
 methods and helps build string expressions without needing
 \code{paste0())} or \code{glue::glue()}.
 }
@@ -30,6 +31,8 @@ compCol1 <- "Sepal.Width"
 expr <- expand_expr("Sepal.Length" >= ratio * compCol1)
 print(expr)
 resCol <- 'X'
-head(mutate_se(iris, c(resCol := expr)))
+iris \%.>\%
+   mutate_se(., resCol1 := expr) \%.>\%
+   head(.)
 
 }

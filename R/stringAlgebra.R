@@ -93,11 +93,26 @@ deref_str <- function(str, env) {
 #' Substitute language elements by one-expand_expr.
 #'
 #'
-#' @param lexpr language item
+#' @param lexpr language item (captured by substitute())
 #' @param env environment to look in
 #' @return R language element with dequotes and derefs
 #'
-#' @noRd
+#' @examples
+#'
+#' resCol1 <- "Sepal_Long"
+#' ratio <- 2
+#' compCol1 <- "Sepal.Width"
+#' f <- function(expr, env = parent.frame()) {
+#'    mt <- substitute(expr)
+#'    deparse(prep_deref(mt, env))
+#' }
+#' expr <- f("Sepal.Length" >= ratio * compCol1)
+#' print(expr)
+#' iris %.>%
+#'    mutate_se(., resCol1 := expr) %.>%
+#'    head(.)
+#'
+#' @export
 #'
 prep_deref <- function(lexpr, env = parent.frame()) {
   nexpr <- lexpr
@@ -141,9 +156,10 @@ prep_deref <- function(lexpr, env = parent.frame()) {
 #' Prepare an expression for standard evaluation.
 #'
 #' Combine string-variable values and quoted terms to produce
-#' a concrete string reading for value orietend string evaluation
+#' a concrete string reading for value oriented string evaluation
 #' (stringified standard evaluation).  We also call this the
-#' string algebra.  This method powers the \code{seplyr::*_nse()}
+#' string algebra or string interpolation.
+#' This method powers the \code{seplyr::*_nse()}
 #' methods and helps build string expressions without needing
 #' \code{paste0())} or \code{glue::glue()}.
 #'
@@ -159,11 +175,13 @@ prep_deref <- function(lexpr, env = parent.frame()) {
 #' expr <- expand_expr("Sepal.Length" >= ratio * compCol1)
 #' print(expr)
 #' resCol <- 'X'
-#' head(mutate_se(iris, c(resCol := expr)))
+#' iris %.>%
+#'    mutate_se(., resCol1 := expr) %.>%
+#'    head(.)
 #'
 #' @export
 #'
 expand_expr <- function(expr, env = parent.frame()) {
   mt <- substitute(expr)
-  deparse(prep_deref(mt, env))
+  paste(deparse(prep_deref(mt, env)), collapse = '\n')
 }
