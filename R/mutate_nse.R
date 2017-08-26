@@ -46,7 +46,7 @@ mutate_nse <- function(.data, ...) {
       lhs[[i-1]] <- as.character(prep_deref(ei[[2]], env))
       rhs[[i-1]] <- deparse(prep_deref(ei[[3]], env))
     }
-    res <- mutate_se(res, lhs := rhs)
+    res <- mutate_se(res, lhs := rhs, env=env)
   }
   res
 }

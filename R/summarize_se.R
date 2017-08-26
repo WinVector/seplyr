@@ -8,6 +8,7 @@
 #'
 #' @param .data data.frame
 #' @param summarizeTerms character vector of column expressions to summarize by.
+#' @param env environment to work in.
 #' @return .data with summarizeTerms summarization applied.
 #'
 #' @examples
@@ -21,10 +22,9 @@
 #'
 #' @export
 #'
-summarize_se <- function(.data, summarizeTerms) {
+summarize_se <- function(.data, summarizeTerms,  env=parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
-  env <- parent.frame()
   summarizeQ <- lapply(summarizeTerms,
                     function(si) {
                       rlang::parse_quosure(si,

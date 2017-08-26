@@ -110,7 +110,7 @@ mutateTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".
 Terms are vectors or lists of the form "lhs := rhs".</p>
     
 
-    <pre class="usage"><span class='fu'>mutate_se</span>(<span class='no'>.data</span>, <span class='no'>mutateTerms</span>)</pre>
+    <pre class="usage"><span class='fu'>mutate_se</span>(<span class='no'>.data</span>, <span class='no'>mutateTerms</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -122,6 +122,10 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
     <tr>
       <th>mutateTerms</th>
       <td><p>character vector of column expressions to mutate by.</p></td>
+    </tr>
+    <tr>
+      <th>env</th>
+      <td><p>environment to work in.</p></td>
     </tr>
     </table>
     
@@ -138,11 +142,11 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
     <pre class="examples"><div class='input'>
 
 <span class='no'>resCol1</span> <span class='kw'>&lt;-</span> <span class='st'>"Sepal_Long"</span>
-
+<span class='no'>limit</span> <span class='kw'>&lt;-</span> <span class='fl'>3.5</span>
 
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
   <span class='fu'>mutate_se</span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='no'>resCol1</span> <span class='kw'>:=</span> <span class='st'>"Sepal.Length &gt;= 2 * Sepal.Width"</span>,
-                 <span class='st'>"Petal_Short"</span> <span class='kw'>:=</span> <span class='st'>"Petal.Length &lt;= 3.5"</span>)) <span class='kw'>%.&gt;%</span>
+                 <span class='st'>"Petal_Short"</span> <span class='kw'>:=</span> <span class='st'>"Petal.Length &lt;= limit"</span>)) <span class='kw'>%.&gt;%</span>
   <span class='fu'>head</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal_Long
 #&gt; 1          5.1         3.5          1.4         0.2  setosa      FALSE
 #&gt; 2          4.9         3.0          1.4         0.2  setosa      FALSE

@@ -9,26 +9,26 @@
 #'
 #' @param .data data.frame
 #' @param mutateTerms character vector of column expressions to mutate by.
+#' @param env environment to work in.
 #' @return .data with altered columns.
 #'
 #' @examples
 #'
 #'
 #' resCol1 <- "Sepal_Long"
-#'
+#' limit <- 3.5
 #'
 #' datasets::iris %.>%
 #'   mutate_se(., c(resCol1 := "Sepal.Length >= 2 * Sepal.Width",
-#'                  "Petal_Short" := "Petal.Length <= 3.5")) %.>%
+#'                  "Petal_Short" := "Petal.Length <= limit")) %.>%
 #'   head(.)
 #'
 #'
 #' @export
 #'
-mutate_se <- function(.data, mutateTerms) {
+mutate_se <- function(.data, mutateTerms, env= parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
-  env <- parent.frame()
   mutateQ <- lapply(mutateTerms,
                     function(si) {
                       rlang::parse_quosure(si,

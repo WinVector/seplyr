@@ -4,12 +4,14 @@
 \alias{filter_se}
 \title{filter standard interface.}
 \usage{
-filter_se(.data, filterTerms)
+filter_se(.data, filterTerms, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{filterTerms}{character vector of column expressions to filter by.}
+
+\item{env}{environment to work in.}
 }
 \value{
 .data filtered by columns named in filterTerms

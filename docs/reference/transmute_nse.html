@@ -145,7 +145,10 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
   <span class='fu'>transmute_nse</span>(<span class='no'>.</span>, <span class='no'>resCol1</span> <span class='kw'>:=</span> <span class='st'>"Sepal.Length"</span> <span class='kw'>&gt;=</span> <span class='no'>ratio</span> * <span class='no'>compCol1</span>,
                 <span class='st'>"Petal_Short"</span> <span class='kw'>:=</span> <span class='st'>"Petal.Length"</span> <span class='kw'>&lt;=</span> <span class='fl'>3.5</span>) <span class='kw'>%.&gt;%</span>
-  <span class='fu'>summary</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt; <span class='error'>Error in mutate_impl(.data, dots): Evaluation error: object 'ratio' not found.</span></div><div class='input'>
+  <span class='fu'>summary</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;  Sepal_Long      Petal_Short    
+#&gt;  Mode :logical   Mode :logical  
+#&gt;  FALSE:66        FALSE:95       
+#&gt;  TRUE :84        TRUE :55       </div><div class='input'>
 
 </div></pre>
   </div>

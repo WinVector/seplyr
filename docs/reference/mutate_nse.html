@@ -145,7 +145,20 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
   <span class='fu'>mutate_nse</span>(<span class='no'>.</span>, <span class='no'>resCol1</span> <span class='kw'>:=</span> <span class='st'>"Sepal.Length"</span> <span class='kw'>&gt;=</span> <span class='no'>ratio</span> * <span class='no'>compCol1</span>,
                 <span class='st'>"Petal_Short"</span> <span class='kw'>:=</span> <span class='st'>"Petal.Length"</span> <span class='kw'>&lt;=</span> <span class='fl'>3.5</span>) <span class='kw'>%.&gt;%</span>
-  <span class='fu'>summary</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt; <span class='error'>Error in mutate_impl(.data, dots): Evaluation error: object 'ratio' not found.</span></div><div class='input'>
+  <span class='fu'>summary</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+#&gt;  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+#&gt;  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+#&gt;  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+#&gt;  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+#&gt;  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+#&gt;  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+#&gt;        Species   Sepal_Long      Petal_Short    
+#&gt;  setosa    :50   Mode :logical   Mode :logical  
+#&gt;  versicolor:50   FALSE:66        FALSE:95       
+#&gt;  virginica :50   TRUE :84        TRUE :55       
+#&gt;                                                 
+#&gt;                                                 
+#&gt;                                                 </div><div class='input'>
 
 </div></pre>
   </div>

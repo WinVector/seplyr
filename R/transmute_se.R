@@ -8,6 +8,7 @@
 #'
 #' @param .data data.frame
 #' @param transmuteTerms character vector of column expressions to transmute by.
+#' @param env environment to work in.
 #' @return .data transumuted by transmuteTerms.
 #'
 #' @examples
@@ -21,10 +22,9 @@
 #'
 #' @export
 #'
-transmute_se <- function(.data, transmuteTerms) {
+transmute_se <- function(.data, transmuteTerms,  env=parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
-  env <- parent.frame()
   transmuteQ <- lapply(transmuteTerms,
                        function(si) {
                          rlang::parse_quosure(si,

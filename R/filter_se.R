@@ -8,6 +8,7 @@
 #'
 #' @param .data data.frame
 #' @param filterTerms character vector of column expressions to filter by.
+#' @param env environment to work in.
 #' @return .data filtered by columns named in filterTerms
 #'
 #' @examples
@@ -21,10 +22,9 @@
 #'
 #' @export
 #'
-filter_se <- function(.data, filterTerms) {
+filter_se <- function(.data, filterTerms,  env=parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
-  env <- parent.frame()
   filterQ <- lapply(filterTerms,
                     function(si) {
                       rlang::parse_quosure(si,

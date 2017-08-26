@@ -46,7 +46,7 @@ transmute_nse <- function(.data, ...) {
       lhs[[i-1]] <- as.character(prep_deref(ei[[2]], env))
       rhs[[i-1]] <- deparse(prep_deref(ei[[3]], env))
     }
-    res <- transmute_se(res, lhs := rhs)
+    res <- transmute_se(res, lhs := rhs, env=env)
   }
   res
 }

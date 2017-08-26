@@ -4,12 +4,14 @@
 \alias{transmute_se}
 \title{transmute standard interface.}
 \usage{
-transmute_se(.data, transmuteTerms)
+transmute_se(.data, transmuteTerms, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{transmuteTerms}{character vector of column expressions to transmute by.}
+
+\item{env}{environment to work in.}
 }
 \value{
 .data transumuted by transmuteTerms.

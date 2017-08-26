@@ -5,14 +5,16 @@
 \alias{summarise_se}
 \title{summarize standard interface.}
 \usage{
-summarize_se(.data, summarizeTerms)
+summarize_se(.data, summarizeTerms, env = parent.frame())
 
-summarise_se(.data, summarizeTerms)
+summarise_se(.data, summarizeTerms, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{summarizeTerms}{character vector of column expressions to summarize by.}
+
+\item{env}{environment to work in.}
 }
 \value{
 .data with summarizeTerms summarization applied.

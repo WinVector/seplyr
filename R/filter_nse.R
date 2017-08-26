@@ -36,7 +36,7 @@ filter_nse <- function(.data, ...) {
       ei <- filterTerms[[i]]
       terms[[i-1]] <- deparse(prep_deref(ei, env))
     }
-    res <- filter_se(res, terms)
+    res <- filter_se(res, terms, env=env)
   }
   res
 }
