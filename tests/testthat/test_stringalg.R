@@ -23,7 +23,11 @@ test_that("test_stringalg.R", {
 
   # this one should be "Sepal.Width"
   e4 <- expand_expr(compCol1)
-  testthat::expect_equal(compCol1, e4)
+  testthat::expect_equal("Sepal.Width", e4)
+
+  # this one should stay xx
+  e5 <- expand_expr(xx)
+  testthat::expect_equal(e5, "xx")
 
   expr <- expand_expr("Sepal.Length" + pcol >= ( ratio * compCol1 +
                                                             ifelse(Species==target, 1, 0) ))
