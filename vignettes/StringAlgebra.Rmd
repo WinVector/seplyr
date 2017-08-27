@@ -73,13 +73,18 @@ useful generic functions such as:
 
 ```{r f1}
 countMatches <- function(data, columnName, targetValue) {
-  targetSym <- paste0('"', targetValue, '"') # extra quotes
+  # extra quotes to say we are interested in value, not de-reference
+  targetSym <- paste0('"', targetValue, '"') 
   data %.>%
     transmute_nse(., "match" := columnName == targetSym) %.>%
-    summary(.)
+    group_by_se(., "match") %.>%
+    summarize_se(., "count" := "n()")
 }
 
 countMatches(datasets::iris, "Species", "setosa")
 ```
+
+The main rule when working with `seplyr` is: as the purpose of the `seplyr` string system is to pull-off quotes and de-reference, you need to remember to add enough extra quotation marks to prevent this where you do not want it.
+
 
 

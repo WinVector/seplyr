@@ -140,17 +140,21 @@ datasets::iris %.&gt;%
 ##  TRUE :50</code></pre>
 <p>The purpose of all of the above is to mix names that are known while we are writing the code (these are quoted) with names that may not be known until later (i.e., column names supplied as parameters). This allows the easy creation of useful generic functions such as:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countMatches &lt;-<span class="st"> </span>function(data, columnName, targetValue) {
-  targetSym &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'"'</span>, targetValue, <span class="st">'"'</span>) <span class="co"># extra quotes</span>
+  <span class="co"># extra quotes to say we are interested in value, not de-reference</span>
+  targetSym &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'"'</span>, targetValue, <span class="st">'"'</span>) 
   data %.&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/transmute_nse.html">transmute_nse</a></span>(., <span class="st">"match"</span> :<span class="er">=</span><span class="st"> </span>columnName ==<span class="st"> </span>targetSym) %.&gt;%
-<span class="st">    </span><span class="kw">summary</span>(.)
+<span class="st">    </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"match"</span>) %.&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="st">"count"</span> :<span class="er">=</span><span class="st"> "n()"</span>)
 }
 
 <span class="kw">countMatches</span>(datasets::iris, <span class="st">"Species"</span>, <span class="st">"setosa"</span>)</code></pre></div>
-<pre><code>##    match        
-##  Mode :logical  
-##  FALSE:100      
-##  TRUE :50</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   match count
+##   &lt;lgl&gt; &lt;int&gt;
+## 1 FALSE   100
+## 2  TRUE    50</code></pre>
+<p>The main rule when working with <code>seplyr</code> is: as the purpose of the <code>seplyr</code> string system is to pull-off quotes and de-reference, you need to remember to add enough extra quotation marks to prevent this where you do not want it.</p>
 </div>
   </div>
 
