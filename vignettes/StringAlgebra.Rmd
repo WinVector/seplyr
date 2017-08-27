@@ -15,7 +15,7 @@ or string expression interpolation.
 What this function does is: it takes an expression of mixed terms including variables
 referring to names, quoted strings, and general expression terms.  It then "dequotes"
 all of the variables referring to quoted strings and  "dereferences" variables 
-thought to be referring to names.  The entire expression is then return as a single string.
+thought to be referring to names.  The entire expression is then returned as a single string.
 
 This is easiest to see with an example:
 
@@ -31,7 +31,7 @@ print(expr)
 Notice in the above one layer of quoting was removed from `"Sepal.Length"` and the name
 referred to by "`compCol1`" was substituted into the expression. "`ratio`" was left
 alone as it was not referring to a string (and hence can not be a name, unbound or free variables
-are also left alone).  So as we see the substitution performed does depend on what values
+are also left alone).  So we do see the substitution performed does depend on what values
 are present in the environment.
 
 After the substitution the returned quoted expression is exactly in the form `seplyr` expects.
