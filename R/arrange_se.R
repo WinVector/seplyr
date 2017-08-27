@@ -1,9 +1,10 @@
 
 #' arrange standard interface.
 #'
-#' Arange a data frame by the arrangeTerms.  Accepts arbitrary text as
+#' Arrange a data frame by the arrangeTerms.  Accepts arbitrary text as
 #' arrangeTerms to allow forms such as "desc(gear)"
-#' (unlike \code{\link[dplyr]{arrange_at}}).
+#' (unlike \code{\link[dplyr]{arrange_at}}). Intent is to arrange only by
+#' sets of variables and simple transforms, not by arbitrary expressions over variables.
 #'
 #' @seealso \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{arrange_at}}
 #'

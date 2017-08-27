@@ -17,7 +17,8 @@ group_by_se(.data, groupingVars, add = FALSE)
 .data grouped by columns named in groupingVars
 }
 \description{
-Group a data frame by the groupingVars.
+Group a data frame by the groupingVars. group_by_se intentionally groups only by
+sets of variables, not by expressions over variables.
 }
 \examples{
 

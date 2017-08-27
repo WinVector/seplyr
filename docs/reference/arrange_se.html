@@ -108,9 +108,10 @@
     </div>
 
     
-    <p>Arange a data frame by the arrangeTerms.  Accepts arbitrary text as
+    <p>Arrange a data frame by the arrangeTerms.  Accepts arbitrary text as
 arrangeTerms to allow forms such as "desc(gear)"
-(unlike <code><a href='http://dplyr.tidyverse.org/reference/arrange_all.html'>arrange_at</a></code>).</p>
+(unlike <code><a href='http://dplyr.tidyverse.org/reference/arrange_all.html'>arrange_at</a></code>). Intent is to arrange only by
+sets of variables and simple transforms, not by arbitrary expressions over variables.</p>
     
 
     <pre class="usage"><span class='fu'>arrange_se</span>(<span class='no'>.data</span>, <span class='no'>arrangeTerms</span>)</pre>

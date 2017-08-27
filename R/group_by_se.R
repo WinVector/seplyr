@@ -1,7 +1,8 @@
 
 #' group_by standard interface.
 #'
-#' Group a data frame by the groupingVars.
+#' Group a data frame by the groupingVars. group_by_se intentionally groups only by
+#' sets of variables, not by expressions over variables.
 #'
 #' @seealso \code{\link[dplyr]{group_by}}, \code{\link[dplyr]{group_by_at}}
 #'
