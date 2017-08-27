@@ -86,8 +86,8 @@ deref_str <- function(str, env) {
     str <- substr(str,2,nchar(str)-1)
     return(str)
   }
-  # now look for a dereference opportunity
-  return(deref_symb(str,env))
+  # pull of implicit quotes by going to name
+  return(as.name(str))
 }
 
 #' Substitute language elements by one-expand_expr.
