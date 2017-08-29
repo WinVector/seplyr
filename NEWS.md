@@ -1,4 +1,8 @@
 
+# seplyr 0.1.6 2017-08-29
+
+ * work on lists.
+
 # seplyr 0.1.5 2017-08-28
 
  * add wrapr dependency (for named map builder, and lambda abstraction).

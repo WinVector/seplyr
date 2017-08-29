@@ -70,7 +70,7 @@ deref_symb <- function(symb, env) {
   }
 }
 
-#' Remove one level of quoting or one level of indirection from a string.
+#' Remove one level of quoting from a string.
 #'
 #' Needs to return symbols to prevent re-quoting of strings.
 #'
@@ -88,6 +88,25 @@ deref_str <- function(str, env) {
   }
   # pull of implicit quotes by going to name
   return(as.name(str))
+}
+
+#' Remove one level of quoting or one level of indirection from a string.
+#'
+#' Needs to return symbols to prevent re-quoting of strings.
+#'
+#' @param str string to work with (not vectorized).
+#' @param env environment to look in
+#' @return de-quoted str (or originval if not quoted).
+#'
+#' @noRd
+#'
+deref_str2 <- function(str, env) {
+  # look for "'x'" forms, if so strip off one level of quotes
+  if(is_quoted(str)) {
+    str <- substr(str,2,nchar(str)-1)
+    return(str)
+  }
+  deref_symb(str, env)
 }
 
 #' Substitute language elements by one-expand_expr.
@@ -126,9 +145,9 @@ prep_deref <- function(lexpr, env = parent.frame()) {
   if(length(nms)>0) {
     for(i in seq_len(length(nms))) {
       ki <- as.character(nms[[i]])
-      if(length(ki)>0) {
-        ri <- deref_str(ki, env)
-        if((length(ri)>0)&&(ri!=ki)) {
+      if(nchar(ki)>0) {
+        ri <- as.character(deref_str2(ki, env))
+        if((nchar(ri)>0)&&(ri!=ki)) {
           nms[[i]] <- ri
         }
       }
