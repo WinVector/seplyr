@@ -30,7 +30,7 @@ NULL
 #' @importFrom dplyr all_equal bind_rows bind_cols
 #' @importFrom dplyr inner_join left_join right_join full_join semi_join anti_join
 #' @importFrom dplyr ungroup distinct
-
+#' @importFrom dplyr compute collect tbl is.tbl as.tbl copy_to
 
 #' @export
 dplyr::all_equal
@@ -64,6 +64,24 @@ dplyr::ungroup
 
 #' @export
 dplyr::distinct
+
+#' @export
+dplyr::compute
+
+#' @export
+dplyr::collect
+
+#' @export
+dplyr::tbl
+
+#' @export
+dplyr::is.tbl
+
+#' @export
+dplyr::as.tbl
+
+#' @export
+dplyr::copy_to
 
 
 
