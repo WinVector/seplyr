@@ -27,7 +27,10 @@ NULL
 #' @importFrom wrapr := let lambda
 NULL
 
-#' @importFrom dplyr all_equal bind_rows bind_cols inner_join left_join right_join full_join semi_join anti_join
+#' @importFrom dplyr all_equal bind_rows bind_cols
+#' @importFrom dplyr inner_join left_join right_join full_join semi_join anti_join
+#' @importFrom dplyr ungroup distinct
+
 
 #' @export
 dplyr::all_equal
@@ -55,6 +58,13 @@ dplyr::semi_join
 
 #' @export
 dplyr::anti_join
+
+#' @export
+dplyr::ungroup
+
+#' @export
+dplyr::distinct
+
 
 
 

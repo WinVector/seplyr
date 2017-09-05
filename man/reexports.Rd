@@ -20,6 +20,10 @@
 \alias{semi_join}
 \alias{reexports}
 \alias{anti_join}
+\alias{reexports}
+\alias{ungroup}
+\alias{reexports}
+\alias{distinct}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -27,6 +31,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{dplyr}{\code{\link[dplyr]{all_equal}}, \code{\link[dplyr]{bind_rows}}, \code{\link[dplyr]{bind_cols}}, \code{\link[dplyr]{inner_join}}, \code{\link[dplyr]{left_join}}, \code{\link[dplyr]{right_join}}, \code{\link[dplyr]{full_join}}, \code{\link[dplyr]{semi_join}}, \code{\link[dplyr]{anti_join}}}
+  \item{dplyr}{\code{\link[dplyr]{all_equal}}, \code{\link[dplyr]{bind_rows}}, \code{\link[dplyr]{bind_cols}}, \code{\link[dplyr]{inner_join}}, \code{\link[dplyr]{left_join}}, \code{\link[dplyr]{right_join}}, \code{\link[dplyr]{full_join}}, \code{\link[dplyr]{semi_join}}, \code{\link[dplyr]{anti_join}}, \code{\link[dplyr]{ungroup}}, \code{\link[dplyr]{distinct}}}
 }}
 
