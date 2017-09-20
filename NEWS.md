@@ -1,8 +1,9 @@
 
-# seplyr 0.1.6 2017-08-29
+# seplyr 0.1.6 2017-09-19
 
  * work on lists.
  * re-export more dplyr functions.
+ * mutate_nse in stages.
 
 # seplyr 0.1.5 2017-08-28
 
