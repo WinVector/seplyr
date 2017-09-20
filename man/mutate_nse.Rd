@@ -19,7 +19,8 @@ mutate_nse(.data, ..., env = parent.frame())
 \description{
 Mutate a data frame by the mutateTerms.  Accepts arbitrary text as
 mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
-Terms are vectors or lists of the form "lhs := rhs".
+Terms are vectors or lists of the form "lhs := rhs".  Semantics are:
+terms are evaluated left to right.
 }
 \examples{
 

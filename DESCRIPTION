@@ -37,7 +37,9 @@ RoxygenNote: 6.0.1
 Suggests: glue,
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    DBI,
+    RSQLite
 VignetteBuilder: knitr
 ByteCompile: true
 

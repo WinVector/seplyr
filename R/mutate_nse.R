@@ -3,7 +3,8 @@
 #'
 #' Mutate a data frame by the mutateTerms.  Accepts arbitrary text as
 #' mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
-#' Terms are vectors or lists of the form "lhs := rhs".
+#' Terms are vectors or lists of the form "lhs := rhs".  Semantics are:
+#' terms are evaluated left to right.
 #'
 #' @seealso \code{\link{mutate_se}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
 #'
@@ -46,7 +47,10 @@ mutate_nse <- function(.data, ...,  env = parent.frame()) {
       lhs[[i-1]] <- as.character(prep_deref(ei[[2]], env))
       rhs[[i-1]] <- deparse(prep_deref(ei[[3]], env))
     }
-    res <- mutate_se(res, lhs := rhs, env=env)
+    # break up the mutate steps to give them good semantis
+    for(i in seq_len(length(lhs))) {
+      res <- mutate_se(res, lhs[[i]] := rhs[[i]], env=env)
+    }
   }
   res
 }
