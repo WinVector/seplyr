@@ -10,6 +10,7 @@
 #'
 #' @param .data data.frame
 #' @param ... stringified expressions to mutate by.
+#' @param splitTerms logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).
 #' @param env environment to work in.
 #' @return .data with altered columns.
 #'
@@ -29,7 +30,9 @@
 #'
 #' @export
 #'
-mutate_nse <- function(.data, ...,  env = parent.frame()) {
+mutate_nse <- function(.data, ...,
+                       splitTerms = TRUE,
+                       env = parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
   mutateTerms <- substitute(list(...))
@@ -47,9 +50,13 @@ mutate_nse <- function(.data, ...,  env = parent.frame()) {
       lhs[[i-1]] <- as.character(prep_deref(ei[[2]], env))
       rhs[[i-1]] <- deparse(prep_deref(ei[[3]], env))
     }
-    # break up the mutate steps to give them good semantis
-    for(i in seq_len(length(lhs))) {
-      res <- mutate_se(res, lhs[[i]] := rhs[[i]], env=env)
+    if(splitTerms) {
+      # break up the mutate steps to give them good semantics
+      for(i in seq_len(length(lhs))) {
+        res <- mutate_se(res, lhs[[i]] := rhs[[i]], env=env)
+      }
+    } else {
+      res <- mutate_se(res, lhs := rhs, env=env)
     }
   }
   res

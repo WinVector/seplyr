@@ -45,7 +45,7 @@ In contrast `dplyr::rename_at()` has its own notation that seems to not imitate 
 
 ```{r rename3}
 datasets::mtcars %>%
-  rename_at(names(mp), function(si) { mp[si] }) %>%
+  rename_at(names(mp), funs(function(si) { mp[si] })) %>%
   head()
 ```
 
