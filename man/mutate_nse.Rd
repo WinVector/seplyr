@@ -22,8 +22,8 @@ mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
 \description{
 Mutate a data frame by the mutateTerms.  Accepts arbitrary text as
 mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
-Terms are vectors or lists of the form "lhs := rhs".  Semantics are:
-terms are evaluated left to right.
+Terms are vectors or lists of the form "lhs := rhs".
+Semantics are: terms are evaluated left to right if mutate_nse_split_terms==TRUE (the default).
 }
 \examples{
 

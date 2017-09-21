@@ -113,8 +113,8 @@
     
     <p>Mutate a data frame by the mutateTerms.  Accepts arbitrary text as
 mutateTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".
-Terms are vectors or lists of the form "lhs := rhs".  Semantics are:
-terms are evaluated left to right.</p>
+Terms are vectors or lists of the form "lhs := rhs".
+Semantics are: terms are evaluated left to right if mutate_nse_split_terms==TRUE (the default).</p>
     
 
     <pre class="usage"><span class='fu'>mutate_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>mutate_nse_split_terms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,

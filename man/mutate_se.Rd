@@ -22,6 +22,7 @@ mutate_se(.data, mutateTerms, splitTerms = TRUE, env = parent.frame())
 Mutate a data frame by the mutateTerms.  Accepts arbitrary text as
 mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 Terms are vectors or lists of the form "lhs := rhs".
+Semantics are: terms are evaluated left to right if splitTerms==TRUE (the default).
 }
 \examples{
 
@@ -37,5 +38,5 @@ datasets::iris \%.>\%
 
 }
 \seealso{
-\code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
+\code{\link{mutate_nse}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
 }
