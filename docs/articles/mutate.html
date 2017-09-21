@@ -87,7 +87,7 @@
       <h1>mutate</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-09-20</h4>
+            <h4 class="date">2017-09-21</h4>
           </div>
 
     
@@ -104,20 +104,34 @@
   d &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/copy_to.html">copy_to</a></span>(db, <span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>))
   
   <span class="co"># works</span>
+   d %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2) %&gt;%
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/explain.html">show_query</a></span>()
   d %&gt;%<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2) %&gt;%
 <span class="st">    </span><span class="kw">print</span>()
   
   <span class="co"># fails</span>
+   d %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2, a4 :<span class="er">=</span><span class="st"> </span>a3) %&gt;%
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/explain.html">show_query</a></span>()
   d %&gt;%<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2, a4 :<span class="er">=</span><span class="st"> </span>a3) %&gt;%
 <span class="st">    </span><span class="kw">print</span>()
 }</code></pre></div>
+<pre><code>## &lt;SQL&gt;
+## SELECT `a`, `a2`, `a2` AS `a3`
+## FROM (SELECT `a`, `a` AS `a2`
+## FROM `data.frame(a = 1)`)</code></pre>
 <pre><code>## # Source:   lazy query [?? x 3]
 ## # Database: sqlite 3.19.3 [:memory:]
 ##       a    a2    a3
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1     1     1</code></pre>
+<pre><code>## &lt;SQL&gt;
+## SELECT `a`, `a2`, `a2` AS `a3`, `a3` AS `a4`
+## FROM (SELECT `a`, `a` AS `a2`
+## FROM `data.frame(a = 1)`)</code></pre>
 <pre><code>## Error in rsqlite_send_query(conn@ptr, statement): no such column: a3</code></pre>
 <p>Current work around, <a href="https://winvector.github.io/seplyr/">dev verson of seplyr</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if(go) {
@@ -125,11 +139,19 @@
   <span class="kw">packageVersion</span>(<span class="st">"seplyr"</span>)
   
   <span class="co"># works</span>
+   d %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="../reference/mutate_nse.html">mutate_nse</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2, a4 :<span class="er">=</span><span class="st"> </span>a3) %&gt;%
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/explain.html">show_query</a></span>()
   d %&gt;%<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/mutate_nse.html">mutate_nse</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2, a4 :<span class="er">=</span><span class="st"> </span>a3) %&gt;%
 <span class="st">    </span><span class="kw">print</span>()
 }</code></pre></div>
 <pre><code>## Loading required package: wrapr</code></pre>
+<pre><code>## &lt;SQL&gt;
+## SELECT `a`, `a2`, `a3`, `a3` AS `a4`
+## FROM (SELECT `a`, `a2`, `a2` AS `a3`
+## FROM (SELECT `a`, `a` AS `a2`
+## FROM `data.frame(a = 1)`))</code></pre>
 <pre><code>## # Source:   lazy query [?? x 4]
 ## # Database: sqlite 3.19.3 [:memory:]
 ##       a    a2    a3    a4
