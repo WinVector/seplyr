@@ -117,7 +117,8 @@ Terms are vectors or lists of the form "lhs := rhs".  Semantics are:
 terms are evaluated left to right.</p>
     
 
-    <pre class="usage"><span class='fu'>mutate_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>splitTerms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
+    <pre class="usage"><span class='fu'>mutate_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>mutate_nse_split_terms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>mutate_nse_env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -131,11 +132,11 @@ terms are evaluated left to right.</p>
       <td><p>stringified expressions to mutate by.</p></td>
     </tr>
     <tr>
-      <th>splitTerms</th>
+      <th>mutate_nse_split_terms</th>
       <td><p>logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).</p></td>
     </tr>
     <tr>
-      <th>env</th>
+      <th>mutate_nse_env</th>
       <td><p>environment to work in.</p></td>
     </tr>
     </table>

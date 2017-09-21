@@ -8,6 +8,7 @@
 #'
 #' @param .data data.frame
 #' @param ... stringified expressions to filter by.
+#' @param filter_nse_env environment to work in.
 #' @return .data filtered by columns named in filterTerms
 #'
 #' @examples
@@ -22,10 +23,10 @@
 #'
 #' @export
 #'
-filter_nse <- function(.data, ...) {
+filter_nse <- function(.data, ...,
+                       filter_nse_env = parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
-  env <- parent.frame()
   filterTerms <- substitute(list(...))
   # filterTerms is a list of k+1 items, first is "list" the rest are captured expressions
   res <- .data
@@ -34,9 +35,9 @@ filter_nse <- function(.data, ...) {
     terms <- vector(len-1, mode='list')
     for(i in (2:len)) {
       ei <- filterTerms[[i]]
-      terms[[i-1]] <- deparse(prep_deref(ei, env))
+      terms[[i-1]] <- deparse(prep_deref(ei, filter_nse_env))
     }
-    res <- filter_se(res, terms, env=env)
+    res <- filter_se(res, terms, env=filter_nse_env)
   }
   res
 }

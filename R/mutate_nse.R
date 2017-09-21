@@ -10,8 +10,8 @@
 #'
 #' @param .data data.frame
 #' @param ... stringified expressions to mutate by.
-#' @param splitTerms logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).
-#' @param env environment to work in.
+#' @param mutate_nse_split_terms logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).
+#' @param mutate_nse_env environment to work in.
 #' @return .data with altered columns.
 #'
 #' @examples
@@ -31,14 +31,14 @@
 #' @export
 #'
 mutate_nse <- function(.data, ...,
-                       splitTerms = TRUE,
-                       env = parent.frame()) {
+                       mutate_nse_split_terms = TRUE,
+                       mutate_nse_env = parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
   mutateTerms <- substitute(list(...))
   # mutateTerms is a list of k+1 items, first is "list" the rest are captured expressions
   res <- .data
-  len <- length(mutateTerms)
+  len <- length(mutateTerms) # first slot is "list"
   if(len>1) {
     lhs <- vector(len-1, mode='list')
     rhs <- vector(len-1, mode='list')
@@ -47,17 +47,10 @@ mutate_nse <- function(.data, ...,
       if((length(ei)!=3)||(as.character(ei[[1]])!=':=')) {
         stop("mutate_nse terms must be of the form: sym := expr")
       }
-      lhs[[i-1]] <- as.character(prep_deref(ei[[2]], env))
-      rhs[[i-1]] <- deparse(prep_deref(ei[[3]], env))
+      lhs[[i-1]] <- as.character(prep_deref(ei[[2]], mutate_nse_env))
+      rhs[[i-1]] <- deparse(prep_deref(ei[[3]], mutate_nse_env))
     }
-    if(splitTerms) {
-      # break up the mutate steps to give them good semantics
-      for(i in seq_len(length(lhs))) {
-        res <- mutate_se(res, lhs[[i]] := rhs[[i]], env=env)
-      }
-    } else {
-      res <- mutate_se(res, lhs := rhs, env=env)
-    }
+    res <- mutate_se(res, lhs := rhs, splitTerms = mutate_nse_split_terms, env=mutate_nse_env)
   }
   res
 }

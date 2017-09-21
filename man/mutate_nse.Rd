@@ -4,16 +4,17 @@
 \alias{mutate_nse}
 \title{mutate non-standard evaluation interface.}
 \usage{
-mutate_nse(.data, ..., splitTerms = TRUE, env = parent.frame())
+mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
+  mutate_nse_env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{...}{stringified expressions to mutate by.}
 
-\item{splitTerms}{logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).}
+\item{mutate_nse_split_terms}{logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).}
 
-\item{env}{environment to work in.}
+\item{mutate_nse_env}{environment to work in.}
 }
 \value{
 .data with altered columns.

@@ -4,12 +4,14 @@
 \alias{mutate_se}
 \title{mutate standard evaluation interface.}
 \usage{
-mutate_se(.data, mutateTerms, env = parent.frame())
+mutate_se(.data, mutateTerms, splitTerms = TRUE, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{mutateTerms}{character vector of column expressions to mutate by.}
+
+\item{splitTerms}{logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).}
 
 \item{env}{environment to work in.}
 }

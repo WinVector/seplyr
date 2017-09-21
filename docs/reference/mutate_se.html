@@ -116,7 +116,7 @@ mutateTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".
 Terms are vectors or lists of the form "lhs := rhs".</p>
     
 
-    <pre class="usage"><span class='fu'>mutate_se</span>(<span class='no'>.data</span>, <span class='no'>mutateTerms</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
+    <pre class="usage"><span class='fu'>mutate_se</span>(<span class='no'>.data</span>, <span class='no'>mutateTerms</span>, <span class='kw'>splitTerms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -128,6 +128,10 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
     <tr>
       <th>mutateTerms</th>
       <td><p>character vector of column expressions to mutate by.</p></td>
+    </tr>
+    <tr>
+      <th>splitTerms</th>
+      <td><p>logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).</p></td>
     </tr>
     <tr>
       <th>env</th>

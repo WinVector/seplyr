@@ -9,7 +9,7 @@
 #'
 #' @param .data data.frame
 #' @param ... stringified expressions to transmute by.
-#' @param env environment to work in.
+#' @param transmute_nse_env environment to work in.
 #' @return .data with altered columns(other columns dropped).
 #'
 #' @examples
@@ -28,7 +28,7 @@
 #'
 #' @export
 #'
-transmute_nse <- function(.data, ...,  env = parent.frame()) {
+transmute_nse <- function(.data, ...,  transmute_nse_env = parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
   transmuteTerms <- substitute(list(...))
@@ -43,10 +43,10 @@ transmute_nse <- function(.data, ...,  env = parent.frame()) {
       if((length(ei)!=3)||(as.character(ei[[1]])!=':=')) {
         stop("transmute_nse terms must be of the form: sym := expr")
       }
-      lhs[[i-1]] <- as.character(prep_deref(ei[[2]], env))
-      rhs[[i-1]] <- deparse(prep_deref(ei[[3]], env))
+      lhs[[i-1]] <- as.character(prep_deref(ei[[2]], transmute_nse_env))
+      rhs[[i-1]] <- deparse(prep_deref(ei[[3]], transmute_nse_env))
     }
-    res <- transmute_se(res, lhs := rhs, env=env)
+    res <- transmute_se(res, lhs := rhs, env=transmute_nse_env)
   }
   res
 }

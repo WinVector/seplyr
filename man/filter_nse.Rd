@@ -4,12 +4,14 @@
 \alias{filter_nse}
 \title{filter non-standard interface.}
 \usage{
-filter_nse(.data, ...)
+filter_nse(.data, ..., filter_nse_env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{...}{stringified expressions to filter by.}
+
+\item{filter_nse_env}{environment to work in.}
 }
 \value{
 .data filtered by columns named in filterTerms
