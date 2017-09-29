@@ -111,7 +111,9 @@
     </div>
 
     
-    <p>rename columns (much different syntax than <code><a href='http://dplyr.tidyverse.org/reference/select_all.html'>rename_at</a></code>).</p>
+    <p>rename columns (much different syntax than <code><a href='http://dplyr.tidyverse.org/reference/select_all.html'>rename_at</a></code>).
+All left hand sides are new column names and all right hand sides are old column names (
+this allows swaps).</p>
     
 
     <pre class="usage"><span class='fu'>rename_se</span>(<span class='no'>.data</span>, <span class='no'>mapping</span>)</pre>
@@ -149,11 +151,15 @@
 #&gt; Datsun 710        22.8         4  108  93 3.85 2.320 18.61  1  1     4    1
 #&gt; Hornet 4 Drive    21.4         6  258 110 3.08 3.215 19.44  1  0     3    1
 #&gt; Hornet Sportabout 18.7         8  360 175 3.15 3.440 17.02  0  0     3    2
-#&gt; Valiant           18.1         6  225 105 2.76 3.460 20.22  1  0     3    1</div><div class='input'># # sames as:
-# datasets::mtcars %>%
-#    rename(cylinders = cyl, gears = gear) %>%
-#    head()
+#&gt; Valiant           18.1         6  225 105 2.76 3.460 20.22  1  0     3    1</div><div class='input'><span class='co'># # sames as:</span>
+<span class='co'># datasets::mtcars %&gt;%</span>
+<span class='co'>#    rename(cylinders = cyl, gears = gear) %&gt;%</span>
+<span class='co'>#    head()</span>
 
+<span class='co'># rename_se allows column swaps</span>
+<span class='fu'>data.frame</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%.&gt;%</span>
+   <span class='fu'>rename_se</span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='st'>'a'</span>, <span class='st'>'b'</span>) <span class='kw'>:=</span> <span class='fu'>c</span>(<span class='st'>'b'</span>, <span class='st'>'a'</span>))</div><div class='output co'>#&gt;   b a
+#&gt; 1 1 2</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

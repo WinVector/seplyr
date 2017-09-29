@@ -152,6 +152,11 @@ datasets::mtcars %&gt;%
 ## Hornet Sportabout 18.7  8  360 175 3.15 3.440 17.02  0  0  3    2
 ## Valiant           18.1  6  225 105 2.76 3.460 20.22  1  0  3    1</code></pre>
 <p>This is sensible, but is very different than <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>. Thus there remains a need for a standard analogue.</p>
+<p>Also <code>rename_se</code> interpets all left-hand names as new column names and all right-hand names as old column names. This allows <code>rename_se</code> to be used to swap columns:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>) %.&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(., <span class="kw">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>) :<span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="st">'b'</span>, <span class="st">'a'</span>))</code></pre></div>
+<pre><code>##   b a
+## 1 1 2</code></pre>
 <p>Please see <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>help("%.&gt;%", package="wrapr")</code></a> for details on “dot pipe.”</p>
 </div>
   </div>

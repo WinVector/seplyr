@@ -2,6 +2,8 @@
 #' rename standard interface.
 #'
 #' rename columns (much different syntax than \code{\link[dplyr]{rename_at}}).
+#' All left hand sides are new column names and all right hand sides are old column names (
+#' this allows swaps).
 #'
 #' @seealso \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}, \code{\link[wrapr]{:=}}
 #'
@@ -20,10 +22,51 @@
 #' #    rename(cylinders = cyl, gears = gear) %>%
 #' #    head()
 #'
+#' # rename_se allows column swaps
+#' data.frame(a = 1, b = 2) %.>%
+#'    rename_se(., c('a', 'b') := c('b', 'a'))
+#'
 #' @export
 #'
 rename_se <- function(.data, mapping) {
-  mp <- lapply(mapping, rlang::sym)
-  do.call(dplyr::rename, c(list(.data) , mp))
+  res <- .data
+  nMap <- length(mapping)
+  if(nMap>0) {
+    sq <- seq_len(nMap)
+    # get task
+    cols <- colnames(.data)
+    oldNames <- as.character(mapping)
+    newNames <- names(mapping)
+    tmpNames <- setdiff(paste('RENAMETMPCOL', sq, sep='_'),
+                        c(cols,
+                          oldNames, newNames))[sq]
+    # some minor checking
+    if(length(unique(newNames))!=nMap) {
+      stop("rename_se: named new column more than once")
+    }
+    if(length(unique(oldNames))!=nMap) {
+      stop("rename_se: named original column more than once")
+    }
+    badOldRefs <- setdiff(oldNames, cols)
+    if(length(badOldRefs)>0) {
+      stop(paste("rename_se, refering to non-existent source columns: ",
+                 paste(badOldRefs, collapse = ', ')))
+    }
+    collisions <- intersect(newNames, setdiff(cols, oldNames))
+    if(length(collisions)>0) {
+      stop(paste("rename_se, new-mappings collide with original columns: ",
+                 paste(collisions, collapse = ', ')))
+    }
+    # do the work
+    for(i in sq) {
+      res <- dplyr::rename(res,
+                           !!rlang::sym(tmpNames[[i]]) := !!rlang::sym(oldNames[[i]]))
+    }
+    for(i in sq) {
+      res <- dplyr::rename(res,
+                           !!rlang::sym(newNames[[i]]) := !!rlang::sym(tmpNames[[i]]))
+    }
+  }
+  res
 }
 

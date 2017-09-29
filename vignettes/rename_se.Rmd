@@ -51,6 +51,12 @@ datasets::mtcars %>%
 
 This is sensible, but is very different than `dplyr::rename()`.  Thus there remains a need for a standard analogue.  
 
+Also `rename_se` interpets all left-hand names as new column names and all right-hand names as old column names.  This allows `rename_se` to be used to swap columns:
+
+```{r swap}
+data.frame(a = 1, b = 2) %.>%
+  rename_se(., c('a', 'b') := c('b', 'a'))
+```
 
 Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html) for details on "dot pipe."
 

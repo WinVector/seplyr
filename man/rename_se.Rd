@@ -16,6 +16,8 @@ rename_se(.data, mapping)
 }
 \description{
 rename columns (much different syntax than \code{\link[dplyr]{rename_at}}).
+All left hand sides are new column names and all right hand sides are old column names (
+this allows swaps).
 }
 \examples{
 
@@ -27,6 +29,10 @@ datasets::mtcars \%.>\%
 # datasets::mtcars \%>\%
 #    rename(cylinders = cyl, gears = gear) \%>\%
 #    head()
+
+# rename_se allows column swaps
+data.frame(a = 1, b = 2) \%.>\%
+   rename_se(., c('a', 'b') := c('b', 'a'))
 
 }
 \seealso{
