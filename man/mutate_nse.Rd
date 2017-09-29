@@ -4,14 +4,17 @@
 \alias{mutate_nse}
 \title{mutate non-standard evaluation interface.}
 \usage{
-mutate_nse(.data, ..., env = parent.frame())
+mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
+  mutate_nse_env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{...}{stringified expressions to mutate by.}
 
-\item{env}{environment to work in.}
+\item{mutate_nse_split_terms}{logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).}
+
+\item{mutate_nse_env}{environment to work in.}
 }
 \value{
 .data with altered columns.
@@ -20,6 +23,7 @@ mutate_nse(.data, ..., env = parent.frame())
 Mutate a data frame by the mutateTerms.  Accepts arbitrary text as
 mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 Terms are vectors or lists of the form "lhs := rhs".
+Semantics are: terms are evaluated left to right if mutate_nse_split_terms==TRUE (the default).
 }
 \examples{
 

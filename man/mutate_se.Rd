@@ -4,12 +4,14 @@
 \alias{mutate_se}
 \title{mutate standard evaluation interface.}
 \usage{
-mutate_se(.data, mutateTerms, env = parent.frame())
+mutate_se(.data, mutateTerms, splitTerms = TRUE, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{mutateTerms}{character vector of column expressions to mutate by.}
+
+\item{splitTerms}{logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).}
 
 \item{env}{environment to work in.}
 }
@@ -20,6 +22,7 @@ mutate_se(.data, mutateTerms, env = parent.frame())
 Mutate a data frame by the mutateTerms.  Accepts arbitrary text as
 mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 Terms are vectors or lists of the form "lhs := rhs".
+Semantics are: terms are evaluated left to right if splitTerms==TRUE (the default).
 }
 \examples{
 
@@ -35,5 +38,5 @@ datasets::iris \%.>\%
 
 }
 \seealso{
-\code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
+\code{\link{mutate_nse}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
 }

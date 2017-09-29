@@ -71,6 +71,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/mutate.html">mutate</a>
+    </li>
+    <li>
       <a href="../articles/named_map_builder.html">Named Map Builder</a>
     </li>
     <li>
@@ -113,7 +116,7 @@ transmuteTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".
 Terms are vectors or lists of the form "lhs := rhs".</p>
     
 
-    <pre class="usage"><span class='fu'>transmute_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
+    <pre class="usage"><span class='fu'>transmute_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>transmute_nse_env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -127,7 +130,7 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
       <td><p>stringified expressions to transmute by.</p></td>
     </tr>
     <tr>
-      <th>env</th>
+      <th>transmute_nse_env</th>
       <td><p>environment to work in.</p></td>
     </tr>
     </table>
