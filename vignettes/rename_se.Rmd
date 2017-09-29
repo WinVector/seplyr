@@ -51,13 +51,6 @@ datasets::mtcars %>%
 
 This is sensible, but is very different than `dplyr::rename()`.  Thus there remains a need for a standard analogue.  
 
-For convenience we also supply an adapter with the above mapping semantics.
-
-```{r rename4}
-datasets::mtcars %.>%
-  rename_mp(., mp) %.>%
-  head(.)
-```
 
 Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html) for details on "dot pipe."
 
