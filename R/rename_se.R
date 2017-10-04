@@ -9,6 +9,8 @@
 #'
 #' @param .data data.frame
 #' @param mapping named character vector of columns to rename (new names on the left, original names on the right; this may seem reversed but it matches dplyr::rename()).
+#' @param splitTerms logical, if TRUE into separate renames (if FALSE instead, pass all at once to dplyr).
+#' @param env environment to work in.
 #' @return .data with renamed columns
 #'
 #' @examples
@@ -17,7 +19,7 @@
 #' datasets::mtcars %.>%
 #'    rename_se(., c("cylinders" := "cyl", "gears" := "gear")) %.>%
 #'    head(.)
-#' # # sames as:
+#' # # same as:
 #' # datasets::mtcars %>%
 #' #    rename(cylinders = cyl, gears = gear) %>%
 #' #    head()
@@ -28,43 +30,54 @@
 #'
 #' @export
 #'
-rename_se <- function(.data, mapping) {
+rename_se <- function(.data, mapping,
+                      splitTerms = TRUE,  env = parent.frame()) {
   res <- .data
   nMap <- length(mapping)
   if(nMap>0) {
-    sq <- seq_len(nMap)
-    # get task
-    cols <- colnames(.data)
-    oldNames <- as.character(mapping)
-    newNames <- names(mapping)
-    tmpNames <- setdiff(paste('RENAMETMPCOL', sq, sep='_'),
-                        c(cols,
-                          oldNames, newNames))[sq]
-    # some minor checking
-    if(length(unique(newNames))!=nMap) {
-      stop("rename_se: named new column more than once")
-    }
-    if(length(unique(oldNames))!=nMap) {
-      stop("rename_se: named original column more than once")
-    }
-    badOldRefs <- setdiff(oldNames, cols)
-    if(length(badOldRefs)>0) {
-      stop(paste("rename_se, refering to non-existent source columns: ",
-                 paste(badOldRefs, collapse = ', ')))
-    }
-    collisions <- intersect(newNames, setdiff(cols, oldNames))
-    if(length(collisions)>0) {
-      stop(paste("rename_se, new-mappings collide with original columns: ",
-                 paste(collisions, collapse = ', ')))
-    }
-    # do the work
-    for(i in sq) {
-      res <- dplyr::rename(res,
-                           !!rlang::sym(tmpNames[[i]]) := !!rlang::sym(oldNames[[i]]))
-    }
-    for(i in sq) {
-      res <- dplyr::rename(res,
-                           !!rlang::sym(newNames[[i]]) := !!rlang::sym(tmpNames[[i]]))
+    if(splitTerms) {
+      sq <- seq_len(nMap)
+      # get task
+      cols <- colnames(.data)
+      oldNames <- as.character(mapping)
+      newNames <- names(mapping)
+      tmpNames <- setdiff(paste('RENAMETMPCOL', sq, sep='_'),
+                          c(cols,
+                            oldNames, newNames))[sq]
+      # some minor checking
+      if(length(unique(newNames))!=nMap) {
+        stop("rename_se: named new column more than once")
+      }
+      if(length(unique(oldNames))!=nMap) {
+        stop("rename_se: named original column more than once")
+      }
+      badOldRefs <- setdiff(oldNames, cols)
+      if(length(badOldRefs)>0) {
+        stop(paste("rename_se, refering to non-existent source columns: ",
+                   paste(badOldRefs, collapse = ', ')))
+      }
+      collisions <- intersect(newNames, setdiff(cols, oldNames))
+      if(length(collisions)>0) {
+        stop(paste("rename_se, new-mappings collide with original columns: ",
+                   paste(collisions, collapse = ', ')))
+      }
+      # do the work
+      for(i in sq) {
+        res <- dplyr::rename(res,
+                             !!rlang::sym(tmpNames[[i]]) := !!rlang::sym(oldNames[[i]]))
+      }
+      for(i in sq) {
+        res <- dplyr::rename(res,
+                             !!rlang::sym(newNames[[i]]) := !!rlang::sym(tmpNames[[i]]))
+      }
+    } else {
+      # pass directly to dplyr
+      retnameQ <- lapply(mapping,
+                        function(si) {
+                          rlang::sym(si)
+                        })
+      names(retnameQ) <- names(mapping)
+      res <- dplyr::rename(.data = res, !!!retnameQ)
     }
   }
   res

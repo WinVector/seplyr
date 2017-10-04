@@ -50,7 +50,8 @@ mutate_nse <- function(.data, ...,
       lhs[[i-1]] <- as.character(prep_deref(ei[[2]], mutate_nse_env))
       rhs[[i-1]] <- deparse(prep_deref(ei[[3]], mutate_nse_env))
     }
-    res <- mutate_se(res, lhs := rhs, splitTerms = mutate_nse_split_terms, env=mutate_nse_env)
+    res <- mutate_se(res, lhs := rhs, splitTerms = mutate_nse_split_terms,
+                     env=mutate_nse_env)
   }
   res
 }
