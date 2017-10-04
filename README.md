@@ -46,3 +46,8 @@ or from [`GitHub`](https://github.com/WinVector/seplyr):
 ```
 
 Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html) for details on "dot pipe."
+
+Note
+----
+
+Note: `seplyr` is meant only for "tame names", that is: variables and column names that are also valid *simple* (without quotes) `R` variables names.
