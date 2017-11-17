@@ -87,7 +87,7 @@
       <h1>Named Map Builder</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-10-04</h4>
+            <h4 class="date">2017-11-17</h4>
           </div>
 
     
@@ -97,34 +97,34 @@
 <p>Here are some examples:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"wrapr"</span>)
 
-<span class="st">'a'</span> :<span class="er">=</span><span class="st"> </span><span class="dv">5</span></code></pre></div>
+<span class="st">'a'</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">5</span></code></pre></div>
 <pre><code>## a 
 ## 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">'a'</span> :<span class="er">=</span><span class="st"> </span><span class="dv">5</span>, <span class="st">'b'</span> :<span class="er">=</span><span class="st"> </span><span class="dv">6</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">'a'</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">5</span>, <span class="st">'b'</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">6</span>)</code></pre></div>
 <pre><code>## a b 
 ## 5 6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>) :<span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>) <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>)</code></pre></div>
 <pre><code>## a b 
 ## 5 6</code></pre>
 <p>The left-side argument of the <code>:=</code> operator is called “the names”, and the right-side argument is called “the values”. The <code>:=</code> operators returns the values with the names set to names.</p>
 <p>A key use of the named map builder is the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">key =<span class="st"> 'keycode'</span>
-key :<span class="er">=</span><span class="st"> 'value'</span></code></pre></div>
+key <span class="op">:</span><span class="er">=</span><span class="st"> 'value'</span></code></pre></div>
 <pre><code>## keycode 
 ## "value"</code></pre>
 <p>Notice the value inside the variable <code>key</code> was used as the array name, this differs from what is easily done with <code>R</code>’s native <code>c(key = 'value')</code> style notation.</p>
 <p>A great use of the <code>:=</code> operator is using it to conveniently build arguments lists for functions such as <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/mutate_se">seplyr::mutate_se()</a></code>. This works for simple explicit code such as the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"seplyr"</span>)
 
-datasets::iris %.&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="st">"Mean_Sepal_Length"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
+datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="st">"Mean_Sepal_Length"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
 <pre><code>##   Mean_Sepal_Length
 ## 1          5.843333</code></pre>
 <p>Slightly more complicated code such as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::iris %.&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"Species"</span>) %.&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="kw">c</span>(<span class="st">"Mean_Sepal_Length"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>,
-                    <span class="st">"Mean_Sepal_Width"</span> :<span class="er">=</span><span class="st"> "mean(Sepal.Width)"</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"Species"</span>) <span class="op">%.&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="kw">c</span>(<span class="st">"Mean_Sepal_Length"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>,
+                    <span class="st">"Mean_Sepal_Width"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Width)"</span>))</code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##      Species Mean_Sepal_Length Mean_Sepal_Width
 ##       &lt;fctr&gt;             &lt;dbl&gt;            &lt;dbl&gt;
@@ -133,9 +133,9 @@ datasets::iris %.&gt;%
 ## 3  virginica             6.588            2.974</code></pre>
 <p>Or even parametric code such as:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resultColumn &lt;-<span class="st"> "summary_value"</span>
-datasets::iris %.&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"Species"</span>) %.&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., resultColumn :<span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
+datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"Species"</span>) <span class="op">%.&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., resultColumn <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##      Species summary_value
 ##       &lt;fctr&gt;         &lt;dbl&gt;

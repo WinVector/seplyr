@@ -87,36 +87,36 @@
       <h1>mutate</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-10-04</h4>
+            <h4 class="date">2017-11-17</h4>
           </div>
 
     
     
 <div class="contents">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">go &lt;-<span class="st"> </span><span class="kw">requireNamespace</span>(<span class="st">"DBI"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>) &amp;&amp;
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">go &lt;-<span class="st"> </span><span class="kw">requireNamespace</span>(<span class="st">"DBI"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>) <span class="op">&amp;&amp;</span>
 <span class="st">  </span><span class="kw">requireNamespace</span>(<span class="st">"RSQLite"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>From <a href="https://github.com/tidyverse/dplyr/issues/3095"><code>dplyr</code> issue 3095</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if(go) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(go) {
   <span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))
   <span class="kw">packageVersion</span>(<span class="st">"dplyr"</span>)
   
-  db &lt;-<span class="st"> </span>DBI::<span class="kw">dbConnect</span>(RSQLite::<span class="kw">SQLite</span>(), <span class="st">":memory:"</span>)
+  db &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/DBI/topics/dbConnect">dbConnect</a></span>(RSQLite<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RSQLite/topics/SQLite">SQLite</a></span>(), <span class="st">":memory:"</span>)
   d &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/copy_to.html">copy_to</a></span>(db, <span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>))
   
   <span class="co"># works</span>
-   d %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2) %&gt;%
+   d <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a, a3 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a2) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/explain.html">show_query</a></span>()
-  d %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2) %&gt;%
+  d <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a, a3 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a2) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">print</span>()
   
   <span class="co"># fails</span>
-   d %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2, a4 :<span class="er">=</span><span class="st"> </span>a3) %&gt;%
+   d <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a, a3 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a2, a4 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a3) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/explain.html">show_query</a></span>()
-  d %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2, a4 :<span class="er">=</span><span class="st"> </span>a3) %&gt;%
+  d <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(a2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a, a3 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a2, a4 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a3) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">print</span>()
 }</code></pre></div>
 <pre><code>## &lt;SQL&gt;
@@ -134,16 +134,16 @@
 ## FROM `data.frame(a = 1)`)</code></pre>
 <pre><code>## Error in rsqlite_send_query(conn@ptr, statement): no such column: a3</code></pre>
 <p>Current work around, <a href="https://winvector.github.io/seplyr/">dev verson of seplyr</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if(go) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(go) {
   <span class="kw">library</span>(<span class="st">"seplyr"</span>)
   <span class="kw">packageVersion</span>(<span class="st">"seplyr"</span>)
   
   <span class="co"># works</span>
-   d %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="../reference/mutate_nse.html">mutate_nse</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2, a4 :<span class="er">=</span><span class="st"> </span>a3) %&gt;%
+   d <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="../reference/mutate_nse.html">mutate_nse</a></span>(a2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a, a3 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a2, a4 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a3) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/explain.html">show_query</a></span>()
-  d %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="../reference/mutate_nse.html">mutate_nse</a></span>(a2 :<span class="er">=</span><span class="st"> </span>a, a3 :<span class="er">=</span><span class="st"> </span>a2, a4 :<span class="er">=</span><span class="st"> </span>a3) %&gt;%
+  d <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="../reference/mutate_nse.html">mutate_nse</a></span>(a2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a, a3 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a2, a4 <span class="op">:</span><span class="er">=</span><span class="st"> </span>a3) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">print</span>()
 }</code></pre></div>
 <pre><code>## Loading required package: wrapr</code></pre>

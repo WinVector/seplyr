@@ -87,7 +87,7 @@
       <h1>rename_se</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-10-04</h4>
+            <h4 class="date">2017-11-17</h4>
           </div>
 
     
@@ -97,8 +97,8 @@
 <p>A case in point is <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>/<code><a href="http://www.rdocumentation.org/packages/seplyr/topics/rename_se">seplyr::rename_se()</a></code>. <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> is used as follows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))
 
-datasets::mtcars %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">rename</a></span>(<span class="dt">cylinders =</span> cyl, <span class="dt">gears =</span> gear) %&gt;%
+datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">rename</a></span>(<span class="dt">cylinders =</span> cyl, <span class="dt">gears =</span> gear) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre></div>
 <pre><code>##                    mpg cylinders disp  hp drat    wt  qsec vs am gears
 ## Mazda RX4         21.0         6  160 110 3.90 2.620 16.46  0  1     4
@@ -122,8 +122,8 @@ datasets::mtcars %&gt;%
 <p>Because <code>seplyr</code> is intended to be a set of adapters for <code>dplyr</code> we simply adopt <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>’s convention. This allows the user to mechanically translate their experience and expectations from scripting over <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> to directly use <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/rename_se">seplyr::rename_se()</a></code> as follows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"seplyr"</span>)</code></pre></div>
 <pre><code>## Loading required package: wrapr</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::mtcars %.&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(., <span class="kw">c</span>(<span class="st">"cylinders"</span> :<span class="er">=</span><span class="st"> "cyl"</span>, <span class="st">"gears"</span> :<span class="er">=</span><span class="st"> "gear"</span>)) %.&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>mtcars <span class="op">%.&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(., <span class="kw">c</span>(<span class="st">"cylinders"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "cyl"</span>, <span class="st">"gears"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "gear"</span>)) <span class="op">%.&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(.)</code></pre></div>
 <pre><code>##                    mpg cylinders disp  hp drat    wt  qsec vs am gears
 ## Mazda RX4         21.0         6  160 110 3.90 2.620 16.46  0  1     4
@@ -141,8 +141,8 @@ datasets::mtcars %&gt;%
 ## Valiant              1</code></pre>
 <p>We hope this makes it easy to translate one-off analyses into re-usable scripts by incrementally replacing known variable names with parametric versions. The <code>:=</code> operator is just a convenience function for building up maps, we could also have written <code><a href="../reference/rename_se.html">rename_se(c("cylinders" = "cyl", "gears" = "gear"))</a></code> or passed in a named vector built up elsewhere.</p>
 <p>In contrast <code><a href="http://dplyr.tidyverse.org/reference/select_all.html">dplyr::rename_at()</a></code> has its own notation that seems to not imitate <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>. The same operation using <code><a href="http://dplyr.tidyverse.org/reference/select_all.html">dplyr::rename_at()</a></code> is something like the following.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets::mtcars %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select_all.html">rename_at</a></span>(<span class="kw">names</span>(mp), <span class="kw"><a href="http://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(function(si) { mp[si] })) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select_all.html">rename_at</a></span>(<span class="kw">names</span>(mp), <span class="kw"><a href="http://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(<span class="cf">function</span>(si) { mp[si] })) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre></div>
 <pre><code>##                    mpg NA disp  hp drat    wt  qsec vs am NA carb
 ## Mazda RX4         21.0  6  160 110 3.90 2.620 16.46  0  1  4    4
@@ -153,8 +153,8 @@ datasets::mtcars %&gt;%
 ## Valiant           18.1  6  225 105 2.76 3.460 20.22  1  0  3    1</code></pre>
 <p>This is sensible, but is very different than <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>. Thus there remains a need for a standard analogue.</p>
 <p>Also <code>rename_se</code> interpets all left-hand names as new column names and all right-hand names as old column names. This allows <code>rename_se</code> to be used to swap columns:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>) %.&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(., <span class="kw">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>) :<span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="st">'b'</span>, <span class="st">'a'</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>) <span class="op">%.&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(., <span class="kw">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>) <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="st">'b'</span>, <span class="st">'a'</span>))</code></pre></div>
 <pre><code>##   b a
 ## 1 1 2</code></pre>
 <p>Please see <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>help("%.&gt;%", package="wrapr")</code></a> for details on “dot pipe.”</p>
