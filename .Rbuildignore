@@ -5,5 +5,5 @@
 ^cran-comments\.md$
 ^docs$
 ^extras$
-
 ^_pkgdown\.yml$
+^revdep$

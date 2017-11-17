@@ -6,7 +6,7 @@
 
 ## R CMD check results
 
-R CMD check --as-cran seplyr_0.1.5.tar.gz 
+R CMD check --as-cran seplyr_0.1.6.tar.gz 
 
 * using log directory ‘/Users/johnmount/Documents/work/seplyr.Rcheck’
 * using R version 3.4.1 (2017-06-30)

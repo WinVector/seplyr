@@ -1,5 +1,5 @@
 
-# seplyr 0.1.6 2017-10-04
+# seplyr 0.1.6 2017-11-17
 
  * work on lists.
  * re-export more dplyr functions.
