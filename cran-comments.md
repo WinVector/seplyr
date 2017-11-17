@@ -2,6 +2,8 @@
 ## Test environments
 
   * Windows
+  * using R Under development (unstable) (2017-09-12 r73242)
+  * using platform: x86_64-w64-mingw32 (64-bit)
   
   * OSX
   * using R version 3.4.2 (2017-09-28)
