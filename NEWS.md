@@ -1,6 +1,10 @@
 
 # seplyr 0.1.6 2017-11-17
 
+ * mutate statement planner.
+
+# seplyr 0.1.6 2017-11-17
+
  * work on lists.
  * re-export more dplyr functions.
  * mutate_nse in stages.

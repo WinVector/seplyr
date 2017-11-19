@@ -24,8 +24,11 @@
 #' @name seplyr
 NULL
 
-#' @importFrom wrapr := let lambda
+#' @importFrom wrapr := let lambda %.>%
 NULL
+
+# make . not look like an undefined ref
+. <- NULL
 
 #' @importFrom dplyr all_equal bind_rows bind_cols
 #' @importFrom dplyr inner_join left_join right_join full_join semi_join anti_join
