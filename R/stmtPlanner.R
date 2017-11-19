@@ -30,10 +30,12 @@ partition_mutate_d <- function(de) {
   }
   de <- de %.>%
     arrange_se(., c("group", "origOrder"))
-  # break out into mutate_se blocks
+  # break out into mutate_se blocks (crude split)
   res <- rep(list(character(0)), max(de$group))
+  gnames <- paste0('group', sprintf("%05g", 1:max(de$group)))
+  names(res) <- gnames
   for(i in 1:n) {
-    gi <- de$group[[i]]
+    gi <- gnames[[de$group[[i]]]]
     res[[gi]] <- c(res[[gi]], de$lhs[[i]] := de$rhs[[i]])
   }
   res
