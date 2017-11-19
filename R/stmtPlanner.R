@@ -3,6 +3,7 @@
 #' partition expressions
 #'
 #' Find longest ordered not created and used in same block chains.
+#' Note: partition_mutate_d only allows assignment to each variable once.
 #'
 #' @param de frame of expressions
 #' @return ordered list of mutate_se assignment blocks
@@ -11,6 +12,10 @@
 #'
 partition_mutate_d <- function(de) {
   n <- nrow(de)
+  # restrict to easy case
+  if(length(d$lhs) != length(unique(d$lhs))) {
+    stop("seplyr::partition_mutate_d only allowed to assign to each column once.")
+  }
   # limit down to symbols we are tracking
   de$syms <- lapply(de$syms,
                     function(si) {
@@ -28,7 +33,7 @@ partition_mutate_d <- function(de) {
     for(i in 1:n) {
       if( (de$group[[i]]<=0) &&
          (length(intersect(de$syms[[i]], formed))<=0) &&
-         (length(setdiff(de$syms[[i]], ready))<=0) ) {
+         (length(setdiff(de$syms[[i]], c(ready, de$lhs[[i]])))<=0) ) {
         formed <- c(formed, de$lhs[[i]])
         ready <- c(ready, de$lhs[[i]])
         de$group[[i]] <- group
