@@ -6,3 +6,5 @@
 *~
 inst/doc
 revdep
+derby.log
+logs
