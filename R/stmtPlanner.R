@@ -11,9 +11,15 @@
 #'
 partition_mutate_d <- function(de) {
   n <- nrow(de)
+  # limit down to symbols we are tracking
+  de$syms <- lapply(de$syms,
+                    function(si) {
+                      intersect(de$lhs, si)
+                    })
   de$origOrder = 1:n
   de$group <- 0L
   group <- 1L
+  ready <- NULL
   while(any(de$group<=0)) {
     # sweep forward in order greedily taking anything
     # that has not been formed
@@ -21,8 +27,10 @@ partition_mutate_d <- function(de) {
     formed <- NULL
     for(i in 1:n) {
       if( (de$group[[i]]<=0) &&
-         (length(intersect(de$syms[[i]], formed))<=0) ) {
+         (length(intersect(de$syms[[i]], formed))<=0) &&
+         (length(setdiff(de$syms[[i]], ready))<=0) ) {
         formed <- c(formed, de$lhs[[i]])
+        ready <- c(ready, de$lhs[[i]])
         de$group[[i]] <- group
       }
     }
