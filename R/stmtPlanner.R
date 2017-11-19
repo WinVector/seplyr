@@ -13,7 +13,7 @@
 partition_mutate_d <- function(de) {
   n <- nrow(de)
   # restrict to easy case
-  if(length(d$lhs) != length(unique(d$lhs))) {
+  if(length(de$lhs) != length(unique(de$lhs))) {
     stop("seplyr::partition_mutate_d only allowed to assign to each column once.")
   }
   # limit down to symbols we are tracking
