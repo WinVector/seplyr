@@ -1,8 +1,8 @@
 Package: seplyr
 Type: Package
-Title: Standard Evaluation Interfaces for Common 'dplyr' Tasks
+Title: Standard Evaluation Improved Interfaces for Common 'dplyr' Tasks
 Version: 0.1.7
-Date: 2017-11-19
+Date: 2017-11-20
 Authors@R: c(
     person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),
     person(family = "Win-Vector LLC", role = c("cph"))
@@ -10,7 +10,7 @@ Authors@R: c(
 Maintainer: John Mount <jmount@win-vector.com>
 URL: https://github.com/WinVector/seplyr/,  https://winvector.github.io/seplyr/
 BugReports: https://github.com/WinVector/seplyr/issues
-Description:     The 'seplyr' (standard evaluation data.frame 'dplyr') package supplies
+Description:  The 'seplyr' (standard evaluation 'dplyr') package supplies improved
     standard evaluation adapter methods for important common 'dplyr' methods
     that currently have a non-standard programming interface. This allows
     the analyst to use 'dplyr' to perform fundamental data transformation
@@ -22,15 +22,16 @@ Description:     The 'seplyr' (standard evaluation data.frame 'dplyr') package s
     bound together" methods.  These include 'group_summarize()' (which
     combines grouping, arranging and calculation in an atomic unit),
     'add_group_summaries()' (which joins grouped summaries into a 'data.frame'
-    in a well documented manner), and 'add_group_indices()' (which adds
-    per-group identifies to a 'data.frame' without depending on row-order).
+    in a well documented manner), 'add_group_indices()' (which adds
+    per-group identifiers to a 'data.frame' without depending on row-order),
+    and 'partition_mutate_qt()' (which optimizes mutate sequences).
 License: GPL-3
 Encoding: UTF-8
 Depends:
-    wrapr (>= 0.4.1)
+    wrapr (>= 1.0.1)
 Imports:
-    dplyr (>= 0.7.1),
-    rlang (>= 0.1.1),
+    dplyr (>= 0.7.4),
+    rlang (>= 0.1.4),
     datasets
 LazyData: true
 RoxygenNote: 6.0.1

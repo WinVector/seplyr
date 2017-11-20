@@ -1,5 +1,5 @@
 
-# seplyr 0.1.7 2017-11-19
+# seplyr 0.1.7 2017-11-20
 
  * mutate statement planner.
 

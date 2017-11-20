@@ -18,6 +18,7 @@ The idea is: we assume the sequence of expressions is in a valid order
 into ordered longest "no new value used blocks" by greedily scanning forward
 and skipping any expressions that either use a value created in the current block
 or require a value not yet produced.
+For an example please see \url{http://winvector.github.io/FluidData/partition_mutate.html}.
 }
 \examples{
 

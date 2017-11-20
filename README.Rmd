@@ -15,7 +15,7 @@ options(width =100)
 ```
 
 
-The [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) supplies *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs.
+The [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) supplies improved *s*tandard *e*valuation interfaces for some common [`dplyr`](https://CRAN.R-project.org/package=dplyr) verbs.
 `seplyr` stands for "standard evaluation dplyr" ("standard" meaning we prefer explicit user provided strings over passive [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html) capture of un-evaluated user code) or "string edition dplyr."
 
 ![](https://github.com/WinVector/seplyr/raw/master/tools/safety.png)

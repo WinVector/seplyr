@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>seplyr</code>: Standard Evaluation Interfaces for Common <code>dplyr</code> Verbs — seplyr • seplyr</title>
+<title><code>seplyr</code>: Standard Evaluation Improved Interfaces for Common <code>dplyr</code> Verbs — seplyr • seplyr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -107,30 +107,30 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>seplyr</code>: Standard Evaluation Interfaces for Common <code>dplyr</code> Verbs</h1>
+    <h1><code>seplyr</code>: Standard Evaluation Improved Interfaces for Common <code>dplyr</code> Verbs</h1>
     </div>
 
     
-    <p>The <code>seplyr</code> (standard evaluation data.frame <code>dplyr</code>) package supplies
+    <p>The <code>seplyr</code> (standard evaluation <code>dplyr</code>) package supplies improved
 standard evaluation adapter methods for important common <code>dplyr</code> methods
-that currently have a non-standard programming interface.</p>
-    
-
-        
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This package allows
+that currently have a non-standard programming interface. This allows
 the analyst to use <code>dplyr</code> to perform fundamental data transformation
 steps such as arranging rows, grouping rows, aggregating selecting
 columns without having to use learn the details of <code>rlang</code>/<code>tidyeval</code>
 non-standard evaluation and without continuing to rely on now
 deprecated <code>dplyr</code> "underscore verbs."</p>
-<p>In addition the <code>seplyr</code> package supplies several new "key operations
+    
+
+        
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>In addition the <code>seplyr</code> package supplies several new "key operations
 bound together" methods.  These include <code><a href='group_summarize.html'>group_summarize()</a></code> (which
 combines grouping, arranging and calculation in an atomic unit),
 <code><a href='add_group_summaries.html'>add_group_summaries()</a></code> (which joins grouped summaries into a <code>data.frame</code>
-in a well documented manner), and <code><a href='add_group_indices.html'>add_group_indices()</a></code> (which adds
-per-group identifies to a <code>data.frame</code> without depending on row-order).</p>
+in a well documented manner), <code><a href='add_group_indices.html'>add_group_indices()</a></code> (which adds
+per-group identifiers to a <code>data.frame</code> without depending on row-order),
+and <code><a href='partition_mutate_qt.html'>partition_mutate_qt()</a></code> (which optimizes mutate sequences).</p>
     
 
   </div>

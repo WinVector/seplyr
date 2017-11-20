@@ -108,6 +108,7 @@ find_symbols <- function(nexpr) {
 #' into ordered longest "no new value used blocks" by greedily scanning forward
 #' and skipping any expressions that either use a value created in the current block
 #' or require a value not yet produced.
+#' For an example please see \url{http://winvector.github.io/FluidData/partition_mutate.html}.
 #'
 #' @param exprs list of source-text of a sequence of mutate expressions.
 #' @return ordered list of mutate_se assignment blocks
@@ -137,6 +138,7 @@ partition_mutate_se <- function(exprs) {
 #' into ordered longest "no new value used blocks" by greedily scanning forward
 #' and skipping any expressions that either use a value created in the current block
 #' or require a value not yet produced.
+#' For an example please see \url{http://winvector.github.io/FluidData/partition_mutate.html}.
 #'
 #' Note: unlike \code{\link{mutate_nse}} \code{partition_mutate_qt} does not perform
 #' substitutions.
