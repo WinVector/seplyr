@@ -3,7 +3,12 @@
 #' partition expressions
 #'
 #' Find longest ordered not created and used in same block chains.
-#' Note: partition_mutate_d only allows assignment to each variable once.
+#'
+#' The idea is: we assume the sequence of expressions is in a valid order
+#' (all items available before use).  This function partitions the expressions
+#' into ordered longest "no new value used blocks" by greedily scanning forward
+#' and skipping any expressions that either use a value created in the current block
+#' or require a value not yet produced.
 #'
 #' @param de frame of expressions
 #' @return ordered list of mutate_se assignment blocks
@@ -12,32 +17,40 @@
 #'
 partition_mutate_d <- function(de) {
   n <- nrow(de)
-  # restrict to easy case
-  if(length(de$lhs) != length(unique(de$lhs))) {
-    stop("seplyr::partition_mutate_d only allowed to assign to each column once.")
+  # find step to step dependences
+  mostRecent <- list()
+  deps <- vector(mode = 'list', length = n)
+  for(i in 1:n) {
+    si <- de$syms[[i]]
+    depsi <- numeric(0)
+    dkeys <- intersect(si, names(mostRecent))
+    if(length(dkeys)>0) {
+      depsi <- as.numeric(mostRecent[dkeys])
+    }
+    deps[[i]] <- depsi
+    mostRecent[de$lhs[[i]]] <- i
   }
-  # limit down to symbols we are tracking
-  de$syms <- lapply(de$syms,
-                    function(si) {
-                      intersect(de$lhs, si)
-                    })
+  de$deps <- deps
   de$origOrder = 1:n
   de$group <- 0L
   group <- 1L
-  ready <- NULL
   while(any(de$group<=0)) {
     # sweep forward in order greedily taking anything
-    # that has not been formed
-    # in this group.
-    formed <- NULL
+    have <- which(de$group>0)
+    formedInGroup <- NULL
     for(i in 1:n) {
-      if( (de$group[[i]]<=0) &&
-         (length(intersect(de$syms[[i]], formed))<=0) &&
-         (length(setdiff(de$syms[[i]], c(ready, de$lhs[[i]])))<=0) ) {
-        formed <- c(formed, de$lhs[[i]])
-        ready <- c(ready, de$lhs[[i]])
+      if( (de$group[[i]]<=0) &&  # available to take
+         (length(intersect(de$deps[[i]], formedInGroup))<=0) && # not using a new value
+         (length(setdiff(de$deps[[i]], have))<=0) # all pre-conditions met
+         ) {
+        formedInGroup <- c(formedInGroup, de$lhs[[i]])
         de$group[[i]] <- group
       }
+    }
+    if(length(formedInGroup)<=0) {
+      # should only get here in error
+      # but if we don't stop we will spin forever
+      stop("seplyr::partition_mutate_d pass failed to accumulate steps")
     }
     group <- group + 1L
   }
@@ -90,6 +103,12 @@ find_symbols <- function(nexpr) {
 
 #' Partition a sequence of mutate commands into longest ordered no create/use blocks.
 #'
+#' The idea is: we assume the sequence of expressions is in a valid order
+#' (all items available before use).  This function partitions the expressions
+#' into ordered longest "no new value used blocks" by greedily scanning forward
+#' and skipping any expressions that either use a value created in the current block
+#' or require a value not yet produced.
+#'
 #' @param exprs source of mutate expressions as an assignment list
 #' @return ordered list of mutate_se assignment blocks
 #'
@@ -112,6 +131,12 @@ partition_mutate_se <- function(exprs) {
 
 
 #' Partition a sequence of mutate commands into longest ordered no create/use blocks.
+#'
+#' The idea is: we assume the sequence of expressions is in a valid order
+#' (all items available before use).  This function partitions the expressions
+#' into ordered longest "no new value used blocks" by greedily scanning forward
+#' and skipping any expressions that either use a value created in the current block
+#' or require a value not yet produced.
 #'
 #' @param ... mutate expressions
 #' @return ordered list of mutate_se assignment blocks

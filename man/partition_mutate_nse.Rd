@@ -13,7 +13,11 @@ partition_mutate_nse(...)
 ordered list of mutate_se assignment blocks
 }
 \description{
-Partition a sequence of mutate commands into longest ordered no create/use blocks.
+The idea is: we assume the sequence of expressions is in a valid order
+(all items available before use).  This function partitions the expressions
+into ordered longest "no new value used blocks" by greedily scanning forward
+and skipping any expressions that either use a value created in the current block
+or require a value not yet produced.
 }
 \examples{
 
