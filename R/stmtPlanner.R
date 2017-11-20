@@ -109,7 +109,7 @@ find_symbols <- function(nexpr) {
 #' and skipping any expressions that either use a value created in the current block
 #' or require a value not yet produced.
 #'
-#' @param exprs source of mutate expressions as an assignment list
+#' @param exprs list of source-text of a sequence of mutate expressions.
 #' @return ordered list of mutate_se assignment blocks
 #'
 #' @examples
@@ -138,12 +138,15 @@ partition_mutate_se <- function(exprs) {
 #' and skipping any expressions that either use a value created in the current block
 #' or require a value not yet produced.
 #'
-#' @param ... mutate expressions
+#' Note: unlike \code{\link{mutate_nse}} \code{partition_mutate_qt} does not perform
+#' substitutions.
+#'
+#' @param ... mutate expressions with := used for assignment.
 #' @return ordered list of mutate_se assignment blocks
 #'
 #' @examples
 #'
-#' plan <- partition_mutate_nse(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
+#' plan <- partition_mutate_qt(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
 #' print(plan)
 #' d <- data.frame(x = 1)
 #' for(si in plan) {
@@ -155,7 +158,7 @@ partition_mutate_se <- function(exprs) {
 #'
 #' @export
 #'
-partition_mutate_nse <- function(...) {
+partition_mutate_qt <- function(...) {
   mutateTerms <- substitute(list(...))
   len <- length(mutateTerms) # first slot is "list"
   if(len>1) {
@@ -165,7 +168,7 @@ partition_mutate_nse <- function(...) {
     for(i in (2:len)) {
       ei <- mutateTerms[[i]]
       if((length(ei)!=3)||(as.character(ei[[1]])!=':=')) {
-        stop("partition_mutate_nse terms must be of the form: sym := expr")
+        stop("partition_mutate_qt terms must be of the form: sym := expr")
       }
       lhs[[i-1]] <- as.character(ei[[2]])[[1]]
       syms[[i-1]] <- find_symbols(ei[[3]])

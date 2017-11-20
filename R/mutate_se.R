@@ -6,6 +6,11 @@
 #' Terms are vectors or lists of the form "lhs := rhs".
 #' Semantics are: terms are evaluated left to right if splitTerms==TRUE (the default).
 #'
+#' Note: this method as the default setting \code{splitTerms = TRUE}, which while
+#' safer (avoiding certain known \code{dplyr}/\code{dblyr} issues) can be needlessly expensive
+#' and have its own "too long sequence" issues on remote-data systems
+#' (please see the side-notes of \url{http://winvector.github.io/FluidData/partition_mutate.html} for some references).
+#'
 #' @seealso \code{\link{mutate_nse}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
 #'
 #' @param .data data.frame

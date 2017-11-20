@@ -25,6 +25,12 @@ mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
 Terms are vectors or lists of the form "lhs := rhs".
 Semantics are: terms are evaluated left to right if mutate_nse_split_terms==TRUE (the default).
 }
+\details{
+Note: this method as the default setting \code{mutate_nse_split_terms = TRUE}, which while
+safer (avoiding certain known \code{dplyr}/\code{dblyr} issues) can be needlessly expensive
+and have its own "too long sequence" issues on remote-data systems
+(please see the side-notes of \url{http://winvector.github.io/FluidData/partition_mutate.html} for some references).
+}
 \examples{
 
 

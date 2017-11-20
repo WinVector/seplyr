@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Partition a sequence of mutate commands into longest ordered no create/use blocks. — partition_mutate_nse • seplyr</title>
+<title>Partition a sequence of mutate commands into longest ordered no create/use blocks. — partition_mutate_qt • seplyr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -118,14 +118,14 @@ and skipping any expressions that either use a value created in the current bloc
 or require a value not yet produced.</p>
     
 
-    <pre class="usage"><span class='fu'>partition_mutate_nse</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>partition_mutate_qt</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>mutate expressions</p></td>
+      <td><p>mutate expressions with := used for assignment.</p></td>
     </tr>
     </table>
     
@@ -133,10 +133,15 @@ or require a value not yet produced.</p>
 
     <p>ordered list of mutate_se assignment blocks</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Note: unlike <code><a href='mutate_nse.html'>mutate_nse</a></code> <code>partition_mutate_qt</code> does not perform
+substitutions.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>plan</span> <span class='kw'>&lt;-</span> <span class='fu'>partition_mutate_nse</span>(<span class='no'>a1</span> <span class='kw'>:=</span> <span class='fl'>1</span>, <span class='no'>b1</span> <span class='kw'>:=</span> <span class='no'>a1</span>, <span class='no'>a2</span> <span class='kw'>:=</span> <span class='fl'>2</span>, <span class='no'>b2</span> <span class='kw'>:=</span> <span class='no'>a1</span> + <span class='no'>a2</span>)
+<span class='no'>plan</span> <span class='kw'>&lt;-</span> <span class='fu'>partition_mutate_qt</span>(<span class='no'>a1</span> <span class='kw'>:=</span> <span class='fl'>1</span>, <span class='no'>b1</span> <span class='kw'>:=</span> <span class='no'>a1</span>, <span class='no'>a2</span> <span class='kw'>:=</span> <span class='fl'>2</span>, <span class='no'>b2</span> <span class='kw'>:=</span> <span class='no'>a1</span> + <span class='no'>a2</span>)
 <span class='fu'>print</span>(<span class='no'>plan</span>)</div><div class='output co'>#&gt; $group00001
 #&gt;  a1  a2 
 #&gt; "1" "2" 
@@ -162,6 +167,8 @@ or require a value not yet produced.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

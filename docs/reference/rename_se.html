@@ -143,6 +143,13 @@ this allows swaps).</p>
 
     <p>.data with renamed columns</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Note: this method as the default setting <code>splitTerms = TRUE</code>, which while
+safer (avoiding certain known <code>dplyr</code>/<code>dblyr</code> issues) can be needlessly expensive
+and have its own "too long sequence" issues on remote-data systems
+(please see the side-notes of <a href='http://winvector.github.io/FluidData/partition_mutate.html'>http://winvector.github.io/FluidData/partition_mutate.html</a> for some references).</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='http://dplyr.tidyverse.org/reference/select.html'>rename</a></code>,  <code><a href='http://dplyr.tidyverse.org/reference/select_all.html'>rename_at</a></code>, <code><a href='http://www.rdocumentation.org/packages/wrapr/topics/named_map_builder'>:=</a></code></p>
@@ -176,6 +183,8 @@ this allows swaps).</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

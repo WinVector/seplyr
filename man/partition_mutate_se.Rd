@@ -7,7 +7,7 @@
 partition_mutate_se(exprs)
 }
 \arguments{
-\item{exprs}{source of mutate expressions as an assignment list}
+\item{exprs}{list of source-text of a sequence of mutate expressions.}
 }
 \value{
 ordered list of mutate_se assignment blocks
