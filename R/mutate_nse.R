@@ -41,6 +41,9 @@ mutate_nse <- function(.data, ...,
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
   mutateTerms <- substitute(list(...))
+  if(!all(names(mutateTerms) %in% "")) {
+    stop("seplyr::mutate_nse() all assignments must be of the form a := b, not a = b")
+  }
   # mutateTerms is a list of k+1 items, first is "list" the rest are captured expressions
   res <- .data
   len <- length(mutateTerms) # first slot is "list"

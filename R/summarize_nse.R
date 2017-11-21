@@ -30,6 +30,9 @@ summarize_nse <- function(.data, ..., env = parent.frame()) {
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
   summarizeTerms <- substitute(list(...))
+  if(!all(names(summarizeTerms) %in% "")) {
+    stop("seplyr::summarize_nse() unexpected names in '...', all assignments must be of the form a := b, not a = b")
+  }
   # summarizeTerms is a list of k+1 items, first is "list" the rest are captured expressions
   res <- .data
   len <- length(summarizeTerms)

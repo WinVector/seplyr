@@ -167,6 +167,10 @@ partition_mutate_se <- function(exprs) {
 #'
 partition_mutate_qt <- function(...) {
   mutateTerms <- substitute(list(...))
+  # check for a = b assignments (which we do not support)
+  if(!all(names(mutateTerms) %in% "")) {
+    stop("seplyr::partition_mutate_qt() unexpected names in '...', all assignments must be of the form a := b, not a = b")
+  }
   len <- length(mutateTerms) # first slot is "list"
   if(len>1) {
     lhs <- character(len-1)

@@ -28,6 +28,9 @@ filter_nse <- function(.data, ...,
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
   filterTerms <- substitute(list(...))
+  if(!all(names(filterTerms) %in% "")) {
+    stop("seplyr::filter_nse() unexpected names in '...'")
+  }
   # filterTerms is a list of k+1 items, first is "list" the rest are captured expressions
   res <- .data
   len <- length(filterTerms)
