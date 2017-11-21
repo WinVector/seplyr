@@ -1,0 +1,108 @@
+---
+title: "Mutate Partitioner"
+author: "John Mount, Win-Vector LLC"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mutate Partitioner}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+[`seplyr::partition_mutate_qt()`](https://winvector.github.io/seplyr/reference/partition_mutate_qt.html) is
+a new service supplied by development version the [`R`](https://www.r-project.org) package [`seplyr`](https://winvector.github.io/seplyr/) (version `0.1.7` or higher).
+
+`seplyr::partition_mutate_qt()` can partition a sequence of assignments so that no statement is using any value created in the same partition element or group.
+The partitions are in a format accepted by [`seplyr::mutate_se()`](https://winvector.github.io/seplyr/reference/mutate_se.html) for execution.
+
+For such a partition the evaluation result does not depend on the order of execution of the statements in each group (as they are all independent of each other's left-hand-sides).  A no-dependency small number of 
+groups partition is *very* helpful when executing expressions on `SQL` based 
+data interfaces (such as `Apache Spark`).
+
+The method used to partition expressions is
+to scan the remaining expressions in order taking any that: have all their values available from earlier groups and
+do not use a value formed in the current group. 
+
+This partitioning method can lead to far fewer
+groups than the straightforward method of breaking up the sequence of expressions
+at each new-value use.
+
+Here is a non-trivial example (notice we use `:=` for assignment, that is a requirement of `seplyr::mutate_se()`):
+
+```{r ex1}
+library("seplyr")
+
+plan <- partition_mutate_qt(
+  rand_a := rand(),
+   choice_a := rand_a>=0.5, # first use of a new value 1
+    a_1 := ifelse(choice_a, # first use of a new value 2
+                  'treatment', 
+                  'contol'),
+    a_2 := ifelse(choice_a, 
+                  'control', 
+                  'treatment'),
+  rand_b := rand(),
+   choice_b := rand_b>=0.5, # first use of a new value 3
+    b_1 := ifelse(choice_b, # first use of a new value 4
+                  'treatment', 
+                  'contol'),
+    b_2 := ifelse(choice_b, 
+                  'control', 
+                  'treatment'),
+  rand_c := rand(),
+   choice_c := rand_c>=0.5, # first use of a new value 5
+    c_1 := ifelse(choice_c, # first use of a new value 6
+                  'treatment', 
+                  'contol'),
+    c_2 := ifelse(choice_c, 
+                  'control', 
+                  'treatment'),
+  rand_d := rand(),
+   choice_d := rand_d>=0.5, # first use of a new value 7
+    d_1 := ifelse(choice_d, # first use of a new value 8
+                  'treatment', 
+                  'contol'),
+    d_2 := ifelse(choice_d, 
+                  'control', 
+                  'treatment'),
+  rand_e := rand(),
+   choice_e := rand_e>=0.5, # first use of a new value 9
+    e_1 := ifelse(choice_e, # first use of a new value 10
+                  'treatment', 
+                  'contol'),
+    e_2 := ifelse(choice_e, 
+                  'control', 
+                  'treatment')
+  )
+
+print(plan)
+```
+
+Notice `seplyr::partition_mutate_qt()` split the work into 3 groups.
+The straightforward method (with no statement re-ordering) of splitting into
+non-dependent groups would have to split the mutate at each first use of a 
+new value: yielding 10 splits or 11 mutate stages.  For why a low number
+of execution stages is 
+important please see [here](http://winvector.github.io/FluidData/partition_mutate.html).
+
+To execute the statements on a data-item "`d`" (either an in-memory `data.frame`
+or a remote database or `Sparklyr` handle) we would do something like the following:
+
+```{r exec, eval=FALSE}
+res <- d
+for(stepi in plan) {
+  res <- mutate_se(res, 
+                   stepi, 
+                   splitTerms = FALSE)
+}
+```
+
+A fully worked version of this example can be found [here](http://winvector.github.io/FluidData/partition_mutate_ex2.html).
+
