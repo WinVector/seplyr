@@ -47,7 +47,7 @@ or from [`GitHub`](https://github.com/WinVector/seplyr):
 
 Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html) for details on "dot pipe."
 
-In addition to standard interface adapters `seplyr` supplies some non-trivial statement transforms (such as [`partition_mutate_qt()`](%60https://winvector.github.io/seplyr/articles/MutatePartitioner.html)).
+In addition to standard interface adapters `seplyr` supplies some non-trivial statement transforms (such as `partition_mutate_qt()`, [vignette](https://winvector.github.io/seplyr/articles/MutatePartitioner.html)).
 
 Note
 ----
