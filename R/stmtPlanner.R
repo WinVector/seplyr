@@ -83,7 +83,12 @@ find_symbols <- function(nexpr) {
   }
   # basic recurse, establish invariant n==1
   if(n>1) {
-    # TODO: skip calls
+    if(is.call(nexpr)) {
+      nexpr <- nexpr[-1]
+      if(length(nexpr)<=0) {
+        return(NULL)
+      }
+    }
     res <- lapply(nexpr, find_symbols)
     res <- Filter(function(ri) {!is.null(ri)}, res)
     return(as.character(res))
