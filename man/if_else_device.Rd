@@ -2,7 +2,7 @@
 % Please edit documentation in R/stmtPlanner.R
 \name{if_else_device}
 \alias{if_else_device}
-\title{Simulate a per-row \code{if(){}else{}} block.}
+\title{Simulate a per-row block-\code{if(){}else{}}.}
 \usage{
 if_else_device(testexpr, thenexprs = NULL, elseexprs = NULL)
 }
@@ -14,8 +14,22 @@ if_else_device(testexpr, thenexprs = NULL, elseexprs = NULL)
 \item{elseexprs}{named character else assignments (altering columns, not creating).}
 }
 \description{
-This device uses expression-ifelse to simulate the
-more powerful block-ifelse. Note: \code{ifebtest_*}
+This device uses expression-\code{ifelse(,,)} to simulate the
+more powerful per-row block-\code{if(){}else{}}.  The difference is
+expression-\code{ifelse(,,)} can choose per-row what value to express,
+whereas block-\code{if(){}else{}} can choose per-row where to assign multiple
+values. By simulation we mean: a sequence of quoted mutate expressions
+are emitted that implement the transform (versus a using a custom
+\code{dplyr} pipe stage or function).  These expressions can then
+be optimized into a minimal number of no-dependency
+blocks by \code{\link{partition_mutate_se}} for efficient execution.
+The idea is the user can write legible code in this notation, and
+the translation turns it into safe and efficient code suitable for
+execution either on \code{data.frame}s or at a big data scale using
+\code{RPostgreSQL} or \code{sparklyr}.
+}
+\details{
+Note: \code{ifebtest_*}
 is a reserved column name for this procedure.
 }
 \examples{

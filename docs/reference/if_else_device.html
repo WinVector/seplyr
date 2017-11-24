@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Simulate a per-row <code>if(){}else{}</code> block. — if_else_device • seplyr</title>
+<title>Simulate a per-row block-<code>if(){}else{}</code>. — if_else_device • seplyr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -110,13 +110,23 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Simulate a per-row <code>if(){}else{}</code> block.</h1>
+    <h1>Simulate a per-row block-<code>if(){}else{}</code>.</h1>
     </div>
 
     
-    <p>This device uses expression-ifelse to simulate the
-more powerful block-ifelse. Note: <code>ifebtest_*</code>
-is a reserved column name for this procedure.</p>
+    <p>This device uses expression-<code>ifelse(,,)</code> to simulate the
+more powerful per-row block-<code>if(){}else{}</code>.  The difference is
+expression-<code>ifelse(,,)</code> can choose per-row what value to express,
+whereas block-<code>if(){}else{}</code> can choose per-row where to assign multiple
+values. By simulation we mean: a sequence of quoted mutate expressions
+are emitted that implement the transform (versus a using a custom
+<code>dplyr</code> pipe stage or function).  These expressions can then
+be optimized into a minimal number of no-dependency
+blocks by <code><a href='partition_mutate_se.html'>partition_mutate_se</a></code> for efficient execution.
+The idea is the user can write legible code in this notation, and
+the translation turns it into safe and efficient code suitable for
+execution either on <code>data.frame</code>s or at a big data scale using
+<code>RPostgreSQL</code> or <code>sparklyr</code>.</p>
     
 
     <pre class="usage"><span class='fu'>if_else_device</span>(<span class='no'>testexpr</span>, <span class='kw'>thenexprs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>elseexprs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -137,6 +147,11 @@ is a reserved column name for this procedure.</p>
       <td><p>named character else assignments (altering columns, not creating).</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Note: <code>ifebtest_*</code>
+is a reserved column name for this procedure.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -197,7 +212,9 @@ is a reserved column name for this procedure.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#details">Details</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
