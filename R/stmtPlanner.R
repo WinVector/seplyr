@@ -242,7 +242,7 @@ partition_mutate_qt <- function(...) {
 #'
 #' @param testexpr character containing the test expression.
 #' @param thenexprs named character then assignments (altering columns, not creating).
-#' @param elseexprs named charager else assignments (altering columns, not creating).
+#' @param elseexprs named character else assignments (altering columns, not creating).
 #'
 #' @examples
 #'
@@ -272,9 +272,12 @@ partition_mutate_qt <- function(...) {
 #' @export
 #'
 if_else_device <- function(testexpr,
-                           thenexprs,
+                           thenexprs = NULL,
                            elseexprs = NULL) {
   # TODO: maybe use testexpr as is when it is already a symbol.
+  if((length(thenexprs) + length(elseexprs))<=0) {
+    return(NULL)
+  }
   knownsyms <- c(names(thenexprs), names(elseexprs))
   repeat {
     testsym <- paste0('ifebtest_',

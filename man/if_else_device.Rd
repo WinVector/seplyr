@@ -4,14 +4,14 @@
 \alias{if_else_device}
 \title{Simulate a per-row \code{if(){}else{}} block.}
 \usage{
-if_else_device(testexpr, thenexprs, elseexprs = NULL)
+if_else_device(testexpr, thenexprs = NULL, elseexprs = NULL)
 }
 \arguments{
 \item{testexpr}{character containing the test expression.}
 
 \item{thenexprs}{named character then assignments (altering columns, not creating).}
 
-\item{elseexprs}{named charager else assignments (altering columns, not creating).}
+\item{elseexprs}{named character else assignments (altering columns, not creating).}
 }
 \description{
 This device uses expression-ifelse to simulate the
