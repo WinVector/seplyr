@@ -89,7 +89,7 @@ find_symbols <- function(nexpr) {
         return(NULL)
       }
     }
-    res <- lapply(nexpr, find_symbols)
+    res <- unlist(lapply(nexpr, find_symbols))
     res <- Filter(function(ri) {!is.null(ri)}, res)
     return(as.character(res))
   }
@@ -212,5 +212,92 @@ partition_mutate_qt <- function(...) {
                  })
   res$syms <- syms
   partition_mutate_d(res)
+}
+
+#' Simulate a per-row \code{if(){}else{}} block.
+#'
+#' This device uses expression-ifelse to simulate the
+#' more powerful block-ifelse. Note: \code{ifebtest_*}
+#' is a reserved column name for this procedure.
+#'
+#' @param testexpr character containing the test expression.
+#' @param thenexprs named character then assignments (altering columns, not creating).
+#' @param elseexprs named charager else assignments (altering columns, not creating).
+#'
+#' @examples
+#'
+#'  # Example: clear one of a or b in any row where both are set.
+#'  d <- data.frame(a = c(0, 0, 1, 1),
+#'                  b = c(0, 1, 0, 1),
+#'                  edited = FALSE)
+#'
+#'  program <- if_else_device('(a+b)>1',
+#'                            if_else_device('runif(4) >= 0.5',
+#'                                           c('a' := '0',
+#'                                             edited = TRUE),
+#'                                           c('b' := '0',
+#'                                             edited = TRUE)))
+#'  print(program)
+#'
+#'  plan <- partition_mutate_se(program)
+#'  print(plan)
+#'
+#'  res <- d
+#'  for(si in plan) {
+#'    res <- mutate_se(res, si)
+#'  }
+#'  res <- res  %.>%
+#'    select_se(., grepdf('^ifebtest_.*', ., invert=TRUE))
+#'  print(res)
+#'
+#' @export
+#'
+if_else_device <- function(testexpr,
+                           thenexprs,
+                           elseexprs = NULL) {
+  # TODO: maybe use testexpr as is when it is already a symbol.
+  knownsyms <- c(names(thenexprs), names(elseexprs))
+  repeat {
+    testsym <- paste0('ifebtest_',
+                      as.character(paste(sample(c(letters, c(0:9)),
+                                                12, replace = TRUE),
+                                         collapse = '')))
+    if(!(testsym %in% knownsyms)) {
+      break
+    }
+  }
+  program <- c(testsym := testexpr) # this statement is special, perculates out
+  prepStmts <- function(stmts, condition) {
+    ret <- NULL
+    n <- length(stmts)
+    if(n<=0) {
+      return(ret)
+    }
+    isSpecial <- startsWith(names(stmts), 'ifebtest_')
+    if(any(isSpecial)) {
+      spc <- stmts[isSpecial]
+      stmts <- stmts[!isSpecial]
+      ret <- c(ret, spc)
+    }
+    n <- length(stmts)
+    if(n<=0) {
+      return(ret)
+    }
+    nexprs <- vapply(1:n,
+                     function(i) {
+                       paste0('ifelse( ', condition,
+                              ', ', stmts[[i]],
+                              ', ', names(stmts)[[i]],
+                              ')')
+                     }, character(1))
+    names(nexprs) <- names(stmts)
+    ret <- c(ret,nexprs)
+    ret
+  }
+  program <- c(program,
+               prepStmts(thenexprs, testsym))
+  program <- c(program,
+               prepStmts(elseexprs, paste('!(', testsym, ')')))
+  program
 }
 
