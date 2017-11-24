@@ -177,11 +177,8 @@ is a reserved column name for this procedure.</p>
 #&gt;                                                                         edited 
 #&gt;                                 "ifelse( ifebtest_blohocn9ky0h, TRUE, edited)" 
 #&gt; </div><div class='input'>
- <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='no'>d</span>
- <span class='kw'>for</span>(<span class='no'>si</span> <span class='kw'>in</span> <span class='no'>plan</span>) {
-   <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='no'>res</span>, <span class='no'>si</span>)
- }
- <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='no'>res</span>  <span class='kw'>%.&gt;%</span>
+ <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='no'>d</span> <span class='kw'>%.&gt;%</span>
+   <span class='fu'><a href='mutate_seb.html'>mutate_seb</a></span>(<span class='no'>.</span>, <span class='no'>plan</span>) <span class='kw'>%.&gt;%</span>
    <span class='fu'><a href='select_se.html'>select_se</a></span>(<span class='no'>.</span>, <span class='fu'>grepdf</span>(<span class='st'>'^ifebtest_.*'</span>, <span class='no'>.</span>, <span class='kw'>invert</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
  <span class='fu'>print</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt;    a b edited
 #&gt; 1  0 0  FALSE

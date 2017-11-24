@@ -28,11 +28,7 @@ substitutions.
 
 plan <- partition_mutate_qt(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
 print(plan)
-d <- data.frame(x = 1)
-for(si in plan) {
-   print(si)
-   d <- mutate_se(d, si)
-}
+d <- data.frame(x = 1) \%.>\% mutate_seb(., plan)
 print(d)
 
 

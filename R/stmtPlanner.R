@@ -56,7 +56,7 @@ partition_mutate_d <- function(de) {
   }
   de <- de %.>%
     arrange_se(., c("group", "origOrder"))
-  # break out into mutate_se blocks (crude split)
+  # break out into mutate_se blocks
   res <- rep(list(character(0)), max(de$group))
   gnames <- paste0('group', sprintf("%05g", 1:max(de$group)))
   names(res) <- gnames
@@ -170,6 +170,30 @@ quote_mutate <- function(...) {
   rhs
 }
 
+#' Run a sequence of quoted mutate blocks.
+#'
+#' @param d data.frame to work on
+#' @param blocks list of sequence named char-array of mutate blocks
+#' @param env environment to work in.
+#' @return d with blocks applied in order
+#'
+#' @examples
+#'
+#' plan <- partition_mutate_qt(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
+#' print(plan)
+#' d <- data.frame(x = 1) %.>% mutate_seb(., plan)
+#' print(d)
+#'
+#' @export
+#'
+mutate_seb <- function(d, blocks,
+                       env = parent.frame()) {
+  for(bi in blocks) {
+    d <- mutate_se(d, bi, splitTerms = FALSE)
+  }
+  d
+}
+
 #' Partition a sequence of mutate commands into longest ordered no create/use blocks.
 #'
 #' The idea is: we assume the sequence of expressions is in a valid order
@@ -189,11 +213,7 @@ quote_mutate <- function(...) {
 #'
 #' plan <- partition_mutate_qt(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
 #' print(plan)
-#' d <- data.frame(x = 1)
-#' for(si in plan) {
-#'    print(si)
-#'    d <- mutate_se(d, si)
-#' }
+#' d <- data.frame(x = 1) %.>% mutate_seb(., plan)
 #' print(d)
 #'
 #'
@@ -244,11 +264,8 @@ partition_mutate_qt <- function(...) {
 #'  plan <- partition_mutate_se(program)
 #'  print(plan)
 #'
-#'  res <- d
-#'  for(si in plan) {
-#'    res <- mutate_se(res, si)
-#'  }
-#'  res <- res  %.>%
+#'  res <- d %.>%
+#'    mutate_seb(., plan) %.>%
 #'    select_se(., grepdf('^ifebtest_.*', ., invert=TRUE))
 #'  print(res)
 #'

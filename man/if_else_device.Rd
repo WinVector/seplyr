@@ -38,11 +38,8 @@ is a reserved column name for this procedure.
  plan <- partition_mutate_se(program)
  print(plan)
 
- res <- d
- for(si in plan) {
-   res <- mutate_se(res, si)
- }
- res <- res  \%.>\%
+ res <- d \%.>\%
+   mutate_seb(., plan) \%.>\%
    select_se(., grepdf('^ifebtest_.*', ., invert=TRUE))
  print(res)
 
