@@ -21,16 +21,18 @@ is a reserved column name for this procedure.
 \examples{
 
  # Example: clear one of a or b in any row where both are set.
- d <- data.frame(a = c(0, 0, 1, 1),
-                 b = c(0, 1, 0, 1),
+ d <- data.frame(a = c(0, 0, 1, 1, 1, 1, 1, 1, 1, 1),
+                 b = c(0, 1, 0, 1, 1, 1, 1, 1, 1, 1),
                  edited = FALSE)
 
- program <- if_else_device('(a+b)>1',
-                           if_else_device('runif(4) >= 0.5',
-                                          c('a' := '0',
-                                            edited = TRUE),
-                                          c('b' := '0',
-                                            edited = TRUE)))
+ program <- if_else_device(
+   testexpr = '(a+b)>1',
+   thenexprs = c(
+     if_else_device(
+       testexpr = 'runif(n()) >= 0.5',
+       thenexprs = 'a' := '0',
+       elseexprs = 'b' := '0'),
+     'edited' := 'TRUE'))
  print(program)
 
  plan <- partition_mutate_se(program)

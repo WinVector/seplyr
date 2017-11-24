@@ -1,13 +1,7 @@
-#' \code{seplyr}: Standard Evaluation Improved Interfaces for Common \code{dplyr} Verbs
+#' \code{seplyr}: Standard Evaluation Improved Interfaces for Common Data Manipulatio Tasks
 #'
 #' The \code{seplyr} (standard evaluation \code{dplyr}) package supplies improved
-#' standard evaluation adapter methods for important common \code{dplyr} methods
-#' that currently have a non-standard programming interface. This allows
-#' the analyst to use \code{dplyr} to perform fundamental data transformation
-#' steps such as arranging rows, grouping rows, aggregating selecting
-#' columns without having to use learn the details of \code{rlang}/\code{tidyeval}
-#' non-standard evaluation and without continuing to rely on now
-#' deprecated \code{dplyr} "underscore verbs."
+#' standard evaluation adapter methods for important common data manipulation tasks.
 #'
 #' In addition the \code{seplyr} package supplies several new "key operations
 #' bound together" methods.  These include \code{group_summarize()} (which
@@ -15,7 +9,8 @@
 #' \code{add_group_summaries()} (which joins grouped summaries into a \code{data.frame}
 #' in a well documented manner), \code{add_group_indices()} (which adds
 #' per-group identifiers to a \code{data.frame} without depending on row-order),
-#' and \code{partition_mutate_qt()} (which optimizes mutate sequences).
+#' \code{partition_mutate_qt()} (which optimizes mutate sequences), and \code{if_else_device()}
+#' (which simulates pre-row if-else blocks in expression sequences).
 #'
 #'
 #' @docType package
