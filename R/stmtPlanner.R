@@ -143,15 +143,15 @@ partition_mutate_se <- function(exprs) {
 #'
 #' @examples
 #'
-#' plan <- mutate_qt(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
+#' plan <- quote_mutate(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
 #' data.frame(x=1) %.>% mutate_se(., plan)
 #'
 #' @export
-mutate_qt <- function(...) {
+quote_mutate <- function(...) {
   mutateTerms <- substitute(list(...))
   # check for a = b assignments (which we do not support)
   if(!all(names(mutateTerms) %in% "")) {
-    stop("seplyr::mutate_qt() unexpected names in '...', all assignments must be of the form a := b, not a = b")
+    stop("seplyr::quote_mutate() unexpected names in '...', all assignments must be of the form a := b, not a = b")
   }
   len <- length(mutateTerms) # first slot is "list"
   if(len>1) {
@@ -160,7 +160,7 @@ mutate_qt <- function(...) {
     for(i in (2:len)) {
       ei <- mutateTerms[[i]]
       if((length(ei)!=3)||(as.character(ei[[1]])!=':=')) {
-        stop("seplyr::mutate_qt terms must be of the form: sym := expr")
+        stop("seplyr::quote_mutate terms must be of the form: sym := expr")
       }
       lhs[[i-1]] <- as.character(ei[[2]])[[1]]
       rhs[[i-1]] <- paste(deparse(ei[[3]]), collapse = "\n")
@@ -200,7 +200,7 @@ mutate_qt <- function(...) {
 #' @export
 #'
 partition_mutate_qt <- function(...) {
-  terms <- mutate_qt(...)
+  terms <- quote_mutate(...)
   lhs <- names(terms)
   rhs <- as.character(terms)
   res <- data.frame(lhs = lhs,
