@@ -135,6 +135,40 @@ partition_mutate_se <- function(exprs) {
   partition_mutate_d(res)
 }
 
+#' Capture the expressions of a mutate-style command.
+#'
+#'
+#' @param ... mutate expressions with := used for assignment.
+#' @return ordered list of mutate_se assignment blocks
+#'
+#' @examples
+#'
+#' plan <- mutate_qt(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
+#' data.frame(x=1) %.>% mutate_se(., plan)
+#'
+#' @export
+mutate_qt <- function(...) {
+  mutateTerms <- substitute(list(...))
+  # check for a = b assignments (which we do not support)
+  if(!all(names(mutateTerms) %in% "")) {
+    stop("seplyr::mutate_qt() unexpected names in '...', all assignments must be of the form a := b, not a = b")
+  }
+  len <- length(mutateTerms) # first slot is "list"
+  if(len>1) {
+    lhs <- character(len-1)
+    rhs <- character(len-1)
+    for(i in (2:len)) {
+      ei <- mutateTerms[[i]]
+      if((length(ei)!=3)||(as.character(ei[[1]])!=':=')) {
+        stop("seplyr::mutate_qt terms must be of the form: sym := expr")
+      }
+      lhs[[i-1]] <- as.character(ei[[2]])[[1]]
+      rhs[[i-1]] <- paste(deparse(ei[[3]]), collapse = "\n")
+    }
+  }
+  names(rhs) = lhs
+  rhs
+}
 
 #' Partition a sequence of mutate commands into longest ordered no create/use blocks.
 #'
@@ -166,29 +200,16 @@ partition_mutate_se <- function(exprs) {
 #' @export
 #'
 partition_mutate_qt <- function(...) {
-  mutateTerms <- substitute(list(...))
-  # check for a = b assignments (which we do not support)
-  if(!all(names(mutateTerms) %in% "")) {
-    stop("seplyr::partition_mutate_qt() unexpected names in '...', all assignments must be of the form a := b, not a = b")
-  }
-  len <- length(mutateTerms) # first slot is "list"
-  if(len>1) {
-    lhs <- character(len-1)
-    rhs <- character(len-1)
-    syms <- vector(mode = 'list', length=len-1)
-    for(i in (2:len)) {
-      ei <- mutateTerms[[i]]
-      if((length(ei)!=3)||(as.character(ei[[1]])!=':=')) {
-        stop("partition_mutate_qt terms must be of the form: sym := expr")
-      }
-      lhs[[i-1]] <- as.character(ei[[2]])[[1]]
-      syms[[i-1]] <- find_symbols(ei[[3]])
-      rhs[[i-1]] <- paste(deparse(ei[[3]]), collapse = "\n")
-    }
-  }
+  terms <- mutate_qt(...)
+  lhs <- names(terms)
+  rhs <- as.character(terms)
   res <- data.frame(lhs = lhs,
                     rhs = rhs,
                     stringsAsFactors = FALSE)
+  syms <- lapply(res$rhs,
+                 function(ei) {
+                   find_symbols(parse(text = ei))
+                 })
   res$syms <- syms
   partition_mutate_d(res)
 }
