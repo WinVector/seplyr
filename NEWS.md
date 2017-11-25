@@ -1,6 +1,7 @@
 
 # seplyr 0.5.1 2017-11-25
 
+ * mutate_se now uses partition_mutate_se.
  * Minor doc fixes.
 
 # seplyr 0.5.0 2017-11-24

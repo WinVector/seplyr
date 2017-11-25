@@ -40,18 +40,17 @@ mutate_se <- function(.data, mutateTerms,
   # from: https://github.com/tidyverse/rlang/issues/116
   res <- .data
   if(length(mutateTerms)>0) {
-    mutateQ <- lapply(mutateTerms,
-                      function(si) {
-                        rlang::parse_quosure(si,
-                                             env = env)
-                      })
-    if(splitTerms) {
-      for(ti in names(mutateQ)) {
-        si <- rlang::sym(ti)
-        vi <- mutateQ[[ti]]
-        res <- dplyr::mutate(.data = res, !!si := !!!vi)
+    if(splitTerms && (length(mutateTerms)>1)) {
+      plan <- partition_mutate_se(mutateTerms)
+      for(bi in plan) {
+        res <- mutate_se(res, bi, splitTerms = FALSE, env = env)
       }
     } else {
+      mutateQ <- lapply(mutateTerms,
+                        function(si) {
+                          rlang::parse_quosure(si,
+                                               env = env)
+                        })
       res <- dplyr::mutate(.data = res, !!!mutateQ)
     }
   }
