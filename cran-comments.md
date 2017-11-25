@@ -12,14 +12,13 @@
 
 ## R CMD check results
 
-R CMD check --as-cran seplyr_0.1.6.tar.gz 
+R CMD check --as-cran seplyr_0.5.0.tar.gz 
 
-  * using session charset: UTF-8
-  * using option ‘--as-cran’
-  * checking for file ‘seplyr/DESCRIPTION’ ... OK
-  * checking extension type ... Package
-  * this is package ‘seplyr’ version ‘0.1.6’
-  * package encoding: UTF-8
+ * using option ‘--as-cran’
+ * checking for file ‘seplyr/DESCRIPTION’ ... OK
+ * checking extension type ... Package
+ * this is package ‘seplyr’ version ‘0.5.0’
+ * package encoding: UTF-8
 
 
 * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
@@ -29,6 +28,6 @@ Status: OK
 
 ## Reverse dependencies
 
-    Checking 1 packages: replyr
+     devtools::revdep_check()
+     Checking 1 packages: replyr
      Checked replyr: 0 errors | 0 warnings | 0 notes
-

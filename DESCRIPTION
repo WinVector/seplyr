@@ -19,7 +19,7 @@ Description:  The 'seplyr' (standard evaluation 'dplyr') package supplies improv
     in a well documented manner), 'add_group_indices()' (which adds
     per-group identifiers to a 'data.frame' without depending on row-order),
     'partition_mutate_qt()' (which optimizes mutate sequences), and 'if_else_device()'
-    (which simulates pre-row if-else blocks in expression sequences).
+    (which simulates per-row if-else blocks in expression sequences).
 License: GPL-3
 Encoding: UTF-8
 Depends:

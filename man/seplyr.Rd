@@ -17,5 +17,5 @@ combines grouping, arranging and calculation in an atomic unit),
 in a well documented manner), \code{add_group_indices()} (which adds
 per-group identifiers to a \code{data.frame} without depending on row-order),
 \code{partition_mutate_qt()} (which optimizes mutate sequences), and \code{if_else_device()}
-(which simulates pre-row if-else blocks in expression sequences).
+(which simulates per-row if-else blocks in expression sequences).
 }

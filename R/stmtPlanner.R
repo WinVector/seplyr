@@ -189,7 +189,7 @@ quote_mutate <- function(...) {
 mutate_seb <- function(d, blocks,
                        env = parent.frame()) {
   for(bi in blocks) {
-    d <- mutate_se(d, bi, splitTerms = FALSE)
+    d <- mutate_se(d, bi, splitTerms = FALSE, env = env)
   }
   d
 }
