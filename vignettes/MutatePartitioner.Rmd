@@ -96,12 +96,7 @@ To execute the statements on a data-item "`d`" (either an in-memory `data.frame`
 or a remote database or `Sparklyr` handle) we would do something like the following:
 
 ```{r exec, eval=FALSE}
-res <- d
-for(stepi in plan) {
-  res <- mutate_se(res, 
-                   stepi, 
-                   splitTerms = FALSE)
-}
+res <- mutate_seb(d, plan)
 ```
 
 A fully worked version of this example can be found [here](http://winvector.github.io/FluidData/partition_mutate_ex2.html).

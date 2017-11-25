@@ -179,12 +179,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
 <span class="co">#&gt; "ifelse(choice_e, \"control\", \"treatment\")"</span></code></pre></div>
 <p>Notice <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/partition_mutate_qt">seplyr::partition_mutate_qt()</a></code> split the work into 3 groups. The straightforward method (with no statement re-ordering) of splitting into non-dependent groups would have to split the mutate at each first use of a new value: yielding 10 splits or 11 mutate stages. For why a low number of execution stages is important please see <a href="http://winvector.github.io/FluidData/partition_mutate.html">here</a>.</p>
 <p>To execute the statements on a data-item “<code>d</code>” (either an in-memory <code>data.frame</code> or a remote database or <code>Sparklyr</code> handle) we would do something like the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span>d
-<span class="cf">for</span>(stepi <span class="cf">in</span> plan) {
-  res &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mutate_se.html">mutate_se</a></span>(res, 
-                   stepi, 
-                   <span class="dt">splitTerms =</span> <span class="ot">FALSE</span>)
-}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mutate_seb.html">mutate_seb</a></span>(d, plan)</code></pre></div>
 <p>A fully worked version of this example can be found <a href="http://winvector.github.io/FluidData/partition_mutate_ex2.html">here</a>.</p>
 </div>
   </div>
