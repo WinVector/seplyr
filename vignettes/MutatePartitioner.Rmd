@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 [`seplyr::partition_mutate_qt()`](https://winvector.github.io/seplyr/reference/partition_mutate_qt.html) is
-a new service supplied by development version the [`R`](https://www.r-project.org) package [`seplyr`](https://winvector.github.io/seplyr/) (version `0.1.7` or higher).
+a service supplied by the package [`seplyr`](https://winvector.github.io/seplyr/) (version `0.5.0` or higher).
 
 `seplyr::partition_mutate_qt()` can partition a sequence of assignments so that no statement is using any value created in the same partition element or group.
 The partitions are in a format accepted by [`seplyr::mutate_se()`](https://winvector.github.io/seplyr/reference/mutate_se.html) for execution.

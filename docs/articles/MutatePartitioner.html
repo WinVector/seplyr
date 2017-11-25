@@ -48,9 +48,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/mutate.html">mutate</a>
-    </li>
-    <li>
       <a href="../articles/MutatePartitioner.html">Mutate Partitioner</a>
     </li>
     <li>
@@ -90,13 +87,13 @@
       <h1>Mutate Partitioner</h1>
                         <h4 class="author">John Mount, Win-Vector LLC</h4>
             
-            <h4 class="date">2017-11-24</h4>
+            <h4 class="date">2017-11-25</h4>
           </div>
 
     
     
 <div class="contents">
-<p><a href="https://winvector.github.io/seplyr/reference/partition_mutate_qt.html"><code><a href="http://www.rdocumentation.org/packages/seplyr/topics/partition_mutate_qt">seplyr::partition_mutate_qt()</a></code></a> is a new service supplied by development version the <a href="https://www.r-project.org"><code>R</code></a> package <a href="https://winvector.github.io/seplyr/"><code>seplyr</code></a> (version <code>0.1.7</code> or higher).</p>
+<p><a href="https://winvector.github.io/seplyr/reference/partition_mutate_qt.html"><code><a href="http://www.rdocumentation.org/packages/seplyr/topics/partition_mutate_qt">seplyr::partition_mutate_qt()</a></code></a> is a service supplied by the package <a href="https://winvector.github.io/seplyr/"><code>seplyr</code></a> (version <code>0.5.0</code> or higher).</p>
 <p><code><a href="http://www.rdocumentation.org/packages/seplyr/topics/partition_mutate_qt">seplyr::partition_mutate_qt()</a></code> can partition a sequence of assignments so that no statement is using any value created in the same partition element or group. The partitions are in a format accepted by <a href="https://winvector.github.io/seplyr/reference/mutate_se.html"><code><a href="http://www.rdocumentation.org/packages/seplyr/topics/mutate_se">seplyr::mutate_se()</a></code></a> for execution.</p>
 <p>For such a partition the evaluation result does not depend on the order of execution of the statements in each group (as they are all independent of each other’s left-hand-sides). A no-dependency small number of groups partition is <em>very</em> helpful when executing expressions on <code>SQL</code> based data interfaces (such as <code>Apache Spark</code>).</p>
 <p>The method used to partition expressions is to scan the remaining expressions in order taking any that: have all their values available from earlier groups and do not use a value formed in the current group.</p>
