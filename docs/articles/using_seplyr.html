@@ -242,43 +242,6 @@ starwars <span class="op">%&gt;%</span><span class="st"> </span>
 ## 14         white  48.00000             NaN     1
 ## 15        yellow  81.11111        76.38000    11</code></pre>
 <p>The only part that requires more study and practice was messing around with the expressions using <code>paste0()</code> (for more details on the string manipulation please try “<code>help(paste)</code>”). Notice also we used the “<code>:=</code>” operator to bind the list of desired result names to the matching calculations (please see “<code>help(named_map_builder)</code>” for more details).</p>
-<p>We can also use <code>gsub</code> or the <code>glue</code> package for the same effect:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(<span class="kw">requireNamespace</span>(<span class="st">'glue'</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {
-  <span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"glue"</span>))
-  
-  grouped_mean &lt;-<span class="st"> </span><span class="cf">function</span>(data, 
-                           grouping_variables, 
-                           value_variables) {
-    data <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(grouping_variables) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/glue/topics/glue">glue</a></span>(<span class="st">"mean_{value_variables}"</span>) <span class="op">:</span><span class="er">=</span><span class="st"> </span>
-<span class="st">                     </span><span class="kw"><a href="http://www.rdocumentation.org/packages/glue/topics/glue">glue</a></span>(<span class="st">"mean({value_variables}, na.rm = TRUE)"</span>),
-                     <span class="st">"count"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "n()"</span>))
-  }
-  
-  starwars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">grouped_mean</span>(<span class="dt">grouping_variables =</span> <span class="st">"eye_color"</span>,
-                 <span class="dt">value_variables =</span> <span class="kw">c</span>(<span class="st">"mass"</span>, <span class="st">"birth_year"</span>))
-}</code></pre></div>
-<pre><code>## # A tibble: 15 x 4
-##        eye_color mean_mass mean_birth_year count
-##            &lt;chr&gt;     &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
-##  1         black  76.28571        33.00000    10
-##  2          blue  86.51667        67.06923    19
-##  3     blue-gray  77.00000        57.00000     1
-##  4         brown  66.09231       108.96429    21
-##  5          dark       NaN             NaN     1
-##  6          gold       NaN             NaN     1
-##  7 green, yellow 159.00000             NaN     1
-##  8         hazel  66.00000        34.50000     3
-##  9        orange 282.33333       231.00000     8
-## 10          pink       NaN             NaN     1
-## 11           red  81.40000        33.66667     5
-## 12     red, blue       NaN             NaN     1
-## 13       unknown  31.50000             NaN     3
-## 14         white  48.00000             NaN     1
-## 15        yellow  81.11111        76.38000    11</code></pre>
-<p>The point is: we did not have to bring in (or study) any deep-theory or heavy-weight tools such as <a href="https://CRAN.R-project.org/package=rlang"><code>rlang</code>/<code>tidyeval</code></a> or <a href="https://CRAN.R-project.org/package=lazyeval"><code>lazyeval</code></a> to complete our programming task. Once you are in <code>seplyr</code> notation, changes are very easy. You can separate translating into <code>seplyr</code> notation from the work of designing your wrapper function (breaking your programming work into smaller easier to understand steps).</p>
 <p>The <code>seplyr</code> methodology is simple, easy to teach, and powerful. The package contains a number of worked examples both in <code>help()</code> and <a href="https://winvector.github.io/seplyr/articles/seplyr.html"><code><a href="https://cran.rstudio.com/web/packages/seplyr/vignettes/seplyr.html">vignette(package='seplyr')</a></code></a> documentation. For more details please also see: <a href="https://winvector.github.io/wrapr/reference/named_map_builder.html"><code>help(</code>:=<code>, package = 'wrapr')</code></a> and <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>help("%.&gt;%", package="wrapr")</code></a>.</p>
 </div>
   </div>

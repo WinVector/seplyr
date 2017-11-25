@@ -30,8 +30,7 @@ Imports:
     datasets
 LazyData: true
 RoxygenNote: 6.0.1
-Suggests: glue,
-    knitr,
+Suggests: knitr,
     rmarkdown,
     testthat,
     DBI,
