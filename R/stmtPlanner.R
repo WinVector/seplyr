@@ -7,8 +7,8 @@
 #' The idea is: we assume the sequence of expressions is in a valid order
 #' (all items available before use).  This function partitions the expressions
 #' into ordered longest "no new value used blocks" by greedily scanning forward
-#' and skipping any expressions that either use a value created in the current block
-#' or require a value not yet produced.
+#' and skipping any expressions that either use a value created in the current block,
+#' require a value not yet produced, or re-use an assignment name.
 #'
 #' @param de frame of expressions
 #' @return ordered list of mutate_se assignment blocks
@@ -40,9 +40,10 @@ partition_mutate_d <- function(de) {
     formedInGroup <- NULL
     for(i in 1:n) {
       if( (de$group[[i]]<=0) &&  # available to take
-         (length(intersect(de$deps[[i]], formedInGroup))<=0) && # not using a new value
-         (length(setdiff(de$deps[[i]], have))<=0) # all pre-conditions met
-         ) {
+          (!(de$lhs[[i]] %in% formedInGroup)) && # not assigned to in this block
+          (length(intersect(de$deps[[i]], formedInGroup))<=0) && # not using a new value
+          (length(setdiff(de$deps[[i]], have))<=0) # all pre-conditions met
+      ) {
         formedInGroup <- c(formedInGroup, de$lhs[[i]])
         de$group[[i]] <- group
       }
