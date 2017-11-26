@@ -27,8 +27,8 @@ groups partition is *very* helpful when executing expressions on `SQL` based
 data interfaces (such as `Apache Spark`).
 
 The method used to partition expressions is
-to scan the remaining expressions in order taking any that: have all their values available from earlier groups and
-do not use a value formed in the current group. 
+to scan the remaining expressions in order taking any that: have all their values available from earlier groups,
+do not use a value formed in the current group, and do not overwrite a value formed in the current group.
 
 This partitioning method can lead to far fewer
 groups than the straightforward method of breaking up the sequence of expressions

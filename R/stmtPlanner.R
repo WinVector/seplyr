@@ -4,11 +4,11 @@
 #'
 #' Find longest ordered not created and used in same block chains.
 #'
-#' The idea is: we assume the sequence of expressions is in a valid order
+#' We assume the sequence of expressions is in a valid order
 #' (all items available before use).  This function partitions the expressions
 #' into ordered longest "no new value used blocks" by greedily scanning forward
-#' and skipping any expressions that either use a value created in the current block,
-#' require a value not yet produced, or re-use an assignment name.
+#' remaining expressions in order taking any that: have all their values available from earlier groups,
+#' do not use a value formed in the current group, and do not overwrite a value formed in the current group.
 #'
 #' @param de frame of expressions
 #' @return ordered list of mutate_se assignment blocks
@@ -109,11 +109,11 @@ find_symbols <- function(nexpr) {
 
 #' Partition a sequence of mutate commands into longest ordered no create/use blocks.
 #'
-#' The idea is: we assume the sequence of expressions is in a valid order
+#' We assume the sequence of expressions is in a valid order
 #' (all items available before use).  This function partitions the expressions
 #' into ordered longest "no new value used blocks" by greedily scanning forward
-#' and skipping any expressions that either use a value created in the current block
-#' or require a value not yet produced.
+#' remaining expressions in order taking any that: have all their values available from earlier groups,
+#' do not use a value formed in the current group, and do not overwrite a value formed in the current group.
 #' For an example please see \url{http://winvector.github.io/FluidData/partition_mutate.html}.
 #'
 #' @param exprs list of source-text of a sequence of mutate expressions.
@@ -197,11 +197,11 @@ mutate_seb <- function(d, blocks,
 
 #' Partition a sequence of mutate commands into longest ordered no create/use blocks.
 #'
-#' The idea is: we assume the sequence of expressions is in a valid order
+#' We assume the sequence of expressions is in a valid order
 #' (all items available before use).  This function partitions the expressions
 #' into ordered longest "no new value used blocks" by greedily scanning forward
-#' and skipping any expressions that either use a value created in the current block
-#' or require a value not yet produced.
+#' remaining expressions in order taking any that: have all their values available from earlier groups,
+#' do not use a value formed in the current group, and do not overwrite a value formed in the current group.
 #' For an example please see \url{http://winvector.github.io/FluidData/partition_mutate.html}.
 #'
 #' Note: unlike \code{\link{mutate_nse}} \code{partition_mutate_qt} does not perform
