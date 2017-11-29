@@ -2,7 +2,7 @@ Package: seplyr
 Type: Package
 Title: Standard Evaluation Improved Interfaces for Common Data Manipulation Tasks
 Version: 0.5.1
-Date: 2017-11-26
+Date: 2017-11-29
 Authors@R: c(
     person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),
     person(family = "Win-Vector LLC", role = c("cph"))
@@ -27,14 +27,15 @@ Depends:
 Imports:
     dplyr (>= 0.7.4),
     rlang (>= 0.1.4),
+    dbplyr,
+    DBI,
+    RSQLite,
     datasets
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     testthat,
-    DBI,
-    RSQLite
 VignetteBuilder: knitr
 ByteCompile: true
 
