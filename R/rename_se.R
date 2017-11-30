@@ -37,6 +37,9 @@
 #'
 rename_se <- function(.data, mapping,
                       splitTerms = TRUE,  env = parent.frame()) {
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::rename_se first argument must be a data.frame or tbl")
+  }
   res <- .data
   nMap <- length(mapping)
   if(nMap>0) {

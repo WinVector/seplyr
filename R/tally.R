@@ -26,6 +26,9 @@
 #' @export
 #'
 tally_se <- function(x, wt=NULL, sort = FALSE) {
+  if(!(is.data.frame(x) || dplyr::is.tbl(x))) {
+    stop("seplyr::tally_se first argument must be a data.frame or tbl")
+  }
   if(is.null(wt)) {
     dplyr::tally(x, sort=sort)
   } else {
@@ -57,6 +60,9 @@ tally_se <- function(x, wt=NULL, sort = FALSE) {
 #' @export
 #'
 add_tally_se <- function(x, wt=NULL, sort = FALSE) {
+  if(!(is.data.frame(x) || dplyr::is.tbl(x))) {
+    stop("seplyr::add_tally_se first argument must be a data.frame or tbl")
+  }
   if(is.null(wt)) {
     dplyr::add_tally(x, sort=sort)
   } else {
@@ -92,6 +98,9 @@ add_tally_se <- function(x, wt=NULL, sort = FALSE) {
 #'
 count_se <- function(x, groupingVars = NULL,
                      wt=NULL, sort = FALSE) {
+  if(!(is.data.frame(x) || dplyr::is.tbl(x))) {
+    stop("seplyr::count_se first argument must be a data.frame or tbl")
+  }
   groupingSyms <- rlang::syms(groupingVars)
   if(is.null(wt)) {
     dplyr::count(x, !!!groupingSyms, sort=sort)
@@ -126,6 +135,9 @@ count_se <- function(x, groupingVars = NULL,
 #'
 add_count_se <- function(x, groupingVars = NULL,
                          wt=NULL, sort = FALSE) {
+  if(!(is.data.frame(x) || dplyr::is.tbl(x))) {
+    stop("seplyr::add_count_se first argument must be a data.frame or tbl")
+  }
   groupingSyms <- rlang::syms(groupingVars)
   if(is.null(wt)) {
     dplyr::add_count(x, !!!groupingSyms, sort=sort)

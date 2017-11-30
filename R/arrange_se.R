@@ -23,8 +23,9 @@
 #' @export
 #'
 arrange_se <- function(.data, arrangeTerms) {
-  # convert char vector into spliceable vector
-  # from: https://github.com/tidyverse/rlang/issues/116
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::arrange_se first argument must be a data.frame or tbl")
+  }
   env <- parent.frame()
   arrangeQ <- lapply(arrangeTerms,
                     function(si) {

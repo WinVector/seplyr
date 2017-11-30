@@ -13,6 +13,9 @@
 #' @export
 #'
 add_group_indices <- function(.data, groupingVars, indexColumn) {
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::add_group_indices first argument must be a data.frame or tbl")
+  }
   .data <- dplyr::ungroup(.data) # just in case
   `:=` <- NULL # don't let look like an unbound reference to CRAN checker
   d <- dplyr::distinct(select_se(.data, groupingVars))

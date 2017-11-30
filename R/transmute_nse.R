@@ -29,6 +29,9 @@
 #' @export
 #'
 transmute_nse <- function(.data, ...,  transmute_nse_env = parent.frame()) {
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::transmute_nse first argument must be a data.frame or tbl")
+  }
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
   transmuteTerms <- substitute(list(...))

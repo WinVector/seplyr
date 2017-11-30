@@ -25,6 +25,9 @@
 #'
 add_group_summaries <- function(d, groupingVars, ...,
                                 arrangeTerms = NULL) {
+  if(!(is.data.frame(d) || dplyr::is.tbl(d))) {
+    stop("seplyr::add_group_summaries first argument must be a data.frame or tbl")
+  }
   # convert char vector into spliceable vector
   groupingSyms <- rlang::syms(groupingVars)
   d <- dplyr::ungroup(d) # just in case

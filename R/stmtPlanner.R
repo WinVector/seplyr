@@ -189,6 +189,9 @@ quote_mutate <- function(...) {
 #'
 mutate_seb <- function(d, blocks,
                        env = parent.frame()) {
+  if(!(is.data.frame(d) || dplyr::is.tbl(d))) {
+    stop("seplyr::mutate_seb first argument must be a data.frame or tbl")
+  }
   for(bi in blocks) {
     d <- mutate_se(d, bi, splitTerms = FALSE, env = env)
   }

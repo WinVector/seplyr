@@ -25,8 +25,9 @@
 #'
 filter_nse <- function(.data, ...,
                        filter_nse_env = parent.frame()) {
-  # convert char vector into spliceable vector
-  # from: https://github.com/tidyverse/rlang/issues/116
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::filter_nse first argument must be a data.frame or tbl")
+  }
   filterTerms <- substitute(list(...))
   if(!all(names(filterTerms) %in% "")) {
     stop("seplyr::filter_nse() unexpected names in '...'")

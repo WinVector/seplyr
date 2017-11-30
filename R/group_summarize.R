@@ -28,6 +28,9 @@
 group_summarize <- function(d, groupingVars, ...,
                             arrangeTerms = NULL,
                             env = parent.frame()) {
+  if(!(is.data.frame(d) || dplyr::is.tbl(d))) {
+    stop("seplyr::group_summarize first argument must be a data.frame or tbl")
+  }
   # convert char vector into spliceable vector
   groupingSyms <- rlang::syms(groupingVars)
   d <- dplyr::ungroup(d) # just in case

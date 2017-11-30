@@ -34,6 +34,9 @@ add_group_sub_indices <- function(.data,
                                  orderColumn,
                                  arrangeTerms = NULL,
                                  env = parent.frame()) {
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::add_group_sub_indices first argument must be a data.frame or tbl")
+  }
   .data <- dplyr::ungroup(.data) # just in case
   if(length(list(...))>0) {
     stop("seplyr::add_group_sub_indices unexpected arguments")

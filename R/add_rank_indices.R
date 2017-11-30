@@ -28,6 +28,9 @@ add_rank_indices <- function(.data,
   if(length(list(...))>0) {
     stop("seplyr::add_rank_indices unexpected arguments")
   }
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::add_rank_indices first argument must be a data.frame or tbl")
+  }
   `:=` <- NULL # don't let look like an unbound reference to CRAN checker
   if(is.null(arrangeTerms)) {
     arrangeTerms <- colnames(.data)

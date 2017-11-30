@@ -21,6 +21,9 @@
 #' @export
 #'
 select_se <- function(.data, colNames) {
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::select_se first argument must be a data.frame or tbl")
+  }
   # select(.data, one_of(colNames))
   # convert char vector into spliceable vector
   # use full parse instead of sym() to allow -var forms
@@ -60,6 +63,9 @@ select_se <- function(.data, colNames) {
 #' @export
 #'
 deselect <- function(.data, colNames) {
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::deselect first argument must be a data.frame or tbl")
+  }
   # select(.data, one_of(colNames))
   # convert char vector into spliceable vector
   colSyms <- rlang::syms(setdiff(colnames(.data), colNames))

@@ -4,6 +4,7 @@
  * mutate_se now uses partition_mutate_se.
  * partition on re-assignment (if_else_device does this, but includes a re-use so was okay).
  * Minor doc fixes.
+ * More argument checking.
 
 # seplyr 0.5.0 2017-11-24
 
