@@ -10,7 +10,7 @@ mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
 \arguments{
 \item{.data}{data.frame}
 
-\item{...}{stringified expressions to mutate by.}
+\item{...}{expressions to mutate by.}
 
 \item{mutate_nse_split_terms}{logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).}
 
@@ -20,8 +20,10 @@ mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
 .data with altered columns.
 }
 \description{
-Mutate a data frame by the mutateTerms.  Accepts arbitrary text as
-mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
+Mutate a data frame by the mutateTerms.
+Accepts arbitrary un-parsed expressions as
+assignments to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
+(without the quotes).
 Terms are vectors or lists of the form "lhs := rhs".
 Semantics are: terms are evaluated left to right if mutate_nse_split_terms==TRUE (the default).
 }
@@ -37,7 +39,6 @@ and have its own "too long sequence" issues on remote-data systems
 resCol1 <- "Sepal_Long"
 ratio <- 2
 compCol1 <- "Sepal.Width"
-
 
 datasets::iris \%.>\%
   mutate_nse(., resCol1 := "Sepal.Length" >= ratio * compCol1,

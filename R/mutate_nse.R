@@ -1,8 +1,13 @@
 
+
+
+
 #' mutate non-standard evaluation interface.
 #'
-#' Mutate a data frame by the mutateTerms.  Accepts arbitrary text as
-#' mutateTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
+#' Mutate a data frame by the mutateTerms.
+#' Accepts arbitrary un-parsed expressions as
+#' assignments to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
+#' (without the quotes).
 #' Terms are vectors or lists of the form "lhs := rhs".
 #' Semantics are: terms are evaluated left to right if mutate_nse_split_terms==TRUE (the default).
 #'
@@ -14,7 +19,7 @@
 #' @seealso \code{\link{mutate_se}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
 #'
 #' @param .data data.frame
-#' @param ... stringified expressions to mutate by.
+#' @param ... expressions to mutate by.
 #' @param mutate_nse_split_terms logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).
 #' @param mutate_nse_env environment to work in.
 #' @return .data with altered columns.
@@ -25,7 +30,6 @@
 #' resCol1 <- "Sepal_Long"
 #' ratio <- 2
 #' compCol1 <- "Sepal.Width"
-#'
 #'
 #' datasets::iris %.>%
 #'   mutate_nse(., resCol1 := "Sepal.Length" >= ratio * compCol1,
