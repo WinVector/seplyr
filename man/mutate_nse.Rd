@@ -5,7 +5,7 @@
 \title{mutate non-standard evaluation interface.}
 \usage{
 mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
-  mutate_nse_env = parent.frame())
+  mutate_nse_env = parent.frame(), mutate_nse_printPlan = FALSE)
 }
 \arguments{
 \item{.data}{data.frame}
@@ -15,6 +15,8 @@ mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
 \item{mutate_nse_split_terms}{logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).}
 
 \item{mutate_nse_env}{environment to work in.}
+
+\item{mutate_nse_printPlan}{logical, if TRUE print the expression plan}
 }
 \value{
 .data with altered columns.

@@ -15,8 +15,10 @@
 #'
 #' @param .data data.frame
 #' @param mutateTerms character vector of column expressions to mutate by.
+#' @param ... force later terms to be bound by name
 #' @param splitTerms logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).
 #' @param env environment to work in.
+#' @param printPlan logical, if TRUE print the expression plan
 #' @return .data with altered columns.
 #'
 #' @examples
@@ -34,18 +36,30 @@
 #' @export
 #'
 mutate_se <- function(.data, mutateTerms,
+                      ...,
                       splitTerms = TRUE,
-                      env = parent.frame()) {
-  # convert char vector into spliceable vector
-  # from: https://github.com/tidyverse/rlang/issues/116
+                      env = parent.frame(),
+                      printPlan = FALSE) {
+  if(length(list(...))>0) {
+    stop("seplyr::mutate_se unexpected arguments")
+  }
+  if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
+    stop("seplyr::mutate_nse first argument must be a data.frame or tbl")
+  }
   res <- .data
   if(length(mutateTerms)>0) {
     if(splitTerms && (length(mutateTerms)>1)) {
       plan <- partition_mutate_se(mutateTerms)
+      if(printPlan) {
+        print(plan)
+      }
       for(bi in plan) {
         res <- mutate_se(res, bi, splitTerms = FALSE, env = env)
       }
     } else {
+      if(printPlan) {
+        print(mutateTerms)
+      }
       mutateQ <- lapply(mutateTerms,
                         function(si) {
                           rlang::parse_quosure(si,
