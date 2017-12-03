@@ -71,7 +71,7 @@ partition_mutate_d <- function(de) {
 
 #' Scan for symbols.
 #'
-#' @param lexpr language item
+#' @param nexpr language item
 #' @return R language element with substitutions
 #'
 #' @noRd
