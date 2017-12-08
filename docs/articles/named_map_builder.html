@@ -87,7 +87,7 @@
       <h1>Named Map Builder</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-11-30</h4>
+            <h4 class="date">2017-12-08</h4>
           </div>
 
     
@@ -126,22 +126,22 @@ datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="kw">c</span>(<span class="st">"Mean_Sepal_Length"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>,
                     <span class="st">"Mean_Sepal_Width"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Width)"</span>))</code></pre></div>
 <pre><code>## # A tibble: 3 x 3
-##      Species Mean_Sepal_Length Mean_Sepal_Width
-##       &lt;fctr&gt;             &lt;dbl&gt;            &lt;dbl&gt;
-## 1     setosa             5.006            3.428
-## 2 versicolor             5.936            2.770
-## 3  virginica             6.588            2.974</code></pre>
+##   Species    Mean_Sepal_Length Mean_Sepal_Width
+##   &lt;fctr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;
+## 1 setosa                  5.01             3.43
+## 2 versicolor              5.94             2.77
+## 3 virginica               6.59             2.97</code></pre>
 <p>Or even parametric code such as:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resultColumn &lt;-<span class="st"> "summary_value"</span>
 datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"Species"</span>) <span class="op">%.&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., resultColumn <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
-##      Species summary_value
-##       &lt;fctr&gt;         &lt;dbl&gt;
-## 1     setosa         5.006
-## 2 versicolor         5.936
-## 3  virginica         6.588</code></pre>
+##   Species    summary_value
+##   &lt;fctr&gt;             &lt;dbl&gt;
+## 1 setosa              5.01
+## 2 versicolor          5.94
+## 3 virginica           6.59</code></pre>
 <p>For more details please see: <a href="https://winvector.github.io/wrapr/reference/named_map_builder.html"><code>help(</code>:=<code>, package = 'wrapr')</code></a> and <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>help("%.&gt;%", package="wrapr")</code></a>.</p>
 </div>
   </div>

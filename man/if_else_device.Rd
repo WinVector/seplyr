@@ -57,4 +57,15 @@ is a reserved column name for this procedure.
    select_se(., grepdf('^ifebtest_.*', ., invert=TRUE))
  print(res)
 
+ ## Note: with wrapr version 1.0.2 or greater
+ ## you can write this without quotes code as:
+ # program <- if_else_device(
+ #  testexpr = '(a+b)>1',
+ #  thenexprs = c(
+ #    if_else_device(
+ #      testexpr = qe(runif(n()) >= 0.5),
+ #      thenexprs = qae(a := 0),
+ #      elseexprs = qae(b := 0),
+ #    'edited' := 'TRUE'))
+
 }
