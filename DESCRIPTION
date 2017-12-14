@@ -2,7 +2,7 @@ Package: seplyr
 Type: Package
 Title: Standard Evaluation Improved Interfaces for Common Data Manipulation Tasks
 Version: 0.5.1
-Date: 2017-11-30
+Date: 2017-12-14
 Authors@R: c(
     person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),
     person(family = "Win-Vector LLC", role = c("cph"))
@@ -23,7 +23,7 @@ Description:  The 'seplyr' (standard evaluation 'dplyr') package supplies improv
 License: GPL-3
 Encoding: UTF-8
 Depends:
-    wrapr (>= 1.0.1)
+    wrapr (>= 1.0.2)
 Imports:
     dplyr (>= 0.7.4),
     rlang (>= 0.1.4),
