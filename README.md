@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-The [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) supplies improved *s*tandard *e*valuation interfaces for some common data plying tasks.
+The [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) supplies improved *s*tandard *e*valuation interfaces for some common `dplyr` data plying tasks.
 
 ![](https://github.com/WinVector/seplyr/raw/master/tools/safety.png)
 

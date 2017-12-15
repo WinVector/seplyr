@@ -1,6 +1,6 @@
 Package: seplyr
 Type: Package
-Title: Standard Evaluation Improved Interfaces for Common Data Manipulation Tasks
+Title: Improved Standard Evaluation Interfaces for Common Data Manipulation Tasks
 Version: 0.5.1
 Date: 2017-12-15
 Authors@R: c(
@@ -10,8 +10,8 @@ Authors@R: c(
 Maintainer: John Mount <jmount@win-vector.com>
 URL: https://github.com/WinVector/seplyr/,  https://winvector.github.io/seplyr/
 BugReports: https://github.com/WinVector/seplyr/issues
-Description:  The 'seplyr' (standard evaluation 'dplyr') package supplies improved
-    standard evaluation adapter methods for important common data manipulation tasks.
+Description:  The 'seplyr' (standard evaluation plying) package supplies improved
+    standard evaluation adapter methods for important common 'dplyr' data manipulation tasks.
     In addition the 'seplyr' package supplies several new "key operations
     bound together" methods.  These include 'group_summarize()' (which
     combines grouping, arranging and calculation in an atomic unit),
