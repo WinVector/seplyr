@@ -20,22 +20,7 @@ summarise_nse(.data, ..., env = parent.frame())
 .data with summarized columns.
 }
 \description{
-summarize a data frame by the summarizeTerms.  Accepts arbitrary text as
-summarizeTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
-Terms are vectors or lists of the form "lhs := rhs".
-}
-\examples{
-
-
-resCol <- "Sepal_Mean_Length"
-varCol <- "Sepal.Length"
-
-datasets::iris \%.>\%
-  group_by_se(., 'Species') \%.>\%
-  summarize_nse(., resCol := mean(varCol),
-                   "max_Sepal_Length" := max("Sepal.Length"))
-
-
+summarize a data frame by the summarize terms from \code{...} (deprecated, please use \code{\link{summarize_se}}).
 }
 \seealso{
 \code{\link{summarize_se}}, \code{\link[dplyr]{summarize}}, \code{\link[dplyr]{summarize_at}}, \code{\link[wrapr]{:=}}

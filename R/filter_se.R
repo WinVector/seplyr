@@ -16,8 +16,8 @@
 #' upperBound <- 3.5
 #'
 #' datasets::iris %.>%
-#'   filter_se(., c("Sepal.Length >= 2 * Sepal.Width",
-#'                  "Petal.Length <= upperBound"))
+#'   filter_se(., qe(Sepal.Length >= 2 * Sepal.Width,
+#'                   Petal.Length <= upperBound))
 #'
 #'
 #' @export

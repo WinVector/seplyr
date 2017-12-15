@@ -111,9 +111,7 @@
     </div>
 
     
-    <p>summarize a data frame by the summarizeTerms.  Accepts arbitrary text as
-summarizeTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".
-Terms are vectors or lists of the form "lhs := rhs".</p>
+    <p>summarize a data frame by the summarize terms from <code>...</code> (deprecated, please use <code><a href='summarize_se.html'>summarize_se</a></code>).</p>
     
 
     <pre class="usage"><span class='fu'>summarize_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())
@@ -146,23 +144,6 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
     <p><code><a href='summarize_se.html'>summarize_se</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/summarise_all.html'>summarize_at</a></code>, <code><a href='http://www.rdocumentation.org/packages/wrapr/topics/named_map_builder'>:=</a></code></p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-
-<span class='no'>resCol</span> <span class='kw'>&lt;-</span> <span class='st'>"Sepal_Mean_Length"</span>
-<span class='no'>varCol</span> <span class='kw'>&lt;-</span> <span class='st'>"Sepal.Length"</span>
-
-<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
-  <span class='fu'><a href='group_by_se.html'>group_by_se</a></span>(<span class='no'>.</span>, <span class='st'>'Species'</span>) <span class='kw'>%.&gt;%</span>
-  <span class='fu'>summarize_nse</span>(<span class='no'>.</span>, <span class='no'>resCol</span> <span class='kw'>:=</span> <span class='fu'>mean</span>(<span class='no'>varCol</span>),
-                   <span class='st'>"max_Sepal_Length"</span> <span class='kw'>:=</span> <span class='fu'>max</span>(<span class='st'>"Sepal.Length"</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 3
-#&gt;   Species    Sepal_Mean_Length max_Sepal_Length
-#&gt;   &lt;fctr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;
-#&gt; 1 setosa                  5.01             5.80
-#&gt; 2 versicolor              5.94             7.00
-#&gt; 3 virginica               6.59             7.90</div><div class='input'>
-
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -172,9 +153,7 @@ Terms are vectors or lists of the form "lhs := rhs".</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

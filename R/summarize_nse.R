@@ -1,9 +1,7 @@
 
 #' summarize non-standard evaluation interface.
 #'
-#' summarize a data frame by the summarizeTerms.  Accepts arbitrary text as
-#' summarizeTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
-#' Terms are vectors or lists of the form "lhs := rhs".
+#' summarize a data frame by the summarize terms from \code{...} (deprecated, please use \code{\link{summarize_se}}).
 #'
 #' @seealso  \code{\link{summarize_se}}, \code{\link[dplyr]{summarize}}, \code{\link[dplyr]{summarize_at}}, \code{\link[wrapr]{:=}}
 #'
@@ -12,21 +10,11 @@
 #' @param env environment to work in.
 #' @return .data with summarized columns.
 #'
-#' @examples
-#'
-#'
-#' resCol <- "Sepal_Mean_Length"
-#' varCol <- "Sepal.Length"
-#'
-#' datasets::iris %.>%
-#'   group_by_se(., 'Species') %.>%
-#'   summarize_nse(., resCol := mean(varCol),
-#'                    "max_Sepal_Length" := max("Sepal.Length"))
-#'
 #'
 #' @export
 #'
 summarize_nse <- function(.data, ..., env = parent.frame()) {
+  .Deprecated(new = "summarize_se", old = "summarize_nse")
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::summarize_nse first argument must be a data.frame or tbl")
   }

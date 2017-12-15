@@ -1,9 +1,7 @@
 
 #' transmute non-standard evaluation interface.
 #'
-#' transmute a data frame by the transmuteTerms.  Accepts arbitrary text as
-#' transmuteTerms to allow forms such as "Sepal.Length >= 2 * Sepal.Width".
-#' Terms are vectors or lists of the form "lhs := rhs".
+#' transmute a data frame by the transmuteterms from \code{...} (deprecated, please use \code{\link{transmute_se}}).
 #'
 #' @seealso \code{\link{transmute_se}}, \code{\link[dplyr]{transmute}}, \code{\link[dplyr]{transmute_at}}, \code{\link[wrapr]{:=}}
 #'
@@ -12,23 +10,10 @@
 #' @param transmute_nse_env environment to work in.
 #' @return .data with altered columns(other columns dropped).
 #'
-#' @examples
-#'
-#'
-#' resCol1 <- "Sepal_Long"
-#' ratio <- 2
-#' compCol1 <- "Sepal.Width"
-#'
-#'
-#' datasets::iris %.>%
-#'   transmute_nse(., resCol1 := "Sepal.Length" >= ratio * compCol1,
-#'                 "Petal_Short" := "Petal.Length" <= 3.5) %.>%
-#'   summary(.)
-#'
-#'
 #' @export
 #'
 transmute_nse <- function(.data, ...,  transmute_nse_env = parent.frame()) {
+  .Deprecated(new = "transmute_se", old = "transmute_nse")
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::transmute_nse first argument must be a data.frame or tbl")
   }

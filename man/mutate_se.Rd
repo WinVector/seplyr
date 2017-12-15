@@ -42,8 +42,8 @@ resCol1 <- "Sepal_Long"
 limit <- 3.5
 
 datasets::iris \%.>\%
-  mutate_se(., c(resCol1 := "Sepal.Length >= 2 * Sepal.Width",
-                 "Petal_Short" := "Petal.Length <= limit")) \%.>\%
+  mutate_se(., qae(resCol1 := Sepal.Length >= 2 * Sepal.Width,
+                   Petal_Short := Petal.Length <= limit)) \%.>\%
   head(.)
 
 

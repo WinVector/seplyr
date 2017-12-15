@@ -147,8 +147,8 @@ transmuteTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".</p>
     <pre class="examples"><div class='input'>
 
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
-  <span class='fu'>transmute_se</span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='st'>"Sepal_Long"</span> <span class='kw'>:=</span> <span class='st'>"Sepal.Length &gt;= 2 * Sepal.Width"</span>,
-                    <span class='st'>"Petal_Short"</span> <span class='kw'>:=</span> <span class='st'>"Petal.Length &lt;= 3.5"</span>)) <span class='kw'>%.&gt;%</span>
+  <span class='fu'>transmute_se</span>(<span class='no'>.</span>, <span class='fu'>qae</span>(<span class='no'>Sepal_Long</span> <span class='kw'>:=</span> <span class='no'>Sepal.Length</span> <span class='kw'>&gt;=</span> <span class='fl'>2</span> * <span class='no'>Sepal.Width</span>,
+                      <span class='no'>Petal_Short</span> <span class='kw'>:=</span> <span class='no'>Petal.Length</span> <span class='kw'>&lt;=</span> <span class='fl'>3.5</span>)) <span class='kw'>%.&gt;%</span>
   <span class='fu'>summary</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;  Sepal_Long      Petal_Short    
 #&gt;  Mode :logical   Mode :logical  
 #&gt;  FALSE:66        FALSE:95       

@@ -149,8 +149,8 @@ summarizeTerms to allow forms such as "mean(Sepal.Length)".</p>
     <pre class="examples"><div class='input'>
 
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
-  <span class='fu'>summarize_se</span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='st'>"Mean_Sepal_Length"</span> <span class='kw'>:=</span> <span class='st'>"mean(Sepal.Length)"</span>,
-                    <span class='st'>"Max_Sepal_Length"</span> <span class='kw'>:=</span> <span class='st'>"max(Sepal.Length)"</span>)) <span class='kw'>%.&gt;%</span>
+  <span class='fu'>summarize_se</span>(<span class='no'>.</span>, <span class='fu'>qae</span>(<span class='no'>Mean_Sepal_Length</span> <span class='kw'>:=</span> <span class='fu'>mean</span>(<span class='no'>Sepal.Length</span>),
+                      <span class='no'>Max_Sepal_Length</span> <span class='kw'>:=</span> <span class='fu'>max</span>(<span class='no'>Sepal.Length</span>))) <span class='kw'>%.&gt;%</span>
   <span class='fu'>head</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;   Mean_Sepal_Length Max_Sepal_Length
 #&gt; 1          5.843333              7.9</div><div class='input'>
 

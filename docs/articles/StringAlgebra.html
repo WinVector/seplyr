@@ -87,7 +87,7 @@
       <h1>String Algebra</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2017-12-14</h4>
+            <h4 class="date">2017-12-15</h4>
           </div>
 
     
@@ -122,47 +122,6 @@ datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
 ## 5          5.0         3.6          1.4         0.2  setosa      FALSE
 ## 6          5.4         3.9          1.7         0.4  setosa      FALSE</code></pre>
 <p>Details on <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>%.&gt;%</code></a> (dot pipe) and <a href="https://winvector.github.io/wrapr/reference/named_map_builder.html"><code>:=</code></a> (named map builder) can be found <a href="https://winvector.github.io/wrapr/articles/dot_pipe.html">here</a> and <a href="https://winvector.github.io/seplyr/articles/named_map_builder.html">here</a> respectively. The idea is: <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/mutate_se">seplyr::mutate_se(., "Sepal_Long" := "Sepal.Length &gt;= ratio * Sepal.Width")</a></code> should be equilant to <code><a href="http://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate(., Sepal_Long = Sepal.Length &gt;= ratio * Sepal.Width)</a></code>.</p>
-<p><code>seplyr</code> also provides an number of <code>seplyr::*_nse()</code> convenience forms wrapping all of these steps into one operation. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/mutate_nse.html">mutate_nse</a></span>(., 
-             resCol1 <span class="op">:</span><span class="er">=</span><span class="st"> "Sepal.Length"</span> <span class="op">&gt;=</span><span class="st"> </span>ratio <span class="op">*</span><span class="st"> </span>compCol1) <span class="op">%.&gt;%</span>
-<span class="st">  </span><span class="kw">head</span>(.)</code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal_Long
-## 1          5.1         3.5          1.4         0.2  setosa      FALSE
-## 2          4.9         3.0          1.4         0.2  setosa      FALSE
-## 3          4.7         3.2          1.3         0.2  setosa      FALSE
-## 4          4.6         3.1          1.5         0.2  setosa      FALSE
-## 5          5.0         3.6          1.4         0.2  setosa      FALSE
-## 6          5.4         3.9          1.7         0.4  setosa      FALSE</code></pre>
-<p>To use string literals you merely need one extra layer of quoting:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">"is_setosa"</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../reference/expand_expr.html">expand_expr</a></span>(Species <span class="op">==</span><span class="st"> "'setosa'"</span>)</code></pre></div>
-<pre><code>##               is_setosa 
-## "Species == \"setosa\""</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/transmute_nse.html">transmute_nse</a></span>(., 
-             <span class="st">"is_setosa"</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>Species <span class="op">==</span><span class="st"> "'setosa'"</span>) <span class="op">%.&gt;%</span>
-<span class="st">  </span><span class="kw">summary</span>(.)</code></pre></div>
-<pre><code>##  is_setosa      
-##  Mode :logical  
-##  FALSE:100      
-##  TRUE :50</code></pre>
-<p>The purpose of all of the above is to mix names that are known while we are writing the code (these are quoted) with names that may not be known until later (i.e., column names supplied as parameters). This allows the easy creation of useful generic functions such as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countMatches &lt;-<span class="st"> </span><span class="cf">function</span>(data, columnName, targetValue) {
-  <span class="co"># extra quotes to say we are interested in value, not de-reference</span>
-  targetSym &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'"'</span>, targetValue, <span class="st">'"'</span>) 
-  data <span class="op">%.&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/transmute_nse.html">transmute_nse</a></span>(., <span class="st">"match"</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>columnName <span class="op">==</span><span class="st"> </span>targetSym) <span class="op">%.&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"match"</span>) <span class="op">%.&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="st">"count"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "n()"</span>)
-}
-
-<span class="kw">countMatches</span>(datasets<span class="op">::</span>iris, <span class="st">"Species"</span>, <span class="st">"setosa"</span>)</code></pre></div>
-<pre><code>## # A tibble: 2 x 2
-##   match count
-##   &lt;lgl&gt; &lt;int&gt;
-## 1 F       100
-## 2 T        50</code></pre>
-<p>The purpose of the <code>seplyr</code> string system is to pull off quotes and de-reference indirect variables. So, you need to remember to add enough extra quotation marks to prevent this where you do not want it.</p>
 </div>
   </div>
 

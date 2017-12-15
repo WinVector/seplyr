@@ -111,12 +111,7 @@
     </div>
 
     
-    <p>Mutate a data frame by the mutateTerms.
-Accepts arbitrary un-parsed expressions as
-assignments to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".
-(without the quotes).
-Terms are vectors or lists of the form "lhs := rhs".
-Semantics are: terms are evaluated left to right if mutate_nse_split_terms==TRUE (the default).</p>
+    <p>Mutate a data frame by the mutate terms from <code>...</code> (deprecated, please use <code><a href='mutate_se.html'>mutate_se</a></code>).</p>
     
 
     <pre class="usage"><span class='fu'>mutate_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>mutate_nse_split_terms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -163,32 +158,6 @@ and have its own "too long sequence" issues on remote-data systems
     <p><code><a href='mutate_se.html'>mutate_se</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/summarise_all.html'>mutate_at</a></code>, <code><a href='http://www.rdocumentation.org/packages/wrapr/topics/named_map_builder'>:=</a></code></p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-
-<span class='no'>resCol1</span> <span class='kw'>&lt;-</span> <span class='st'>"Sepal_Long"</span>
-<span class='no'>ratio</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>
-<span class='no'>compCol1</span> <span class='kw'>&lt;-</span> <span class='st'>"Sepal.Width"</span>
-
-<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
-  <span class='fu'>mutate_nse</span>(<span class='no'>.</span>, <span class='no'>resCol1</span> <span class='kw'>:=</span> <span class='st'>"Sepal.Length"</span> <span class='kw'>&gt;=</span> <span class='no'>ratio</span> * <span class='no'>compCol1</span>,
-                <span class='st'>"Petal_Short"</span> <span class='kw'>:=</span> <span class='st'>"Petal.Length"</span> <span class='kw'>&lt;=</span> <span class='fl'>3.5</span>) <span class='kw'>%.&gt;%</span>
-  <span class='fu'>summary</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
-#&gt;  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
-#&gt;  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
-#&gt;  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
-#&gt;  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
-#&gt;  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
-#&gt;  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
-#&gt;        Species   Sepal_Long      Petal_Short    
-#&gt;  setosa    :50   Mode :logical   Mode :logical  
-#&gt;  versicolor:50   FALSE:66        FALSE:95       
-#&gt;  virginica :50   TRUE :84        TRUE :55       
-#&gt;                                                 
-#&gt;                                                 
-#&gt;                                                 </div><div class='input'>
-
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -200,9 +169,7 @@ and have its own "too long sequence" issues on remote-data systems
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

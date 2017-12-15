@@ -27,8 +27,8 @@ summarizeTerms to allow forms such as "mean(Sepal.Length)".
 
 
 datasets::iris \%.>\%
-  summarize_se(., c("Mean_Sepal_Length" := "mean(Sepal.Length)",
-                    "Max_Sepal_Length" := "max(Sepal.Length)")) \%.>\%
+  summarize_se(., qae(Mean_Sepal_Length := mean(Sepal.Length),
+                      Max_Sepal_Length := max(Sepal.Length))) \%.>\%
   head(.)
 
 
