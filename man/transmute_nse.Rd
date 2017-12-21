@@ -2,7 +2,7 @@
 % Please edit documentation in R/transmute_nse.R
 \name{transmute_nse}
 \alias{transmute_nse}
-\title{transmute non-standard evaluation interface.}
+\title{transmute non-standard evaluation interface (deprecated).}
 \usage{
 transmute_nse(.data, ..., transmute_nse_env = parent.frame())
 }

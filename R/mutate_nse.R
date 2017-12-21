@@ -2,7 +2,7 @@
 
 
 
-#' mutate non-standard evaluation interface.
+#' mutate non-standard evaluation interface (deprecated).
 #'
 #' Mutate a data frame by the mutate terms from \code{...} (deprecated, please use \code{\link{mutate_se}}).
 #'
@@ -48,7 +48,7 @@ mutate_nse <- function(.data, ...,
         stop("mutate_nse terms must be of the form: sym := expr")
       }
       lhs[[i-1]] <- as.character(prep_deref(ei[[2]], mutate_nse_env))
-      rhs[[i-1]] <- deparse(prep_deref(ei[[3]], mutate_nse_env))
+      rhs[[i-1]] <- paste(deparse(prep_deref(ei[[3]], mutate_nse_env)), collapse = " ")
     }
     res <- mutate_se(res, lhs := rhs,
                      splitTerms = mutate_nse_split_terms,

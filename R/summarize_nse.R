@@ -1,5 +1,5 @@
 
-#' summarize non-standard evaluation interface.
+#' summarize non-standard evaluation interface (deprecated).
 #'
 #' summarize a data frame by the summarize terms from \code{...} (deprecated, please use \code{\link{summarize_se}}).
 #'
@@ -36,7 +36,7 @@ summarize_nse <- function(.data, ..., env = parent.frame()) {
         stop("summarize_nse terms must be of the form: sym := expr")
       }
       lhs[[i-1]] <- as.character(prep_deref(ei[[2]], env))
-      rhs[[i-1]] <- deparse(prep_deref(ei[[3]], env))
+      rhs[[i-1]] <- paste(deparse(prep_deref(ei[[3]], env)), collapse = " ")
     }
     res <- summarize_se(res, lhs := rhs, env=env)
   }

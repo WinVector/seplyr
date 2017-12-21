@@ -2,7 +2,7 @@
 % Please edit documentation in R/stringAlgebra.R
 \name{prep_deref}
 \alias{prep_deref}
-\title{Substitute language elements by one-expand_expr.}
+\title{Substitute language elements by one-expand_expr (deprecated).}
 \usage{
 prep_deref(lexpr, env = parent.frame())
 }
@@ -15,21 +15,5 @@ prep_deref(lexpr, env = parent.frame())
 R language element with dequotes and derefs
 }
 \description{
-Substitute language elements by one-expand_expr.
-}
-\examples{
-
-resCol1 <- "Sepal_Long"
-ratio <- 2
-compCol1 <- "Sepal.Width"
-f <- function(expr, env = parent.frame()) {
-   mt <- substitute(expr)
-   deparse(prep_deref(mt, env))
-}
-expr <- f("Sepal.Length" >= ratio * compCol1)
-print(expr)
-iris \%.>\%
-   mutate_se(., resCol1 := expr) \%.>\%
-   head(.)
-
+Substitute language elements by one-expand_expr (deprecated).
 }

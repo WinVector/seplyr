@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_nse.R
 \name{filter_nse}
 \alias{filter_nse}
-\title{Filter non-standard interface.}
+\title{Filter non-standard interface (deprecated).}
 \usage{
 filter_nse(.data, ..., filter_nse_env = parent.frame())
 }

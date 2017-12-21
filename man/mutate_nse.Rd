@@ -2,7 +2,7 @@
 % Please edit documentation in R/mutate_nse.R
 \name{mutate_nse}
 \alias{mutate_nse}
-\title{mutate non-standard evaluation interface.}
+\title{mutate non-standard evaluation interface (deprecated).}
 \usage{
 mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
   mutate_nse_env = parent.frame(), mutate_nse_printPlan = FALSE)

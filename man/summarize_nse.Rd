@@ -3,7 +3,7 @@
 \name{summarize_nse}
 \alias{summarize_nse}
 \alias{summarise_nse}
-\title{summarize non-standard evaluation interface.}
+\title{summarize non-standard evaluation interface (deprecated).}
 \usage{
 summarize_nse(.data, ..., env = parent.frame())
 

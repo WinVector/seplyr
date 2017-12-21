@@ -1,5 +1,5 @@
 
-#' Filter non-standard interface.
+#' Filter non-standard interface (deprecated).
 #'
 #' Filter a data frame by the filter terms in \code{...} (deprecated, please use \code{\link{filter_se}}).
 #'
@@ -29,7 +29,7 @@ filter_nse <- function(.data, ...,
     terms <- vector(len-1, mode='list')
     for(i in (2:len)) {
       ei <- filterTerms[[i]]
-      terms[[i-1]] <- deparse(prep_deref(ei, filter_nse_env))
+      terms[[i-1]] <- paste(deparse(prep_deref(ei, filter_nse_env)), collapse = " ")
     }
     res <- filter_se(res, terms, env=filter_nse_env)
   }

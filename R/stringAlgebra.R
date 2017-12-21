@@ -109,31 +109,18 @@ deref_str2 <- function(str, env) {
   deref_symb(str, env)
 }
 
-#' Substitute language elements by one-expand_expr.
+#' Substitute language elements by one-expand_expr (deprecated).
 #'
 #'
 #' @param lexpr language item (captured by substitute())
 #' @param env environment to look in
 #' @return R language element with dequotes and derefs
 #'
-#' @examples
-#'
-#' resCol1 <- "Sepal_Long"
-#' ratio <- 2
-#' compCol1 <- "Sepal.Width"
-#' f <- function(expr, env = parent.frame()) {
-#'    mt <- substitute(expr)
-#'    deparse(prep_deref(mt, env))
-#' }
-#' expr <- f("Sepal.Length" >= ratio * compCol1)
-#' print(expr)
-#' iris %.>%
-#'    mutate_se(., resCol1 := expr) %.>%
-#'    head(.)
 #'
 #' @export
 #'
 prep_deref <- function(lexpr, env = parent.frame()) {
+  .Deprecated(new = "wrapr::qe", old = "prep_deref")
   nexpr <- lexpr
   n <- length(nexpr)
   # just in case (establishes an invarient of n>=1)
@@ -172,7 +159,7 @@ prep_deref <- function(lexpr, env = parent.frame()) {
   return(nexpr)
 }
 
-#' Prepare an expression for standard evaluation.
+#' Prepare an expression for standard evaluation (deprecated).
 #'
 #' Combine string-variable values and quoted terms to produce
 #' a concrete string reading for value oriented string evaluation
@@ -185,21 +172,10 @@ prep_deref <- function(lexpr, env = parent.frame()) {
 #' @param env enviornment in.
 #' @return string
 #'
-#' @examples
-#'
-#' resCol1 <- "Sepal_Long"
-#' ratio <- 2
-#' compCol1 <- "Sepal.Width"
-#' expr <- expand_expr("Sepal.Length" >= ratio * compCol1)
-#' print(expr)
-#' resCol <- 'X'
-#' iris %.>%
-#'    mutate_se(., resCol1 := expr) %.>%
-#'    head(.)
-#'
 #' @export
 #'
 expand_expr <- function(expr, env = parent.frame()) {
+  .Deprecated(new = "wrapr::qe", old = "expand_expr")
   mt <- substitute(expr)
-  paste(deparse(prep_deref(mt, env)), collapse = '\n')
+  paste(deparse(prep_deref(mt, env)), collapse = ' ')
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/stringAlgebra.R
 \name{expand_expr}
 \alias{expand_expr}
-\title{Prepare an expression for standard evaluation.}
+\title{Prepare an expression for standard evaluation (deprecated).}
 \usage{
 expand_expr(expr, env = parent.frame())
 }
@@ -21,17 +21,4 @@ a concrete string reading for value oriented string evaluation
 string algebra or string interpolation.
 This method powers the \code{seplyr::*_nse()}
 methods and helps build string expressions.
-}
-\examples{
-
-resCol1 <- "Sepal_Long"
-ratio <- 2
-compCol1 <- "Sepal.Width"
-expr <- expand_expr("Sepal.Length" >= ratio * compCol1)
-print(expr)
-resCol <- 'X'
-iris \%.>\%
-   mutate_se(., resCol1 := expr) \%.>\%
-   head(.)
-
 }
