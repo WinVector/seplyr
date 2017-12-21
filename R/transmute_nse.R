@@ -35,7 +35,7 @@ transmute_nse <- function(.data, ...,  transmute_nse_env = parent.frame()) {
         stop("transmute_nse terms must be of the form: sym := expr")
       }
       lhs[[i-1]] <- as.character(prep_deref(ei[[2]], transmute_nse_env))
-      rhs[[i-1]] <- paste(deparse(prep_deref(ei[[3]], transmute_nse_env)), collapse = " ")
+      rhs[[i-1]] <- paste(deparse(prep_deref(ei[[3]], transmute_nse_env)), collapse = "\n")
     }
     res <- transmute_se(res, lhs := rhs, env=transmute_nse_env)
   }

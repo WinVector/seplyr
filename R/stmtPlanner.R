@@ -164,7 +164,7 @@ quote_mutate <- function(...) {
         stop("seplyr::quote_mutate terms must be of the form: sym := expr")
       }
       lhs[[i-1]] <- as.character(ei[[2]])[[1]]
-      rhs[[i-1]] <- paste(deparse(ei[[3]]), collapse = " ")
+      rhs[[i-1]] <- paste(deparse(ei[[3]]), collapse = "\n")
     }
   }
   names(rhs) = lhs

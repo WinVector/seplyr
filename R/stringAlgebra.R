@@ -177,5 +177,5 @@ prep_deref <- function(lexpr, env = parent.frame()) {
 expand_expr <- function(expr, env = parent.frame()) {
   .Deprecated(new = "wrapr::qe", old = "expand_expr")
   mt <- substitute(expr)
-  paste(deparse(prep_deref(mt, env)), collapse = ' ')
+  paste(deparse(prep_deref(mt, env)), collapse = '\n')
 }

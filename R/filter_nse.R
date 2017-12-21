@@ -29,7 +29,7 @@ filter_nse <- function(.data, ...,
     terms <- vector(len-1, mode='list')
     for(i in (2:len)) {
       ei <- filterTerms[[i]]
-      terms[[i-1]] <- paste(deparse(prep_deref(ei, filter_nse_env)), collapse = " ")
+      terms[[i-1]] <- paste(deparse(prep_deref(ei, filter_nse_env)), collapse = "\n")
     }
     res <- filter_se(res, terms, env=filter_nse_env)
   }
