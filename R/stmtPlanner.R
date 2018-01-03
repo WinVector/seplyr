@@ -37,13 +37,16 @@ partition_mutate_d <- function(de) {
   while(any(de$group<=0)) {
     # sweep forward in order greedily taking anything
     have <- which(de$group>0)
+    usedInGroup <- NULL
     formedInGroup <- NULL
     for(i in 1:n) {
       if( (de$group[[i]]<=0) &&  # available to take
           (!(de$lhs[[i]] %in% formedInGroup)) && # not assigned to in this block
+          (!(de$lhs[[i]] %in% usedInGroup)) && # not used to in this block
           (length(intersect(de$deps[[i]], formedInGroup))<=0) && # not using a new value
           (length(setdiff(de$deps[[i]], have))<=0) # all pre-conditions met
       ) {
+        usedInGroup <- unique(c(usedInGroup, de$syms[[i]]))
         formedInGroup <- c(formedInGroup, de$lhs[[i]])
         de$group[[i]] <- group
       }

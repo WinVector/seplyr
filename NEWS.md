@@ -1,4 +1,8 @@
 
+# seplyr 0.5.2 2018-01-04
+
+ * Fix missed case in statement partitioner.
+
 # seplyr 0.5.1 2018-01-02
 
  * mutate_se now uses partition_mutate_se.
