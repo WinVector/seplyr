@@ -84,7 +84,7 @@
       <h1>Mutate Partitioner</h1>
                         <h4 class="author">John Mount, Win-Vector LLC</h4>
             
-            <h4 class="date">2018-01-03</h4>
+            <h4 class="date">2018-01-04</h4>
           </div>
 
     
@@ -104,7 +104,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice_a <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand_a<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 1</span>
     a_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_a, <span class="co"># first use of a new value 2</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     a_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_a, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
@@ -112,7 +112,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice_b <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand_b<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 3</span>
     b_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_b, <span class="co"># first use of a new value 4</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     b_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_b, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
@@ -120,7 +120,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice_c <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand_c<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 5</span>
     c_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_c, <span class="co"># first use of a new value 6</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     c_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_c, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
@@ -128,7 +128,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice_d <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand_d<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 7</span>
     d_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_d, <span class="co"># first use of a new value 8</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     d_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_d, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
@@ -136,7 +136,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice_e <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand_e<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 9</span>
     e_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_e, <span class="co"># first use of a new value 10</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     e_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice_e, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>)
@@ -155,23 +155,23 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $group00003</span>
 <span class="co">#&gt;                                            a_1 </span>
-<span class="co">#&gt;  "ifelse(choice_a, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice_a, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                            a_2 </span>
 <span class="co">#&gt; "ifelse(choice_a, \"control\", \"treatment\")" </span>
 <span class="co">#&gt;                                            b_1 </span>
-<span class="co">#&gt;  "ifelse(choice_b, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice_b, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                            b_2 </span>
 <span class="co">#&gt; "ifelse(choice_b, \"control\", \"treatment\")" </span>
 <span class="co">#&gt;                                            c_1 </span>
-<span class="co">#&gt;  "ifelse(choice_c, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice_c, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                            c_2 </span>
 <span class="co">#&gt; "ifelse(choice_c, \"control\", \"treatment\")" </span>
 <span class="co">#&gt;                                            d_1 </span>
-<span class="co">#&gt;  "ifelse(choice_d, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice_d, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                            d_2 </span>
 <span class="co">#&gt; "ifelse(choice_d, \"control\", \"treatment\")" </span>
 <span class="co">#&gt;                                            e_1 </span>
-<span class="co">#&gt;  "ifelse(choice_e, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice_e, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                            e_2 </span>
 <span class="co">#&gt; "ifelse(choice_e, \"control\", \"treatment\")"</span></code></pre></div>
 <p>Notice <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/partition_mutate_qt">seplyr::partition_mutate_qt()</a></code> split the work into 3 groups. The straightforward method (with no statement re-ordering) of splitting into non-dependent groups would have to split the mutate at each first use of a new value: yielding 10 splits or 11 mutate stages. For why a low number of execution stages is important please see <a href="http://winvector.github.io/FluidData/partition_mutate.html">here</a>.</p>
@@ -184,7 +184,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 1</span>
     a_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, <span class="co"># first use of a new value 2</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     a_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
@@ -192,7 +192,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 3</span>
     b_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, <span class="co"># first use of a new value 4</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     b_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
@@ -200,7 +200,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 5</span>
     c_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, <span class="co"># first use of a new value 6</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     c_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
@@ -208,7 +208,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 7</span>
     d_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, <span class="co"># first use of a new value 8</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     d_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
@@ -216,7 +216,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
    choice <span class="op">:</span><span class="er">=</span><span class="st"> </span>rand<span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 9</span>
     e_<span class="dv">1</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, <span class="co"># first use of a new value 10</span>
                   <span class="st">'treatment'</span>, 
-                  <span class="st">'contol'</span>),
+                  <span class="st">'control'</span>),
     e_<span class="dv">2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(choice, 
                   <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>)
@@ -233,7 +233,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $group00003</span>
 <span class="co">#&gt;                                          a_1 </span>
-<span class="co">#&gt;  "ifelse(choice, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                          a_2 </span>
 <span class="co">#&gt; "ifelse(choice, \"control\", \"treatment\")" </span>
 <span class="co">#&gt;                                         rand </span>
@@ -245,7 +245,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $group00005</span>
 <span class="co">#&gt;                                          b_1 </span>
-<span class="co">#&gt;  "ifelse(choice, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                          b_2 </span>
 <span class="co">#&gt; "ifelse(choice, \"control\", \"treatment\")" </span>
 <span class="co">#&gt;                                         rand </span>
@@ -257,7 +257,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $group00007</span>
 <span class="co">#&gt;                                          c_1 </span>
-<span class="co">#&gt;  "ifelse(choice, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                          c_2 </span>
 <span class="co">#&gt; "ifelse(choice, \"control\", \"treatment\")" </span>
 <span class="co">#&gt;                                         rand </span>
@@ -269,7 +269,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $group00009</span>
 <span class="co">#&gt;                                          d_1 </span>
-<span class="co">#&gt;  "ifelse(choice, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                          d_2 </span>
 <span class="co">#&gt; "ifelse(choice, \"control\", \"treatment\")" </span>
 <span class="co">#&gt;                                         rand </span>
@@ -281,7 +281,7 @@ plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/partit
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $group00011</span>
 <span class="co">#&gt;                                          e_1 </span>
-<span class="co">#&gt;  "ifelse(choice, \"treatment\", \"contol\")" </span>
+<span class="co">#&gt; "ifelse(choice, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                          e_2 </span>
 <span class="co">#&gt; "ifelse(choice, \"control\", \"treatment\")"</span></code></pre></div>
 </div>

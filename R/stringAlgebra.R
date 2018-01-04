@@ -109,7 +109,7 @@ deref_str2 <- function(str, env) {
   deref_symb(str, env)
 }
 
-#' Substitute language elements by one-expand_expr (deprecated).
+#' Substitute language elements by one-expand_expr.
 #'
 #'
 #' @param lexpr language item (captured by substitute())
@@ -117,10 +117,9 @@ deref_str2 <- function(str, env) {
 #' @return R language element with dequotes and derefs
 #'
 #'
-#' @export
+#' @noRd
 #'
 prep_deref <- function(lexpr, env = parent.frame()) {
-  .Deprecated(new = "wrapr::qe", old = "prep_deref")
   nexpr <- lexpr
   n <- length(nexpr)
   # just in case (establishes an invarient of n>=1)
@@ -172,10 +171,9 @@ prep_deref <- function(lexpr, env = parent.frame()) {
 #' @param env enviornment in.
 #' @return string
 #'
-#' @export
+#' @noRd
 #'
 expand_expr <- function(expr, env = parent.frame()) {
-  .Deprecated(new = "wrapr::qe", old = "expand_expr")
   mt <- substitute(expr)
   paste(deparse(prep_deref(mt, env)), collapse = '\n')
 }
