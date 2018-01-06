@@ -1,8 +1,10 @@
 
-# seplyr 0.5.2 2018-01-04
+# seplyr 0.5.2 2018-01-06
 
  * Fix missed case in statement partitioner.
  * Fix deprecations and visibility of stringAlgebra.
+ * Start to relax quoting conditions.
+ * Factor mutate helper.
 
 # seplyr 0.5.1 2018-01-02
 

@@ -7,7 +7,7 @@
 quote_mutate(...)
 }
 \arguments{
-\item{...}{mutate expressions with := used for assignment.}
+\item{...}{mutate expressions with := or = used for assignment.}
 }
 \value{
 ordered list of mutate_se assignment blocks
@@ -17,7 +17,7 @@ Capture the expressions of a mutate-style command.
 }
 \examples{
 
-plan <- quote_mutate(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
-data.frame(x=1) \%.>\% mutate_se(., plan)
+assignments <- quote_mutate(a1 := 1, b1 = a1, a2 := 2, b2 := 7*(a1 + a2))
+data.frame(x=1) \%.>\% mutate_se(., assignments)
 
 }

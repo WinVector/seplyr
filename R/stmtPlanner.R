@@ -142,32 +142,40 @@ partition_mutate_se <- function(exprs) {
 #' Capture the expressions of a mutate-style command.
 #'
 #'
-#' @param ... mutate expressions with := used for assignment.
+#' @param ... mutate expressions with := or = used for assignment.
 #' @return ordered list of mutate_se assignment blocks
 #'
 #' @examples
 #'
-#' plan <- quote_mutate(a1 := 1, b1 := a1, a2 := 2, b2 := a1 + a2)
-#' data.frame(x=1) %.>% mutate_se(., plan)
+#' assignments <- quote_mutate(a1 := 1, b1 = a1, a2 := 2, b2 := 7*(a1 + a2))
+#' data.frame(x=1) %.>% mutate_se(., assignments)
 #'
 #' @export
+#'
 quote_mutate <- function(...) {
   mutateTerms <- substitute(list(...))
-  # check for a = b assignments (which we do not support)
-  if(!all(names(mutateTerms) %in% "")) {
-    stop("seplyr::quote_mutate() unexpected names in '...', all assignments must be of the form a := b, not a = b")
-  }
   len <- length(mutateTerms) # first slot is "list"
   if(len>1) {
     lhs <- character(len-1)
     rhs <- character(len-1)
     for(i in (2:len)) {
       ei <- mutateTerms[[i]]
-      if((length(ei)!=3)||(as.character(ei[[1]])!=':=')) {
-        stop("seplyr::quote_mutate terms must be of the form: sym := expr")
+      ni <- names(mutateTerms)[[i]]
+      if((!is.null(ni)) && (!is.na(ni)) &&
+         (is.character(ni)) && (nchar(ni)>0)) {
+        vi <- paste(deparse(ei), collapse = "\n")
+      } else {
+        if(as.character(ei[[1]])!=':=') {
+          stop("seplyr::quote_mutate terms must be of the form: sym := expr")
+        }
+        ni <- as.character(ei[[2]])[[1]]
+        vi <- paste(deparse(ei[[3]]), collapse = "\n")
       }
-      lhs[[i-1]] <- as.character(ei[[2]])[[1]]
-      rhs[[i-1]] <- paste(deparse(ei[[3]]), collapse = "\n")
+      if(is.null(ni)) {
+        stop("seplyr::quote_mutate terms must all have names (either from = or :=)")
+      }
+      lhs[[i-1]] <- ni
+      rhs[[i-1]] <- vi
     }
   }
   names(rhs) = lhs
@@ -239,6 +247,65 @@ partition_mutate_qt <- function(...) {
                  })
   res$syms <- syms
   partition_mutate_d(res)
+}
+
+#' Re-write a \code{dplyr::mutate()} into safe blocks.
+#'
+#' Note: not for use with \code{rlang} expressions (guesses variable names by text inspection).
+#' See also: \url{https://winvector.github.io/rquery/articles/AssigmentPartitioner.html}.
+#'
+#' @param ... mutate terms
+#' @return partitioned dplyr::mutate() source text
+#'
+#' @examples
+#'
+#' cat(factor_mutate(
+#'  choice_a = rand_a >= 0.5,
+#'    a_1 = ifelse(choice_a, 'T', 'C'),
+#'    a_2 = ifelse(choice_a, 'C', 'T'),
+#'   choice_b = rand_b >= 0.5,
+#'    b_1 = ifelse(choice_b, 'T', 'C'),
+#'    b_2 = ifelse(choice_b, 'C', 'T'),
+#'   choice_c = rand_c >= 0.5,
+#'    c_1 = ifelse(choice_c, 'T', 'C'),
+#'    c_2 = ifelse(choice_c, 'C', 'T'),
+#'   choice_d = rand_d >= 0.5,
+#'    d_1 = ifelse(choice_d, 'T', 'C'),
+#'    d_2 = ifelse(choice_d, 'C', 'T'),
+#'   choice_e = rand_e >= 0.5,
+#'    e_1 = ifelse(choice_e, 'T', 'C'),
+#'    e_2 = ifelse(choice_e, 'C', 'T') ))
+#'
+#' cat(factor_mutate(
+#'  choice = rand_a >= 0.5,
+#'    a_1 = ifelse(choice, 'T', 'C'),
+#'    a_2 = ifelse(choice, 'C', 'T'),
+#'   choice = rand_b >= 0.5,
+#'    b_1 = ifelse(choice, 'T', 'C'),
+#'    b_2 = ifelse(choice, 'C', 'T'),
+#'   choice = rand_c >= 0.5,
+#'    c_1 = ifelse(choice, 'T', 'C'),
+#'    c_2 = ifelse(choice, 'C', 'T'),
+#'   choice = rand_d >= 0.5,
+#'    d_1 = ifelse(choice, 'T', 'C'),
+#'    d_2 = ifelse(choice, 'C', 'T'),
+#'   choice = rand_e >= 0.5,
+#'    e_1 = ifelse(choice, 'T', 'C'),
+#'    e_2 = ifelse(choice, 'C', 'T') ))
+#'
+#' @export
+#'
+factor_mutate <- function(...) {
+  plan <- partition_mutate_qt(...)
+  steps <- vapply(seq_len(length(plan)),
+                 function(i) {
+                   pi <- plan[[i]]
+                   terms <- paste(names(pi), "=", pi)
+                   ti <- paste(terms, collapse = ",\n          ")
+                   paste0("   mutate(", ti, ")")
+                 }, character(1))
+  r <- paste(steps, collapse = " %>%\n")
+  paste(r, "\n")
 }
 
 #' Simulate a per-row block-\code{if(){}else{}}.
