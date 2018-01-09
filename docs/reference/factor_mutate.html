@@ -71,6 +71,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/factor_mutate.html">factor_mutate</a>
+    </li>
+    <li>
       <a href="../articles/MutatePartitioner.html">Mutate Partitioner</a>
     </li>
     <li>
@@ -112,7 +115,7 @@
 See also: <a href='https://winvector.github.io/rquery/articles/AssigmentPartitioner.html'>https://winvector.github.io/rquery/articles/AssigmentPartitioner.html</a>.</p>
     
 
-    <pre class="usage"><span class='fu'>factor_mutate</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>factor_mutate</span>(<span class='no'>...</span>, <span class='kw'>factor_mutate_warn_msg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -120,6 +123,10 @@ See also: <a href='https://winvector.github.io/rquery/articles/AssigmentPartitio
     <tr>
       <th>...</th>
       <td><p>mutate terms</p></td>
+    </tr>
+    <tr>
+      <th>factor_mutate_warn_msg</th>
+      <td><p>logical if TRUE issue a warning message on non-trivial mutates.</p></td>
     </tr>
     </table>
     
@@ -145,7 +152,8 @@ See also: <a href='https://winvector.github.io/rquery/articles/AssigmentPartitio
    <span class='kw'>d_2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice_d</span>, <span class='st'>'C'</span>, <span class='st'>'T'</span>),
   <span class='kw'>choice_e</span> <span class='kw'>=</span> <span class='no'>rand_e</span> <span class='kw'>&gt;=</span> <span class='fl'>0.5</span>,
    <span class='kw'>e_1</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice_e</span>, <span class='st'>'T'</span>, <span class='st'>'C'</span>),
-   <span class='kw'>e_2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice_e</span>, <span class='st'>'C'</span>, <span class='st'>'T'</span>) ))</div><div class='output co'>#&gt;    mutate(choice_a = rand_a &gt;= 0.5,
+   <span class='kw'>e_2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice_e</span>, <span class='st'>'C'</span>, <span class='st'>'T'</span>),
+ <span class='kw'>factor_mutate_warn_msg</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> ))</div><div class='output co'>#&gt;    mutate(choice_a = rand_a &gt;= 0.5,
 #&gt;           choice_b = rand_b &gt;= 0.5,
 #&gt;           choice_c = rand_c &gt;= 0.5,
 #&gt;           choice_d = rand_d &gt;= 0.5,
@@ -175,7 +183,8 @@ See also: <a href='https://winvector.github.io/rquery/articles/AssigmentPartitio
    <span class='kw'>d_2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice</span>, <span class='st'>'C'</span>, <span class='st'>'T'</span>),
   <span class='kw'>choice</span> <span class='kw'>=</span> <span class='no'>rand_e</span> <span class='kw'>&gt;=</span> <span class='fl'>0.5</span>,
    <span class='kw'>e_1</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice</span>, <span class='st'>'T'</span>, <span class='st'>'C'</span>),
-   <span class='kw'>e_2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice</span>, <span class='st'>'C'</span>, <span class='st'>'T'</span>) ))</div><div class='output co'>#&gt;    mutate(choice = rand_a &gt;= 0.5) %&gt;%
+   <span class='kw'>e_2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice</span>, <span class='st'>'C'</span>, <span class='st'>'T'</span>),
+ <span class='kw'>factor_mutate_warn_msg</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt;    mutate(choice = rand_a &gt;= 0.5) %&gt;%
 #&gt;    mutate(a_1 = ifelse(choice, "T", "C"),
 #&gt;           a_2 = ifelse(choice, "C", "T")) %&gt;%
 #&gt;    mutate(choice = rand_b &gt;= 0.5) %&gt;%

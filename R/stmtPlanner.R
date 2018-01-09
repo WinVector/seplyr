@@ -255,6 +255,7 @@ partition_mutate_qt <- function(...) {
 #' See also: \url{https://winvector.github.io/rquery/articles/AssigmentPartitioner.html}.
 #'
 #' @param ... mutate terms
+#' @param factor_mutate_warn_msg logical if TRUE issue a warning message on non-trivial mutates.
 #' @return partitioned dplyr::mutate() source text
 #'
 #' @examples
@@ -274,7 +275,8 @@ partition_mutate_qt <- function(...) {
 #'    d_2 = ifelse(choice_d, 'C', 'T'),
 #'   choice_e = rand_e >= 0.5,
 #'    e_1 = ifelse(choice_e, 'T', 'C'),
-#'    e_2 = ifelse(choice_e, 'C', 'T') ))
+#'    e_2 = ifelse(choice_e, 'C', 'T'),
+#'  factor_mutate_warn_msg = FALSE ))
 #'
 #' cat(factor_mutate(
 #'  choice = rand_a >= 0.5,
@@ -291,12 +293,17 @@ partition_mutate_qt <- function(...) {
 #'    d_2 = ifelse(choice, 'C', 'T'),
 #'   choice = rand_e >= 0.5,
 #'    e_1 = ifelse(choice, 'T', 'C'),
-#'    e_2 = ifelse(choice, 'C', 'T') ))
+#'    e_2 = ifelse(choice, 'C', 'T'),
+#'  factor_mutate_warn_msg = FALSE))
 #'
 #' @export
 #'
-factor_mutate <- function(...) {
+factor_mutate <- function(...,
+                          factor_mutate_warn_msg = TRUE) {
   plan <- partition_mutate_qt(...)
+  if(factor_mutate_warn_msg && (length(plan)>1)) {
+    warning("Mutate should be split into more than one stage.")
+  }
   steps <- vapply(seq_len(length(plan)),
                  function(i) {
                    pi <- plan[[i]]

@@ -4,10 +4,12 @@
 \alias{factor_mutate}
 \title{Re-write a \code{dplyr::mutate()} into safe blocks.}
 \usage{
-factor_mutate(...)
+factor_mutate(..., factor_mutate_warn_msg = TRUE)
 }
 \arguments{
 \item{...}{mutate terms}
+
+\item{factor_mutate_warn_msg}{logical if TRUE issue a warning message on non-trivial mutates.}
 }
 \value{
 partitioned dplyr::mutate() source text
@@ -33,7 +35,8 @@ cat(factor_mutate(
    d_2 = ifelse(choice_d, 'C', 'T'),
   choice_e = rand_e >= 0.5,
    e_1 = ifelse(choice_e, 'T', 'C'),
-   e_2 = ifelse(choice_e, 'C', 'T') ))
+   e_2 = ifelse(choice_e, 'C', 'T'),
+ factor_mutate_warn_msg = FALSE ))
 
 cat(factor_mutate(
  choice = rand_a >= 0.5,
@@ -50,6 +53,7 @@ cat(factor_mutate(
    d_2 = ifelse(choice, 'C', 'T'),
   choice = rand_e >= 0.5,
    e_1 = ifelse(choice, 'T', 'C'),
-   e_2 = ifelse(choice, 'C', 'T') ))
+   e_2 = ifelse(choice, 'C', 'T'),
+ factor_mutate_warn_msg = FALSE))
 
 }
