@@ -95,14 +95,14 @@
 <div class="contents">
 <p>An <a href="https://www.r-project.org"><code>R</code></a> <a href="https://CRAN.R-project.org/package=dplyr"><code>dplyr</code></a> user must, to some extent, be able to know if a <code>dplyr</code> expression is well-formed. The <code>dplyr</code> implementation makes such decisions, so to program <code>dplyr</code> one has to be able to anticipate a least a reasonable subset of these determinations.</p>
 <p>Take the following <code>dplyr</code> statement as an example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">x =</span> <span class="dv">1</span>,
-         <span class="dt">v1 =</span> x,
-         <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
-         <span class="dt">v2 =</span> x,
-         <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
-         <span class="dt">v3 =</span> x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">x =</span> <span class="dv">1</span>,
+              <span class="dt">v1 =</span> x,
+              <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
+              <span class="dt">v2 =</span> x,
+              <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
+              <span class="dt">v3 =</span> x)</code></pre></div>
 <p>Would the above be, in the context of a larger <code>dplyr</code> pipeline, be a valid statement?</p>
-<p>My personal opinion is: <a href="http://www.win-vector.com/blog/2017/09/my-advice-on-dplyrmutate/">no it is not</a>.</p>
+<p>My personal opinion is: <a href="http://www.win-vector.com/blog/2017/09/my-advice-on-dplyrmutate/">it is not</a>.</p>
 <p>The issues include: the statement is (unsafely) using values in the same block they are created, and also re-using variable names across terms. I don’t recall these issues being discussed in <a href="http://dplyr.tidyverse.org/reference/mutate.html"><code>dplyr</code> <code><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> documentation</a>, and indeed the statement <em>appears</em> to work when used with the in-memory (or on <code>data.frame</code>) version of <code>dplyr</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"dplyr"</span>)
 <span class="co">#&gt; </span>
@@ -142,7 +142,7 @@ d <span class="op">%&gt;%</span>
 <td align="right">3</td>
 </tr></tbody>
 </table>
-<p>However “in memory” is not the only place <code>dplyr</code> is used and promoted. <code>dplyr</code> is also often used to talk to <code>SQL</code> back ends (such as <code>Spark</code> and databases). When we try the same <code><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> in a database context we, currently, get a different (and wrong) result. This establishes the example <code><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> statement is at best unsafe.</p>
+<p>However “in memory” is not the only place <code>dplyr</code> is promoted and used. <code>dplyr</code> is also often used to talk to <code>SQL</code> back ends (such as <code>Spark</code> and databases). When we try the same <code><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> in a database context we, currently, get a different (and wrong) result. This establishes the example <code><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> statement is at best unsafe.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">packageVersion</span>(<span class="st">"dbplyr"</span>)
 <span class="co">#&gt; [1] '1.2.0'</span>
 <span class="kw">packageVersion</span>(<span class="st">"DBI"</span>)
@@ -160,12 +160,25 @@ d2 <span class="op">%&gt;%</span>
          <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
          <span class="dt">v2 =</span> x,
          <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
-         <span class="dt">v3 =</span> x)
-<span class="co">#&gt; # Source: lazy query [?? x 5]</span>
-<span class="co">#&gt; # Database: sqlite 3.19.3 [:memory:]</span>
-<span class="co">#&gt;       z     x    v1    v2    v3</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1  1.00  1.00  1.00  1.00  1.00</span></code></pre></div>
+         <span class="dt">v3 =</span> x) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/compute.html">collect</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>()</code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">z</th>
+<th align="right">x</th>
+<th align="right">v1</th>
+<th align="right">v2</th>
+<th align="right">v3</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr></tbody>
+</table>
 <p>The above is an incorrect result, with no warning and no error signaled.<br>
 Essentially this is a silent result corruption.</p>
 <p>Looking further we can see the issue is likely in the <code>SQL</code> generation path:</p>
@@ -200,10 +213,9 @@ stmts &lt;-<span class="st"> </span>seplyr<span class="op">::</span><span class=
   <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
   <span class="dt">v3 =</span> x
 )
-Warning <span class="cf">in</span> seplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/seplyr/topics/factor_mutate">factor_mutate</a></span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">v1 =</span> x, <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">v2 =</span> x, <span class="dt">x =</span> x
-<span class="op">+</span><span class="st"> </span><span class="er">:</span><span class="st"> </span>Mutate should be split into more than one stage.
-
-<span class="kw">cat</span>(stmts)
+<span class="co">#&gt; Warning in seplyr::factor_mutate(x = 1, v1 = x, x = x + 1, v2 = x, x = x</span>
+<span class="co">#&gt; + : Mutate should be split into more than one stage.</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(stmts)
    <span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">x =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">v1 =</span> x) <span class="op">%&gt;%</span>
 <span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span>
@@ -217,12 +229,25 @@ Warning <span class="cf">in</span> seplyr<span class="op">::</span><span class="
 </ul>
 <p>The statement is partitioned into a minimal (subject to some order constraints) number of new statements (though it is not obvious from this example). In particular statements that can be left alone are left alone (and no warning is issued).</p>
 <p>And in fact this code returns the same result on the database as we did on the in-memory example.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text =</span> <span class="kw">paste</span>(<span class="st">"d2 %&gt;%"</span>, stmts)))
-<span class="co">#&gt; # Source: lazy query [?? x 5]</span>
-<span class="co">#&gt; # Database: sqlite 3.19.3 [:memory:]</span>
-<span class="co">#&gt;       z     x    v1    v2    v3</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1  1.00  3.00  1.00  2.00  3.00</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text =</span> <span class="kw">paste</span>(<span class="st">"d2 %&gt;%"</span>, stmts))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/compute.html">collect</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>()</code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">z</th>
+<th align="right">x</th>
+<th align="right">v1</th>
+<th align="right">v2</th>
+<th align="right">v3</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+</tr></tbody>
+</table>
 <p>We don’t suggest calling <code>eval()</code> in production code. Instead we suggest using <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/factor_mutate">seplyr::factor_mutate()</a></code> to inspect code as you are writing, and to incorporate its advice in your best practices.</p>
 <p>The important distinction is: the in-memory code seems to have (possibly undocumented) strict sequential semantics (terms are guaranteed to be evaluated in order in a single <code><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>), and database implementations do not have such a property. Thus we need to organize code to be completely unambiguous even with terms re-ordered with a <em>single</em> <code><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> stage. This is a service that the <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/factor_mutate">seplyr::factor_mutate()</a></code> method attempts to heuristically supply, and something <em>central</em> to the design of <a href="https://winvector.github.io/rquery/"><code>rquery</code></a> (a <code>SQL</code>-only data processing system).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/DBI/topics/dbDisconnect">dbDisconnect</a></span>(db)</code></pre></div>

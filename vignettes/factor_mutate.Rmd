@@ -21,17 +21,17 @@ An [`R`](https://www.r-project.org) [`dplyr`](https://CRAN.R-project.org/package
 Take the following `dplyr` statement as an example:
 
 ```{r eval = FALSE}
-  dplyr::mutate(x = 1,
-         v1 = x,
-         x = x + 1,
-         v2 = x,
-         x = x + 1,
-         v3 = x)
+dplyr::mutate(x = 1,
+              v1 = x,
+              x = x + 1,
+              v2 = x,
+              x = x + 1,
+              v3 = x)
 ```
 
 Would the above be, in the context of a larger `dplyr` pipeline, be a valid statement?
 
-My personal opinion is: [no it is not](http://www.win-vector.com/blog/2017/09/my-advice-on-dplyrmutate/).
+My personal opinion is: [it is not](http://www.win-vector.com/blog/2017/09/my-advice-on-dplyrmutate/).
 
 The issues include: the statement is (unsafely) using values in the same 
 block they are created, and also re-using variable names across terms. I don't recall
@@ -55,7 +55,7 @@ d %>%
   knitr::kable()
 ```
 
-However "in memory" is not the only place `dplyr` is used and promoted.
+However "in memory" is not the only place `dplyr` is promoted and used. 
 `dplyr` is also often used to talk to `SQL` back ends (such as `Spark` and 
 databases).  When we try the same `mutate()` in a database context we, currently,
 get a different (and wrong) result.  This establishes the example 
@@ -76,7 +76,9 @@ d2 %>%
          x = x + 1,
          v2 = x,
          x = x + 1,
-         v3 = x)
+         v3 = x) %>%
+  collect() %>%
+  knitr::kable()
 ```
 
 The above is an incorrect result, with no warning and no error signaled.  
@@ -101,7 +103,7 @@ considering placing in a `dplyr::mutate()` (or even a `dplyr::sumarize()` or `dp
   * Issues a warning if the statement is unsafe.
   * Factors the statement into multiple ordered safe statements.
 
-```{r, comment=""}
+```{r}
 # # seplyr::factor_mutate() currently 
 # # requires the dev-version of seplyr
 # # version 0.5.2 or better.
@@ -114,7 +116,9 @@ stmts <- seplyr::factor_mutate(
   x = x + 1,
   v3 = x
 )
+```
 
+```{r, comment=""}
 cat(stmts)
 ```
 
@@ -133,7 +137,9 @@ we did on the in-memory example.
 
 
 ```{r}
-eval(parse(text = paste("d2 %>%", stmts)))
+eval(parse(text = paste("d2 %>%", stmts))) %>%
+  collect() %>%
+  knitr::kable()
 ```
 
 We don't suggest calling `eval()` in production code.  Instead we suggest using
