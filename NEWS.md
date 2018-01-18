@@ -1,5 +1,5 @@
 
-# seplyr 0.5.2 2018-01-06
+# seplyr 0.5.2 2018-01-18
 
  * Fix missed case in statement partitioner.
  * Fix deprecations and visibility of stringAlgebra.
