@@ -19,14 +19,12 @@ the reported CRAN issue is a high priority.
 
 ## R CMD check results
 
-R CMD check --as-cran seplyr_0.5.1.tar.gz 
+R CMD check --as-cran seplyr_0.5.2.tar.gz 
 
-  * this is package ‘seplyr’ version ‘0.5.1’
+  * this is package ‘seplyr’ version ‘0.5.2’
   * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
      Maintainer: ‘John Mount <jmount@win-vector.com>’
-  
-  Note:
-  Number of updates in past 6 months: 7
+
 
 Status: OK (no other notes, errors, or warnings)
 
