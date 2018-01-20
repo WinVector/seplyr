@@ -29,8 +29,7 @@ Imports:
     rlang (>= 0.1.6),
     dbplyr,
     DBI,
-    RSQLite,
-    datasets
+    RSQLite
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: knitr,
