@@ -1,4 +1,8 @@
 
+# seplyr 0.5.3 2018-01-21
+
+ * Fix misspelling of package import.
+ 
 # seplyr 0.5.2 2018-01-20
 
  * Fix missed case in statement partitioner.
