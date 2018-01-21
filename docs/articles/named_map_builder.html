@@ -127,7 +127,7 @@ datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
                     <span class="st">"Mean_Sepal_Width"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Width)"</span>))</code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   Species    Mean_Sepal_Length Mean_Sepal_Width
-##   &lt;fctr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;
+##   &lt;fct&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
 ## 1 setosa                  5.01             3.43
 ## 2 versicolor              5.94             2.77
 ## 3 virginica               6.59             2.97</code></pre>
@@ -138,7 +138,7 @@ datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., resultColumn <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>)</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   Species    summary_value
-##   &lt;fctr&gt;             &lt;dbl&gt;
+##   &lt;fct&gt;              &lt;dbl&gt;
 ## 1 setosa              5.01
 ## 2 versicolor          5.94
 ## 3 virginica           6.59</code></pre>
