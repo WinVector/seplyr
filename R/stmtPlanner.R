@@ -153,33 +153,7 @@ partition_mutate_se <- function(exprs) {
 #' @export
 #'
 quote_mutate <- function(...) {
-  mutateTerms <- substitute(list(...))
-  len <- length(mutateTerms) # first slot is "list"
-  if(len>1) {
-    lhs <- character(len-1)
-    rhs <- character(len-1)
-    for(i in (2:len)) {
-      ei <- mutateTerms[[i]]
-      ni <- names(mutateTerms)[[i]]
-      if((!is.null(ni)) && (!is.na(ni)) &&
-         (is.character(ni)) && (nchar(ni)>0)) {
-        vi <- paste(deparse(ei), collapse = "\n")
-      } else {
-        if(as.character(ei[[1]])!=':=') {
-          stop("seplyr::quote_mutate terms must be of the form: sym := expr")
-        }
-        ni <- as.character(ei[[2]])[[1]]
-        vi <- paste(deparse(ei[[3]]), collapse = "\n")
-      }
-      if(is.null(ni)) {
-        stop("seplyr::quote_mutate terms must all have names (either from = or :=)")
-      }
-      lhs[[i-1]] <- ni
-      rhs[[i-1]] <- vi
-    }
-  }
-  names(rhs) = lhs
-  rhs
+  wrapr::qae(...)
 }
 
 #' Run a sequence of quoted mutate blocks.
@@ -235,7 +209,7 @@ mutate_seb <- function(d, blocks,
 #' @export
 #'
 partition_mutate_qt <- function(...) {
-  terms <- quote_mutate(...)
+  terms <- wrapr::qae(...)
   lhs <- names(terms)
   rhs <- as.character(terms)
   res <- data.frame(lhs = lhs,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_nse.R
 \name{filter_nse}
 \alias{filter_nse}
-\title{Filter non-standard interface (deprecated).}
+\title{Filter non-standard interface.}
 \usage{
 filter_nse(.data, ..., filter_nse_env = parent.frame())
 }
@@ -17,7 +17,16 @@ filter_nse(.data, ..., filter_nse_env = parent.frame())
 .data filtered by columns named in filterTerms
 }
 \description{
-Filter a data frame by the filter terms in \code{...} (deprecated, please use \code{\link{filter_se}}).
+Filter a data frame by the filter terms in \code{...}.
+}
+\examples{
+
+upperBound <- 3.5
+
+datasets::iris \%.>\%
+  filter_nse(., Sepal.Length >= 2 * Sepal.Width,
+                  Petal.Length <= upperBound)
+
 }
 \seealso{
 \code{\link{filter_se}}, \code{\link[dplyr]{filter}}, \code{\link[dplyr]{filter_at}}

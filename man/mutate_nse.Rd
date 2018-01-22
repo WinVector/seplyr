@@ -2,7 +2,7 @@
 % Please edit documentation in R/mutate_nse.R
 \name{mutate_nse}
 \alias{mutate_nse}
-\title{mutate non-standard evaluation interface (deprecated).}
+\title{mutate non-standard evaluation interface.}
 \usage{
 mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
   mutate_nse_env = parent.frame(), mutate_nse_printPlan = FALSE)
@@ -22,13 +22,26 @@ mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
 .data with altered columns.
 }
 \description{
-Mutate a data frame by the mutate terms from \code{...} (deprecated, please use \code{\link{mutate_se}}).
+Mutate a data frame by the mutate terms from \code{...}.
 }
 \details{
 Note: this method as the default setting \code{mutate_nse_split_terms = TRUE}, which while
 safer (avoiding certain known \code{dplyr}/\code{dblyr} issues) can be needlessly expensive
 and have its own "too long sequence" issues on remote-data systems
 (please see the side-notes of \url{http://winvector.github.io/FluidData/partition_mutate.html} for some references).
+}
+\examples{
+
+
+resCol1 <- "Sepal_Long"
+limit <- 3.5
+
+datasets::iris \%.>\%
+  mutate_nse(., resCol1 := Sepal.Length >= 2 * Sepal.Width,
+                Petal_Short := Petal.Length <= limit) \%.>\%
+  head(.)
+
+
 }
 \seealso{
 \code{\link{mutate_se}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}

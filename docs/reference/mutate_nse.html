@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mutate non-standard evaluation interface (deprecated). — mutate_nse • seplyr</title>
+<title>mutate non-standard evaluation interface. — mutate_nse • seplyr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -107,11 +107,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>mutate non-standard evaluation interface (deprecated).</h1>
+    <h1>mutate non-standard evaluation interface.</h1>
     </div>
 
     
-    <p>Mutate a data frame by the mutate terms from <code>...</code> (deprecated, please use <code><a href='mutate_se.html'>mutate_se</a></code>).</p>
+    <p>Mutate a data frame by the mutate terms from <code>...</code>.</p>
     
 
     <pre class="usage"><span class='fu'>mutate_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>mutate_nse_split_terms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -158,6 +158,24 @@ and have its own "too long sequence" issues on remote-data systems
     <p><code><a href='mutate_se.html'>mutate_se</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/summarise_all.html'>mutate_at</a></code>, <code><a href='http://www.rdocumentation.org/packages/wrapr/topics/named_map_builder'>:=</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+
+<span class='no'>resCol1</span> <span class='kw'>&lt;-</span> <span class='st'>"Sepal_Long"</span>
+<span class='no'>limit</span> <span class='kw'>&lt;-</span> <span class='fl'>3.5</span>
+
+<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
+  <span class='fu'>mutate_nse</span>(<span class='no'>.</span>, <span class='no'>resCol1</span> <span class='kw'>:=</span> <span class='no'>Sepal.Length</span> <span class='kw'>&gt;=</span> <span class='fl'>2</span> * <span class='no'>Sepal.Width</span>,
+                <span class='no'>Petal_Short</span> <span class='kw'>:=</span> <span class='no'>Petal.Length</span> <span class='kw'>&lt;=</span> <span class='no'>limit</span>) <span class='kw'>%.&gt;%</span>
+  <span class='fu'>head</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species resCol1 Petal_Short
+#&gt; 1          5.1         3.5          1.4         0.2  setosa   FALSE        TRUE
+#&gt; 2          4.9         3.0          1.4         0.2  setosa   FALSE        TRUE
+#&gt; 3          4.7         3.2          1.3         0.2  setosa   FALSE        TRUE
+#&gt; 4          4.6         3.1          1.5         0.2  setosa   FALSE        TRUE
+#&gt; 5          5.0         3.6          1.4         0.2  setosa   FALSE        TRUE
+#&gt; 6          5.4         3.9          1.7         0.4  setosa   FALSE        TRUE</div><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -169,7 +187,9 @@ and have its own "too long sequence" issues on remote-data systems
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

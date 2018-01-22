@@ -2,7 +2,7 @@
 % Please edit documentation in R/transmute_nse.R
 \name{transmute_nse}
 \alias{transmute_nse}
-\title{transmute non-standard evaluation interface (deprecated).}
+\title{transmute non-standard evaluation interface.}
 \usage{
 transmute_nse(.data, ..., transmute_nse_env = parent.frame())
 }
@@ -17,7 +17,15 @@ transmute_nse(.data, ..., transmute_nse_env = parent.frame())
 .data with altered columns(other columns dropped).
 }
 \description{
-transmute a data frame by the transmuteterms from \code{...} (deprecated, please use \code{\link{transmute_se}}).
+transmute a data frame by the transmuteterms from \code{...}.
+}
+\examples{
+
+datasets::iris \%.>\%
+  transmute_nse(., Sepal_Long := Sepal.Length >= 2 * Sepal.Width,
+                   Petal_Short := Petal.Length <= 3.5) \%.>\%
+  summary(.)
+
 }
 \seealso{
 \code{\link{transmute_se}}, \code{\link[dplyr]{transmute}}, \code{\link[dplyr]{transmute_at}}, \code{\link[wrapr]{:=}}

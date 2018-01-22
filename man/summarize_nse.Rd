@@ -3,7 +3,7 @@
 \name{summarize_nse}
 \alias{summarize_nse}
 \alias{summarise_nse}
-\title{summarize non-standard evaluation interface (deprecated).}
+\title{summarize non-standard evaluation interface.}
 \usage{
 summarize_nse(.data, ..., env = parent.frame())
 
@@ -20,7 +20,15 @@ summarise_nse(.data, ..., env = parent.frame())
 .data with summarized columns.
 }
 \description{
-summarize a data frame by the summarize terms from \code{...} (deprecated, please use \code{\link{summarize_se}}).
+summarize a data frame by the summarize terms from \code{...}.
+}
+\examples{
+
+
+datasets::iris \%.>\%
+  summarize_nse(., Mean_Sepal_Length := mean(Sepal.Length),
+                   Max_Sepal_Length := max(Sepal.Length))
+
 }
 \seealso{
 \code{\link{summarize_se}}, \code{\link[dplyr]{summarize}}, \code{\link[dplyr]{summarize_at}}, \code{\link[wrapr]{:=}}

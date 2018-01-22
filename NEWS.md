@@ -1,4 +1,10 @@
 
+# seplyr 0.5.4 2018-01-22
+
+ * Switch to qae().
+ * Undeprecate mutate_nse() et.al..
+ * Remove other deperecated functions.
+ 
 # seplyr 0.5.3 2018-01-21
 
  * Fix misspelling of package import.
