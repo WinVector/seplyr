@@ -1,7 +1,7 @@
 
-# seplyr 0.5.4 2018-01-22
+# seplyr 0.5.4 2018-01-29
 
- * Switch to qae().
+ * Switch to qae() (need wrapr 1.2.0 or newer version).
  * Undeprecate mutate_nse() et.al..
  * Remove other deperecated functions.
  
