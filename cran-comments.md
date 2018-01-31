@@ -1,6 +1,4 @@
 
-Re-submitting (at the request of CRAN) to fix my misspelling of 'RSQLite' as 'RSQlite'.
-I apologize for my mistake, not catching the error, and wasting the team's time.
 
 ## Test environments
 
@@ -11,22 +9,27 @@ I apologize for my mistake, not catching the error, and wasting the team's time.
   * OSX
   * using R version 3.4.3 (2017-11-30)
   * using platform: x86_64-apple-darwin15.6.0 (64-bit)
+
  
 
 ## R CMD check results
 
-R CMD check --as-cran seplyr_0.5.3.tar.gz 
+R CMD check --as-cran seplyr_0.5.4.tar.gz 
 
-  * this is package ‘seplyr’ version ‘0.5.3’
-  * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
-     Maintainer: ‘John Mount <jmount@win-vector.com>’
+  * checking extension type ... Package
+  * this is package ‘seplyr’ version ‘0.5.4’
+  * package encoding: UTF-8
+  * checking CRAN incoming feasibility ... NOTE
 
     Maintainer: ‘John Mount <jmount@win-vector.com>’
 
-    Days since last update: 1
     Number of updates in past 6 months: 7
 
-Status: OK (no other notes, errors, or warnings)
+    Unknown, possibly mis-spelled, fields in DESCRIPTION:
+      ‘Remotes’
+
+
+Status: 1 NOTE
 
 ## Reverse dependencies
 
