@@ -41,17 +41,7 @@ datasets::mtcars %.>%
 
 We hope this makes it easy to translate one-off analyses into re-usable scripts by incrementally replacing known variable names with parametric versions.  The `:=` operator is just a convenience function for building up maps, we could also have written `rename_se(c("cylinders" = "cyl", "gears" = "gear"))` or passed in a named vector built up elsewhere.
 
-In contrast `dplyr::rename_at()` has its own notation that seems to not imitate `dplyr::rename()`.  The same operation using `dplyr::rename_at()` is something like the following.
-
-```{r rename3}
-datasets::mtcars %>%
-  rename_at(names(mp), funs(function(si) { mp[si] })) %>%
-  head()
-```
-
-This is sensible, but is very different than `dplyr::rename()`.  Thus there remains a need for a standard analogue.  
-
-Also `rename_se` interpets all left-hand names as new column names and all right-hand names as old column names.  This allows `rename_se` to be used to swap columns:
+`rename_se` interpets all left-hand names as new column names and all right-hand names as old column names.  This allows `rename_se` to be used to swap columns:
 
 ```{r swap}
 data.frame(a = 1, b = 2) %.>%
