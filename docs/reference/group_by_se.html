@@ -149,7 +149,7 @@ sets of variables, not by expressions over variables.</p>
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/mtcars'>mtcars</a></span> <span class='kw'>%.&gt;%</span>
   <span class='fu'>group_by_se</span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>)) <span class='kw'>%.&gt;%</span>
   <span class='fu'>head</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 11
-#&gt; # Groups: cyl, gear [4]
+#&gt; # Groups:   cyl, gear [4]
 #&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1  21.0  6.00   160 110    3.90  2.62  16.5  0     1.00  4.00  4.00

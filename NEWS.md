@@ -4,6 +4,7 @@
  * Switch to qae() (need wrapr 1.2.0 or newer version).
  * Undeprecate mutate_nse() et.al..
  * Remove other deperecated functions.
+ * Avoid possible dplyr issue in rename vignette.
  
 # seplyr 0.5.3 2018-01-21
 
