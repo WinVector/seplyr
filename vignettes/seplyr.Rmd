@@ -95,17 +95,7 @@ We also have a few methods that work around a few of the minor inconvenience of 
 * `deselect()`
 * `rename_mp()`
 
-One can combine `seplyr` methods with standard `dplyr` methods (such as `summarize_at()`):
-
-```{r atex}
-datasets::iris %.>%
-  group_by_at(., "Species") %>%
-  summarize_at(., c("Sepal.Length", "Sepal.Width"), funs(mean)) %.>%
-  rename_se(., c("Mean.Sepal.Length" := "Sepal.Length", 
-                 "Mean.Sepal.Width" := "Sepal.Width"))
-```
-
-One also perform the above directly with `seplyr::summarize_se()` as follows.
+Here is a example using `seplyr::summarize_se()`.
 
 ```{r atexse}
 datasets::iris %.>%

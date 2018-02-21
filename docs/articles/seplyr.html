@@ -87,7 +87,7 @@
       <h1>seplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-02-20</h4>
+            <h4 class="date">2018-02-21</h4>
           </div>
 
     
@@ -175,19 +175,7 @@ datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span><span cla
 <li><code><a href="../reference/deselect.html">deselect()</a></code></li>
 <li><code>rename_mp()</code></li>
 </ul>
-<p>One can combine <code>seplyr</code> methods with standard <code>dplyr</code> methods (such as <code><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at()</a></code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by_all.html">group_by_at</a></span>(., <span class="st">"Species"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarize_at</a></span>(., <span class="kw">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>), <span class="kw"><a href="http://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(mean)) <span class="op">%.&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(., <span class="kw">c</span>(<span class="st">"Mean.Sepal.Length"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "Sepal.Length"</span>, 
-                 <span class="st">"Mean.Sepal.Width"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "Sepal.Width"</span>))</code></pre></div>
-<pre><code>## # A tibble: 3 x 3
-##   Species    Mean.Sepal.Length Mean.Sepal.Width
-##   &lt;fct&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
-## 1 setosa                  5.01             3.43
-## 2 versicolor              5.94             2.77
-## 3 virginica               6.59             2.97</code></pre>
-<p>One also perform the above directly with <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/summarize_se">seplyr::summarize_se()</a></code> as follows.</p>
+<p>Here is a example using <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/summarize_se">seplyr::summarize_se()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>iris <span class="op">%.&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(., <span class="st">"Species"</span>) <span class="op">%.&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(., <span class="kw">c</span>(<span class="st">"Mean.Sepal.Length"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "mean(Sepal.Length)"</span>, 

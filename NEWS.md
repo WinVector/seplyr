@@ -5,6 +5,7 @@
  * Undeprecate mutate_nse() et.al..
  * Remove other deperecated functions.
  * Avoid possible rlang/dplyr issue in rename vignette https://github.com/r-lib/rlang/issues/411 .
+ * Move off rlang::funs().
  
 # seplyr 0.5.3 2018-01-21
 
