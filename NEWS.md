@@ -1,10 +1,10 @@
 
-# seplyr 0.5.4 2018-01-31
+# seplyr 0.5.4 2018-02-21
 
  * Switch to qae() (need wrapr 1.2.0 or newer version).
  * Undeprecate mutate_nse() et.al..
  * Remove other deperecated functions.
- * Avoid possible dplyr issue in rename vignette.
+ * Avoid possible rlang/dplyr issue in rename vignette https://github.com/r-lib/rlang/issues/411 .
  
 # seplyr 0.5.3 2018-01-21
 
