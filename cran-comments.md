@@ -1,4 +1,16 @@
 
+Note to CRAN: In addition to new features and fixes 
+(covered in NEWS.md), this is a maintenance release to
+work around errors triggered by the 1.2.0 CRAN release of
+'rlang' on 2018-02-20.  The 'rlang' team released this
+version of 'rlang' knowing that it triggered a vignette
+failure in the 'seplyr' package, (probably without contacting
+the maintainers of the impacted package, and certainly without
+waiting for or confirming with the maintainers of the impacted
+package: https://github.com/r-lib/rlang/issues/411 ).  
+This 'seplyr' update removes the interacting code from 'seplyr'
+and clears the issue.
+
 
 ## Test environments
 

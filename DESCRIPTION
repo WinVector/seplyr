@@ -37,6 +37,5 @@ Suggests: knitr,
     testthat,
 VignetteBuilder: knitr
 ByteCompile: true
-Remotes: github::WinVector/wrapr
 
 
