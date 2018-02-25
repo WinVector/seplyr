@@ -1,4 +1,8 @@
 
+# seplyr 0.5.5 2018-02-25
+
+ * Add subset_rows().
+ 
 # seplyr 0.5.4 2018-02-21
 
  * Switch to qae() (need wrapr 1.2.0 or newer version).
