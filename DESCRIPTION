@@ -2,7 +2,7 @@ Package: seplyr
 Type: Package
 Title: Improved Standard Evaluation Interfaces for Common Data Manipulation Tasks
 Version: 0.5.5
-Date: 2018-02-25
+Date: 2018-02-28
 Authors@R: c(
     person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),
     person(family = "Win-Vector LLC", role = c("cph"))
@@ -23,7 +23,7 @@ Description:  The 'seplyr' (standard evaluation plying) package supplies improve
 License: GPL-3
 Encoding: UTF-8
 Depends:
-    wrapr (>= 1.2.0)
+    wrapr (>= 1.2.1)
 Imports:
     dplyr (>= 0.7.4),
     rlang,
@@ -37,5 +37,5 @@ Suggests: knitr,
     testthat,
 VignetteBuilder: knitr
 ByteCompile: true
-
+Remotes: github::WinVector/wrapr
 
