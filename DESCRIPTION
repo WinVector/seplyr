@@ -23,7 +23,7 @@ Description:  The 'seplyr' (standard evaluation plying) package supplies improve
 License: GPL-3
 Encoding: UTF-8
 Depends:
-    wrapr (>= 1.2.1)
+    wrapr (>= 1.3.0)
 Imports:
     dplyr (>= 0.7.4),
     rlang,
@@ -37,5 +37,5 @@ Suggests: knitr,
     testthat,
 VignetteBuilder: knitr
 ByteCompile: true
-Remotes: github::WinVector/wrapr
+
 
