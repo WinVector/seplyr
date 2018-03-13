@@ -48,9 +48,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/factor_mutate.html">factor_mutate</a>
-    </li>
-    <li>
       <a href="../articles/MutatePartitioner.html">Mutate Partitioner</a>
     </li>
     <li>
@@ -87,7 +84,7 @@
       <h1>Using seplyr to Program Over dplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-02-28</h4>
+            <h4 class="date">2018-03-12</h4>
           </div>
 
     
@@ -121,16 +118,16 @@
 <pre><code>## # A tibble: 49 x 4
 ##    homeworld      mean_height mean_mass count
 ##    &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
-##  1 Alderaan             176        64.0     3
+##  1 Alderaan             176.       64.0     3
 ##  2 Aleen Minor           79.0      15.0     1
-##  3 Bespin               175        79.0     1
-##  4 Bestine IV           180       110       1
-##  5 Cato Neimoidia       191        90.0     1
-##  6 Cerea                198        82.0     1
-##  7 Champala             196       NaN       1
-##  8 Chandrila            150       NaN       1
-##  9 Concord Dawn         183        79.0     1
-## 10 Corellia             175        78.5     2
+##  3 Bespin               175.       79.0     1
+##  4 Bestine IV           180.      110.      1
+##  5 Cato Neimoidia       191.       90.0     1
+##  6 Cerea                198.       82.0     1
+##  7 Champala             196.      NaN       1
+##  8 Chandrila            150.      NaN       1
+##  9 Concord Dawn         183.       79.0     1
+## 10 Corellia             175.       78.5     2
 ## # ... with 39 more rows</code></pre>
 <p>The above is colloquially called “an interactive script.” The name comes from the fact that we use names of variables (such as “<code>homeworld</code>”) that would only be known from looking at the data directly in the analysis code. Only somebody interacting with the data could write such a script (hence the name).</p>
 <p>It has long been considered a point of discomfort to convert such an interactive <code>dplyr</code> pipeline into a re-usable script or function. That is a script or function that specifies column names in some <a href="http://www.win-vector.com/blog/2017/04/programming-over-r/">parametric</a> or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).</p>
@@ -156,16 +153,16 @@
 <pre><code>## # A tibble: 49 x 4
 ##    homeworld      mean_height mean_mass count
 ##    &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
-##  1 Alderaan             176        64.0     3
+##  1 Alderaan             176.       64.0     3
 ##  2 Aleen Minor           79.0      15.0     1
-##  3 Bespin               175        79.0     1
-##  4 Bestine IV           180       110       1
-##  5 Cato Neimoidia       191        90.0     1
-##  6 Cerea                198        82.0     1
-##  7 Champala             196       NaN       1
-##  8 Chandrila            150       NaN       1
-##  9 Concord Dawn         183        79.0     1
-## 10 Corellia             175        78.5     2
+##  3 Bespin               175.       79.0     1
+##  4 Bestine IV           180.      110.      1
+##  5 Cato Neimoidia       191.       90.0     1
+##  6 Cerea                198.       82.0     1
+##  7 Champala             196.      NaN       1
+##  8 Chandrila            150.      NaN       1
+##  9 Concord Dawn         183.       79.0     1
+## 10 Corellia             175.       78.5     2
 ## # ... with 39 more rows</code></pre>
 <p>This code works the same as the original <code>dplyr</code> code. Obviously at this point all we have done is: worked to make the code a bit less pleasant looking. We have yet to see any benefit from this conversion (though we can turn this on its head and say all the original <code>dplyr</code> notation is saving us is from having to write a few quote marks).</p>
 <p>The benefit is: this new code can <em>very easily</em> be parameterized and wrapped in a re-usable function. In fact it is now simpler to do than to describe.</p>
@@ -182,19 +179,19 @@
 <pre><code>## # A tibble: 13 x 4
 ##    hair_color    mean_height mean_mass count
 ##    &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
-##  1 auburn                150     NaN       1
-##  2 auburn, grey          180     NaN       1
-##  3 auburn, white         182      77.0     1
-##  4 black                 174      73.1    13
-##  5 blond                 177      80.5     3
-##  6 blonde                168      55.0     1
-##  7 brown                 175      79.3    18
-##  8 brown, grey           178     120       1
-##  9 grey                  170      75.0     1
-## 10 none                  181      78.5    37
-## 11 unknown               NaN     NaN       1
-## 12 white                 156      59.7     4
-## 13 &lt;NA&gt;                  142     314       5</code></pre>
+##  1 auburn               150.     NaN       1
+##  2 auburn, grey         180.     NaN       1
+##  3 auburn, white        182.      77.0     1
+##  4 black                174.      73.1    13
+##  5 blond                177.      80.5     3
+##  6 blonde               168.      55.0     1
+##  7 brown                175.      79.3    18
+##  8 brown, grey          178.     120.      1
+##  9 grey                 170.      75.0     1
+## 10 none                 181.      78.5    37
+## 11 unknown              NaN      NaN       1
+## 12 white                156.      59.7     4
+## 13 &lt;NA&gt;                 142.     314.      5</code></pre>
 <p>In <code>seplyr</code> programming is easy (just replace values with variables). For example we can make a completely generic re-usable “grouped mean” function using <code>R</code>’s <code>paste()</code> function to build up expressions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grouped_mean &lt;-<span class="st"> </span><span class="cf">function</span>(data, 
                          grouping_variables, 
@@ -226,12 +223,12 @@ starwars <span class="op">%&gt;%</span><span class="st"> </span>
 ##  1 black              76.3            33.0    10
 ##  2 blue               86.5            67.1    19
 ##  3 blue-gray          77.0            57.0     1
-##  4 brown              66.1           109      21
+##  4 brown              66.1           109.     21
 ##  5 dark              NaN             NaN       1
 ##  6 gold              NaN             NaN       1
-##  7 green, yellow     159             NaN       1
+##  7 green, yellow     159.            NaN       1
 ##  8 hazel              66.0            34.5     3
-##  9 orange            282             231       8
+##  9 orange            282.            231.      8
 ## 10 pink              NaN             NaN       1
 ## 11 red                81.4            33.7     5
 ## 12 red, blue         NaN             NaN       1

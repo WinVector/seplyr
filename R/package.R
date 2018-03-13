@@ -27,9 +27,6 @@ NULL
 #' @importFrom dplyr inner_join left_join right_join full_join semi_join anti_join
 #' @importFrom dplyr ungroup distinct
 #' @importFrom dplyr compute collect tbl is.tbl as.tbl copy_to
-#' @importFrom DBI dbGetQuery
-#' @importFrom RSQLite rsqliteVersion
-#' @importFrom dbplyr db_sql_render
 NULL
 
 #' @export

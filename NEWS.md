@@ -1,7 +1,10 @@
 
+
 # seplyr 0.5.5 2018-03-12
 
- * Move to wrapr 1.3.0
+ * Move to wrapr 1.3.0.
+ * Lower dependencies.
+ * Remove factor_mutate vignette.
  
 # seplyr 0.5.4 2018-02-21
 
