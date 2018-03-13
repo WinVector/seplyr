@@ -1,7 +1,7 @@
 
-# seplyr 0.5.5 2018-02-28
+# seplyr 0.5.5 2018-03-12
 
- * Add subset_rows() (now from wrapr).
+ * Move to wrapr 1.3.0
  
 # seplyr 0.5.4 2018-02-21
 
