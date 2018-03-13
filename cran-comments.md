@@ -30,8 +30,10 @@ Status: OK
 
 ## Reverse dependencies
 
-     devtools::revdep_check()
-     Checking 1 packages: WVPlots
-     Checked WVPlots: 0 errors | 0 warnings | 0 notes
+No declared reverse dependencies.
+
+    devtools::revdep()
+    character(0)
+
 
 
