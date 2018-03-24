@@ -1,7 +1,7 @@
 
-# seplyr 0.5.6 2018-03-14
+# seplyr 0.5.6 2018-03-24
 
- * Attempt work around dependency errors.
+ * Adjust dependencies.
 
 # seplyr 0.5.5 2018-03-12
 
