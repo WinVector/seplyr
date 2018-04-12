@@ -18,13 +18,23 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Objects exported from other packages — reexports" />
+
+<meta property="og:description" content="These objects are imported from other packages. Follow the links
+below to see their documentation.
+
+  dplyrall_equal, bind_rows, bind_cols, inner_join, left_join, right_join, full_join, semi_join, anti_join, ungroup, distinct, compute, collect, tbl, is.tbl, as.tbl, copy_to
+" />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +42,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -47,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">seplyr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">seplyr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.6</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -58,7 +74,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/seplyr.html">Get Started</a>
+  <a href="../articles/seplyr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -85,7 +101,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -94,6 +110,7 @@
   <a href="http://www.win-vector.com/">Sponsor: Win-Vector LLC</a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -101,15 +118,18 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Objects exported from other packages</h1>
+    <small>Source: <a href='https://github.com/WinVector/seplyr//blob/master/R/package.R'><code>R/package.R</code></a></small>
+    <div class="hidden name"><code>reexports.Rd</code></div>
     </div>
 
     
     <p>These objects are imported from other packages. Follow the links
-below to see their documentation.</p><dl class='dl-horizontal'>
+below to see their documentation.</p>
+<dl class='dl-horizontal'>
   <dt>dplyr</dt><dd><p><code><a href='http://dplyr.tidyverse.org/reference/all_equal.html'>all_equal</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/bind.html'>bind_rows</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/bind.html'>bind_cols</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/join.html'>inner_join</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/join.html'>left_join</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/join.html'>right_join</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/join.html'>full_join</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/join.html'>semi_join</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/join.html'>anti_join</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/distinct.html'>distinct</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/compute.html'>compute</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/compute.html'>collect</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/tbl.html'>tbl</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/tbl.html'>is.tbl</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/tbl.html'>as.tbl</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/copy_to.html'>copy_to</a></code></p></dd>
 </dl>
     
@@ -131,11 +151,14 @@ below to see their documentation.</p><dl class='dl-horizontal'>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

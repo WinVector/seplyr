@@ -18,13 +18,16 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Function reference" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +35,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -47,8 +52,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">seplyr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">seplyr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.6</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -58,7 +67,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/seplyr.html">Get Started</a>
+  <a href="../articles/seplyr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -85,7 +94,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -94,6 +103,7 @@
   <a href="http://www.win-vector.com/">Sponsor: Win-Vector LLC</a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -101,258 +111,253 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.5.6</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_count_se.html">add_count_se</a></code> </p>
-          </td>
-          <td><p>tally/count standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_group_indices.html">add_group_indices</a></code> </p>
-          </td>
-          <td><p>Group a data frame and add per-group indices as a column.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_group_sub_indices.html">add_group_sub_indices</a></code> </p>
-          </td>
-          <td><p>Group a data frame and add in-group indices as a column.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_group_summaries.html">add_group_summaries</a></code> </p>
-          </td>
-          <td><p>Simulate the group_by/mutate pattern with an explicit summarize and join.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_rank_indices.html">add_rank_indices</a></code> </p>
-          </td>
-          <td><p>Arrange a data frame and rank indexes.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_tally_se.html">add_tally_se</a></code> </p>
-          </td>
-          <td><p>tally/count standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="arrange_se.html">arrange_se</a></code> </p>
-          </td>
-          <td><p>arrange standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="count_se.html">count_se</a></code> </p>
-          </td>
-          <td><p>tally/count standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="deselect.html">deselect</a></code> </p>
-          </td>
-          <td><p>deselect standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="distinct_se.html">distinct_se</a></code> </p>
-          </td>
-          <td><p>Standard interface for distinct.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="factor_mutate.html">factor_mutate</a></code> </p>
-          </td>
-          <td><p>Re-write a <code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code> into safe blocks.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="filter_nse.html">filter_nse</a></code> </p>
-          </td>
-          <td><p>Filter non-standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="filter_se.html">filter_se</a></code> </p>
-          </td>
-          <td><p>filter standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="group_by_se.html">group_by_se</a></code> </p>
-          </td>
-          <td><p>group_by standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="group_indices_se.html">group_indices_se</a></code> </p>
-          </td>
-          <td><p>group_indices standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="group_summarize.html">group_summarize</a></code> <code><a href="group_summarize.html">group_summarise</a></code> </p>
-          </td>
-          <td><p>group_by and summarize as an atomic action.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="if_else_device.html">if_else_device</a></code> </p>
-          </td>
-          <td><p>Simulate a per-row block-<code>if(){}else{}</code>.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mutate_nse.html">mutate_nse</a></code> </p>
-          </td>
-          <td><p>mutate non-standard evaluation interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mutate_se.html">mutate_se</a></code> </p>
-          </td>
-          <td><p>mutate standard evaluation interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mutate_seb.html">mutate_seb</a></code> </p>
-          </td>
-          <td><p>Run a sequence of quoted mutate blocks.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="novelName.html">novelName</a></code> </p>
-          </td>
-          <td><p>Generate a name with a prefix disjoint from a set of names</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="partition_mutate_qt.html">partition_mutate_qt</a></code> </p>
-          </td>
-          <td><p>Partition a sequence of mutate commands into longest ordered no create/use blocks.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="partition_mutate_se.html">partition_mutate_se</a></code> </p>
-          </td>
-          <td><p>Partition a sequence of mutate commands into longest ordered no create/use blocks.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="quote_mutate.html">quote_mutate</a></code> </p>
-          </td>
-          <td><p>Capture the expressions of a mutate-style command.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rename_se.html">rename_se</a></code> </p>
-          </td>
-          <td><p>rename standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sel_columns.html">sel_columns</a></code> </p>
-          </td>
-          <td><p>Pick a sequence of columns.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sel_rows.html">sel_rows</a></code> </p>
-          </td>
-          <td><p>Pick a selection of rows (can be used to order).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="select_se.html">select_se</a></code> </p>
-          </td>
-          <td><p>select standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="seplyr.html">seplyr</a></code> </p>
-          </td>
-          <td><p><code>seplyr</code>: Standard Evaluation Improved Interfaces for Common Data Manipulatio Tasks</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="subset_rows.html">subset_rows</a></code> </p>
-          </td>
-          <td><p>Pick a subset of rows, evaluating the subset expression
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="add_count_se.html">add_count_se()</a></code> </p>
+        </td>
+        <td><p>tally/count standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="add_group_indices.html">add_group_indices()</a></code> </p>
+        </td>
+        <td><p>Group a data frame and add per-group indices as a column.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="add_group_sub_indices.html">add_group_sub_indices()</a></code> </p>
+        </td>
+        <td><p>Group a data frame and add in-group indices as a column.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="add_group_summaries.html">add_group_summaries()</a></code> </p>
+        </td>
+        <td><p>Simulate the group_by/mutate pattern with an explicit summarize and join.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="add_rank_indices.html">add_rank_indices()</a></code> </p>
+        </td>
+        <td><p>Arrange a data frame and rank indexes.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="add_tally_se.html">add_tally_se()</a></code> </p>
+        </td>
+        <td><p>tally/count standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="arrange_se.html">arrange_se()</a></code> </p>
+        </td>
+        <td><p>arrange standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="count_se.html">count_se()</a></code> </p>
+        </td>
+        <td><p>tally/count standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="deselect.html">deselect()</a></code> </p>
+        </td>
+        <td><p>deselect standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="distinct_se.html">distinct_se()</a></code> </p>
+        </td>
+        <td><p>Standard interface for distinct.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="factor_mutate.html">factor_mutate()</a></code> </p>
+        </td>
+        <td><p>Re-write a <code>dplyr::mutate()</code> into safe blocks.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="filter_nse.html">filter_nse()</a></code> </p>
+        </td>
+        <td><p>Filter non-standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="filter_se.html">filter_se()</a></code> </p>
+        </td>
+        <td><p>filter standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="group_by_se.html">group_by_se()</a></code> </p>
+        </td>
+        <td><p>group_by standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="group_indices_se.html">group_indices_se()</a></code> </p>
+        </td>
+        <td><p>group_indices standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="group_summarize.html">group_summarize()</a></code> <code><a href="group_summarize.html">group_summarise()</a></code> </p>
+        </td>
+        <td><p>group_by and summarize as an atomic action.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="if_else_device.html">if_else_device()</a></code> </p>
+        </td>
+        <td><p>Simulate a per-row block-<code>if(){}else{}</code>.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="mutate_nse.html">mutate_nse()</a></code> </p>
+        </td>
+        <td><p>mutate non-standard evaluation interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="mutate_se.html">mutate_se()</a></code> </p>
+        </td>
+        <td><p>mutate standard evaluation interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="mutate_seb.html">mutate_seb()</a></code> </p>
+        </td>
+        <td><p>Run a sequence of quoted mutate blocks.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="novelName.html">novelName()</a></code> </p>
+        </td>
+        <td><p>Generate a name with a prefix disjoint from a set of names</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="partition_mutate_qt.html">partition_mutate_qt()</a></code> </p>
+        </td>
+        <td><p>Partition a sequence of mutate commands into longest ordered no create/use blocks.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="partition_mutate_se.html">partition_mutate_se()</a></code> </p>
+        </td>
+        <td><p>Partition a sequence of mutate commands into longest ordered no create/use blocks.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="quote_mutate.html">quote_mutate()</a></code> </p>
+        </td>
+        <td><p>Capture the expressions of a mutate-style command.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="rename_se.html">rename_se()</a></code> </p>
+        </td>
+        <td><p>rename standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="sel_columns.html">sel_columns()</a></code> </p>
+        </td>
+        <td><p>Pick a sequence of columns.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="sel_rows.html">sel_rows()</a></code> </p>
+        </td>
+        <td><p>Pick a selection of rows (can be used to order).</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="select_se.html">select_se()</a></code> </p>
+        </td>
+        <td><p>select standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="seplyr.html">seplyr</a></code> </p>
+        </td>
+        <td><p><code>seplyr</code>: Standard Evaluation Improved Interfaces for Common Data Manipulatio Tasks</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="subset_rows.html">subset_rows()</a></code> </p>
+        </td>
+        <td><p>Pick a subset of rows, evaluating the subset expression
 as if the columns of x were in the evaluation environment.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="summarize_nse.html">summarize_nse</a></code> <code><a href="summarize_nse.html">summarise_nse</a></code> </p>
-          </td>
-          <td><p>summarize non-standard evaluation interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="summarize_se.html">summarize_se</a></code> <code><a href="summarize_se.html">summarise_se</a></code> </p>
-          </td>
-          <td><p>summarize standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tally_se.html">tally_se</a></code> </p>
-          </td>
-          <td><p>tally/count standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="transform_columns.html">transform_columns</a></code> </p>
-          </td>
-          <td><p>Evaluate an expression with a data frame acting as the inner environment
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="summarize_nse.html">summarize_nse()</a></code> <code><a href="summarize_nse.html">summarise_nse()</a></code> </p>
+        </td>
+        <td><p>summarize non-standard evaluation interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="summarize_se.html">summarize_se()</a></code> <code><a href="summarize_se.html">summarise_se()</a></code> </p>
+        </td>
+        <td><p>summarize standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="tally_se.html">tally_se()</a></code> </p>
+        </td>
+        <td><p>tally/count standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="transform_columns.html">transform_columns()</a></code> </p>
+        </td>
+        <td><p>Evaluate an expression with a data frame acting as the inner environment
 and assigning back to the data.frame.  Statements are executed sequentially.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="transmute_nse.html">transmute_nse</a></code> </p>
-          </td>
-          <td><p>transmute non-standard evaluation interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="transmute_se.html">transmute_se</a></code> </p>
-          </td>
-          <td><p>transmute standard interface.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="with_eval.html">with_eval</a></code> </p>
-          </td>
-          <td><p>Evaluate an expression with a data frame acting as the inner environment.</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="transmute_nse.html">transmute_nse()</a></code> </p>
+        </td>
+        <td><p>transmute non-standard evaluation interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="transmute_se.html">transmute_se()</a></code> </p>
+        </td>
+        <td><p>transmute standard interface.</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="with_eval.html">with_eval()</a></code> </p>
+        </td>
+        <td><p>Evaluate an expression with a data frame acting as the inner environment.</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -369,11 +374,14 @@ and assigning back to the data.frame.  Statements are executed sequentially.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

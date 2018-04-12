@@ -8,14 +8,17 @@
 <title>rename_se • seplyr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="rename_se">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -24,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">seplyr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">seplyr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.6</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -35,7 +42,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/seplyr.html">Get Started</a>
+  <a href="../articles/seplyr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -62,7 +69,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -79,19 +86,22 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>rename_se</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-03-29</h4>
-          </div>
+            <h4 class="date">2018-04-11</h4>
+      
+      <small>Source: <a href="https://github.com/WinVector/seplyr//blob/master/vignettes/rename_se.Rmd"><code>vignettes/rename_se.Rmd</code></a></small>
+      <div class="hidden name"><code>rename_se.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <p><a href="https://github.com/WinVector/seplyr"><code>seplyr</code></a> is an attempt to work with the <a href="https://CRAN.R-project.org/package=dplyr"><code>dplyr</code> <code>0.7.*</code></a> <a href="https://www.r-project.org"><code>R</code></a> package through standard evaluation interfaces with a minimum of change and minimum of cognitive friction. Beyond championing standard evaluation it attempts to introduce as few of its own opinions as possible.</p>
-<p>A case in point is <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>/<code><a href="http://www.rdocumentation.org/packages/seplyr/topics/rename_se">seplyr::rename_se()</a></code>. <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> is used as follows.</p>
+<p>A case in point is <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>/<code><a href="../reference/rename_se.html">seplyr::rename_se()</a></code>. <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> is used as follows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))
 
 datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span>
@@ -116,7 +126,7 @@ datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span>
 <span class="kw">print</span>(mp)</code></pre></div>
 <pre><code>##         cyl        gear 
 ## "cylinders"     "gears"</code></pre>
-<p>Because <code>seplyr</code> is intended to be a set of adapters for <code>dplyr</code> we simply adopt <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>’s convention. This allows the user to mechanically translate their experience and expectations from scripting over <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> to directly use <code><a href="http://www.rdocumentation.org/packages/seplyr/topics/rename_se">seplyr::rename_se()</a></code> as follows.</p>
+<p>Because <code>seplyr</code> is intended to be a set of adapters for <code>dplyr</code> we simply adopt <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>’s convention. This allows the user to mechanically translate their experience and expectations from scripting over <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> to directly use <code><a href="../reference/rename_se.html">seplyr::rename_se()</a></code> as follows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"seplyr"</span>)</code></pre></div>
 <pre><code>## Loading required package: wrapr</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>mtcars <span class="op">%.&gt;%</span>
@@ -143,7 +153,6 @@ datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span>
 <pre><code>##   b a
 ## 1 1 2</code></pre>
 <p>Please see <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>help("%.&gt;%", package="wrapr")</code></a> for details on “dot pipe.”</p>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -157,11 +166,13 @@ datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

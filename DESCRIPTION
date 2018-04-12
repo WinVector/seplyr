@@ -23,7 +23,7 @@ Description:  The 'seplyr' (standard evaluation plying) package supplies improve
 License: GPL-3
 Encoding: UTF-8
 Depends:
-    wrapr (>= 1.3.0)
+    wrapr (>= 1.4.0)
 Imports:
     dplyr (>= 0.7.0),
     rlang
