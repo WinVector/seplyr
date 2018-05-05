@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Partition a sequence of mutate commands into longest ordered no create/use blocks. — partition_mutate_qt" />
 
 <meta property="og:description" content="We assume the sequence of expressions is in a valid order
@@ -43,8 +46,6 @@ For an example please see http://winvector.github.io/FluidData/partition_mutate.
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -123,10 +124,11 @@ For an example please see http://winvector.github.io/FluidData/partition_mutate.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Partition a sequence of mutate commands into longest ordered no create/use blocks.</h1>
-    <small>Source: <a href='https://github.com/WinVector/seplyr//blob/master/R/stmtPlanner.R'><code>R/stmtPlanner.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/WinVector/seplyr//blob/master/R/stmtPlanner.R'><code>R/stmtPlanner.R</code></a></small>
     <div class="hidden name"><code>partition_mutate_qt.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>We assume the sequence of expressions is in a valid order
 (all items available before use).  This function partitions the expressions
@@ -135,6 +137,7 @@ remaining expressions in order taking any that: have all their values available 
 do not use a value formed in the current group, and do not overwrite a value formed in the current group.
 For an example please see <a href='http://winvector.github.io/FluidData/partition_mutate.html'>http://winvector.github.io/FluidData/partition_mutate.html</a>.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>partition_mutate_qt</span>(<span class='no'>...</span>)</pre>
     
