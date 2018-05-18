@@ -1,5 +1,5 @@
 
-# seplyr 0.5.6 2018-05-05
+# seplyr 0.5.6 2018-05-18
 
  * Adjust dependencies.
  * Add pipeable base fns.
