@@ -27,12 +27,13 @@ Depends:
     wrapr (>= 1.4.1)
 Imports:
     dplyr (>= 0.7.0),
-    rlang
+    rlang, 
+    tidyr
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
-    testthat,
+    testthat
 VignetteBuilder: knitr
 ByteCompile: true
 
