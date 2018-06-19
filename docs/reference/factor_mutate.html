@@ -172,12 +172,12 @@ See also: <a href='https://winvector.github.io/rquery/articles/AssigmentPartitio
   <span class='kw'>choice_e</span> <span class='kw'>=</span> <span class='no'>rand_e</span> <span class='kw'>&gt;=</span> <span class='fl'>0.5</span>,
    <span class='kw'>e_1</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice_e</span>, <span class='st'>'T'</span>, <span class='st'>'C'</span>),
    <span class='kw'>e_2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice_e</span>, <span class='st'>'C'</span>, <span class='st'>'T'</span>),
- <span class='kw'>factor_mutate_warn_msg</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> ))</div><div class='output co'>#&gt;    mutate(choice_a = rand_a &gt;= 0.5,
+ <span class='kw'>factor_mutate_warn_msg</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> ))</div><div class='output co'>#&gt;    mutate(., choice_a = rand_a &gt;= 0.5,
 #&gt;           choice_b = rand_b &gt;= 0.5,
 #&gt;           choice_c = rand_c &gt;= 0.5,
 #&gt;           choice_d = rand_d &gt;= 0.5,
-#&gt;           choice_e = rand_e &gt;= 0.5) %&gt;%
-#&gt;    mutate(a_1 = ifelse(choice_a, "T", "C"),
+#&gt;           choice_e = rand_e &gt;= 0.5) %.&gt;%
+#&gt;    mutate(., a_1 = ifelse(choice_a, "T", "C"),
 #&gt;           a_2 = ifelse(choice_a, "C", "T"),
 #&gt;           b_1 = ifelse(choice_b, "T", "C"),
 #&gt;           b_2 = ifelse(choice_b, "C", "T"),
@@ -203,20 +203,20 @@ See also: <a href='https://winvector.github.io/rquery/articles/AssigmentPartitio
   <span class='kw'>choice</span> <span class='kw'>=</span> <span class='no'>rand_e</span> <span class='kw'>&gt;=</span> <span class='fl'>0.5</span>,
    <span class='kw'>e_1</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice</span>, <span class='st'>'T'</span>, <span class='st'>'C'</span>),
    <span class='kw'>e_2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>choice</span>, <span class='st'>'C'</span>, <span class='st'>'T'</span>),
- <span class='kw'>factor_mutate_warn_msg</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt;    mutate(choice = rand_a &gt;= 0.5) %&gt;%
-#&gt;    mutate(a_1 = ifelse(choice, "T", "C"),
-#&gt;           a_2 = ifelse(choice, "C", "T")) %&gt;%
-#&gt;    mutate(choice = rand_b &gt;= 0.5) %&gt;%
-#&gt;    mutate(b_1 = ifelse(choice, "T", "C"),
-#&gt;           b_2 = ifelse(choice, "C", "T")) %&gt;%
-#&gt;    mutate(choice = rand_c &gt;= 0.5) %&gt;%
-#&gt;    mutate(c_1 = ifelse(choice, "T", "C"),
-#&gt;           c_2 = ifelse(choice, "C", "T")) %&gt;%
-#&gt;    mutate(choice = rand_d &gt;= 0.5) %&gt;%
-#&gt;    mutate(d_1 = ifelse(choice, "T", "C"),
-#&gt;           d_2 = ifelse(choice, "C", "T")) %&gt;%
-#&gt;    mutate(choice = rand_e &gt;= 0.5) %&gt;%
-#&gt;    mutate(e_1 = ifelse(choice, "T", "C"),
+ <span class='kw'>factor_mutate_warn_msg</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt;    mutate(., choice = rand_a &gt;= 0.5) %.&gt;%
+#&gt;    mutate(., a_1 = ifelse(choice, "T", "C"),
+#&gt;           a_2 = ifelse(choice, "C", "T")) %.&gt;%
+#&gt;    mutate(., choice = rand_b &gt;= 0.5) %.&gt;%
+#&gt;    mutate(., b_1 = ifelse(choice, "T", "C"),
+#&gt;           b_2 = ifelse(choice, "C", "T")) %.&gt;%
+#&gt;    mutate(., choice = rand_c &gt;= 0.5) %.&gt;%
+#&gt;    mutate(., c_1 = ifelse(choice, "T", "C"),
+#&gt;           c_2 = ifelse(choice, "C", "T")) %.&gt;%
+#&gt;    mutate(., choice = rand_d &gt;= 0.5) %.&gt;%
+#&gt;    mutate(., d_1 = ifelse(choice, "T", "C"),
+#&gt;           d_2 = ifelse(choice, "C", "T")) %.&gt;%
+#&gt;    mutate(., choice = rand_e &gt;= 0.5) %.&gt;%
+#&gt;    mutate(., e_1 = ifelse(choice, "T", "C"),
 #&gt;           e_2 = ifelse(choice, "C", "T")) </div><div class='input'>
 </div></pre>
   </div>

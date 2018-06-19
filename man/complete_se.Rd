@@ -37,13 +37,13 @@ value2 = 4:6)
 
 # columns to complete by
 col_terms <- c("group", "item_id", "item_name")
-df \%>\% complete_se(., col_terms)
-df \%>\% complete_se(., col_terms, fill = list(value1 = 0))
+df \%.>\% complete_se(., col_terms)
+df \%.>\% complete_se(., col_terms, fill = list(value1 = 0))
 
 # with nesting
 col_terms <- c("group", "nesting(item_id, item_name)")
-df \%>\% complete_se(., col_terms)
-df \%>\% complete_se(., col_terms, fill = list(value1 = 0))
-df \%>\% complete_se(., col_terms, fill = list(value1 = 0, value2 = 0))
+df \%.>\% complete_se(., col_terms)
+df \%.>\% complete_se(., col_terms, fill = list(value1 = 0))
+df \%.>\% complete_se(., col_terms, fill = list(value1 = 0, value2 = 0))
 
 }

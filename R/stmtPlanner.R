@@ -283,9 +283,9 @@ factor_mutate <- function(...,
                    pi <- plan[[i]]
                    terms <- paste(names(pi), "=", pi)
                    ti <- paste(terms, collapse = ",\n          ")
-                   paste0("   mutate(", ti, ")")
+                   paste0("   mutate(., ", ti, ")")
                  }, character(1))
-  r <- paste(steps, collapse = " %>%\n")
+  r <- paste(steps, collapse = " %.>%\n")
   paste(r, "\n")
 }
 

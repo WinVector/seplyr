@@ -27,14 +27,14 @@ NULL
 #'
 #' # columns to complete by
 #' col_terms <- c("group", "item_id", "item_name")
-#' df %>% complete_se(., col_terms)
-#' df %>% complete_se(., col_terms, fill = list(value1 = 0))
+#' df %.>% complete_se(., col_terms)
+#' df %.>% complete_se(., col_terms, fill = list(value1 = 0))
 #'
 #' # with nesting
 #' col_terms <- c("group", "nesting(item_id, item_name)")
-#' df %>% complete_se(., col_terms)
-#' df %>% complete_se(., col_terms, fill = list(value1 = 0))
-#' df %>% complete_se(., col_terms, fill = list(value1 = 0, value2 = 0))
+#' df %.>% complete_se(., col_terms)
+#' df %.>% complete_se(., col_terms, fill = list(value1 = 0))
+#' df %.>% complete_se(., col_terms, fill = list(value1 = 0, value2 = 0))
 #'
 #' @export
 complete_se <- function(data, col_terms, fill = list(), env = parent.frame()) {
@@ -50,4 +50,4 @@ complete_se <- function(data, col_terms, fill = list(), env = parent.frame()) {
 		})
 	tidyr::complete(data, !!!col_syms, fill = fill)
 }
-"complete_se"
+

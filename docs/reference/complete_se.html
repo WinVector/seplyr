@@ -177,7 +177,7 @@
 
 <span class='co'># columns to complete by</span>
 <span class='no'>col_terms</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"group"</span>, <span class='st'>"item_id"</span>, <span class='st'>"item_name"</span>)
-<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>)</div><div class='output co'>#&gt; # A tibble: 8 x 5
+<span class='no'>df</span> <span class='kw'>%.&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>)</div><div class='output co'>#&gt; # A tibble: 8 x 5
 #&gt;   group item_id item_name value1 value2
 #&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;int&gt;  &lt;int&gt;
 #&gt; 1     1       1 a              1      4
@@ -187,7 +187,7 @@
 #&gt; 5     2       1 a             NA     NA
 #&gt; 6     2       1 b             NA     NA
 #&gt; 7     2       2 a             NA     NA
-#&gt; 8     2       2 b              2      5</div><div class='input'><span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>value1</span> <span class='kw'>=</span> <span class='fl'>0</span>))</div><div class='output co'>#&gt; # A tibble: 8 x 5
+#&gt; 8     2       2 b              2      5</div><div class='input'><span class='no'>df</span> <span class='kw'>%.&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>value1</span> <span class='kw'>=</span> <span class='fl'>0</span>))</div><div class='output co'>#&gt; # A tibble: 8 x 5
 #&gt;   group item_id item_name value1 value2
 #&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;int&gt;
 #&gt; 1     1       1 a              1      4
@@ -200,19 +200,19 @@
 #&gt; 8     2       2 b              2      5</div><div class='input'>
 <span class='co'># with nesting</span>
 <span class='no'>col_terms</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"group"</span>, <span class='st'>"nesting(item_id, item_name)"</span>)
-<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
+<span class='no'>df</span> <span class='kw'>%.&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
 #&gt;   group item_id item_name value1 value2
 #&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;int&gt;  &lt;int&gt;
 #&gt; 1     1       1 a              1      4
 #&gt; 2     1       2 b              3      6
 #&gt; 3     2       1 a             NA     NA
-#&gt; 4     2       2 b              2      5</div><div class='input'><span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>value1</span> <span class='kw'>=</span> <span class='fl'>0</span>))</div><div class='output co'>#&gt; # A tibble: 4 x 5
+#&gt; 4     2       2 b              2      5</div><div class='input'><span class='no'>df</span> <span class='kw'>%.&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>value1</span> <span class='kw'>=</span> <span class='fl'>0</span>))</div><div class='output co'>#&gt; # A tibble: 4 x 5
 #&gt;   group item_id item_name value1 value2
 #&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;int&gt;
 #&gt; 1     1       1 a              1      4
 #&gt; 2     1       2 b              3      6
 #&gt; 3     2       1 a              0     NA
-#&gt; 4     2       2 b              2      5</div><div class='input'><span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>value1</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>value2</span> <span class='kw'>=</span> <span class='fl'>0</span>))</div><div class='output co'>#&gt; # A tibble: 4 x 5
+#&gt; 4     2       2 b              2      5</div><div class='input'><span class='no'>df</span> <span class='kw'>%.&gt;%</span> <span class='fu'>complete_se</span>(<span class='no'>.</span>, <span class='no'>col_terms</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>value1</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>value2</span> <span class='kw'>=</span> <span class='fl'>0</span>))</div><div class='output co'>#&gt; # A tibble: 4 x 5
 #&gt;   group item_id item_name value1 value2
 #&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;
 #&gt; 1     1       1 a              1      4
