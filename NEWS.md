@@ -1,5 +1,5 @@
 
-# seplyr 0.5.6 2018-05-19
+# seplyr 0.5.6 2018-06-19
 
  * Adjust dependencies.
  * complete_se() from Richard Layton graphdr.
