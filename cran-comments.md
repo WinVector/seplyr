@@ -1,15 +1,15 @@
 
-Maintenance release.
+Functionality improvements, documentation fixes, and dependency adjustments.
 
 ## Test environments
 
   * Windows
- 
-  
-  * OSX
-  * using R version 3.4.4 (2018-03-15)
-  * using platform: x86_64-apple-darwin15.6.0 (64-bit)
+  * using R Under development (unstable) (2018-06-21 r74927)
+  * using platform: x86_64-w64-mingw32 (64-bit)
 
+  * OSX
+  * using R version 3.5.0 (2018-04-23)
+  * using platform: x86_64-apple-darwin15.6.0 (64-bit)
  
 
 ## R CMD check results
@@ -21,11 +21,10 @@ Maintenance release.
   * checking extension type ... Package
   * this is package ‘seplyr’ version ‘0.5.6’
   * package encoding: UTF-8
-  * checking CRAN incoming feasibility ...
-  
+  * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
   Maintainer: ‘John Mount <jmount@win-vector.com>’
 
-  Number of updates in past 6 months: 7
+  Status: OK
 
 ## Reverse dependencies
 

@@ -120,6 +120,6 @@ In addition to the series of adapters we also supply a number of useful new verb
 `seplyr` methods are short and have examples in their help, so always try both help and printing the method (for example: `help(select_se)` and `print(select_se)`). Printing methods can show you how to use `dplyr` directly with `rlang`/`tidyeval` methodology (allowing you to skip `seplyr`).
 
 Some inspiration comes from [Sebastian Kranz's `s_dplyr`](https://gist.github.com/skranz/9681509). 
-Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html) for details on "dot pipe."
+Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/dot_arrow.html) for details on "dot pipe."
 
 

@@ -65,5 +65,5 @@ datasets::iris %.>%
 
 
 For more details please see: [`help(`:=`, package = 'wrapr')`](https://winvector.github.io/wrapr/reference/named_map_builder.html) and 
-[`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html).
+[`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/dot_arrow.html).
 

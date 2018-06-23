@@ -107,7 +107,7 @@ The only part that requires more study and practice was messing around with the 
 
 The `seplyr` methodology is simple, easy to teach, and powerful.  The package contains a number of worked examples both in `help()` and [`vignette(package='seplyr')`](https://winvector.github.io/seplyr/articles/seplyr.html) documentation.
 For more details please also see: [`help(`:=`, package = 'wrapr')`](https://winvector.github.io/wrapr/reference/named_map_builder.html) and 
-[`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html).
+[`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/dot_arrow.html).
 
 
 

@@ -91,7 +91,7 @@
       <h1>seplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-06-19</h4>
+            <h4 class="date">2018-06-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr//blob/master/vignettes/seplyr.Rmd"><code>vignettes/seplyr.Rmd</code></a></small>
       <div class="hidden name"><code>seplyr.Rmd</code></div>
@@ -217,7 +217,7 @@ datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span><span cla
 </ul>
 <p><code>seplyr</code> is designed to be a thin package that passes work to <code>dplyr</code>. If you want a package that works around <code>dplyr</code> implementation differences on different data sources I suggest trying our own <a href="https://CRAN.R-project.org/package=replyr"><code>replyr</code></a> package. Another alternative is using <a href="https://github.com/WinVector/wrapr/blob/master/README.html"><code><a href="http://www.rdocumentation.org/packages/wrapr/topics/let">wrapr::let()</a></code></a>.</p>
 <p><code>seplyr</code> methods are short and have examples in their help, so always try both help and printing the method (for example: <code>help(select_se)</code> and <code>print(select_se)</code>). Printing methods can show you how to use <code>dplyr</code> directly with <code>rlang</code>/<code>tidyeval</code> methodology (allowing you to skip <code>seplyr</code>).</p>
-<p>Some inspiration comes from <a href="https://gist.github.com/skranz/9681509">Sebastian Kranz’s <code>s_dplyr</code></a>. Please see <a href="https://winvector.github.io/wrapr/reference/grapes-.-greater-than-grapes.html"><code>help("%.&gt;%", package="wrapr")</code></a> for details on “dot pipe.”</p>
+<p>Some inspiration comes from <a href="https://gist.github.com/skranz/9681509">Sebastian Kranz’s <code>s_dplyr</code></a>. Please see <a href="https://winvector.github.io/wrapr/reference/dot_arrow.html"><code>help("%.&gt;%", package="wrapr")</code></a> for details on “dot pipe.”</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
