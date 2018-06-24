@@ -38,7 +38,7 @@ NULL
 #'
 #' @export
 complete_se <- function(data, col_terms, fill = list(), env = parent.frame()) {
-	if(isFALSE(is.data.frame(data) || dplyr::is.tbl(data))) {
+	if(!(is.data.frame(data) || dplyr::is.tbl(data))) {
 		stop("seplyr::complete_se first argument must be a data.frame or tbl")
 	}
 	# convert char vector into spliceable vector

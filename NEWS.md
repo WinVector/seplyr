@@ -1,4 +1,9 @@
 
+
+# seplyr 0.5.7 2018-06-24
+
+ * Remove use of isFALSE().
+ 
 # seplyr 0.5.6 2018-06-23
 
  * Adjust dependencies.
