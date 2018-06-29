@@ -38,10 +38,7 @@ add_group_sub_indices <- function(.data,
     stop("seplyr::add_group_sub_indices first argument must be a data.frame or tbl")
   }
   .data <- dplyr::ungroup(.data) # just in case
-  if(length(list(...))>0) {
-    stop("seplyr::add_group_sub_indices unexpected arguments")
-  }
-  `:=` <- NULL # don't let look like an unbound reference to CRAN checker
+  wrapr::stop_if_dot_args(substitute(list(...)), "seplyr::add_group_sub_indices")
   if(is.null(arrangeTerms)) {
     arrangeTerms <- colnames(.data)
   }

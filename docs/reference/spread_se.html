@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate a name with a prefix disjoint from a set of names — novelName • seplyr</title>
+<title>Collect values from blocks of rows into columns. — spread_se • seplyr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,12 @@
 
 
 
-<meta property="og:title" content="Generate a name with a prefix disjoint from a set of names — novelName" />
+<meta property="og:title" content="Collect values from blocks of rows into columns. — spread_se" />
 
-<meta property="og:description" content="Generate a name with a prefix disjoint from a set of names" />
+<meta property="og:description" content="Call spread.
+Take values from the columns named in the columns argument and
+move them into blocks of rows, placing values in the new column specified by value
+and indicating which column each value came from in the new column specified by key." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,66 +124,80 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate a name with a prefix disjoint from a set of names</h1>
-    <small class="dont-index">Source: <a href='https://github.com/WinVector/seplyr//blob/master/R/novelName.R'><code>R/novelName.R</code></a></small>
-    <div class="hidden name"><code>novelName.Rd</code></div>
+    <h1>Collect values from blocks of rows into columns.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/WinVector/seplyr//blob/master/R/spread_se.R'><code>R/spread_se.R</code></a></small>
+    <div class="hidden name"><code>spread_se.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Generate a name with a prefix disjoint from a set of names</p>
+    <p>Call <code><a href='http://www.rdocumentation.org/packages/tidyr/topics/spread'>spread</a></code>.
+Take values from the columns named in the <code>columns</code> argument and
+move them into blocks of rows, placing values in the new column specified by <code>value</code>
+and indicating which column each value came from in the new column specified by <code>key</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>novelName</span>(<span class='no'>prefix</span>, <span class='no'>names</span>)</pre>
+    <pre class="usage"><span class='fu'>spread_se</span>(<span class='no'>data</span>, <span class='no'>key</span>, <span class='no'>value</span>, <span class='no'>...</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>convert</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>prefix</th>
-      <td><p>character, desired prefix</p></td>
+      <th>data</th>
+      <td><p>data.frame to take value from.</p></td>
     </tr>
     <tr>
-      <th>names</th>
-      <td><p>character list of names to avoid</p></td>
+      <th>key</th>
+      <td><p>character, name for existing column to get new column names from.</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>character, name for existing column to take values from.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>not used, force later arguments to bind by name.</p></td>
+    </tr>
+    <tr>
+      <th>fill</th>
+      <td><p>passed to spread.</p></td>
+    </tr>
+    <tr>
+      <th>convert</th>
+      <td><p>passed to spread.</p></td>
+    </tr>
+    <tr>
+      <th>drop</th>
+      <td><p>passed to spread.</p></td>
+    </tr>
+    <tr>
+      <th>sep</th>
+      <td><p>passed to spread.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>new name disjoint from set of names</p>
+    <p>converted data.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/tidyr/topics/spread'>spread</a></code>, <code><a href='gather_se.html'>gather_se</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'># basic op</span>
-<span class='fu'>novelName</span>(<span class='st'>'b'</span>, <span class='fu'>c</span>(<span class='st'>'a'</span>, <span class='st'>'b'</span>, <span class='st'>'c'</span>))</div><div class='output co'>#&gt; [1] "b_1"</div><div class='input'>
-
-
-<span class='co'># complex application (converting logistic</span>
-<span class='co'># links to probabilities).</span>
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(
-  <span class='kw'>exampleId</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>),
-  <span class='kw'>resultLabel</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'a'</span>, <span class='st'>'b'</span> , <span class='st'>'a'</span>, <span class='st'>'b'</span>),
-  <span class='kw'>linkValue</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>5</span>, <span class='fl'>2</span>, -<span class='fl'>2</span>, -<span class='fl'>1</span>),
-  <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='no'>totColName</span> <span class='kw'>&lt;-</span> <span class='fu'>novelName</span>(<span class='st'>'t'</span>, <span class='fu'>colnames</span>(<span class='no'>d</span>))
-
-<span class='no'>d</span> <span class='kw'>-&gt;</span><span class='no'>.</span>;
-  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='no'>totColName</span> <span class='kw'>:=</span> <span class='st'>"exp(linkValue)"</span>)) <span class='kw'>-&gt;</span><span class='no'>.</span>;
-  <span class='fu'><a href='group_by_se.html'>group_by_se</a></span>(<span class='no'>.</span>, <span class='st'>"exampleId"</span>) <span class='kw'>-&gt;</span><span class='no'>.</span>;
-  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='st'>"probability"</span> <span class='kw'>:=</span>
-                <span class='fu'>paste0</span>(<span class='no'>totColName</span>, <span class='st'>'/sum('</span>, <span class='no'>totColName</span>, <span class='st'>')'</span>))) <span class='kw'>-&gt;</span><span class='no'>.</span>;
-  <span class='fu'><a href='deselect.html'>deselect</a></span>(<span class='no'>.</span>, <span class='no'>totColName</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
-#&gt; # Groups:   exampleId [2]
-#&gt;   exampleId resultLabel linkValue probability
-#&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;
-#&gt; 1         1 a                  -5    0.000911
-#&gt; 2         1 b                   2    0.999   
-#&gt; 3         2 a                  -2    0.269   
-#&gt; 4         2 b                  -1    0.731   </div><div class='input'>
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>wrapr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/wrapr/topics/build_frame'>build_frame</a></span>(
+    <span class='st'>'id'</span>, <span class='st'>'key'</span> , <span class='st'>'value'</span> <span class='kw'>|</span>
+    <span class='fl'>1</span>   , <span class='st'>'col1'</span>, <span class='st'>'a'</span>     <span class='kw'>|</span>
+    <span class='fl'>1</span>   , <span class='st'>'col2'</span>, <span class='st'>'10'</span>    <span class='kw'>|</span>
+    <span class='fl'>2</span>   , <span class='st'>'col1'</span>, <span class='st'>'b'</span>     <span class='kw'>|</span>
+    <span class='fl'>2</span>   , <span class='st'>'col2'</span>, <span class='st'>'20'</span>    )
+<span class='fu'>spread_se</span>(<span class='no'>d</span>)</div><div class='output co'>#&gt;   id col1 col2
+#&gt; 1  1    a   10
+#&gt; 2  2    b   20</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -189,6 +206,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
