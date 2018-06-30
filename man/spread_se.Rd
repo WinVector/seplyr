@@ -8,7 +8,7 @@ spread_se(data, key, value, ..., fill = NA, convert = FALSE, drop = TRUE,
   sep = NULL)
 }
 \arguments{
-\item{data}{data.frame to take value from.}
+\item{data}{data.frame to take values from.}
 
 \item{key}{character, name for existing column to get new column names from.}
 
@@ -28,7 +28,7 @@ spread_se(data, key, value, ..., fill = NA, convert = FALSE, drop = TRUE,
 converted data.
 }
 \description{
-Call \code{\link[tidyr]{spread}}.
+Standared inteface to \code{\link[tidyr]{spread}}.
 Take values from the columns named in the \code{columns} argument and
 move them into blocks of rows, placing values in the new column specified by \code{value}
 and indicating which column each value came from in the new column specified by \code{key}.
@@ -36,12 +36,14 @@ and indicating which column each value came from in the new column specified by 
 \examples{
 
 d <- wrapr::build_frame(
-    'id', 'key' , 'value' |
-    1   , 'col1', 'a'     |
-    1   , 'col2', '10'    |
-    2   , 'col1', 'b'     |
-    2   , 'col2', '20'    )
-spread_se(d)
+    'id', 'name_for_new_column' , 'value_to_take' |
+    1   , 'col1'                , 'a'             |
+    1   , 'col2'                , '10'            |
+    2   , 'col1'                , 'b'             |
+    2   , 'col2'                , '20'            )
+spread_se(d,
+   key = 'name_for_new_column',
+   value = 'value_to_take')
 
 }
 \seealso{

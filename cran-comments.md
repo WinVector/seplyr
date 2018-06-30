@@ -1,5 +1,5 @@
 
-Fix error caused by calling ifFALSE() for versions of R prior to 3.5.0.
+Bug-fix release to replace erroneous 0.5.7 release.  I messed up the 0.5.7 relase (very sorry!) and would like either to replace it with this 0.5.8 or stay at 0.5.6.
 
 ## Test environments
 
@@ -13,7 +13,7 @@ Fix error caused by calling ifFALSE() for versions of R prior to 3.5.0.
 
 ## R CMD check results
 
-  R CMD check --as-cran seplyr_0.5.7.tar.gz 
+  R CMD check --as-cran seplyr_0.5.8.tar.gz 
 
   * using option ‘--as-cran’
   * checking for file ‘seplyr/DESCRIPTION’ ... OK
@@ -22,7 +22,11 @@ Fix error caused by calling ifFALSE() for versions of R prior to 3.5.0.
   * package encoding: UTF-8
   * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
   Maintainer: ‘John Mount <jmount@win-vector.com>’
-  Status: OK
+  
+  Days since last update: 0
+  Number of updates in past 6 months: 7
+
+  Status: 1 NOTE
 
 ## Reverse dependencies
 

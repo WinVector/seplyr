@@ -6,7 +6,7 @@
 #' move them into blocks of rows, placing values in the new column specified by \code{value}
 #' and indicating which column each value came from in the new column specified by \code{key}.
 #'
-#' @param data data.frame to take value from.
+#' @param data data.frame to take values from.
 #' @param ... not used, force later arguments to bind by name.
 #' @param key character, name for new column to record which columns values were taken from.
 #' @param value character, name for new column to record values.
@@ -19,10 +19,13 @@
 #' @examples
 #'
 #' d <- wrapr::build_frame(
-#'     'id', 'col1', 'col2' |
-#'     1   , 'a'   , 10     |
-#'     2   , 'b'   , 20     )
-#' gather_se(d, columns = qc(col1, col2))
+#'     'id', 'measurement1', 'measurement2' |
+#'     1   , 'a'           , 10             |
+#'     2   , 'b'           , 20             )
+#' gather_se(d,
+#'   key = "value_came_from_column",
+#'   value = "value_was",
+#'   columns = c("measurement1", "measurement2"))
 #'
 #' @seealso \code{\link[tidyr]{gather}}, \code{\link{spread_se}}
 #'
@@ -41,13 +44,22 @@ gather_se <- function(data,
   if(!(is.data.frame(data) || dplyr::is.tbl(data))) {
     stop("seplyr::gather_se first argument must be a data.frame or tbl")
   }
+  if((!is.character(key))||(length(key)!=1)) {
+    stop("seplyr::gather_se key must be a single string")
+  }
+  if((!is.character(value))||(length(value)!=1)) {
+    stop("seplyr::gather_se value must be a single string")
+  }
+  if(!is.character(columns)) {
+    stop("seplyr::gather_se columns must be a string vector")
+  }
   gather_terms <- lapply(columns,
                          function(si) {
                            rlang::sym(si)
                          })
   tidyr::gather(data,
-                key = key,
-                value = value,
+                key = !!key,
+                value = !!value,
                 !!!gather_terms,
                 na.rm = na.rm,
                 convert = convert,

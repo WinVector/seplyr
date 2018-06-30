@@ -8,7 +8,7 @@ gather_se(data, ..., key = "key", value = "value", columns = NULL,
   na.rm = FALSE, convert = FALSE, factor_key = FALSE)
 }
 \arguments{
-\item{data}{data.frame to take value from.}
+\item{data}{data.frame to take values from.}
 
 \item{...}{not used, force later arguments to bind by name.}
 
@@ -36,10 +36,13 @@ and indicating which column each value came from in the new column specified by 
 \examples{
 
 d <- wrapr::build_frame(
-    'id', 'col1', 'col2' |
-    1   , 'a'   , 10     |
-    2   , 'b'   , 20     )
-gather_se(d, columns = qc(col1, col2))
+    'id', 'measurement1', 'measurement2' |
+    1   , 'a'           , 10             |
+    2   , 'b'           , 20             )
+gather_se(d,
+  key = "value_came_from_column",
+  value = "value_was",
+  columns = c("measurement1", "measurement2"))
 
 }
 \seealso{

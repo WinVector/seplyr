@@ -1,4 +1,7 @@
 
+# seplyr 0.5.7 2018-06-30
+
+ * Fix NSE interface to gather()/spread().
 
 # seplyr 0.5.7 2018-06-30
 
