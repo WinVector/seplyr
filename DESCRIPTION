@@ -1,7 +1,7 @@
 Package: seplyr
 Type: Package
 Title: Improved Standard Evaluation Interfaces for Common Data Manipulation Tasks
-Version: 0.5.8
+Version: 0.5.9
 Date: 2018-06-30
 Authors@R: c(
     person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),

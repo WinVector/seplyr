@@ -14,6 +14,7 @@
 #' @param na.rm passed to gather.
 #' @param convert passed to gather.
 #' @param factor_key passed to gather.
+#' @param use_one_of logical, if TRUE use dplyr::one_of() instead of rlang:::`!!!`.
 #' @return converted data.
 #'
 #' @examples
@@ -38,7 +39,8 @@ gather_se <- function(data,
                       columns = NULL,
                       na.rm = FALSE,
                       convert = FALSE,
-                      factor_key = FALSE) {
+                      factor_key = FALSE,
+                      use_one_of = TRUE) {
   wrapr::stop_if_dot_args(substitute(list(...)),
                           "seplyr::gather_se")
   if(!(is.data.frame(data) || dplyr::is.tbl(data))) {
@@ -53,15 +55,25 @@ gather_se <- function(data,
   if(!is.character(columns)) {
     stop("seplyr::gather_se columns must be a string vector")
   }
-  gather_terms <- lapply(columns,
-                         function(si) {
-                           rlang::sym(si)
-                         })
-  tidyr::gather(data,
-                key = !!key,
-                value = !!value,
-                !!!gather_terms,
-                na.rm = na.rm,
-                convert = convert,
-                factor_key = factor_key)
+  if(use_one_of) {
+    tidyr::gather(data,
+                  key = !!key,
+                  value = !!value,
+                  dplyr::one_of(columns),
+                  na.rm = na.rm,
+                  convert = convert,
+                  factor_key = factor_key)
+  } else {
+    gather_terms <- lapply(columns,
+                           function(si) {
+                             rlang::sym(si)
+                           })
+    tidyr::gather(data,
+                  key = !!key,
+                  value = !!value,
+                  !!!gather_terms,
+                  na.rm = na.rm,
+                  convert = convert,
+                  factor_key = factor_key)
+  }
 }

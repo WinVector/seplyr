@@ -5,7 +5,7 @@
 \title{Distribute columns into blocks of rows.}
 \usage{
 gather_se(data, ..., key = "key", value = "value", columns = NULL,
-  na.rm = FALSE, convert = FALSE, factor_key = FALSE)
+  na.rm = FALSE, convert = FALSE, factor_key = FALSE, use_one_of = TRUE)
 }
 \arguments{
 \item{data}{data.frame to take values from.}
@@ -23,6 +23,8 @@ gather_se(data, ..., key = "key", value = "value", columns = NULL,
 \item{convert}{passed to gather.}
 
 \item{factor_key}{passed to gather.}
+
+\item{use_one_of}{logical, if TRUE use dplyr::one_of() instead of rlang:::`!!!`.}
 }
 \value{
 converted data.
