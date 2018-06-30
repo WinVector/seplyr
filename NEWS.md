@@ -1,6 +1,6 @@
 
 
-# seplyr 0.5.7 2018-06-29
+# seplyr 0.5.7 2018-06-30
 
  * Remove use of isFALSE().
  * Add gather_se() and spread_se().

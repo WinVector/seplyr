@@ -1,4 +1,5 @@
 
+Fix error caused by calling ifFALSE() for versions of R prior to 3.5.0.
 
 ## Test environments
 
@@ -19,11 +20,9 @@
   * checking extension type ... Package
   * this is package ‘seplyr’ version ‘0.5.7’
   * package encoding: UTF-8
-  * checking CRAN incoming feasibility ... NOTE
+  * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
   Maintainer: ‘John Mount <jmount@win-vector.com>’
-
-  Days since last update: 6
-
+  Status: OK
 
 ## Reverse dependencies
 
