@@ -4,7 +4,7 @@ Fix error caused by calling ifFALSE() for versions of R prior to 3.5.0.
 ## Test environments
 
   * Windows
-  * using R Under development (unstable) (2018-06-26 r74934)
+  * using R Under development (unstable) (2018-06-28 r74941)
   * using platform: x86_64-w64-mingw32 (64-bit)
 
   * OSX
