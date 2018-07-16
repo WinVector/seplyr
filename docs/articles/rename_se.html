@@ -91,7 +91,7 @@
       <h1>rename_se</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-06-30</h4>
+            <h4 class="date">2018-07-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr//blob/master/vignettes/rename_se.Rmd"><code>vignettes/rename_se.Rmd</code></a></small>
       <div class="hidden name"><code>rename_se.Rmd</code></div>
@@ -102,9 +102,9 @@
     
 <p><a href="https://github.com/WinVector/seplyr"><code>seplyr</code></a> is an attempt to work with the <a href="https://CRAN.R-project.org/package=dplyr"><code>dplyr</code> <code>0.7.*</code></a> <a href="https://www.r-project.org"><code>R</code></a> package through standard evaluation interfaces with a minimum of change and minimum of cognitive friction. Beyond championing standard evaluation it attempts to introduce as few of its own opinions as possible.</p>
 <p>A case in point is <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>/<code><a href="../reference/rename_se.html">seplyr::rename_se()</a></code>. <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> is used as follows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))
-
-datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))</code></pre></div>
+<pre><code>## Warning: package 'dplyr' was built under R version 3.5.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">rename</a></span>(<span class="dt">cylinders =</span> cyl, <span class="dt">gears =</span> gear) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre></div>
 <pre><code>##                    mpg cylinders disp  hp drat    wt  qsec vs am gears
@@ -152,7 +152,7 @@ datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span>
 ## Hornet Sportabout    2
 ## Valiant              1</code></pre>
 <p>We hope this makes it easy to translate one-off analyses into re-usable scripts by incrementally replacing known variable names with parametric versions. The <code>:=</code> operator is just a convenience function for building up maps, we could also have written <code><a href="../reference/rename_se.html">rename_se(c("cylinders" = "cyl", "gears" = "gear"))</a></code> or passed in a named vector built up elsewhere.</p>
-<p><code>rename_se</code> interpets all left-hand names as new column names and all right-hand names as old column names. This allows <code>rename_se</code> to be used to swap columns:</p>
+<p><code>rename_se</code> interprets all left-hand names as new column names and all right-hand names as old column names. This allows <code>rename_se</code> to be used to swap columns:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>) <span class="op">%.&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/rename_se.html">rename_se</a></span>(., <span class="kw">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>) <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="st">'b'</span>, <span class="st">'a'</span>))</code></pre></div>
 <pre><code>##   b a

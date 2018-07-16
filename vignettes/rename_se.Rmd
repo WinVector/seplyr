@@ -41,7 +41,7 @@ datasets::mtcars %.>%
 
 We hope this makes it easy to translate one-off analyses into re-usable scripts by incrementally replacing known variable names with parametric versions.  The `:=` operator is just a convenience function for building up maps, we could also have written `rename_se(c("cylinders" = "cyl", "gears" = "gear"))` or passed in a named vector built up elsewhere.
 
-`rename_se` interpets all left-hand names as new column names and all right-hand names as old column names.  This allows `rename_se` to be used to swap columns:
+`rename_se` interprets all left-hand names as new column names and all right-hand names as old column names.  This allows `rename_se` to be used to swap columns:
 
 ```{r swap}
 data.frame(a = 1, b = 2) %.>%

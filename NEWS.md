@@ -1,5 +1,5 @@
 
-# seplyr 0.5.9 2018-06-30
+# seplyr 0.5.9 2018-07-16
 
  * dplyr::one_of() option.
 

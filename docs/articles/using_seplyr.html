@@ -91,7 +91,7 @@
       <h1>Using seplyr to Program Over dplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-06-30</h4>
+            <h4 class="date">2018-07-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr//blob/master/vignettes/using_seplyr.Rmd"><code>vignettes/using_seplyr.Rmd</code></a></small>
       <div class="hidden name"><code>using_seplyr.Rmd</code></div>
@@ -103,9 +103,10 @@
 <p><a href="https://github.com/WinVector/seplyr"><code>seplyr</code></a> is an <a href="https://www.r-project.org"><code>R</code></a> package that makes it easy to program over <a href="https://CRAN.R-project.org/package=dplyr"><code>dplyr</code> <code>0.7.*</code></a>.</p>
 <p>To illustrate this we will work an example.</p>
 <p>Suppose you had worked out a <code>dplyr</code> pipeline that performed an analysis you were interested in. For an example we could take something similar to one of the examples from the <a href="https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/"><code>dplyr</code> <code>0.7.0</code> announcement</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))
-<span class="kw">packageVersion</span>(<span class="st">"dplyr"</span>)</code></pre></div>
-<pre><code>## [1] '0.7.5'</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))</code></pre></div>
+<pre><code>## Warning: package 'dplyr' was built under R version 3.5.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">packageVersion</span>(<span class="st">"dplyr"</span>)</code></pre></div>
+<pre><code>## [1] '0.7.6'</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">colnames</span>(starwars), <span class="dt">sep =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
 <pre><code>## name
 ## height
