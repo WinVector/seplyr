@@ -9,6 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## Introduction
 
 [`seplyr`](https://github.com/WinVector/seplyr) is an [`R`](https://www.r-project.org) package that makes it easy to program over [`dplyr` `0.7.*`]( https://CRAN.R-project.org/package=dplyr).
 
@@ -20,7 +21,7 @@ Suppose you had worked out a `dplyr` pipeline that performed an analysis you wer
 suppressPackageStartupMessages(library("dplyr"))
 packageVersion("dplyr")
 
-cat(colnames(starwars), sep = '\n')
+colnames(starwars)
 
 starwars %>%
   group_by(homeworld) %>%
@@ -29,15 +30,17 @@ starwars %>%
             count = n())
 ```
 
-The above is colloquially called "an interactive script."  The name comes from the fact that we use names of variables (such as "`homeworld`") that would only be known from looking at the data directly in the analysis code.  Only somebody interacting with the data could write such a script (hence the name).
+The above is colloquially called "an interactive script."  The name comes from the fact that we directly use names of variables (such as "`homeworld`", which would only be known from looking at the data directly) in our analysis code.  Only somebody interacting with the data could write such a script (hence the name).
 
 It has long been considered a point of discomfort to convert such an interactive `dplyr` pipeline into a re-usable script or function.  That is a script or function that specifies column names in some [parametric](http://www.win-vector.com/blog/2017/04/programming-over-r/) or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).
 
-This inessential (or conquerable) difficulty is largely a due to the preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.
+This inessential (or conquerable) difficulty is largely a due to the strong preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.
+
+## `seplyr`
 
 `seplyr` is a `dplyr` adapter layer that prefers "slightly clunkier" standard interfaces (or [referentially transparent](https://en.wikipedia.org/wiki/Referential_transparency) interfaces), which are actually very powerful and can be used to some advantage.
 
-The above description and comparisons can come off as needlessly broad and painfully abstract.  Things are much clearer if we move away from theory and return to our practical example.
+The above description and comparisons can come off as needlessly broad and painfully abstract.  Things are much clearer if we move away from theory and return to our example.
 
 Let's translate the above example into a re-usable function in small (easy) stages.  First translate the interactive script from `dplyr` notation into `seplyr` notation.  This step is a pure [re-factoring](https://en.wikipedia.org/wiki/Code_refactoring), we are changing the code without changing its observable external behavior.
 
@@ -61,25 +64,12 @@ starwars %>%
                  "count" := "n()"))
 ```
 
-This code works the same as the original `dplyr` code.  Obviously at this point all we have done is: worked to make the code a bit less pleasant looking. We have yet to see any benefit from this conversion (though we can turn this on its head and say all the original `dplyr` notation is saving us is from having to write a few quote marks).
+This code works the same as the original `dplyr` code.  Also the translation could be performed by following the small set of explicit re-coding rules that we gave above.
+
+Obviously at this point all we have done is: worked to make the code a bit less pleasant looking. We have yet to see any benefit from this conversion (though we can turn this on its head and say all the original `dplyr` notation is saving us is from having to write a few quote marks).
 
 The benefit is: this new code can *very easily* be parameterized and wrapped in a re-usable function.  In fact it is now simpler to do than to describe.
 
-For example: suppose ([as in the original example](https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/)) we want to create a function that lets us choose the grouping variable?  This is now easy, we copy the code into a function and replace the explicit value `"homeworld"` with a variable:
-
-```{r exp1}
-starwars_mean <- function(my_var) {
-  starwars %>%
-    group_by_se(my_var) %>%
-    summarize_se(c("mean_height" := "mean(height, na.rm = TRUE)",
-                   "mean_mass" := "mean(mass, na.rm = TRUE)",
-                   "count" := "n()"))
-}
-
-starwars_mean("hair_color")
-```
-
-In `seplyr` programming is easy (just replace values with variables).  For example we can make a completely generic re-usable "grouped mean" function using `R`'s `paste()` function to build up expressions.
 
 ```{r exp3}
 grouped_mean <- function(data, 
@@ -91,7 +81,6 @@ grouped_mean <- function(data,
                         value_variables, 
                         ", na.rm = TRUE)")
   calculation <- result_names := expressions
-  print(as.list(calculation)) # print for demonstration
   data %>%
     group_by_se(grouping_variables) %>%
     summarize_se(c(calculation,
@@ -103,11 +92,87 @@ starwars %>%
                value_variables = c("mass", "birth_year"))
 ```
 
-The only part that requires more study and practice was messing around with the expressions using `paste0()` (for more details on the string manipulation please try "`help(paste)`").  Notice also we used the "`:=`" operator to bind the list of desired result names to the matching calculations (please see "`help(named_map_builder)`" for more details).
+We have translated our original interactive or ad-hoc calculation into a parameterized reusable function it two easy steps:
 
-The `seplyr` methodology is simple, easy to teach, and powerful.  The package contains a number of worked examples both in `help()` and [`vignette(package='seplyr')`](https://winvector.github.io/seplyr/articles/seplyr.html) documentation.
-For more details please also see: [`help(`:=`, package = 'wrapr')`](https://winvector.github.io/wrapr/reference/named_map_builder.html) and 
-[`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/dot_arrow.html).
+  * Translate into \code{seplyr} notation.
+  * Replace values with variables.
+  
+To be sure: there are some clunky details of using \code{paste0()} to build up the expressions, but the conversion process is very regular and easy. In `seplyr` parametric programming is intentionally easy (just replace values with variables).  
 
 
+## `rlang`/tidyeval
+
+The above may all seem academic as "`dplyr` supplies its own parametric abstraction layer: `rlang`/tidyeval."  However, in our opinion `rlang` abstraction is irregular and full of corner cases (even for simple column names).  Take for example the following example from the [`dplyr` `0.7.0` announcement](https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/):
+
+![](dplyr_rlan_example.png)
+
+The above code appears to work, unless you take the extra steps of actually running it and examining the results.
+
+```{r rlde1}
+packageVersion("dplyr")
+packageVersion("rlang")
+packageVersion("tidyselect")
+
+my_var <- "homeworld"
+
+starwars %>%
+  group_by(.data[[my_var]]) %>%
+  summarise_at(vars(height:mass), mean, na.rm = TRUE)
+```
+
+Notice the created grouping columns is called "`my_var`", and *not* "`homeworld`".  This may seem like a small thing, but it will cause any downstream processing that needs the "`homeworld`" column to fail.  One can try variations and get many different results, some of which are correct and some of which are not.
+
+```{r rlde2}
+# wrong
+starwars %>%
+  group_by(!!my_var) %>%
+  summarise_at(vars(height:mass), mean, na.rm = TRUE)
+```
+
+
+```{r rlde3}
+# correct, or at least appears to work
+starwars %>%
+  group_by(!!rlang::sym(my_var)) %>%
+  summarise_at(vars(height:mass), mean, na.rm = TRUE)
+```
+
+```{r rlde4}
+# correct, or at least appears to work
+starwars %>%
+  group_by(.data[[!!my_var]]) %>%
+  summarise_at(vars(height:mass), mean, na.rm = TRUE)
+```
+
+```{r rlde5, error=TRUE}
+# errors-out
+starwars %>%
+  group_by(.data[[!!rlang::sym(my_var)]]) %>%
+  summarise_at(vars(height:mass), mean, na.rm = TRUE)
+```
+
+Notice above in some places strings are required and in others names or symbols are required.  In some contexts one may substitute for the other, and in some contexts they can not. In some situations "`!!`" must be used, and in others it must not be used. In some situations errors are signaled, and in others
+a bad result is quietly returned.
+
+The details above are teachable (in the sense one can rote memorize them), but they are not friendly to exploration or discoverable.  There are a large number of moving pieces (strings, names, symbols, quoting, quosers, de-quoting, "data pronouns", select semantics, non-select semantics) and one is expected to know which combinations of these items work together in which context.
+
+For a further example consider the following.
+
+```{r rdse1, error=TRUE}
+# correct, or at least appears to work
+starwars %>%
+  select(my_var) %>%
+  head()
+
+# errors-out
+starwars %>%
+  group_by(my_var) %>%
+  head()
+```
+
+We have found when a programing notation is irregular it discourages exploration and leads to learned helplessness (rote appeals to authority and manuals instead of rapid acquisition of patterns and skills).
+
+## Conclusion
+
+The `seplyr` methodology is simple, easy to teach, and powerful.  The package contains a number of worked examples both in `help()` and [`vignette(package='seplyr')`](https://winvector.github.io/seplyr/articles/seplyr.html) documentation. 
 
