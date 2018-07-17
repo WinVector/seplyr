@@ -92,7 +92,7 @@ starwars %>%
                value_variables = c("mass", "birth_year"))
 ```
 
-We have translated our original interactive or ad-hoc calculation into a parameterized reusable function it two easy steps:
+We have translated our original interactive or ad-hoc calculation into a parameterized reusable function in two easy steps:
 
   * Translate into \code{seplyr} notation.
   * Replace values with variables.
