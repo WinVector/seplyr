@@ -124,7 +124,7 @@ starwars %>%
   summarise_at(vars(height:mass), mean, na.rm = TRUE)
 ```
 
-Notice the created grouping columns is called "`my_var`", and *not* "`homeworld`".  This may seem like a small thing, but it will cause any downstream processing that needs the "`homeworld`" column to fail.  One can try variations and get many different results, some of which are correct and some of which are not.
+Notice the created grouping columns is called "`my_var`", and *not* "`homeworld`".  This may *seem* like a small thing, but it will cause any downstream processing that needs the "`homeworld`" column to fail.  One can try variations and get many different results, some of which are correct and some of which are not.
 
 ```{r rlde2}
 # wrong
@@ -180,8 +180,13 @@ The point is the user does not know what column a `select()` actually chooses un
   * The name of the variable being used (in this case "`my_var`").
   * The value in the variable.
   * If the `data.frame` does or does not have a column matching the variable name.
+  
+Column-name coincidences are actually likely in re-usable code.  Often when generalizing a sequence of operations,
+one chooses an existing column name as the name of a column control variable.
 
-```{r rdsel2}
+Let's look at examples.
+
+```{r rdsel2, error=TRUE}
 my_var <- "homeworld"
 # selects height column
 starwars %>%
@@ -196,9 +201,30 @@ starwars <- starwars %>%
 starwars %>%
   select(my_var) %>%
   head(n=2)
+
+# original official example code now errors-out
+starwars %>%
+  group_by(.data[[my_var]]) %>%
+  summarise_at(vars(height:mass), mean, na.rm = TRUE)
 ```
 
-The `seplyr::select_se()` interface is in fact much simpler: it always looks for columns using the strings (not variable names) given.
+
+The above *might* be acceptable in interactive work, if we assume the user knows the names of all of the columns in the `data.frame` and
+therefore can be held responsible for avoiding column name to variable coincidences. Or more realistically: the user is working in
+interactively in the sense they are there to alter and re-run the code if they happen to notice the failure. However, this is not a safe state of
+affairs in re-usable functions or packages: which should work even if their are naming coincidences in thought to be irrelevant extra columns.
+
+`rlang` does have methods to write unambiguous code such as in:
+
+```{r rlangu}
+starwars %>%
+  select(!!my_var) %>%
+  head(n=2)
+```
+
+However, because the `dplyr` interface does not insist on the "`!!`" notation, the "`!!`" notation will not always be remembered.
+
+The `seplyr::select_se()` interface is intentionally simpler and more reliable: it always looks for columns using the strings (not variable names) given.
 
 ```{r sesel}
 print(my_var)
