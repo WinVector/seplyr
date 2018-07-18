@@ -135,7 +135,8 @@
 ## # ... with 39 more rows</code></pre>
 <p>The above is colloquially called “an interactive script.” The name comes from the fact that we directly use names of variables (such as “<code>homeworld</code>”, which would only be known from looking at the data directly) in our analysis code. Only somebody interacting with the data could write such a script (hence the name).</p>
 <p>It has long been considered a point of discomfort to convert such an interactive <code>dplyr</code> pipeline into a re-usable script or function. That is a script or function that specifies column names in some <a href="http://www.win-vector.com/blog/2017/04/programming-over-r/">parametric</a> or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).</p>
-<p>This inessential (or conquerable) difficulty is largely a due to the strong preference for <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation interfaces</a> (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design <code>dplyr</code>.</p>
+<p>This inessential (or conquerable) difficulty is largely a due to the strong preference for <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation interfaces</a> (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design <code>dplyr</code>. The current suggested tooling to work around <code>dplyr</code>’s non-standard interfaces is a system called alternately <code>rlang</code> (a name which is perhaps a bit overly ambitious as <code>rlang</code> is not the <code>R</code> language) or tidyeval (a name which is perhaps a bit derogatory, incorrectly labeling <code>R</code> itself as the “non-tidy” dialect relative to tidyeval).</p>
+<p>Our contention is a dialect (or adaption) of <code>dplyr</code> itself (which we call <code>seplyr</code> for “standard evaluation plyr”) that emphasizes standard (or value carrying) interfaces is easy to use and does not require the complexities of <code>rlang</code> (as <code>seplyr</code> fails to introduce the difficulty <code>rlang</code> is designed to feast on).</p>
 </div>
 <div id="seplyr" class="section level2">
 <h2 class="hasAnchor">
@@ -183,7 +184,8 @@
 <p>The benefit is: this new code can <em>very easily</em> be parameterized and wrapped in a re-usable function. In fact it is now simpler to do than to describe.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grouped_mean &lt;-<span class="st"> </span><span class="cf">function</span>(data, 
                          grouping_variables, 
-                         value_variables) {
+                         value_variables,
+                         <span class="dt">count_name =</span> <span class="st">"count"</span>) {
   result_names &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"mean_"</span>, 
                          value_variables)
   expressions &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"mean("</span>, 
@@ -193,31 +195,27 @@
   data <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(grouping_variables) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="kw">c</span>(calculation,
-                   <span class="st">"count"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "n()"</span>)) <span class="op">%&gt;%</span>
+                   count_name <span class="op">:</span><span class="er">=</span><span class="st"> "n()"</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span>()
 }
 
 starwars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">grouped_mean</span>(<span class="dt">grouping_variables =</span> <span class="st">"eye_color"</span>,
+<span class="st">  </span><span class="kw">grouped_mean</span>(<span class="dt">grouping_variables =</span> <span class="kw">c</span>(<span class="st">"eye_color"</span>, <span class="st">"skin_color"</span>),
                <span class="dt">value_variables =</span> <span class="kw">c</span>(<span class="st">"mass"</span>, <span class="st">"birth_year"</span>))</code></pre></div>
-<pre><code>## # A tibble: 15 x 4
-##    eye_color     mean_mass mean_birth_year count
-##    &lt;chr&gt;             &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
-##  1 black              76.3            33      10
-##  2 blue               86.5            67.1    19
-##  3 blue-gray          77              57       1
-##  4 brown              66.1           109.     21
-##  5 dark              NaN             NaN       1
-##  6 gold              NaN             NaN       1
-##  7 green, yellow     159             NaN       1
-##  8 hazel              66              34.5     3
-##  9 orange            282.            231       8
-## 10 pink              NaN             NaN       1
-## 11 red                81.4            33.7     5
-## 12 red, blue         NaN             NaN       1
-## 13 unknown            31.5           NaN       3
-## 14 white              48             NaN       1
-## 15 yellow             81.1            76.4    11</code></pre>
+<pre><code>## # A tibble: 53 x 5
+##    eye_color skin_color       mean_mass mean_birth_year count
+##    &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
+##  1 black     green                 80.5            44       2
+##  2 black     grey                  78.7           NaN       4
+##  3 black     none                 NaN             NaN       1
+##  4 black     orange                80              22       1
+##  5 black     red, blue, white      57             NaN       1
+##  6 black     white, blue          NaN             NaN       1
+##  7 blue      blue                 NaN             NaN       1
+##  8 blue      brown                136             NaN       1
+##  9 blue      dark                  50             NaN       1
+## 10 blue      fair                  90              62.6    10
+## # ... with 43 more rows</code></pre>
 <p>We have translated our original interactive or ad-hoc calculation into a parameterized reusable function in two easy steps:</p>
 <ul>
 <li>Translate into  notation.</li>
@@ -228,7 +226,7 @@ starwars <span class="op">%&gt;%</span><span class="st"> </span>
 <div id="rlangtidyeval" class="section level2">
 <h2 class="hasAnchor">
 <a href="#rlangtidyeval" class="anchor"></a><code>rlang</code>/tidyeval</h2>
-<p>The above may all seem academic as “<code>dplyr</code> supplies its own parametric abstraction layer: <code>rlang</code>/tidyeval.” However, in our opinion <code>rlang</code> abstraction is irregular and full of corner cases (even for simple column names). Take for example the following example from the <a href="https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/"><code>dplyr</code> <code>0.7.0</code> announcement</a>:</p>
+<p>The above may all seem academic as “<code>dplyr</code> supplies its own parametric abstraction layer: <code>rlang</code>/tidyeval.” However, in our opinion <code>rlang</code> abstraction is irregular and full of corner cases (even for simple column names). When you are programming of <code>rlang</code> you are programming over a language that is not quite <code>R</code>, and a language that is not in fact superior to <code>R</code>. Take for example the following example from the <a href="https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/"><code>dplyr</code> <code>0.7.0</code> announcement</a>:</p>
 <div class="figure">
 <img src="dplyr_rlan_example.png">
 </div>

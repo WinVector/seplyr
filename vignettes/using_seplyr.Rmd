@@ -34,7 +34,9 @@ The above is colloquially called "an interactive script."  The name comes from t
 
 It has long been considered a point of discomfort to convert such an interactive `dplyr` pipeline into a re-usable script or function.  That is a script or function that specifies column names in some [parametric](http://www.win-vector.com/blog/2017/04/programming-over-r/) or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).
 
-This inessential (or conquerable) difficulty is largely a due to the strong preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.
+This inessential (or conquerable) difficulty is largely a due to the strong preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.  The current suggested tooling to work around `dplyr`'s non-standard interfaces is a system called alternately `rlang` (a name which is perhaps a bit overly ambitious as `rlang` is not the `R` language) or tidyeval (a name which is perhaps a bit derogatory, incorrectly labeling `R` itself as the "non-tidy" dialect relative to tidyeval).
+
+Our contention is a dialect (or adaption) of `dplyr` itself (which we call `seplyr` for "standard evaluation plyr") that emphasizes standard (or value carrying) interfaces is easy to use and does not require the complexities of `rlang` (as `seplyr` fails to introduce the difficulty `rlang` is designed to feast on).
 
 ## `seplyr`
 
@@ -74,7 +76,8 @@ The benefit is: this new code can *very easily* be parameterized and wrapped in 
 ```{r exp3}
 grouped_mean <- function(data, 
                          grouping_variables, 
-                         value_variables) {
+                         value_variables,
+                         count_name = "count") {
   result_names <- paste0("mean_", 
                          value_variables)
   expressions <- paste0("mean(", 
@@ -84,12 +87,12 @@ grouped_mean <- function(data,
   data %>%
     group_by_se(grouping_variables) %>%
     summarize_se(c(calculation,
-                   "count" := "n()")) %>%
+                   count_name := "n()")) %>%
     ungroup()
 }
 
 starwars %>% 
-  grouped_mean(grouping_variables = "eye_color",
+  grouped_mean(grouping_variables = c("eye_color", "skin_color"),
                value_variables = c("mass", "birth_year"))
 ```
 
@@ -103,7 +106,7 @@ To be sure: there are some clunky details of using \code{paste0()} to build up t
 
 ## `rlang`/tidyeval
 
-The above may all seem academic as "`dplyr` supplies its own parametric abstraction layer: `rlang`/tidyeval."  However, in our opinion `rlang` abstraction is irregular and full of corner cases (even for simple column names).  Take for example the following example from the [`dplyr` `0.7.0` announcement](https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/):
+The above may all seem academic as "`dplyr` supplies its own parametric abstraction layer: `rlang`/tidyeval."  However, in our opinion `rlang` abstraction is irregular and full of corner cases (even for simple column names).  When you are programming of `rlang` you are programming over a language that is not quite `R`, and a language that is not in fact superior to `R`. Take for example the following example from the [`dplyr` `0.7.0` announcement](https://blog.rstudio.com/2017/06/13/dplyr-0-7-0/):
 
 ![](dplyr_rlan_example.png)
 
