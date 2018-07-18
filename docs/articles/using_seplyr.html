@@ -193,7 +193,8 @@
   data <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(grouping_variables) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="kw">c</span>(calculation,
-                   <span class="st">"count"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "n()"</span>))
+                   <span class="st">"count"</span> <span class="op">:</span><span class="er">=</span><span class="st"> "n()"</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span>()
 }
 
 starwars <span class="op">%&gt;%</span><span class="st"> </span>

@@ -84,7 +84,8 @@ grouped_mean <- function(data,
   data %>%
     group_by_se(grouping_variables) %>%
     summarize_se(c(calculation,
-                   "count" := "n()"))
+                   "count" := "n()")) %>%
+    ungroup()
 }
 
 starwars %>% 
