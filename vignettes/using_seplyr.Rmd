@@ -27,7 +27,7 @@ starwars %>%
   group_by(homeworld) %>%
   summarise(mean_height = mean(height, na.rm = TRUE),
             mean_mass = mean(mass, na.rm = TRUE),
-            count = n())
+            count = n()) 
 ```
 
 The above is colloquially called "an interactive script."  The name comes from the fact that we directly use names of variables (such as "`homeworld`", which would only be known from looking at the data directly) in our analysis code.  Only somebody interacting with the data could write such a script (hence the name).
@@ -163,12 +163,48 @@ For a further example consider the following.
 # correct, or at least appears to work
 starwars %>%
   select(my_var) %>%
-  head()
+  head(n=2)
 
 # errors-out
 starwars %>%
   group_by(my_var) %>%
-  head()
+  head(n=2)
+```
+
+The "use the value unless the variable name is a column" semantics of select can make code hard to read and potentially unsafe.  
+The point is the user does not know what column a `select()` actually chooses unless that know all of:
+
+  * The name of the variable being used (in this case "`my_var`").
+  * The value in the variable.
+  * If the `data.frame` does or does not have a column matching the variable name.
+
+```{r rdsel2}
+my_var <- "homeworld"
+# selects height column
+starwars %>%
+  select(my_var) %>%
+  head(n=2)
+
+# perhaps different data with an extra column
+starwars <- starwars %>%
+  mutate(my_var = seq_len(nrow(starwars)))
+
+# same code now selects my_var column
+starwars %>%
+  select(my_var) %>%
+  head(n=2)
+```
+
+The `seplyr::select_se()` interface is in fact much simpler: it always looks for columns using the strings (not variable names) given.
+
+```{r sesel}
+print(my_var)
+
+# selects homeworld column (the value specified my_var) independent of
+# any coincidence between variable name and column names.
+starwars %>% 
+  select_se(my_var) %>%
+  head(n=2)
 ```
 
 We have found when a programing notation is irregular it discourages exploration and leads to learned helplessness (rote appeals to authority and manuals instead of rapid acquisition of patterns and skills).

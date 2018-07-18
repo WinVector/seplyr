@@ -91,7 +91,7 @@
       <h1>Using seplyr to Program Over dplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-07-17</h4>
+            <h4 class="date">2018-07-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr//blob/master/vignettes/using_seplyr.Rmd"><code>vignettes/using_seplyr.Rmd</code></a></small>
       <div class="hidden name"><code>using_seplyr.Rmd</code></div>
@@ -118,7 +118,7 @@
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(homeworld) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
             <span class="dt">mean_mass =</span> <span class="kw">mean</span>(mass, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
-            <span class="dt">count =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>())</code></pre></div>
+            <span class="dt">count =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>()) </code></pre></div>
 <pre><code>## # A tibble: 49 x 4
 ##    homeworld      mean_height mean_mass count
 ##    &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -314,21 +314,60 @@ starwars <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># correct, or at least appears to work</span>
 starwars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(my_var) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">head</span>()</code></pre></div>
-<pre><code>## # A tibble: 6 x 1
+<span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## # A tibble: 2 x 1
 ##   homeworld
 ##   &lt;chr&gt;    
 ## 1 Tatooine 
-## 2 Tatooine 
-## 3 Naboo    
-## 4 Tatooine 
-## 5 Alderaan 
-## 6 Tatooine</code></pre>
+## 2 Tatooine</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># errors-out</span>
 starwars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(my_var) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">head</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## Error in grouped_df_impl(data, unname(vars), drop): Column `my_var` is unknown</code></pre>
+<p>The “use the value unless the variable name is a column” semantics of select can make code hard to read and potentially unsafe.<br>
+The point is the user does not know what column a <code><a href="http://dplyr.tidyverse.org/reference/select.html">select()</a></code> actually chooses unless that know all of:</p>
+<ul>
+<li>The name of the variable being used (in this case “<code>my_var</code>”).</li>
+<li>The value in the variable.</li>
+<li>If the <code>data.frame</code> does or does not have a column matching the variable name.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_var &lt;-<span class="st"> "homeworld"</span>
+<span class="co"># selects height column</span>
+starwars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(my_var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## # A tibble: 2 x 1
+##   homeworld
+##   &lt;chr&gt;    
+## 1 Tatooine 
+## 2 Tatooine</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perhaps different data with an extra column</span>
+starwars &lt;-<span class="st"> </span>starwars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">my_var =</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(starwars)))
+
+<span class="co"># same code now selects my_var column</span>
+starwars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(my_var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## # A tibble: 2 x 1
+##   my_var
+##    &lt;int&gt;
+## 1      1
+## 2      2</code></pre>
+<p>The <code><a href="../reference/select_se.html">seplyr::select_se()</a></code> interface is in fact much simpler: it always looks for columns using the strings (not variable names) given.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(my_var)</code></pre></div>
+<pre><code>## [1] "homeworld"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># selects homeworld column (the value specified my_var) independent of</span>
+<span class="co"># any coincidence between variable name and column names.</span>
+starwars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/select_se.html">select_se</a></span>(my_var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## # A tibble: 2 x 1
+##   homeworld
+##   &lt;chr&gt;    
+## 1 Tatooine 
+## 2 Tatooine</code></pre>
 <p>We have found when a programing notation is irregular it discourages exploration and leads to learned helplessness (rote appeals to authority and manuals instead of rapid acquisition of patterns and skills).</p>
 </div>
 <div id="conclusion" class="section level2">
