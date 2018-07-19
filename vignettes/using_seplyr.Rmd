@@ -194,16 +194,16 @@ starwars %>%
   head(n=2)
 
 # perhaps different data with an extra column
-starwars <- starwars %>%
+starwars_plus <- starwars %>%
   mutate(my_var = seq_len(nrow(starwars)))
 
 # same code now selects my_var column
-starwars %>%
+starwars_plus %>%
   select(my_var) %>%
   head(n=2)
 
 # original official example code now errors-out
-starwars %>%
+starwars_plus %>%
   group_by(.data[[my_var]]) %>%
   summarise_at(vars(height:mass), mean, na.rm = TRUE)
 ```
@@ -231,7 +231,7 @@ print(my_var)
 
 # selects homeworld column (the value specified my_var) independent of
 # any coincidence between variable name and column names.
-starwars %>% 
+starwars_plus %>% 
   select_se(my_var) %>%
   head(n=2)
 ```

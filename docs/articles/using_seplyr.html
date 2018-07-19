@@ -91,7 +91,7 @@
       <h1>Using seplyr to Program Over dplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-07-18</h4>
+            <h4 class="date">2018-07-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr//blob/master/vignettes/using_seplyr.Rmd"><code>vignettes/using_seplyr.Rmd</code></a></small>
       <div class="hidden name"><code>using_seplyr.Rmd</code></div>
@@ -343,11 +343,11 @@ starwars <span class="op">%&gt;%</span>
 ## 1 Tatooine 
 ## 2 Tatooine</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perhaps different data with an extra column</span>
-starwars &lt;-<span class="st"> </span>starwars <span class="op">%&gt;%</span>
+starwars_plus &lt;-<span class="st"> </span>starwars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">my_var =</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(starwars)))
 
 <span class="co"># same code now selects my_var column</span>
-starwars <span class="op">%&gt;%</span>
+starwars_plus <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(my_var) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## # A tibble: 2 x 1
@@ -356,7 +356,7 @@ starwars <span class="op">%&gt;%</span>
 ## 1      1
 ## 2      2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># original official example code now errors-out</span>
-starwars <span class="op">%&gt;%</span>
+starwars_plus <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(.data[[my_var]]) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## Error in mutate_impl(.data, dots): Evaluation error: Must subset the data pronoun with a string.</code></pre>
@@ -376,7 +376,7 @@ starwars <span class="op">%&gt;%</span>
 <pre><code>## [1] "homeworld"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># selects homeworld column (the value specified my_var) independent of</span>
 <span class="co"># any coincidence between variable name and column names.</span>
-starwars <span class="op">%&gt;%</span><span class="st"> </span>
+starwars_plus <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/select_se.html">select_se</a></span>(my_var) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## # A tibble: 2 x 1
