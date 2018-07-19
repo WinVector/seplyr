@@ -135,7 +135,7 @@
 ## # ... with 39 more rows</code></pre>
 <p>The above is colloquially called “an interactive script.” The name comes from the fact that we directly use names of variables (such as “<code>homeworld</code>”, which would only be known from looking at the data directly) in our analysis code. Only somebody interacting with the data could write such a script (hence the name).</p>
 <p>It has long been considered a point of discomfort to convert such an interactive <code>dplyr</code> pipeline into a re-usable script or function. That is a script or function that specifies column names in some <a href="http://www.win-vector.com/blog/2017/04/programming-over-r/">parametric</a> or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).</p>
-<p>This inessential (or conquerable) difficulty is largely a due to the strong preference for <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation interfaces</a> (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design <code>dplyr</code>. The current suggested tooling to work around <code>dplyr</code>’s non-standard interfaces is a system called alternately <code>rlang</code> (a name which is perhaps a bit overly ambitious as <code>rlang</code> is not the <code>R</code> language) or tidyeval (a name which is perhaps a bit derogatory, incorrectly labeling <code>R</code> itself as the “non-tidy” dialect relative to tidyeval).</p>
+<p>This inessential (or conquerable) difficulty is largely a due to the strong preference for <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation interfaces</a> (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design <code>dplyr</code>. The common tooling to work around <code>dplyr</code>’s non-standard interfaces is a system called alternately <code>rlang</code> (a name which is perhaps a bit overly ambitious as <code>rlang</code> is not the <code>R</code> language) or tidyeval (a name which is perhaps a bit derogatory, incorrectly labeling <code>R</code> itself as the “non-tidy” dialect relative to tidyeval). We, on the other hand, recommend using either the superior tooling offered by <a href="https://winvector.github.io/wrapr/reference/let.html"><code><a href="http://www.rdocumentation.org/packages/wrapr/topics/let">wrapr::let()</a></code></a> (which actual pre-dates <code>rlang</code> and can be used with any package, not just those that are designed around it) or to avoid non-standard interface foibles by using a standard evaluation adapter for <code>dplyr</code> called <a href="https://CRAN.R-project.org/package=seplyr"><code>seplyr</code></a> (which we will discuss here).</p>
 <p>Our contention is a dialect (or adaption) of <code>dplyr</code> itself (which we call <code>seplyr</code> for “standard evaluation plyr”) that emphasizes standard (or value carrying) interfaces is easy to use and does not require the complexities of <code>rlang</code> (as <code>seplyr</code> fails to introduce the difficulty <code>rlang</code> is designed to feast on).</p>
 </div>
 <div id="seplyr" class="section level2">
@@ -256,7 +256,7 @@ starwars <span class="op">%&gt;%</span>
 ##  9 Concord Dawn     183   79  
 ## 10 Corellia         175   78.5
 ## # ... with 39 more rows</code></pre>
-<p>Notice the created grouping columns is called “<code>my_var</code>”, and <em>not</em> “<code>homeworld</code>”. This may <em>seem</em> like a small thing, but it will cause any downstream processing that needs the “<code>homeworld</code>” column to fail. One can try variations and get many different results, some of which are correct and some of which are not.</p>
+<p>Notice the created grouping column is called “<code>my_var</code>”, and <em>not</em> “<code>homeworld</code>”. This may <em>seem</em> like a small thing, but it will cause any downstream processing to fail. One can try variations and get many different results, some of which are correct and some of which are not.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wrong</span>
 starwars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="op">!!</span>my_var) <span class="op">%&gt;%</span>
@@ -306,8 +306,8 @@ starwars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(.data[[<span class="op">!!</span>rlang<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rlang/topics/sym">sym</a></span>(my_var)]]) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## Error in mutate_impl(.data, dots): Evaluation error: Must subset the data pronoun with a string.</code></pre>
-<p>Notice above in some places strings are required and in others names or symbols are required. In some contexts one may substitute for the other, and in some contexts they can not. In some situations “<code>!!</code>” must be used, and in others it must not be used. In some situations errors are signaled, and in others a bad result is quietly returned.</p>
-<p>The details above are teachable (in the sense one can rote memorize them), but they are not friendly to exploration or discoverable. There are a large number of moving pieces (strings, names, symbols, quoting, quosers, de-quoting, “data pronouns”, select semantics, non-select semantics) and one is expected to know which combinations of these items work together in which context.</p>
+<p>Notice above in some places strings are required and in others names or symbols are required. In some contexts one may substitute for the other, and in some contexts they can not. In some situations “<code>!!</code>” must be used, and in others it must not be used. In some situations “<code><a href="http://www.rdocumentation.org/packages/rlang/topics/sym">rlang::sym()</a></code>” must be used, and in some situations it must not be used. In some situations errors are signaled, and in others a bad result is quietly returned.</p>
+<p>The details above are <a href="https://dplyr.tidyverse.org/articles/programming.html">possibly teachable</a> (in the sense one can rote memorize them, once APIs stabilize and stop changing), but they are not friendly to exploration or discoverable. There are a needlessly large number of moving pieces (strings, names, symbols, quoting, quosures, de-quoting, “data pronouns”, select semantics, non-select semantics, <code>=</code> versus <code>:=</code>, and so on) and one is expected to know which combinations of these items work together in which context.</p>
 <p>For a further example consider the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># correct, or at least appears to work</span>
 starwars <span class="op">%&gt;%</span>
@@ -330,7 +330,7 @@ The point is the user does not know what column a <code><a href="http://dplyr.ti
 <li>The value in the variable.</li>
 <li>If the <code>data.frame</code> does or does not have a column matching the variable name.</li>
 </ul>
-<p>Column-name coincidences are actually likely in re-usable code. Often when generalizing a sequence of operations, one chooses an existing column name as the name of a column control variable.</p>
+<p>Column-name coincidences are actually likely in re-usable code. Often when generalizing a sequence of operations, one often chooses an existing column name as the name of a column control variable.</p>
 <p>Let’s look at examples.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_var &lt;-<span class="st"> "homeworld"</span>
 <span class="co"># selects height column</span>
@@ -360,7 +360,7 @@ starwars_plus <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(.data[[my_var]]) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## Error in mutate_impl(.data, dots): Evaluation error: Must subset the data pronoun with a string.</code></pre>
-<p>The above <em>might</em> be acceptable in interactive work, if we assume the user knows the names of all of the columns in the <code>data.frame</code> and therefore can be held responsible for avoiding column name to variable coincidences. Or more realistically: the user is working in interactively in the sense they are there to alter and re-run the code if they happen to notice the failure. However, this is not a safe state of affairs in re-usable functions or packages: which should work even if their are naming coincidences in thought to be irrelevant extra columns.</p>
+<p>The above <em>might</em> be acceptable in interactive work, if we assume the user knows the names of all of the columns in the <code>data.frame</code> and therefore can be held responsible for avoiding column name to variable coincidences. Or more realistically: the user is working interactively in the sense they are there to alter and re-run the code if they happen to notice the failure. However, this is not a safe state of affairs in re-usable functions or packages: which should work even if their are naming coincidences in thought to be irrelevant extra columns.</p>
 <p><code>rlang</code> does have methods to write unambiguous code such as in:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">!!</span>my_var) <span class="op">%&gt;%</span>
@@ -370,8 +370,8 @@ starwars_plus <span class="op">%&gt;%</span>
 ##   &lt;chr&gt;    
 ## 1 Tatooine 
 ## 2 Tatooine</code></pre>
-<p>However, because the <code>dplyr</code> interface does not insist on the “<code>!!</code>” notation, the “<code>!!</code>” notation will not always be remembered.</p>
-<p>The <code><a href="../reference/select_se.html">seplyr::select_se()</a></code> interface is intentionally simpler and more reliable: it always looks for columns using the strings (not variable names) given.</p>
+<p>However, because the <code>dplyr</code> interface does not insist on the “<code>!!</code>” notation, the “<code>!!</code>” notation will not always be remembered. <code>rlang</code>/tidyeval interfaces tend to be complex and irregular.</p>
+<p>The <code><a href="../reference/select_se.html">seplyr::select_se()</a></code> interface is intentionally simple and regular: it always looks for columns using the strings (not variable names) given.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(my_var)</code></pre></div>
 <pre><code>## [1] "homeworld"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># selects homeworld column (the value specified my_var) independent of</span>
@@ -389,7 +389,17 @@ starwars_plus <span class="op">%&gt;%</span><span class="st"> </span>
 <div id="conclusion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conclusion" class="anchor"></a>Conclusion</h2>
-<p>The <code>seplyr</code> methodology is simple, easy to teach, and powerful. The package contains a number of worked examples both in <code>help()</code> and <a href="https://winvector.github.io/seplyr/articles/seplyr.html"><code>vignette(package='seplyr')</code></a> documentation.</p>
+<p>The <code>seplyr</code> methodology is simple, easy to teach, and powerful.</p>
+<p>The methodologies we discussed differ in philosophy.</p>
+<ul>
+<li>
+<code>rlang</code>/tidyeval is often used to build new non-standard interfaces on top of existing non-standard interfaces. This is needed because non-standard interfaces do not naturally compose. The tidy/non-tidy analogy is: it works around a mess by introducing a new mess.</li>
+<li>
+<code><a href="http://www.rdocumentation.org/packages/wrapr/topics/let">wrapr::let()</a></code> converts non-standard interfaces into standard <a href="https://en.wikipedia.org/wiki/Referential_transparency">referentially transparent</a> or value-oriented interfaces. It tries to help clean up messes.</li>
+<li>
+<code>seplyr</code> is a demonstration of a possible variation of <code>dplyr</code> where more of the interfaces expect values. It tries to cut down on the initial mess, which in turn cuts down on the need for tools and training in dealing with messes.</li>
+</ul>
+<p>The <code>seplyr</code> package contains a number of worked examples both in <code>help()</code> and <a href="https://winvector.github.io/seplyr/articles/seplyr.html"><code>vignette(package='seplyr')</code></a> documentation.</p>
 </div>
   </div>
 
