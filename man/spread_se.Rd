@@ -4,8 +4,8 @@
 \alias{spread_se}
 \title{Collect values from blocks of rows into columns.}
 \usage{
-spread_se(data, key, value, ..., fill = NA, convert = FALSE, drop = TRUE,
-  sep = NULL)
+spread_se(data, key, value, ..., fill = NA, convert = FALSE,
+  drop = TRUE, sep = NULL)
 }
 \arguments{
 \item{data}{data.frame to take values from.}

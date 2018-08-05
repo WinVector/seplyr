@@ -4,8 +4,8 @@
 \alias{mutate_se}
 \title{mutate standard evaluation interface.}
 \usage{
-mutate_se(.data, mutateTerms, ..., splitTerms = TRUE, env = parent.frame(),
-  printPlan = FALSE)
+mutate_se(.data, mutateTerms, ..., splitTerms = TRUE,
+  env = parent.frame(), printPlan = FALSE)
 }
 \arguments{
 \item{.data}{data.frame}
@@ -30,9 +30,8 @@ Terms are vectors or lists of the form "lhs := rhs".
 Semantics are: terms are evaluated left to right if splitTerms==TRUE (the default).
 }
 \details{
-Note: this method as the default setting \code{splitTerms = TRUE}, which while
-safer (avoiding certain known \code{dplyr}/\code{dblyr} issues) can be needlessly expensive
-and have its own "too long sequence" issues on remote-data systems
+Note: this method as the default setting \code{splitTerms = TRUE}, which is
+safer (avoiding certain known \code{dplyr}/\code{dblyr} issues)
 (please see the side-notes of \url{http://winvector.github.io/FluidData/partition_mutate.html} for some references).
 }
 \examples{

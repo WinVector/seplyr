@@ -1,8 +1,8 @@
 Package: seplyr
 Type: Package
 Title: Improved Standard Evaluation Interfaces for Common Data Manipulation Tasks
-Version: 0.5.9
-Date: 2018-07-20
+Version: 0.6.0
+Date: 2018-08-05
 Authors@R: c(
     person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),
     person(family = "Win-Vector LLC", role = c("cph"))
@@ -10,7 +10,7 @@ Authors@R: c(
 Maintainer: John Mount <jmount@win-vector.com>
 URL: https://github.com/WinVector/seplyr/,  https://winvector.github.io/seplyr/
 BugReports: https://github.com/WinVector/seplyr/issues
-Description:  The 'seplyr' (standard evaluation plying) package supplies improved
+Description: The 'seplyr' (standard evaluation plying) package supplies improved
     standard evaluation adapter methods for important common 'dplyr' data manipulation tasks.
     In addition the 'seplyr' package supplies several new "key operations
     bound together" methods.  These include 'group_summarize()' (which
@@ -24,17 +24,15 @@ License: GPL-3
 Encoding: UTF-8
 Depends:
     R (>= 3.2.1),
-    wrapr (>= 1.5.0)
+    wrapr (>= 1.6.0)
 Imports:
     dplyr (>= 0.7.0),
     rlang, 
     tidyr
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Suggests: knitr,
     rmarkdown,
     testthat
 VignetteBuilder: knitr
 ByteCompile: true
-
-

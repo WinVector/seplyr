@@ -24,9 +24,8 @@ All left hand sides are new column names and all right hand sides are old column
 this allows swaps).
 }
 \details{
-Note: this method as the default setting \code{splitTerms = TRUE}, which while
-safer (avoiding certain known \code{dplyr}/\code{dblyr} issues) can be needlessly expensive
-and have its own "too long sequence" issues on remote-data systems
+Note: this method as the default setting \code{splitTerms = TRUE}, which is
+safer (avoiding certain known \code{dplyr}/\code{dblyr} issues)
 (please see the side-notes of \url{http://winvector.github.io/FluidData/partition_mutate.html} for some references).
 }
 \examples{

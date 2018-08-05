@@ -5,14 +5,16 @@
 \alias{summarise_nse}
 \title{summarize non-standard evaluation interface.}
 \usage{
-summarize_nse(.data, ..., env = parent.frame())
+summarize_nse(.data, ..., summarize_se = TRUE, env = parent.frame())
 
-summarise_nse(.data, ..., env = parent.frame())
+summarise_nse(.data, ..., summarize_se = TRUE, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{...}{stringified expressions to summarize by.}
+
+\item{summarize_se}{logical, if TRUE warn about possible name collisions.}
 
 \item{env}{environment to work in.}
 }

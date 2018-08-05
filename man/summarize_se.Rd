@@ -5,14 +5,20 @@
 \alias{summarise_se}
 \title{summarize standard interface.}
 \usage{
-summarize_se(.data, summarizeTerms, env = parent.frame())
+summarize_se(.data, summarizeTerms, ..., summarize_se = TRUE,
+  env = parent.frame())
 
-summarise_se(.data, summarizeTerms, env = parent.frame())
+summarise_se(.data, summarizeTerms, ..., summarize_se = TRUE,
+  env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{summarizeTerms}{character vector of column expressions to summarize by.}
+
+\item{...}{force later terms to be bound by name}
+
+\item{summarize_se}{logical, if TRUE warn about possible name collisions.}
 
 \item{env}{environment to work in.}
 }
@@ -25,9 +31,18 @@ summarizeTerms to allow forms such as "mean(Sepal.Length)".
 }
 \examples{
 
-
+# good
 datasets::iris \%.>\%
   summarize_se(., qae(Mean_Sepal_Length := mean(Sepal.Length),
+                      Max_Sepal_Length := max(Sepal.Length)))
+
+# good
+datasets::iris \%.>\%
+  summarize_se(., qae(Sepal.Length := mean(Sepal.Length)))
+
+# generates a warning
+datasets::iris \%.>\%
+  summarize_se(., qae(Sepal.Length := mean(Sepal.Length),
                       Max_Sepal_Length := max(Sepal.Length)))
 
 

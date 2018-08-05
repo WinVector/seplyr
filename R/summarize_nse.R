@@ -7,6 +7,7 @@
 #'
 #' @param .data data.frame
 #' @param ... stringified expressions to summarize by.
+#' @param summarize_se logical, if TRUE warn about possible name collisions.
 #' @param env environment to work in.
 #' @return .data with summarized columns.
 #'
@@ -19,7 +20,10 @@
 #'
 #' @export
 #'
-summarize_nse <- function(.data, ..., env = parent.frame()) {
+summarize_nse <- function(.data,
+                          ...,
+                          summarize_se = TRUE,
+                          env = parent.frame()) {
   summarizeTerms <- wrapr::qae(...)
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::summarize_nse first argument must be a data.frame or tbl")
@@ -27,7 +31,10 @@ summarize_nse <- function(.data, ..., env = parent.frame()) {
   res <- .data
   len <- length(summarizeTerms)
   if(len>1) {
-    res <- summarize_se(res, summarizeTerms, env=env)
+    res <- summarize_se(res,
+                        summarizeTerms,
+                        summarize_se = summarize_se,
+                        env = env)
   }
   res
 }

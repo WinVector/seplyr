@@ -5,9 +5,8 @@
 #' All left hand sides are new column names and all right hand sides are old column names (
 #' this allows swaps).
 #'
-#' Note: this method as the default setting \code{splitTerms = TRUE}, which while
-#' safer (avoiding certain known \code{dplyr}/\code{dblyr} issues) can be needlessly expensive
-#' and have its own "too long sequence" issues on remote-data systems
+#' Note: this method as the default setting \code{splitTerms = TRUE}, which is
+#' safer (avoiding certain known \code{dplyr}/\code{dblyr} issues)
 #' (please see the side-notes of \url{http://winvector.github.io/FluidData/partition_mutate.html} for some references).
 #'
 #' @seealso \code{\link[dplyr]{rename}},  \code{\link[dplyr]{rename_at}}, \code{\link[wrapr]{:=}}
@@ -43,7 +42,7 @@ rename_se <- function(.data, mapping,
   res <- .data
   nMap <- length(mapping)
   if(nMap>0) {
-    if(splitTerms) {
+    if(splitTerms && (length(intersect(as.character(mapping), names(mapping)))>0)) {
       sq <- seq_len(nMap)
       # get task
       cols <- colnames(.data)
@@ -59,25 +58,21 @@ rename_se <- function(.data, mapping,
       if(length(unique(oldNames))!=nMap) {
         stop("rename_se: named original column more than once")
       }
-      badOldRefs <- setdiff(oldNames, cols)
-      if(length(badOldRefs)>0) {
-        stop(paste("rename_se, refering to non-existent source columns: ",
-                   paste(badOldRefs, collapse = ', ')))
-      }
-      collisions <- intersect(newNames, setdiff(cols, oldNames))
-      if(length(collisions)>0) {
-        stop(paste("rename_se, new-mappings collide with original columns: ",
-                   paste(collisions, collapse = ', ')))
-      }
-      # do the work
-      for(i in sq) {
-        res <- dplyr::rename(res,
-                             !!rlang::sym(tmpNames[[i]]) := !!rlang::sym(oldNames[[i]]))
-      }
-      for(i in sq) {
-        res <- dplyr::rename(res,
-                             !!rlang::sym(newNames[[i]]) := !!rlang::sym(tmpNames[[i]]))
-      }
+      mapping1 <- oldNames
+      names(mapping1) <- tmpNames
+      mapping2 <- tmpNames
+      names(mapping2) <- newNames
+      retnameQ1 <- lapply(mapping1,
+                         function(si) {
+                           rlang::sym(si)
+                         })
+      names(retnameQ1) <- names(mapping1)
+      retnameQ2 <- lapply(mapping2,
+                          function(si) {
+                            rlang::sym(si)
+                          })
+      names(retnameQ2) <- names(mapping2)
+      res <- dplyr::rename(.data = dplyr::rename(.data = res, !!!retnameQ1), !!!retnameQ2)
     } else {
       # pass directly to dplyr
       retnameQ <- lapply(mapping,

@@ -1,4 +1,8 @@
 
+# seplyr 0.6.0 2018-08-05
+
+ * more expression partition work
+
 # seplyr 0.5.9 2018-07-20
 
  * dplyr::one_of() option.
