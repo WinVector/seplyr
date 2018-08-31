@@ -10,6 +10,7 @@
 #'
 #' @param .data data.frame
 #' @param arrangeTerms character vector of column expressions to arrange by.
+#' @param env environment to parse terms in.
 #' @return .data arrnaged by arrangeTerms
 #'
 #' @examples
@@ -22,15 +23,17 @@
 #'
 #' @export
 #'
-arrange_se <- function(.data, arrangeTerms) {
+arrange_se <- function(.data, arrangeTerms, env = parent.frame()) {
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::arrange_se first argument must be a data.frame or tbl")
   }
-  env <- parent.frame()
-  arrangeQ <- lapply(arrangeTerms,
-                    function(si) {
-                      rlang::parse_quosure(si,
-                                           env = env)
-                    })
-  dplyr::arrange(.data = .data, !!!arrangeQ)
+  if(length(arrangeTerms)>0) {
+    arrangeQ <- lapply(arrangeTerms,
+                       function(si) {
+                         rlang::parse_quosure(si,
+                                              env = env)
+                       })
+    .data <- dplyr::arrange(.data = .data, !!!arrangeQ)
+  }
+  .data
 }

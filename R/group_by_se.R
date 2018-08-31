@@ -25,8 +25,14 @@ group_by_se <- function(.data, groupingVars, add = FALSE) {
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::group_by_se first argument must be a data.frame or tbl")
   }
-  # convert char vector into spliceable vector
-  groupingSyms <- rlang::syms(groupingVars)
-  dplyr::group_by(.data = .data, !!!groupingSyms, add = add)
+  if(!add) {
+    .data <- dplyr::ungroup(.data)
+  }
+  if(length(groupingVars)>0) {
+    # convert char vector into spliceable vector
+    groupingSyms <- rlang::syms(groupingVars)
+    .data <- dplyr::group_by(.data = .data, !!!groupingSyms, add = add)
+  }
+  .data
 }
 

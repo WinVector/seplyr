@@ -4,12 +4,14 @@
 \alias{arrange_se}
 \title{arrange standard interface.}
 \usage{
-arrange_se(.data, arrangeTerms)
+arrange_se(.data, arrangeTerms, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{arrangeTerms}{character vector of column expressions to arrange by.}
+
+\item{env}{environment to parse terms in.}
 }
 \value{
 .data arrnaged by arrangeTerms

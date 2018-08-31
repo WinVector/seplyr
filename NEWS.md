@@ -1,7 +1,8 @@
 
-# seplyr 0.6.0 2018-08-05
+# seplyr 0.6.0 2018-08-31
 
  * more expression partition work
+ * special-case empty grouping and arranging.
 
 # seplyr 0.5.9 2018-07-20
 
