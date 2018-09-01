@@ -138,7 +138,7 @@ sets of variables and simple transforms, not by arbitrary expressions over varia
     
     </div>
 
-    <pre class="usage"><span class='fu'>arrange_se</span>(<span class='no'>.data</span>, <span class='no'>arrangeTerms</span>)</pre>
+    <pre class="usage"><span class='fu'>arrange_se</span>(<span class='no'>.data</span>, <span class='no'>arrangeTerms</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,6 +150,10 @@ sets of variables and simple transforms, not by arbitrary expressions over varia
     <tr>
       <th>arrangeTerms</th>
       <td><p>character vector of column expressions to arrange by.</p></td>
+    </tr>
+    <tr>
+      <th>env</th>
+      <td><p>environment to parse terms in.</p></td>
     </tr>
     </table>
     
