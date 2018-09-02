@@ -4,30 +4,33 @@
 \alias{arrange_se}
 \title{arrange standard interface.}
 \usage{
-arrange_se(.data, arrangeTerms, env = parent.frame())
+arrange_se(.data, arrangeTerms, ..., strict = TRUE)
 }
 \arguments{
 \item{.data}{data.frame}
 
 \item{arrangeTerms}{character vector of column expressions to arrange by.}
 
-\item{env}{environment to parse terms in.}
+\item{...}{not used, force later arguments to bind by name.}
+
+\item{strict}{logical if TRUE accept only name and desc(name) terms.}
 }
 \value{
 .data arrnaged by arrangeTerms
 }
 \description{
 Arrange a data frame by the arrangeTerms.  Accepts arbitrary text as
-arrangeTerms to allow forms such as "desc(gear)"
-(unlike \code{\link[dplyr]{arrange_at}}). Intent is to arrange only by
-sets of variables and simple transforms, not by arbitrary expressions over variables.
+arrangeTerms to allow forms such as "desc(gear)". Intent is to arrange only by
+sets of variables or desc() reversals, not by arbitrary expressions over variables.
+To help enforce this parsing is performed in an empty environment (so expressions
+such as "gear + carb" deliberately error-out).
 }
 \examples{
 
 datasets::mtcars \%.>\%
   arrange_se(., c("cyl", "desc(gear)")) \%.>\%
   head(.)
-# roughly equivilent to:
+# equivilent to:
 # arrange(datasets::mtcars, cyl, desc(gear)) \%>\% head()
 
 }

@@ -17,7 +17,6 @@
 #' datasets::mtcars %.>%
 #'   group_by_se(., c("cyl", "gear")) %.>%
 #'   head(.)
-#' # essentially group_by_at()
 #'
 #' @export
 #'
@@ -29,6 +28,9 @@ group_by_se <- function(.data, groupingVars, add = FALSE) {
     .data <- dplyr::ungroup(.data)
   }
   if(length(groupingVars)>0) {
+    if(!is.character(groupingVars)) {
+      stop("seplyr::group_by_se groupingVars must be a character vector")
+    }
     # convert char vector into spliceable vector
     groupingSyms <- rlang::syms(groupingVars)
     .data <- dplyr::group_by(.data = .data, !!!groupingSyms, add = add)

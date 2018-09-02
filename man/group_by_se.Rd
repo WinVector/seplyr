@@ -26,7 +26,6 @@ sets of variables, not by expressions over variables.
 datasets::mtcars \%.>\%
   group_by_se(., c("cyl", "gear")) \%.>\%
   head(.)
-# essentially group_by_at()
 
 }
 \seealso{
