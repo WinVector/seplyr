@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>arrange standard interface. — arrange_se • seplyr</title>
+<title>Arrange standard interface. — arrange_se • seplyr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,11 @@
 
 
 
-<meta property="og:title" content="arrange standard interface. — arrange_se" />
+<meta property="og:title" content="Arrange standard interface. — arrange_se" />
 
-<meta property="og:description" content="Arrange a data frame by the arrangeTerms.  Accepts arbitrary text as
+<meta property="og:description" content="Arrange a data frame by the possibly the group_vars() (optional, but defaults to off) and arrangeTerms.  Accepts arbitrary text as
 arrangeTerms to allow forms such as &quot;desc(gear)&quot;. Intent is to arrange only by
-sets of variables or desc() reversals, not by arbitrary expressions over variables.
+sets of variables with desc() notations reversals, not by arbitrary expressions over variables.
 To help enforce this parsing is performed in an empty environment (so expressions
 such as &quot;gear + carb&quot; deliberately error-out)." />
 <meta name="twitter:card" content="summary" />
@@ -125,22 +125,22 @@ such as &quot;gear + carb&quot; deliberately error-out)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>arrange standard interface.</h1>
+    <h1>Arrange standard interface.</h1>
     <small class="dont-index">Source: <a href='https://github.com/WinVector/seplyr//blob/master/R/arrange_se.R'><code>R/arrange_se.R</code></a></small>
     <div class="hidden name"><code>arrange_se.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Arrange a data frame by the arrangeTerms.  Accepts arbitrary text as
+    <p>Arrange a data frame by the possibly the <code>group_vars()</code> (optional, but defaults to off) and <code>arrangeTerms</code>.  Accepts arbitrary text as
 arrangeTerms to allow forms such as "desc(gear)". Intent is to arrange only by
-sets of variables or desc() reversals, not by arbitrary expressions over variables.
+sets of variables with desc() notations reversals, not by arbitrary expressions over variables.
 To help enforce this parsing is performed in an empty environment (so expressions
 such as "gear + carb" deliberately error-out).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>arrange_se</span>(<span class='no'>.data</span>, <span class='no'>arrangeTerms</span>, <span class='no'>...</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>arrange_se</span>(<span class='no'>.data</span>, <span class='no'>arrangeTerms</span>, <span class='no'>...</span>, <span class='kw'>.by_group</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,6 +156,10 @@ such as "gear + carb" deliberately error-out).</p>
     <tr>
       <th>...</th>
       <td><p>not used, force later arguments to bind by name.</p></td>
+    </tr>
+    <tr>
+      <th>.by_group</th>
+      <td><p>logical, should data be sorted by grouping variables (if present).</p></td>
     </tr>
     <tr>
       <th>strict</th>
@@ -182,9 +186,70 @@ such as "gear + carb" deliberately error-out).</p>
 #&gt; 3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
 #&gt; 4 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
 #&gt; 5 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-#&gt; 6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</div><div class='input'># equivilent to:
-# arrange(datasets::mtcars, cyl, desc(gear)) %>% head()
+#&gt; 6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</div><div class='input'><span class='co'># equivilent to dplyr/magrittr pipeline</span>
+<span class='co'># arrange(datasets::mtcars, cyl, desc(gear)) %&gt;% head()</span>
 
+<span class='co'># Note: arranging in the presence of groups is subtle.</span>
+<span class='co'># As grouping is an annotation, not an ordering (and ordering is</span>
+<span class='co'># unfortunately not an annotation).</span>
+
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>,
+                <span class='kw'>sin_x</span> <span class='kw'>=</span> <span class='fu'>sin</span>(<span class='fl'>1</span>:<span class='fl'>6</span>),
+                <span class='kw'>grp</span> <span class='kw'>=</span> <span class='fu'>rep</span>(<span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>), <span class='fl'>3</span>),
+                <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># arranged by sin_x and not by grp</span>
+<span class='no'>d</span> <span class='kw'>%.&gt;%</span>
+  <span class='fu'><a href='group_by_se.html'>group_by_se</a></span>(<span class='no'>.</span>, <span class='st'>"grp"</span>) <span class='kw'>%.&gt;%</span>
+  <span class='fu'>arrange_se</span>(<span class='no'>.</span>, <span class='st'>"sin_x"</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
+#&gt; # Groups:   grp [2]
+#&gt;       x  sin_x grp  
+#&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;
+#&gt; 1     5 -0.959 a    
+#&gt; 2     4 -0.757 b    
+#&gt; 3     6 -0.279 b    
+#&gt; 4     3  0.141 a    
+#&gt; 5     1  0.841 a    
+#&gt; 6     2  0.909 b    </div><div class='input'>
+<span class='co'># arranged by sin_x and not by grp</span>
+<span class='no'>d</span> <span class='kw'>%.&gt;%</span>
+  <span class='fu'>arrange_se</span>(<span class='no'>.</span>, <span class='st'>"sin_x"</span>) <span class='kw'>%.&gt;%</span>
+  <span class='fu'><a href='group_by_se.html'>group_by_se</a></span>(<span class='no'>.</span>, <span class='st'>"grp"</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
+#&gt; # Groups:   grp [2]
+#&gt;       x  sin_x grp  
+#&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;
+#&gt; 1     5 -0.959 a    
+#&gt; 2     4 -0.757 b    
+#&gt; 3     6 -0.279 b    
+#&gt; 4     3  0.141 a    
+#&gt; 5     1  0.841 a    
+#&gt; 6     2  0.909 b    </div><div class='input'>
+<span class='co'># arranged by sin_x and not by grp</span>
+<span class='no'>d</span> <span class='kw'>%.&gt;%</span>
+  <span class='fu'><a href='group_by_se.html'>group_by_se</a></span>(<span class='no'>.</span>, <span class='st'>"grp"</span>) <span class='kw'>%.&gt;%</span>
+  <span class='fu'>arrange_se</span>(<span class='no'>.</span>, <span class='st'>"sin_x"</span>, <span class='kw'>.by_group</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
+#&gt; # Groups:   grp [2]
+#&gt;       x  sin_x grp  
+#&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;
+#&gt; 1     5 -0.959 a    
+#&gt; 2     3  0.141 a    
+#&gt; 3     1  0.841 a    
+#&gt; 4     4 -0.757 b    
+#&gt; 5     6 -0.279 b    
+#&gt; 6     2  0.909 b    </div><div class='input'>
+<span class='co'># arranged by sin_x and not by grp</span>
+<span class='no'>d</span> <span class='kw'>%.&gt;%</span>
+  <span class='fu'>arrange_se</span>(<span class='no'>.</span>, <span class='st'>"sin_x"</span>, <span class='kw'>.by_group</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%.&gt;%</span>
+  <span class='fu'><a href='group_by_se.html'>group_by_se</a></span>(<span class='no'>.</span>, <span class='st'>"grp"</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
+#&gt; # Groups:   grp [2]
+#&gt;       x  sin_x grp  
+#&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;
+#&gt; 1     5 -0.959 a    
+#&gt; 2     4 -0.757 b    
+#&gt; 3     6 -0.279 b    
+#&gt; 4     3  0.141 a    
+#&gt; 5     1  0.841 a    
+#&gt; 6     2  0.909 b    </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

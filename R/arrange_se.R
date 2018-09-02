@@ -1,9 +1,9 @@
 
-#' arrange standard interface.
+#' Arrange standard interface.
 #'
-#' Arrange a data frame by the arrangeTerms.  Accepts arbitrary text as
+#' Arrange a data frame by the possibly the \code{group_vars()} (optional, but defaults to off) and \code{arrangeTerms}.  Accepts arbitrary text as
 #' arrangeTerms to allow forms such as "desc(gear)". Intent is to arrange only by
-#' sets of variables or desc() reversals, not by arbitrary expressions over variables.
+#' sets of variables with desc() notations reversals, not by arbitrary expressions over variables.
 #' To help enforce this parsing is performed in an empty environment (so expressions
 #' such as "gear + carb" deliberately error-out).
 #'
@@ -12,6 +12,7 @@
 #' @param .data data.frame
 #' @param arrangeTerms character vector of column expressions to arrange by.
 #' @param ... not used, force later arguments to bind by name.
+#' @param .by_group logical, should data be sorted by grouping variables (if present).
 #' @param strict logical if TRUE accept only name and desc(name) terms.
 #' @return .data arrnaged by arrangeTerms
 #'
@@ -20,18 +21,56 @@
 #' datasets::mtcars %.>%
 #'   arrange_se(., c("cyl", "desc(gear)")) %.>%
 #'   head(.)
-#' # equivilent to:
+#' # equivilent to dplyr/magrittr pipeline
 #' # arrange(datasets::mtcars, cyl, desc(gear)) %>% head()
+#'
+#' # Note: arranging in the presence of groups is subtle.
+#' # As grouping is an annotation, not an ordering (and ordering is
+#' # unfortunately not an annotation).
+#'
+#' d <- data.frame(x = 1:6,
+#'                 sin_x = sin(1:6),
+#'                 grp = rep(c("a", "b"), 3),
+#'                 stringsAsFactors = FALSE)
+#'
+#' # arranged by sin_x and not by grp
+#' d %.>%
+#'   group_by_se(., "grp") %.>%
+#'   arrange_se(., "sin_x")
+#'
+#' # arranged by sin_x and not by grp
+#' d %.>%
+#'   arrange_se(., "sin_x") %.>%
+#'   group_by_se(., "grp")
+#'
+#' # arranged by sin_x and not by grp
+#' d %.>%
+#'   group_by_se(., "grp") %.>%
+#'   arrange_se(., "sin_x", .by_group = TRUE)
+#'
+#' # arranged by sin_x and not by grp
+#' d %.>%
+#'   arrange_se(., "sin_x", .by_group = TRUE) %.>%
+#'   group_by_se(., "grp")
 #'
 #' @export
 #'
 arrange_se <- function(.data, arrangeTerms,
                        ...,
+                       .by_group = FALSE,
                        strict = TRUE) {
   wrapr::stop_if_dot_args(substitute(list(...)),
                           "seplyr::arrange_se")
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::arrange_se first argument must be a data.frame or tbl")
+  }
+  if(.by_group) {
+    # passing the .by_group boolean to dplyr::arrange() does
+    # not seem to be convenient or reliable, so simulate it by adding more
+    # sorting terms.
+    # https://github.com/tidyverse/dplyr/issues/3793
+    gvars <- as.character(dplyr::group_vars(.data))
+    arrangeTerms <- c(gvars, arrangeTerms)
   }
   nt <- length(arrangeTerms)
   if(nt>0) {
@@ -69,7 +108,8 @@ arrange_se <- function(.data, arrangeTerms,
                          rlang::parse_quosure(si,
                                               env = env)
                        })
-    .data <- dplyr::arrange(.data = .data, !!!arrangeQ)
+    .data <- dplyr::arrange(.data = .data,
+                            !!!arrangeQ)
   }
   .data
 }
