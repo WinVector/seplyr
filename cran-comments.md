@@ -4,7 +4,18 @@ Push a change requested by the rlang package team ( https://github.com/WinVector
 ## Test environments
 
 ### Windows
+
     devtools::build_win()
+    * using R Under development (unstable) (2018-09-16 r75318)
+    * using platform: x86_64-w64-mingw32 (64-bit)
+    * using session charset: ISO8859-1
+    * checking for file 'seplyr/DESCRIPTION' ... OK
+    * checking extension type ... Package
+    * this is package 'seplyr' version '0.8.1'
+    * package encoding: UTF-8
+    * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
+    Maintainer: 'John Mount <jmount@win-vector.com>'
+    Status: OK
 
 ### OSX
 
