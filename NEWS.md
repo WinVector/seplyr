@@ -1,4 +1,8 @@
 
+# seplyr 0.8.2 2018-09-18
+
+ * force parent.frame()
+
 # seplyr 0.8.1 2018-09-18
 
  * Switch from parse_quosure() to parse_quo() ( https://github.com/WinVector/seplyr/issues/3 ).

@@ -25,6 +25,7 @@ summarize_nse <- function(.data,
                           summarize_se = TRUE,
                           env = parent.frame()) {
   summarizeTerms <- wrapr::qae(...)
+  force(env)
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::summarize_nse first argument must be a data.frame or tbl")
   }

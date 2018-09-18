@@ -22,6 +22,7 @@
 #'
 filter_nse <- function(.data, ...,
                        filter_nse_env = parent.frame()) {
+  force(filter_nse_env)
   filterTerms <- wrapr::qe(...)
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::filter_nse first argument must be a data.frame or tbl")

@@ -38,6 +38,7 @@ mutate_se <- function(.data, mutateTerms,
                       splitTerms = TRUE,
                       env = parent.frame(),
                       printPlan = FALSE) {
+  force(env)
   wrapr::stop_if_dot_args(substitute(list(...)), "seplyr::mutate_se")
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::mutate_nse first argument must be a data.frame or tbl")

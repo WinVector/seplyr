@@ -37,6 +37,7 @@ summarize_se <- function(.data, summarizeTerms,
                          summarize_se = TRUE,
                          env = parent.frame()) {
   wrapr::stop_if_dot_args(substitute(list(...)), "seplyr::summarize_se")
+  force(env)
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::summarize_se first argument must be a data.frame or tbl")
   }

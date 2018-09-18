@@ -36,6 +36,7 @@ mutate_nse <- function(.data, ...,
                        mutate_nse_split_terms = TRUE,
                        mutate_nse_env = parent.frame(),
                        mutate_nse_printPlan = FALSE) {
+  force(mutate_nse_env)
   mutateTerms <- wrapr::qae(...)
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::mutate_nse first argument must be a data.frame or tbl")

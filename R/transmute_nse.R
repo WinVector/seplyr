@@ -21,6 +21,7 @@
 #'
 transmute_nse <- function(.data, ...,  transmute_nse_env = parent.frame()) {
   transmuteTerms <- wrapr::qae(...)
+  force(transmute_nse_env)
   res <- .data
   len <- length(transmuteTerms)
   if(len>1) {
