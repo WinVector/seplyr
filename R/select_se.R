@@ -31,13 +31,14 @@ select_se <- function(.data, colNames) {
   #                   function(si) { rlang::parse_expr(si) })
   # parse_expr sees into global environment
   #  https://github.com/tidyverse/dplyr/issues/3006
+  # updated: https://github.com/WinVector/seplyr/issues/3
   env <- new.env(parent = emptyenv())
   assign('-', `-`, envir = env)
   assign('(', `(`, envir = env)
   colSyms <- lapply(colNames,
                     function(si) {
-                      rlang::parse_quosure(si,
-                                           env = env)
+                      rlang::parse_quo(si,
+                                       env = env)
                     })
   dplyr::select(.data, !!!colSyms)
 }

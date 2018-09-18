@@ -28,10 +28,11 @@ transmute_se <- function(.data, transmuteTerms,  env=parent.frame()) {
   }
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
+  # updated: https://github.com/WinVector/seplyr/issues/3
   transmuteQ <- lapply(transmuteTerms,
                        function(si) {
-                         rlang::parse_quosure(si,
-                                              env = env)
+                         rlang::parse_quo(si,
+                                          env = env)
                        })
   dplyr::transmute(.data = .data, !!!transmuteQ)
 }

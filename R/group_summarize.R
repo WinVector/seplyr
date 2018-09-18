@@ -37,11 +37,12 @@ group_summarize <- function(d, groupingVars, ...,
   dg <- dplyr::group_by(d, !!!groupingSyms)
   if(!is.null(arrangeTerms)) {
     # from: https://github.com/tidyverse/rlang/issues/116
+    # updated: https://github.com/WinVector/seplyr/issues/3
     arrangeQ <- lapply(arrangeTerms,
-                      function(si) {
-                        rlang::parse_quosure(si,
-                                             env = env)
-                      })
+                       function(si) {
+                         rlang::parse_quo(si,
+                                          env = env)
+                       })
     dg <- dplyr::arrange(dg, !!!arrangeQ)
   }
   ds <- dplyr::summarize(dg, ...)

@@ -37,11 +37,10 @@ safer (avoiding certain known \code{dplyr}/\code{dblyr} issues)
 \examples{
 
 
-resCol1 <- "Sepal_Long"
 limit <- 3.5
 
 datasets::iris \%.>\%
-  mutate_se(., qae(resCol1 := Sepal.Length >= 2 * Sepal.Width,
+  mutate_se(., qae(Sepal_Long = Sepal.Length >= 2 * Sepal.Width,
                    Petal_Short := Petal.Length <= limit)) \%.>\%
   head(.)
 

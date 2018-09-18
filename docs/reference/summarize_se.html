@@ -62,7 +62,7 @@ summarizeTerms to allow forms such as &quot;mean(Sepal.Length)&quot;." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seplyr</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.1</span>
       </span>
     </div>
 
@@ -185,7 +185,7 @@ summarizeTerms to allow forms such as "mean(Sepal.Length)".</p>
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
   <span class='fu'>summarize_se</span>(<span class='no'>.</span>, <span class='fu'>qae</span>(<span class='no'>Sepal.Length</span> <span class='kw'>:=</span> <span class='fu'>mean</span>(<span class='no'>Sepal.Length</span>)))</div><div class='output co'>#&gt;   Sepal.Length
 #&gt; 1     5.843333</div><div class='input'>
-<span class='co'># generates a warning</span>
+<span class='co'># intentionally generates a warning</span>
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span> <span class='kw'>%.&gt;%</span>
   <span class='fu'>summarize_se</span>(<span class='no'>.</span>, <span class='fu'>qae</span>(<span class='no'>Sepal.Length</span> <span class='kw'>:=</span> <span class='fu'>mean</span>(<span class='no'>Sepal.Length</span>),
                       <span class='no'>Max_Sepal_Length</span> <span class='kw'>:=</span> <span class='fu'>max</span>(<span class='no'>Sepal.Length</span>)))</div><div class='output co'>#&gt; <span class='warning'>Warning: seplyr::summarize_se possibly confusing column name re-use c('Sepal.Length' = 'mean(Sepal.Length)', 'Max_Sepal_Length' = 'max(Sepal.Length)')</span></div><div class='output co'>#&gt;   Sepal.Length Max_Sepal_Length

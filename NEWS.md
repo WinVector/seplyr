@@ -1,4 +1,9 @@
 
+# seplyr 0.8.1 2018-09-18
+
+ * Switch from parse_quosure() to parse_quo() ( https://github.com/WinVector/seplyr/issues/3 ).
+ * Some documentation fixes.
+
 # seplyr 0.8.0 2018-09-10
 
  * more expression partition work

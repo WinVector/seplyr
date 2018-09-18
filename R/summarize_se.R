@@ -24,7 +24,7 @@
 #' datasets::iris %.>%
 #'   summarize_se(., qae(Sepal.Length := mean(Sepal.Length)))
 #'
-#' # generates a warning
+#' # intentionally generates a warning
 #' datasets::iris %.>%
 #'   summarize_se(., qae(Sepal.Length := mean(Sepal.Length),
 #'                       Max_Sepal_Length := max(Sepal.Length)))
@@ -49,11 +49,12 @@ summarize_se <- function(.data, summarizeTerms,
   }
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
+  # updated: https://github.com/WinVector/seplyr/issues/3
   summarizeQ <- lapply(summarizeTerms,
-                    function(si) {
-                      rlang::parse_quosure(si,
-                                           env = env)
-                    })
+                       function(si) {
+                         rlang::parse_quo(si,
+                                          env = env)
+                       })
   dplyr::summarize(.data = .data, !!!summarizeQ)
 }
 

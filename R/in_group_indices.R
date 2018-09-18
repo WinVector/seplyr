@@ -43,11 +43,12 @@ add_group_sub_indices <- function(.data,
     arrangeTerms <- colnames(.data)
   }
   # from: https://github.com/tidyverse/rlang/issues/116
+  # updated: https://github.com/WinVector/seplyr/issues/3
   arrangeQ <- lapply(arrangeTerms,
-                    function(si) {
-                      rlang::parse_quosure(si,
-                                           env = env)
-                    })
+                     function(si) {
+                       rlang::parse_quo(si,
+                                        env = env)
+                     })
   .data <-  dplyr::arrange(.data, !!!arrangeQ)
   # add ordered row-ids globally
   d <- dplyr::mutate(.data, !!orderColumn := 1 )

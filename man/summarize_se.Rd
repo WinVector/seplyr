@@ -40,7 +40,7 @@ datasets::iris \%.>\%
 datasets::iris \%.>\%
   summarize_se(., qae(Sepal.Length := mean(Sepal.Length)))
 
-# generates a warning
+# intentionally generates a warning
 datasets::iris \%.>\%
   summarize_se(., qae(Sepal.Length := mean(Sepal.Length),
                       Max_Sepal_Length := max(Sepal.Length)))

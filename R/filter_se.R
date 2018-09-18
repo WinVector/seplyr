@@ -28,10 +28,11 @@ filter_se <- function(.data, filterTerms,  env=parent.frame()) {
   }
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
+  # updated: https://github.com/WinVector/seplyr/issues/3
   filterQ <- lapply(filterTerms,
                     function(si) {
-                      rlang::parse_quosure(si,
-                                           env = env)
+                      rlang::parse_quo(si,
+                                       env = env)
                     })
   dplyr::filter(.data = .data, !!!filterQ)
 }

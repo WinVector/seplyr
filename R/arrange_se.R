@@ -105,8 +105,8 @@ arrange_se <- function(.data, arrangeTerms,
     env = emptyenv()
     arrangeQ <- lapply(arrangeTerms,
                        function(si) {
-                         rlang::parse_quosure(si,
-                                              env = env)
+                         rlang::parse_quo(si,
+                                          env = env)
                        })
     .data <- dplyr::arrange(.data = .data,
                             !!!arrangeQ)
