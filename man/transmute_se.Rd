@@ -4,7 +4,7 @@
 \alias{transmute_se}
 \title{transmute standard interface.}
 \usage{
-transmute_se(.data, transmuteTerms, env = parent.frame())
+transmute_se(.data, transmuteTerms, env = parent.frame(), warn = TRUE)
 }
 \arguments{
 \item{.data}{data.frame}
@@ -12,6 +12,8 @@ transmute_se(.data, transmuteTerms, env = parent.frame())
 \item{transmuteTerms}{character vector of column expressions to transmute by.}
 
 \item{env}{environment to work in.}
+
+\item{warn}{logical, if TRUE warn about possible name collisions.}
 }
 \value{
 .data transumuted by transmuteTerms.

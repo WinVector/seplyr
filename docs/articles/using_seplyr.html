@@ -91,7 +91,7 @@
       <h1>Using seplyr to Program Over dplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-09-18</h4>
+            <h4 class="date">2018-09-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr//blob/master/vignettes/using_seplyr.Rmd"><code>vignettes/using_seplyr.Rmd</code></a></small>
       <div class="hidden name"><code>using_seplyr.Rmd</code></div>
@@ -115,10 +115,10 @@
 ##  [6] "eye_color"  "birth_year" "gender"     "homeworld"  "species"   
 ## [11] "films"      "vehicles"   "starships"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(homeworld) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(homeworld) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarise</a></span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
             <span class="dt">mean_mass =</span> <span class="kw">mean</span>(mass, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
-            <span class="dt">count =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>()) </code></pre></div>
+            <span class="dt">count =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/n">n</a></span>()) </code></pre></div>
 <pre><code>## # A tibble: 49 x 4
 ##    homeworld      mean_height mean_mass count
 ##    &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -149,7 +149,7 @@
 <ul>
 <li>Change <code>dplyr</code> verbs to their matching <code>seplyr</code> “<code>*_se()</code>” adapters.</li>
 <li>Add quote marks around names and expressions.</li>
-<li>Convert sequences of expressions (such as in the <code><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>) to explicit vectors by adding the “<code>c()</code>” notation.</li>
+<li>Convert sequences of expressions (such as in the <code><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarize()</a></code>) to explicit vectors by adding the “<code>c()</code>” notation.</li>
 <li>Replace “<code>=</code>” in expressions with “<code>:=</code>”.</li>
 </ul>
 <p>Our converted code looks like the following.</p>
@@ -196,7 +196,7 @@
 <span class="st">    </span><span class="kw"><a href="../reference/group_by_se.html">group_by_se</a></span>(grouping_variables) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="kw">c</span>(calculation,
                    count_name <span class="op">:</span><span class="er">=</span><span class="st"> "n()"</span>)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span>()
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">ungroup</a></span>()
 }
 
 starwars <span class="op">%&gt;%</span><span class="st"> </span>
@@ -240,8 +240,8 @@ starwars <span class="op">%&gt;%</span><span class="st"> </span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_var &lt;-<span class="st"> "homeworld"</span>
 
 starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(.data[[my_var]]) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(.data[[my_var]]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise_all">summarise_at</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/vars">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 49 x 3
 ##    my_var         height  mass
 ##    &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;
@@ -259,16 +259,16 @@ starwars <span class="op">%&gt;%</span>
 <p>Notice the created grouping column is called “<code>my_var</code>”, and <em>not</em> “<code>homeworld</code>”. This may <em>seem</em> like a small thing, but it will cause any downstream processing to fail. One can try variations and get many different results, some of which are correct and some of which are not.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wrong</span>
 starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="op">!!</span>my_var) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(<span class="op">!!</span>my_var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise_all">summarise_at</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/vars">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 1 x 3
 ##   `"homeworld"` height  mass
 ##   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;
 ## 1 homeworld       174.  97.3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># correct, or at least appears to work</span>
 starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="op">!!</span>rlang<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rlang/topics/sym">sym</a></span>(my_var)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(<span class="op">!!</span>rlang<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rlang/topics/sym">sym</a></span>(my_var)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise_all">summarise_at</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/vars">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 49 x 3
 ##    homeworld      height  mass
 ##    &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;
@@ -285,8 +285,8 @@ starwars <span class="op">%&gt;%</span>
 ## # ... with 39 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># correct, or at least appears to work</span>
 starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(.data[[<span class="op">!!</span>my_var]]) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(.data[[<span class="op">!!</span>my_var]]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise_all">summarise_at</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/vars">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 49 x 3
 ##    homeworld      height  mass
 ##    &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;
@@ -303,15 +303,15 @@ starwars <span class="op">%&gt;%</span>
 ## # ... with 39 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># errors-out</span>
 starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(.data[[<span class="op">!!</span>rlang<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rlang/topics/sym">sym</a></span>(my_var)]]) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(.data[[<span class="op">!!</span>rlang<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rlang/topics/sym">sym</a></span>(my_var)]]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise_all">summarise_at</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/vars">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## Error in mutate_impl(.data, dots): Evaluation error: Must subset the data pronoun with a string.</code></pre>
 <p>Notice above in some places strings are required and in others names or symbols are required. In some contexts one may substitute for the other, and in some contexts they can not. In some situations “<code>!!</code>” must be used, and in others it must not be used. In some situations “<code><a href="http://www.rdocumentation.org/packages/rlang/topics/sym">rlang::sym()</a></code>” must be used, and in some situations it must not be used. In some situations errors are signaled, and in others a bad result is quietly returned.</p>
 <p>The details above are <a href="https://dplyr.tidyverse.org/articles/programming.html">possibly teachable</a> (in the sense one can rote memorize them, once APIs stabilize and stop changing), but they are not friendly to exploration or discoverable. There are a needlessly large number of moving pieces (strings, names, symbols, quoting, quosures, de-quoting, “data pronouns”, select semantics, non-select semantics, <code>=</code> versus <code>:=</code>, and so on) and one is expected to know which combinations of these items work together in which context.</p>
 <p>For a further example consider the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># correct, or at least appears to work</span>
 starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(my_var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(my_var) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## # A tibble: 2 x 1
 ##   homeworld
@@ -320,11 +320,11 @@ starwars <span class="op">%&gt;%</span>
 ## 2 Tatooine</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># errors-out</span>
 starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(my_var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(my_var) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## Error in grouped_df_impl(data, unname(vars), drop): Column `my_var` is unknown</code></pre>
 <p>The “use the value unless the variable name is a column” semantics of select can make code hard to read and potentially unsafe.<br>
-The point is the user does not know what column a <code><a href="http://dplyr.tidyverse.org/reference/select.html">select()</a></code> actually chooses unless that know all of:</p>
+The point is the user does not know what column a <code><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select()</a></code> actually chooses unless that know all of:</p>
 <ul>
 <li>The name of the variable being used (in this case “<code>my_var</code>”).</li>
 <li>The value in the variable.</li>
@@ -335,7 +335,7 @@ The point is the user does not know what column a <code><a href="http://dplyr.ti
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_var &lt;-<span class="st"> "homeworld"</span>
 <span class="co"># selects height column</span>
 starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(my_var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(my_var) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## # A tibble: 2 x 1
 ##   homeworld
@@ -344,11 +344,11 @@ starwars <span class="op">%&gt;%</span>
 ## 2 Tatooine</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perhaps different data with an extra column</span>
 starwars_plus &lt;-<span class="st"> </span>starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">my_var =</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(starwars)))
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">my_var =</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(starwars)))
 
 <span class="co"># same code now selects my_var column</span>
 starwars_plus <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(my_var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(my_var) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## # A tibble: 2 x 1
 ##   my_var
@@ -357,13 +357,13 @@ starwars_plus <span class="op">%&gt;%</span>
 ## 2      2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># original official example code now errors-out</span>
 starwars_plus <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(.data[[my_var]]) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(.data[[my_var]]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise_all">summarise_at</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/vars">vars</a></span>(height<span class="op">:</span>mass), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## Error in mutate_impl(.data, dots): Evaluation error: Must subset the data pronoun with a string.</code></pre>
 <p>The above <em>might</em> be acceptable in interactive work, if we assume the user knows the names of all of the columns in the <code>data.frame</code> and therefore can be held responsible for avoiding column name to variable coincidences. Or more realistically: the user is working interactively in the sense they are there to alter and re-run the code if they happen to notice the failure. However, this is not a safe state of affairs in re-usable functions or packages: which should work even if their are naming coincidences in thought to be irrelevant extra columns.</p>
 <p><code>rlang</code> does have methods to write unambiguous code such as in:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">!!</span>my_var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(<span class="op">!!</span>my_var) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## # A tibble: 2 x 1
 ##   homeworld

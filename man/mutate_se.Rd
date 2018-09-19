@@ -4,7 +4,7 @@
 \alias{mutate_se}
 \title{mutate standard evaluation interface.}
 \usage{
-mutate_se(.data, mutateTerms, ..., splitTerms = TRUE,
+mutate_se(.data, mutateTerms, ..., splitTerms = TRUE, warn = TRUE,
   env = parent.frame(), printPlan = FALSE)
 }
 \arguments{
@@ -16,9 +16,11 @@ mutate_se(.data, mutateTerms, ..., splitTerms = TRUE,
 
 \item{splitTerms}{logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).}
 
+\item{warn}{logical, if TRUE warn about name re-use.}
+
 \item{env}{environment to work in.}
 
-\item{printPlan}{logical, if TRUE print the expression plan}
+\item{printPlan}{logical, if TRUE print the expression plan.}
 }
 \value{
 .data with altered columns.

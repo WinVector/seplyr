@@ -9,6 +9,7 @@
 #' @param .data data.frame
 #' @param transmuteTerms character vector of column expressions to transmute by.
 #' @param env environment to work in.
+#' @param warn logical, if TRUE warn about possible name collisions.
 #' @return .data transumuted by transmuteTerms.
 #'
 #' @examples
@@ -22,11 +23,20 @@
 #'
 #' @export
 #'
-transmute_se <- function(.data, transmuteTerms,  env=parent.frame()) {
+transmute_se <- function(.data, transmuteTerms,
+                         env = parent.frame(),
+                         warn = TRUE) {
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::transmute_se first argument must be a data.frame or tbl")
   }
   force(env)
+  if(warn) {
+    plan <- partition_mutate_se(transmuteTerms)
+    if(length(plan)!=1) {
+      warning(paste("seplyr::transmute_se possibly confusing column name re-use",
+                    wrapr::map_to_char(transmuteTerms)))
+    }
+  }
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
   # updated: https://github.com/WinVector/seplyr/issues/3

@@ -133,7 +133,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>mutate_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>mutate_nse_split_terms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>mutate_nse_env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>(), <span class='kw'>mutate_nse_printPlan</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>mutate_nse_env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>(), <span class='kw'>mutate_nse_warn</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>mutate_nse_printPlan</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,6 +154,10 @@
     <tr>
       <th>mutate_nse_env</th>
       <td><p>environment to work in.</p></td>
+    </tr>
+    <tr>
+      <th>mutate_nse_warn</th>
+      <td><p>logical, if TRUE warn about name re-use.</p></td>
     </tr>
     <tr>
       <th>mutate_nse_printPlan</th>
@@ -197,7 +202,10 @@ safer (avoiding certain known <code>dplyr</code>/<code>dblyr</code> issues)
 #&gt; 4        TRUE
 #&gt; 5        TRUE
 #&gt; 6        TRUE</div><div class='input'>
-
+<span class='co'># generates a warning</span>
+<span class='fu'>data.frame</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%.&gt;%</span>
+   <span class='fu'>mutate_nse</span>(<span class='no'>.</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: seplyr::mutate_se possible name conflicts in assigment</span></div><div class='output co'>#&gt;   x y
+#&gt; 1 2 2</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

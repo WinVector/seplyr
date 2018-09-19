@@ -4,7 +4,8 @@
 \alias{transmute_nse}
 \title{transmute non-standard evaluation interface.}
 \usage{
-transmute_nse(.data, ..., transmute_nse_env = parent.frame())
+transmute_nse(.data, ..., transmute_nse_env = parent.frame(),
+  transmute_nse_warn = TRUE)
 }
 \arguments{
 \item{.data}{data.frame}
@@ -12,6 +13,8 @@ transmute_nse(.data, ..., transmute_nse_env = parent.frame())
 \item{...}{stringified expressions to transmute by.}
 
 \item{transmute_nse_env}{environment to work in.}
+
+\item{transmute_nse_warn}{logical, if TRUE warn about possible name collisions.}
 }
 \value{
 .data with altered columns(other columns dropped).

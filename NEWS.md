@@ -1,7 +1,9 @@
 
-# seplyr 0.8.2 2018-09-18
+# seplyr 0.8.2 2018-09-19
 
  * force parent.frame()
+ * warnings on mutate(), summarize(), and transmute().
+ * fix some argument names.
 
 # seplyr 0.8.1 2018-09-18
 

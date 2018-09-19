@@ -5,10 +5,10 @@
 \alias{summarise_se}
 \title{summarize standard interface.}
 \usage{
-summarize_se(.data, summarizeTerms, ..., summarize_se = TRUE,
+summarize_se(.data, summarizeTerms, ..., warn = TRUE,
   env = parent.frame())
 
-summarise_se(.data, summarizeTerms, ..., summarize_se = TRUE,
+summarise_se(.data, summarizeTerms, ..., warn = TRUE,
   env = parent.frame())
 }
 \arguments{
@@ -18,7 +18,7 @@ summarise_se(.data, summarizeTerms, ..., summarize_se = TRUE,
 
 \item{...}{force later terms to be bound by name}
 
-\item{summarize_se}{logical, if TRUE warn about possible name collisions.}
+\item{warn}{logical, if TRUE warn about possible name collisions.}
 
 \item{env}{environment to work in.}
 }

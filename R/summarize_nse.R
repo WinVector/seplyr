@@ -7,7 +7,7 @@
 #'
 #' @param .data data.frame
 #' @param ... stringified expressions to summarize by.
-#' @param summarize_se logical, if TRUE warn about possible name collisions.
+#' @param summarize_nse_warn logical, if TRUE warn about possible name collisions.
 #' @param env environment to work in.
 #' @return .data with summarized columns.
 #'
@@ -22,7 +22,7 @@
 #'
 summarize_nse <- function(.data,
                           ...,
-                          summarize_se = TRUE,
+                          summarize_nse_warn = TRUE,
                           env = parent.frame()) {
   summarizeTerms <- wrapr::qae(...)
   force(env)
@@ -34,7 +34,7 @@ summarize_nse <- function(.data,
   if(len>1) {
     res <- summarize_se(res,
                         summarizeTerms,
-                        summarize_se = summarize_se,
+                        warn = summarize_nse_warn,
                         env = env)
   }
   res

@@ -16,8 +16,9 @@
 #' @param mutateTerms character vector of column expressions to mutate by.
 #' @param ... force later terms to be bound by name
 #' @param splitTerms logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).
+#' @param warn logical, if TRUE warn about name re-use.
 #' @param env environment to work in.
-#' @param printPlan logical, if TRUE print the expression plan
+#' @param printPlan logical, if TRUE print the expression plan.
 #' @return .data with altered columns.
 #'
 #' @examples
@@ -36,6 +37,7 @@
 mutate_se <- function(.data, mutateTerms,
                       ...,
                       splitTerms = TRUE,
+                      warn = TRUE,
                       env = parent.frame(),
                       printPlan = FALSE) {
   force(env)
@@ -45,11 +47,17 @@ mutate_se <- function(.data, mutateTerms,
   }
   res <- .data
   if(length(mutateTerms)>0) {
-    if(splitTerms && (length(mutateTerms)>1)) {
+    plan <- NULL
+    if(splitTerms || warn) {
       plan <- partition_mutate_se(mutateTerms)
       if(printPlan) {
         print(plan)
       }
+      if(warn && (length(plan)>1)) {
+        warning("seplyr::mutate_se possible name conflicts in assigment")
+      }
+    }
+    if(splitTerms) {
       for(bi in plan) {
         res <- mutate_se(res, bi, splitTerms = FALSE, env = env)
       }

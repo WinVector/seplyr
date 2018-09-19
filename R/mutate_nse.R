@@ -16,6 +16,7 @@
 #' @param ... expressions to mutate by.
 #' @param mutate_nse_split_terms logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).
 #' @param mutate_nse_env environment to work in.
+#' @param mutate_nse_warn logical, if TRUE warn about name re-use.
 #' @param mutate_nse_printPlan logical, if TRUE print the expression plan
 #' @return .data with altered columns.
 #'
@@ -29,12 +30,16 @@
 #'                 Petal_Short := Petal.Length <= limit) %.>%
 #'   head(.)
 #'
+#' # generates a warning
+#' data.frame(x = 1, y = 2) %.>%
+#'    mutate_nse(., x = y, y = x)
 #'
 #' @export
 #'
 mutate_nse <- function(.data, ...,
                        mutate_nse_split_terms = TRUE,
                        mutate_nse_env = parent.frame(),
+                       mutate_nse_warn = TRUE,
                        mutate_nse_printPlan = FALSE) {
   force(mutate_nse_env)
   mutateTerms <- wrapr::qae(...)
@@ -46,6 +51,7 @@ mutate_nse <- function(.data, ...,
     res <- mutate_se(res, mutateTerms,
                      splitTerms = mutate_nse_split_terms,
                      env = mutate_nse_env,
+                     warn = mutate_nse_warn,
                      printPlan = mutate_nse_printPlan)
   }
   res
