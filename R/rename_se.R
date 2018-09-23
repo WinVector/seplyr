@@ -39,6 +39,9 @@ rename_se <- function(.data, mapping,
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::rename_se first argument must be a data.frame or tbl")
   }
+  if(!is.character(mapping)) {
+    stop("seplyr::rename_se mapping must be a named character vector")
+  }
   force(env)
   res <- .data
   nMap <- length(mapping)

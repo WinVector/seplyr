@@ -33,6 +33,9 @@ select_se <- function(.data, colNames) {
   #  https://github.com/tidyverse/dplyr/issues/3006
   # updated: https://github.com/WinVector/seplyr/issues/3
   env <- new.env(parent = emptyenv())
+  if(!is.character(colNames)) {
+    stop("seplyr::select_se colNames must be a character vector")
+  }
   assign('-', `-`, envir = env)
   assign('(', `(`, envir = env)
   colSyms <- lapply(colNames,
@@ -66,6 +69,9 @@ select_se <- function(.data, colNames) {
 deselect <- function(.data, colNames) {
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::deselect first argument must be a data.frame or tbl")
+  }
+  if(!is.character(colNames)) {
+    stop("seplyr::deselect colNames must be a character vector")
   }
   # select(.data, one_of(colNames))
   # convert char vector into spliceable vector

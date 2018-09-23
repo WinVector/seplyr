@@ -31,13 +31,21 @@ group_summarize <- function(d, groupingVars, ...,
   if(!(is.data.frame(d) || dplyr::is.tbl(d))) {
     stop("seplyr::group_summarize first argument must be a data.frame or tbl")
   }
-  # convert char vector into spliceable vector
-  groupingSyms <- rlang::syms(groupingVars)
   d <- dplyr::ungroup(d) # just in case
-  dg <- dplyr::group_by(d, !!!groupingSyms)
-  if(!is.null(arrangeTerms)) {
+  if(length(groupingVars)>0) {
+    if(!is.character(groupingVars)) {
+      stop("seplyr::group_summarize groupingVars must be a character vector")
+    }
+    # convert char vector into spliceable vector
+    groupingSyms <- rlang::syms(groupingVars)
+    dg <- dplyr::group_by(d, !!!groupingSyms)
+  }
+  if(length(arrangeTerms)>0) {
     # from: https://github.com/tidyverse/rlang/issues/116
     # updated: https://github.com/WinVector/seplyr/issues/3
+    if(!is.character(arrangeTerms)) {
+      stop("seplyr::group_summarize arrangeTerms must be length 0, or character")
+    }
     arrangeQ <- lapply(arrangeTerms,
                        function(si) {
                          rlang::parse_quo(si,

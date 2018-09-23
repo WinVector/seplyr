@@ -21,6 +21,9 @@ distinct_se <- function(.data, groupingVars, .keep_all = FALSE) {
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::distinct_se first argument must be a data.frame or tbl")
   }
+  if(!is.character(groupingVars)) {
+    stop("seplyr::distinct_se groupingVars must be a character vector")
+  }
   # convert char vector into spliceable vector
   groupingSyms <- rlang::syms(groupingVars)
   dplyr::distinct(.data = .data, !!!groupingSyms, .keep_all = .keep_all)

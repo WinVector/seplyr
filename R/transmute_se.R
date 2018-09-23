@@ -29,6 +29,9 @@ transmute_se <- function(.data, transmuteTerms,
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::transmute_se first argument must be a data.frame or tbl")
   }
+  if(!check_is_char_vec_or_listscal(transmuteTerms)) {
+    stop("seplyr::transmute_se transmuteTerms must be a character vector or list of character scalars")
+  }
   force(env)
   if(warn) {
     plan <- partition_mutate_se(transmuteTerms)

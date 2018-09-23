@@ -29,7 +29,12 @@ tally_se <- function(x, wt=NULL, sort = FALSE) {
   if(!(is.data.frame(x) || dplyr::is.tbl(x))) {
     stop("seplyr::tally_se first argument must be a data.frame or tbl")
   }
-  if(is.null(wt)) {
+  if(length(wt)>0) {
+    if((!is.character(wt)) || (length(wt)!=1)) {
+      stop("seplyr::tally_se wt must be length 0, or length 1 character vector")
+    }
+  }
+  if(length(wt)<=0) {
     dplyr::tally(x, sort=sort)
   } else {
     dplyr::tally(x, wt = !!rlang::sym(wt), sort=sort)
@@ -63,7 +68,12 @@ add_tally_se <- function(x, wt=NULL, sort = FALSE) {
   if(!(is.data.frame(x) || dplyr::is.tbl(x))) {
     stop("seplyr::add_tally_se first argument must be a data.frame or tbl")
   }
-  if(is.null(wt)) {
+  if(length(wt)>0) {
+    if((!is.character(wt)) || (length(wt)!=1)) {
+      stop("seplyr::add_tally_se wt must be length 0, or length 1 character vector")
+    }
+  }
+  if(length(wt)<=0) {
     dplyr::add_tally(x, sort=sort)
   } else {
     dplyr::add_tally(x, wt = !!rlang::sym(wt), sort=sort)
@@ -101,11 +111,29 @@ count_se <- function(x, groupingVars = NULL,
   if(!(is.data.frame(x) || dplyr::is.tbl(x))) {
     stop("seplyr::count_se first argument must be a data.frame or tbl")
   }
-  groupingSyms <- rlang::syms(groupingVars)
-  if(is.null(wt)) {
-    dplyr::count(x, !!!groupingSyms, sort=sort)
+  if(length(groupingVars)>0) {
+    if(!is.character(groupingVars)) {
+      stop("seplyr::count_se groupingVars must be length 0, or a character vector")
+    }
+  }
+  if(length(wt)>0) {
+    if((!is.character(wt)) || (length(wt)!=1)) {
+      stop("seplyr::count_se wt must be length 0, or length 1 character vector")
+    }
+  }
+  if(length(groupingVars)>0) {
+    groupingSyms <- rlang::syms(groupingVars)
+    if(length(wt)<=0) {
+      dplyr::count(x, !!!groupingSyms, sort=sort)
+    } else {
+      dplyr::count(x, !!!groupingSyms, wt = !!rlang::sym(wt), sort=sort)
+    }
   } else {
-    dplyr::count(x, !!!groupingSyms, wt = !!rlang::sym(wt), sort=sort)
+    if(length(wt)<=0) {
+      dplyr::count(x, sort=sort)
+    } else {
+      dplyr::count(x, wt = !!rlang::sym(wt), sort=sort)
+    }
   }
 }
 
@@ -138,11 +166,29 @@ add_count_se <- function(x, groupingVars = NULL,
   if(!(is.data.frame(x) || dplyr::is.tbl(x))) {
     stop("seplyr::add_count_se first argument must be a data.frame or tbl")
   }
-  groupingSyms <- rlang::syms(groupingVars)
-  if(is.null(wt)) {
-    dplyr::add_count(x, !!!groupingSyms, sort=sort)
+  if(length(groupingVars)>0) {
+    if(!is.character(groupingVars)) {
+      stop("seplyr::add_count_se groupingVars must be length 0, or a character vector")
+    }
+  }
+  if(length(wt)>0) {
+    if((!is.character(wt)) || (length(wt)!=1)) {
+      stop("seplyr::add_count_se wt must be length 0, or length 1 character vector")
+    }
+  }
+  if(length(groupingVars)>0) {
+    groupingSyms <- rlang::syms(groupingVars)
+    if(length(wt)<=0) {
+      dplyr::add_count(x, !!!groupingSyms, sort=sort)
+    } else {
+      dplyr::add_count(x, !!!groupingSyms, wt = !!rlang::sym(wt), sort=sort)
+    }
   } else {
-    dplyr::add_count(x, !!!groupingSyms, wt = !!rlang::sym(wt), sort=sort)
+    if(length(wt)<=0) {
+      dplyr::add_count(x, sort=sort)
+    } else {
+      dplyr::add_count(x, wt = !!rlang::sym(wt), sort=sort)
+    }
   }
 }
 

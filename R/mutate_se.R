@@ -45,6 +45,9 @@ mutate_se <- function(.data, mutateTerms,
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::mutate_nse first argument must be a data.frame or tbl")
   }
+  if(!check_is_char_vec_or_listscal(mutateTerms)) {
+    stop("seplyr::mutate_se mutateTerms must be a character vector or list of character scalars")
+  }
   res <- .data
   if(length(mutateTerms)>0) {
     plan <- NULL

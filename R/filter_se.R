@@ -1,4 +1,26 @@
 
+
+check_is_char_vec_or_listscal <- function(v) {
+  if(length(v)<=0) {
+    return(TRUE)
+  }
+  if(is.character(v)) {
+    return(TRUE)
+  }
+  if(!is.list(v)) {
+    return(FALSE)
+  }
+  is_char <- vapply(v, is.character, logical(1))
+  if(!all(is_char)) {
+    return(FALSE)
+  }
+  lens <- vapply(v, length, numeric(1))
+  if(!all(lens==1)) {
+    return(FALSE)
+  }
+  TRUE
+}
+
 #' filter standard interface.
 #'
 #' Filter a data frame by the filterTerms.  Accepts arbitrary text as
@@ -7,7 +29,7 @@
 #' @seealso \code{\link[dplyr]{filter}}, \code{\link[dplyr]{filter_at}}
 #'
 #' @param .data data.frame
-#' @param filterTerms character vector of column expressions to filter by.
+#' @param filterTerms character vector or list of column expressions to filter by.
 #' @param env environment to work in.
 #' @return .data filtered by columns named in filterTerms
 #'
@@ -25,6 +47,12 @@
 filter_se <- function(.data, filterTerms,  env=parent.frame()) {
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::filter_se first argument must be a data.frame or tbl")
+  }
+  if(length(filterTerms)<=0) {
+    return(.data)
+  }
+  if(!check_is_char_vec_or_listscal(filterTerms)) {
+    stop("seplyr::filter_se filterTerms must be a character vector or list of character scalars")
   }
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116

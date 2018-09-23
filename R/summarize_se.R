@@ -41,6 +41,9 @@ summarize_se <- function(.data, summarizeTerms,
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::summarize_se first argument must be a data.frame or tbl")
   }
+  if(!check_is_char_vec_or_listscal(summarizeTerms)) {
+    stop("seplyr::summarize_se summarizeTerms must be a character vector or list of character scalars")
+  }
   if(warn) {
     plan <- partition_mutate_se(summarizeTerms)
     if(length(plan)!=1) {

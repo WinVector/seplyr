@@ -32,8 +32,11 @@ add_rank_indices <- function(.data,
     stop("seplyr::add_rank_indices first argument must be a data.frame or tbl")
   }
   `:=` <- NULL # don't let look like an unbound reference to CRAN checker
-  if(is.null(arrangeTerms)) {
+  if(length(arrangeTerms)<=0) {
     arrangeTerms <- colnames(.data)
+  }
+  if(!is.character(arrangeTerms)) {
+    stop("seplyr::add_rank_indices arrangeTerms should be length 0, or charcter vector")
   }
   # from: https://github.com/tidyverse/rlang/issues/116
   # updated: https://github.com/WinVector/seplyr/issues/3

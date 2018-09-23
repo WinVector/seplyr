@@ -32,7 +32,7 @@ add_group_summaries <- function(d, groupingVars, ...,
   groupingSyms <- rlang::syms(groupingVars)
   d <- dplyr::ungroup(d) # just in case
   dg <- dplyr::group_by(d, !!!groupingSyms)
-  if(!is.null(arrangeTerms)) {
+  if(length(arrangeTerms)>0) {
     # from: https://github.com/tidyverse/rlang/issues/116
     # now updated: https://github.com/WinVector/seplyr/issues/3
     env <- parent.frame()

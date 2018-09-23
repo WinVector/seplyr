@@ -9,7 +9,7 @@ filter_se(.data, filterTerms, env = parent.frame())
 \arguments{
 \item{.data}{data.frame}
 
-\item{filterTerms}{character vector of column expressions to filter by.}
+\item{filterTerms}{character vector or list of column expressions to filter by.}
 
 \item{env}{environment to work in.}
 }

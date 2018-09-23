@@ -37,13 +37,22 @@ add_group_sub_indices <- function(.data,
   if(!(is.data.frame(.data) || dplyr::is.tbl(.data))) {
     stop("seplyr::add_group_sub_indices first argument must be a data.frame or tbl")
   }
+  if((!is.character(orderColumn)) || (length(orderColumn)!=1)) {
+    stop("seplyr::add_group_sub_indices orderColumn must be a character scalar")
+  }
+  if(!is.character(groupingVars)) {
+    stop("seplyr::add_group_sub_indices groupingVars must be a character vector")
+  }
   .data <- dplyr::ungroup(.data) # just in case
   wrapr::stop_if_dot_args(substitute(list(...)), "seplyr::add_group_sub_indices")
-  if(is.null(arrangeTerms)) {
+  if(length(arrangeTerms)<=0) {
     arrangeTerms <- colnames(.data)
   }
   # from: https://github.com/tidyverse/rlang/issues/116
   # updated: https://github.com/WinVector/seplyr/issues/3
+  if(!is.character(arrangeTerms)) {
+    stop("seplyr::add_group_sub_indices arrangeTerms must be a character vector")
+  }
   arrangeQ <- lapply(arrangeTerms,
                      function(si) {
                        rlang::parse_quo(si,
