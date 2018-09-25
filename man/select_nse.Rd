@@ -16,7 +16,8 @@ Select column that are exactly the names captured unevaluated from \code{...}.
 This is to provide a simple interface that reliably uses non-standard captured names
 (and not consequences of further evaluation).  Please see
 \url{http://www.win-vector.com/blog/2018/09/a-subtle-flaw-in-some-popular-r-nse-interfaces/}
-for some discussion.  Also accepts -name notation.
+for some discussion.  Also accepts -name notation, but not integers or
+functions of columns.  Does not look at argument names (so can not be used to rename columns).
 }
 \examples{
 
@@ -31,9 +32,18 @@ dplyr::select(data.frame(x = 1), y)
 # returns y-column
 select_nse(data.frame(x = 1, y = 2), y)
 
+# deletes wrong column!
+dplyr::select(data.frame(x = 1, z = 3), -y)
+
 # throws when y is not the name of a column (good)
 tryCatch(
   select_nse(data.frame(x = 1), y),
+  error = function(e) { e }
+)
+
+#' # throws when y is not the name of a column (good)
+tryCatch(
+  select_nse(data.frame(x = 1, z = 3), -y),
   error = function(e) { e }
 )
 
