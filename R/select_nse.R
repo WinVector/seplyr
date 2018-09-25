@@ -22,7 +22,7 @@
 #' # returns y-column
 #' select_nse(data.frame(x = 1, y = 2), y)
 #'
-#' # throws that y is not defined (good)
+#' # throws when y is not the name of a column (good)
 #' tryCatch(
 #'   select_nse(data.frame(x = 1), y),
 #'   error = function(e) { e }
@@ -35,7 +35,7 @@ select_nse <- function(.data, ...) {
   colNames <- vapply(
     colSyms,
     function(ci) {
-      as.character(ci)
+      as.character(ci) # deparse?
     }, character(1))
   select_se(.data, colNames)
 }

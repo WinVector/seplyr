@@ -31,7 +31,7 @@ dplyr::select(data.frame(x = 1), y)
 # returns y-column
 select_nse(data.frame(x = 1, y = 2), y)
 
-# throws that y is not defined (good)
+# throws when y is not the name of a column (good)
 tryCatch(
   select_nse(data.frame(x = 1), y),
   error = function(e) { e }

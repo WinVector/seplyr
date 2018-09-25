@@ -169,7 +169,7 @@ for some discussion.  Also accepts -name notation.</p>
 <span class='co'># returns y-column</span>
 <span class='fu'>select_nse</span>(<span class='fu'>data.frame</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt;   y
 #&gt; 1 2</div><div class='input'>
-<span class='co'># throws that y is not defined (good)</span>
+<span class='co'># throws when y is not the name of a column (good)</span>
 <span class='fu'>tryCatch</span>(
   <span class='fu'>select_nse</span>(<span class='fu'>data.frame</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='no'>y</span>),
   <span class='kw'>error</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>e</span>) { <span class='no'>e</span> }
