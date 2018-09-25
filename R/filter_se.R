@@ -54,6 +54,7 @@ filter_se <- function(.data, filterTerms,  env=parent.frame()) {
   if(!check_is_char_vec_or_listscal(filterTerms)) {
     stop("seplyr::filter_se filterTerms must be a character vector or list of character scalars")
   }
+  force(env)
   # convert char vector into spliceable vector
   # from: https://github.com/tidyverse/rlang/issues/116
   # updated: https://github.com/WinVector/seplyr/issues/3

@@ -44,6 +44,7 @@ complete_se <- function(data, col_terms, fill = list(), env = parent.frame()) {
   if(!is.character(col_terms)) {
     stop("seplyr::complete_se col_terms must be a character vector")
   }
+  force(env)
 	# convert char vector into spliceable vector
 	# from: https://github.com/tidyverse/rlang/issues/116
 	col_syms <- lapply(

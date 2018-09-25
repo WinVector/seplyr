@@ -1,5 +1,5 @@
 
-# seplyr 0.8.2 2018-09-24
+# seplyr 0.8.2 2018-09-25
 
  * force parent.frame().
  * stricter argument type checking.

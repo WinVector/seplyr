@@ -37,8 +37,10 @@ select_se <- function(.data, colNames) {
     stop("seplyr::select_se colNames must be a character vector")
   }
   env <- new.env(parent = emptyenv())
-  assign('-', `-`, envir = env)
-  assign('(', `(`, envir = env)
+  penv <- parent.frame()
+  for(sym in c("-", "c", ":", "(")) {
+    assign(sym, get(sym, envir = penv), envir = env)
+  }
   colSyms <- lapply(colNames,
                     function(si) {
                       rlang::parse_quo(si,

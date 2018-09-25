@@ -31,6 +31,7 @@ group_summarize <- function(d, groupingVars, ...,
   if(!(is.data.frame(d) || dplyr::is.tbl(d))) {
     stop("seplyr::group_summarize first argument must be a data.frame or tbl")
   }
+  force(env)
   d <- dplyr::ungroup(d) # just in case
   if(length(groupingVars)>0) {
     if(!is.character(groupingVars)) {

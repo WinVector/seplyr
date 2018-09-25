@@ -43,6 +43,7 @@ add_group_sub_indices <- function(.data,
   if(!is.character(groupingVars)) {
     stop("seplyr::add_group_sub_indices groupingVars must be a character vector")
   }
+  force(env)
   .data <- dplyr::ungroup(.data) # just in case
   wrapr::stop_if_dot_args(substitute(list(...)), "seplyr::add_group_sub_indices")
   if(length(arrangeTerms)<=0) {
