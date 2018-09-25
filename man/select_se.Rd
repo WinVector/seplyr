@@ -2,7 +2,7 @@
 % Please edit documentation in R/select_se.R
 \name{select_se}
 \alias{select_se}
-\title{select standard interface.}
+\title{Select columns standard interface.}
 \usage{
 select_se(.data, colNames)
 }
@@ -15,7 +15,7 @@ select_se(.data, colNames)
 .data with only selected columns
 }
 \description{
-select columns.  To remove columns please see \code{\link{deselect}}.
+Select columns.  To remove columns please see \code{\link{deselect}}.  Also accepts -column notation.
 }
 \examples{
 

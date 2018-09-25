@@ -1,10 +1,11 @@
 
-# seplyr 0.8.2 2018-09-23
+# seplyr 0.8.2 2018-09-24
 
  * force parent.frame().
  * stricter argument type checking.
  * warnings on mutate(), summarize(), and transmute().
  * fix some argument names.
+ * start on select_nse().
 
 # seplyr 0.8.1 2018-09-18
 

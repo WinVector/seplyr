@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select columns standard interface. — select_se • seplyr</title>
+<title>Select columns non-standard (code capturing) interface. — select_nse • seplyr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,13 @@
 
 
 
-<meta property="og:title" content="Select columns standard interface. — select_se" />
+<meta property="og:title" content="Select columns non-standard (code capturing) interface. — select_nse" />
 
-<meta property="og:description" content="Select columns.  To remove columns please see deselect.  Also accepts -column notation." />
+<meta property="og:description" content="Select column that are exactly the names captured unevaluated from ....
+This is to provide a simple interface that reliably uses non-standard captured names
+(and not consequences of further evaluation).  Please see
+http://www.win-vector.com/blog/2018/09/a-subtle-flaw-in-some-popular-r-nse-interfaces/
+for some discussion.  Also accepts -name notation." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,67 +125,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Select columns standard interface.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/WinVector/seplyr//blob/master/R/select_se.R'><code>R/select_se.R</code></a></small>
-    <div class="hidden name"><code>select_se.Rd</code></div>
+    <h1>Select columns non-standard (code capturing) interface.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/WinVector/seplyr//blob/master/R/select_nse.R'><code>R/select_nse.R</code></a></small>
+    <div class="hidden name"><code>select_nse.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Select columns.  To remove columns please see <code><a href='deselect.html'>deselect</a></code>.  Also accepts -column notation.</p>
+    <p>Select column that are exactly the names captured unevaluated from <code>...</code>.
+This is to provide a simple interface that reliably uses non-standard captured names
+(and not consequences of further evaluation).  Please see
+<a href='http://www.win-vector.com/blog/2018/09/a-subtle-flaw-in-some-popular-r-nse-interfaces/'>http://www.win-vector.com/blog/2018/09/a-subtle-flaw-in-some-popular-r-nse-interfaces/</a>
+for some discussion.  Also accepts -name notation.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>select_se</span>(<span class='no'>.data</span>, <span class='no'>colNames</span>)</pre>
+    <pre class="usage"><span class='fu'>select_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>data.frame</p></td>
+      <td><p>data frame or tbl to select columns from.</p></td>
     </tr>
     <tr>
-      <th>colNames</th>
-      <td><p>character vector of columns to keep</p></td>
+      <th>...</th>
+      <td><p>unevaluated symbols to use as column names.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>.data with only selected columns</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='deselect.html'>deselect</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/select_all.html'>select_at</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='st'>"x"</span>
 
-<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/mtcars'>mtcars</a></span> <span class='kw'>%.&gt;%</span>
-   <span class='fu'>select_se</span>(<span class='no'>.</span>, <span class='fu'>c</span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>)) <span class='kw'>%.&gt;%</span>
-   <span class='fu'>head</span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;                   cyl gear
-#&gt; Mazda RX4           6    4
-#&gt; Mazda RX4 Wag       6    4
-#&gt; Datsun 710          4    4
-#&gt; Hornet 4 Drive      6    3
-#&gt; Hornet Sportabout   8    3
-#&gt; Valiant             6    3</div><div class='input'><span class='co'># essentially dplyr::select_at()</span>
-
-<span class='fu'>data.frame</span>(<span class='kw'>a</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>b</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='kw'>%.&gt;%</span> <span class='fu'>select_se</span>(<span class='no'>.</span>, <span class='st'>'-b'</span>)</div><div class='output co'>#&gt;   a
+<span class='co'># returns y-column</span>
+<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'>data.frame</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt;   y
+#&gt; 1 2</div><div class='input'>
+<span class='co'># returns x-column (very confusing!)</span>
+<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'>data.frame</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt;   x
 #&gt; 1 1</div><div class='input'>
+<span class='co'># returns y-column</span>
+<span class='fu'>select_nse</span>(<span class='fu'>data.frame</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt;   y
+#&gt; 1 2</div><div class='input'>
+<span class='co'># throws that y is not defined (good)</span>
+<span class='fu'>tryCatch</span>(
+  <span class='fu'>select_nse</span>(<span class='fu'>data.frame</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='no'>y</span>),
+  <span class='kw'>error</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>e</span>) { <span class='no'>e</span> }
+)</div><div class='output co'>#&gt; &lt;simpleError in .f(.x[[i]], ...): object 'y' not found&gt;</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
