@@ -35,27 +35,6 @@ mtcars %>%
     ## 2     1            23.4          13
 
 ``` r
-bquote_function <- function(fn) {
-  frmls <- formals(fn)
-  if(length(formals)<=0) {
-    stop("bquote_function function must have formals() not empty")
-  }
-  .adapted_wrapped_function_ <- NULL # don't look unbound
-  f <- function() {
-    call <- match.call()
-    env <- parent.frame()
-    mc <- do.call(bquote, list(call, where = env), envir = env)
-    mc[[1]] <- .adapted_wrapped_function_
-    eval(mc, envir = env)
-  }
-  formals(f) <- frmls
-  newenv <- new.env(parent = environment(fn))
-  assign('.adapted_wrapped_function_', fn, envir = newenv)
-  environment(f) <- newenv
-  f
-}
-
-
 # wrap some dplyr methods
 nms <- c("add_count", "add_tally", "all_equal", "anti_join",
          "arrange", "as.tbl", "bind_cols", "bind_rows", "collect",
@@ -67,7 +46,7 @@ nms <- c("add_count", "add_tally", "all_equal", "anti_join",
 env <- environment()
 for(fname in nms) {
   assign(fname, 
-         bquote_function(getFromNamespace(fname, ns = "dplyr")),
+         wrapr::bquote_function(getFromNamespace(fname, ns = "dplyr")),
          envir = env)
 }
 
