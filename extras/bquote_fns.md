@@ -8,6 +8,12 @@ suppressPackageStartupMessages(library("dplyr"))
     ## Warning: package 'dplyr' was built under R version 3.5.1
 
 ``` r
+packageVersion("dplyr")
+```
+
+    ## [1] '0.7.6'
+
+``` r
 # define our parameters
 group_nm <- as.name("am")
 num_nm <- as.name("hp")
