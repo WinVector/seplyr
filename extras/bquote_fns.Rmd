@@ -29,7 +29,7 @@ mtcars %>%
 bquote_function <- function(fn) {
   frmls <- formals(fn)
   if(length(formals)<=0) {
-    stop("wrapr::bquote_function function must have formals() not empty")
+    stop("bquote_function function must have formals() not empty")
   }
   .adapted_wrapped_function_ <- NULL # don't look unbound
   f <- function() {
