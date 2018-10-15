@@ -8,8 +8,38 @@ suppressPackageStartupMessages(library("dplyr"))
     ## Warning: package 'dplyr' was built under R version 3.5.1
 
 ``` r
-bquote_function <- function(fn, function_name, env = parent.frame()) {
+# define our parameters
+group_nm <- as.name("am")
+num_nm <- as.name("hp")
+den_nm <- as.name("cyl")
+derived_nm <- as.name(paste0(num_nm, "_per_", den_nm))
+mean_nm <- as.name(paste0("mean_", derived_nm))
+count_nm <- as.name("group_count")
+
+# apply a parameterized pipeline using rlang::!!
+mtcars %>%
+  group_by(!!group_nm) %>%
+  mutate(!!derived_nm := !!num_nm/!!den_nm) %>%
+  summarize(
+    !!mean_nm := mean(!!derived_nm),
+    !!count_nm := n()
+  ) %>%
+  ungroup() %>%
+  arrange(!!group_nm)
+```
+
+    ## # A tibble: 2 x 3
+    ##      am mean_hp_per_cyl group_count
+    ##   <dbl>           <dbl>       <int>
+    ## 1     0            22.7          19
+    ## 2     1            23.4          13
+
+``` r
+bquote_function <- function(fn) {
   frmls <- formals(fn)
+  if(length(formals)<=0) {
+    stop("bquote_function function must have formals() not empty")
+  }
   f <- function() {
     call <- match.call()
     env <- parent.frame()
@@ -18,8 +48,9 @@ bquote_function <- function(fn, function_name, env = parent.frame()) {
     eval(mc, envir = env)
   }
   formals(f) <- frmls
-  assign(function_name, f, envir = env)
+  f
 }
+
 
 # wrap some dplyr methods
 nms <- c("add_count", "add_tally", "all_equal", "anti_join",
@@ -29,20 +60,16 @@ nms <- c("add_count", "add_tally", "all_equal", "anti_join",
          "is.tbl", "left_join", "mutate", "rename", "right_join",
          "select", "semi_join", "summarise", "summarize", "tally",
          "tbl", "transmute", "ungroup")
+env <- environment()
 for(fname in nms) {
-  bquote_function(getFromNamespace(fname, ns = "dplyr"), fname)
+  assign(fname, 
+         bquote_function(getFromNamespace(fname, ns = "dplyr")),
+         envir = env)
 }
 
-# define our parameters
-group_nm <- as.name("am")
-num_nm <- as.name("hp")
-den_nm <- as.name("cyl")
-derived_nm <- as.name(paste0(num_nm, "_per_", den_nm))
-mean_nm <- as.name(paste0("mean_", derived_nm))
-count_nm <- as.name("group_count")
 
 
-# apply a parameterized pipeline
+# apply a parameterized pipeline using bquote
 mtcars %>%
   group_by(.(group_nm)) %>%
   mutate(.(derived_nm) := .(num_nm)/.(den_nm)) %>%
