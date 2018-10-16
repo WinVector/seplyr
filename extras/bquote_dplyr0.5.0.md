@@ -112,7 +112,7 @@ mtcars %>%
     ## 1     0            22.7          19
     ## 2     1            23.4          13
 
-It was felt this was the least intrusive way to give `dplyr` users useful macro substitution ability over `dplyr` pipelines. So by December of 2016 users had public access to a complete solution.
+It was felt this was the least intrusive way to give `dplyr` users useful macro substitution ability over `dplyr` pipelines. So by December of 2016 users had public access to a complete solution. More on `wrapr::let()` can be found [here](https://github.com/WinVector/wrapr/blob/master/extras/wrapr_let.pdf).
 
 In May of 2017 `rlang` was publicly announced and released. `dplyr` adapted new `rlang` based quasiquotation ability directly into many of its functions/methods. This means the user does not need to draw a substitution block around their code, as the package authors have written the block. At first glance this is something only the `dplyr` package authors could do (as they control the code), but it turns out one can also easily adapt (or wrap) existing code in `R`.
 
@@ -136,6 +136,7 @@ env <- environment()
 for(fname in nms) {
   fn <- getFromNamespace(fname, ns = "dplyr")
   assign(fname, 
+         # requires wrapr 1.6.4 or newer
          wrapr::bquote_function(fn),
          envir = env)
 }
