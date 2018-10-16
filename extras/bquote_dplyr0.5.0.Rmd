@@ -26,7 +26,7 @@ mean_nm <- as.name(paste0("mean_", derived_nm))
 count_nm <- as.name("group_count")
 ```
 
-And then you would execute something like the following.
+And then you would execute something like the following.  We are not running the following block (so there is no result), as we have `dplyr 0.5.0` loaded which does not yet accept the quasiquotation notation.
 
 ```{r, eval=FALSE}
 # apply a parameterized pipeline using rlang::!!
@@ -167,7 +167,7 @@ For `R` package and function developers my advice is:
 
   * If you wish to introduce quasiquotation into your functions or packages, *please* consider using `bquote()` to do it.  It has been part of base-`R` for 15 years, works very well, and is quite stable.  `bquote()` is small enough to be comprehensible.  Users who learn `bquote()` notation on one package will be able to re-use their experience on other `bquote()` enabled packages.  To help: we have some example code called [`bquote_call_args()`](https://github.com/WinVector/wrapr/blob/master/R/bquotefn.R) where we are prototyping a canonical way to incorporate `bquote()` and `:=` re-writing in your own functions and packages.  It isn't in the released version of `wrapr` yet, but it is testing well in the development version.
   
-A lot of the technical details (including defining standard and non-standard evalution) are covered in [our long article on macro capabilities in `R`](https://github.com/WinVector/wrapr/blob/master/extras/MacrosInR.md).
+A lot of the technical details (including defining standard and non-standard evaluation) are covered in [our long article on macro capabilities in `R`](https://github.com/WinVector/wrapr/blob/master/extras/MacrosInR.md).
   
 
   
