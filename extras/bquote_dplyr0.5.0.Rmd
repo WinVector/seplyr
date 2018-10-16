@@ -26,7 +26,7 @@ mean_nm <- as.name(paste0("mean_", derived_nm))
 count_nm <- as.name("group_count")
 ```
 
-And then you would execute something like the following.  We are not running the following block (so there is no result), as we have `dplyr 0.5.0` loaded which does not yet accept the quasiquotation notation.
+And then you would execute something like the following.  We are not running the following block (so there is no result), as we have `dplyr 0.5.0` installed, which does not yet accept the quasiquotation notation.
 
 ```{r, eval=FALSE}
 # apply a parameterized pipeline using rlang::!!
@@ -43,7 +43,7 @@ mtcars %>%
 
 Writing the above code requires two ideas:
 
-  * quasiqotation (marking some symbols for substitution, in this case using `!!` as the marker).  As we said available in `R` since 2003.
+  * quasiqotation (marking some symbols for substitution, in this case using `!!` as the marker).  As we said, quasiquotation has been available in `R` since 2003.
   * Using `:=` as a substitute for `=` to allow substitution marks on the left-hand sides of assignment like expressions without triggering syntax errors. `:=` is an unused left-over assignment operator that has low-precedence (like assignments do), but not all the syntactic restrictions of `=`. This is an idea used in `data.table` for quite some time, and is actually [first visible in `dplyr` when used as part of `dplyr`'s `data.table` adapter in May 2013](https://github.com/tidyverse/dplyr/blob/bec50d3b1740db1fb28724e7e560cdf19924b97c/R/manip-dt.r)).
 
 `dplyr 0.5.0` (released June 2016) did not yet incorporate quasiqotation, so we can not run the above code in `dplyr 0.5.0` unless we take the steps of:
@@ -103,7 +103,7 @@ mtcars %>%
 )
 ```
 
-It was felt this was the least intrusive way to give `dplyr` users useful macro substitution ability over `dplyr` pipelines.  So by December of 2016 users had public access to a complete solution.   More on `wrapr::let()` can be found [here](https://github.com/WinVector/wrapr/blob/master/extras/wrapr_let.pdf).
+We felt this was the least intrusive way to give `dplyr` users useful macro substitution ability over `dplyr` pipelines.  So by December of 2016 users had public access to a complete solution.   More on `wrapr::let()` can be found [here](https://github.com/WinVector/wrapr/blob/master/extras/wrapr_let.pdf).
 
 In May of 2017 `rlang` was publicly announced and released. `dplyr` adapted new `rlang` based quasiquotation ability directly into many of its functions/methods.  This means the user does not need to draw a substitution block around their code, as the package authors have written the block.  At first glance this is something only the `dplyr` package authors could do (as they control the code), but it turns out one can also easily adapt (or wrap) existing code in `R`.
 
