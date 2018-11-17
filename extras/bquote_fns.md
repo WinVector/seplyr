@@ -3,15 +3,10 @@ bquote functions
 
 ``` r
 suppressPackageStartupMessages(library("dplyr"))
-```
-
-    ## Warning: package 'dplyr' was built under R version 3.5.1
-
-``` r
 packageVersion("dplyr")
 ```
 
-    ## [1] '0.7.6'
+    ## [1] '0.7.7'
 
 ``` r
 # define our parameters
