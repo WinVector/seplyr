@@ -30,7 +30,7 @@ Imports:
     rlang (>= 0.2.0), 
     tidyr
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Suggests: knitr,
     rmarkdown,
     testthat

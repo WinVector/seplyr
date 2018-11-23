@@ -39,12 +39,6 @@ To install this package please either install from [CRAN](https://CRAN.R-project
    install.packages('seplyr')
 ```
 
-or from [`GitHub`](https://github.com/WinVector/seplyr):
-
-``` r
-   devtools::install_github('WinVector/seplyr')
-```
-
 Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/dot_arrow.html) for details on "dot pipe."
 
 In addition to standard interface adapters `seplyr` supplies some non-trivial statement transforms:
