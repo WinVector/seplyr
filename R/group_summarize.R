@@ -40,6 +40,8 @@ group_summarize <- function(d, groupingVars, ...,
     # convert char vector into spliceable vector
     groupingSyms <- rlang::syms(groupingVars)
     dg <- dplyr::group_by(d, !!!groupingSyms)
+  } else {
+    dg <- d
   }
   if(length(arrangeTerms)>0) {
     # from: https://github.com/tidyverse/rlang/issues/116

@@ -91,7 +91,7 @@
       <h1>seplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2018-10-16</h4>
+            <h4 class="date">2018-12-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr//blob/master/vignettes/seplyr.Rmd"><code>vignettes/seplyr.Rmd</code></a></small>
       <div class="hidden name"><code>seplyr.Rmd</code></div>
@@ -108,7 +108,7 @@
 <p>In <code>dplyr</code> if you know the names of columns when you are writing code you can write code such as the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"dplyr"</span>))
 <span class="kw">packageVersion</span>(<span class="st">"dplyr"</span>)</code></pre></div>
-<pre><code>## [1] '0.7.7'</code></pre>
+<pre><code>## [1] '0.7.8'</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(cyl, <span class="kw"><a href="http://dplyr.tidyverse.org/reference/desc.html">desc</a></span>(gear)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre></div>
@@ -131,7 +131,7 @@ orderTerms &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="
 <span class="co"># "If you are close enough to form a quosure, </span>
 <span class="co">#  you are close enough to re-code the analysis"</span>
 orderQs &lt;-<span class="st"> </span><span class="kw">lapply</span>(orderTerms,
-                  <span class="cf">function</span>(si) { rlang<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rlang/topics/parse_expr">parse_expr</a></span>(si) })
+                  <span class="cf">function</span>(si) { rlang<span class="op">::</span><span class="kw"><a href="https://rlang.r-lib.org/reference/parse_expr.html">parse_expr</a></span>(si) })
 <span class="co"># pipe</span>
 datasets<span class="op">::</span>mtcars <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="op">!!!</span>orderQs) <span class="op">%&gt;%</span><span class="st"> </span>

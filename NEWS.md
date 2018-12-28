@@ -1,7 +1,8 @@
 
 # seplyr 0.8.3 2018-10-16
 
- * more select_nse() work
+ * more select_nse() work.
+ * fix non-grouped xes of group_summarize().
 
 # seplyr 0.8.2 2018-09-25
 
