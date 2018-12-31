@@ -43,7 +43,7 @@ is a reserved column name for this procedure.
    testexpr = '(a+b)>1',
    thenexprs = c(
      if_else_device(
-       testexpr = 'runif(n()) >= 0.5',
+       testexpr = 'runif(dplyr::n()) >= 0.5',
        thenexprs = 'a' := '0',
        elseexprs = 'b' := '0'),
      'edited' := 'TRUE'))
@@ -63,7 +63,7 @@ is a reserved column name for this procedure.
  #  testexpr = qe((a+b)>1),
  #  thenexprs = c(
  #    if_else_device(
- #      testexpr = qe(runif(n()) >= 0.5),
+ #      testexpr = qe(runif(dplyr::n()) >= 0.5),
  #      thenexprs = qae(a := 0),
  #      elseexprs = qae(b := 0)),
  #    qae(edited := TRUE)))

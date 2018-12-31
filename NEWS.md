@@ -1,6 +1,7 @@
 
-# seplyr 0.8.3 2018-10-16
+# seplyr 0.8.3 2018-12-31
 
+ * work around https://github.com/tidyverse/dplyr/issues/4062 .
  * more select_nse() work.
  * fix non-grouped xes of group_summarize().
 

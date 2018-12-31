@@ -1,5 +1,8 @@
 
 
+#' @importFrom dplyr n
+NULL
+
 #' partition expressions
 #'
 #' Find longest ordered not created and used in same block chains.
@@ -324,7 +327,7 @@ factor_mutate <- function(...,
 #'    testexpr = '(a+b)>1',
 #'    thenexprs = c(
 #'      if_else_device(
-#'        testexpr = 'runif(n()) >= 0.5',
+#'        testexpr = 'runif(dplyr::n()) >= 0.5',
 #'        thenexprs = 'a' := '0',
 #'        elseexprs = 'b' := '0'),
 #'      'edited' := 'TRUE'))
@@ -344,7 +347,7 @@ factor_mutate <- function(...,
 #'  #  testexpr = qe((a+b)>1),
 #'  #  thenexprs = c(
 #'  #    if_else_device(
-#'  #      testexpr = qe(runif(n()) >= 0.5),
+#'  #      testexpr = qe(runif(dplyr::n()) >= 0.5),
 #'  #      thenexprs = qae(a := 0),
 #'  #      elseexprs = qae(b := 0)),
 #'  #    qae(edited := TRUE)))
