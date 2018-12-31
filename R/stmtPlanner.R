@@ -318,6 +318,7 @@ factor_mutate <- function(...,
 #'
 #' @examples
 #'
+#'  suppressPackageStartupMessages(library("dplyr"))
 #'  # Example: clear one of a or b in any row where both are set.
 #'  d <- data.frame(a = c(0, 0, 1, 1, 1, 1, 1, 1, 1, 1),
 #'                  b = c(0, 1, 0, 1, 1, 1, 1, 1, 1, 1),
@@ -327,7 +328,7 @@ factor_mutate <- function(...,
 #'    testexpr = '(a+b)>1',
 #'    thenexprs = c(
 #'      if_else_device(
-#'        testexpr = 'runif(dplyr::n()) >= 0.5',
+#'        testexpr = 'runif(n()) >= 0.5',
 #'        thenexprs = 'a' := '0',
 #'        elseexprs = 'b' := '0'),
 #'      'edited' := 'TRUE'))
@@ -347,7 +348,7 @@ factor_mutate <- function(...,
 #'  #  testexpr = qe((a+b)>1),
 #'  #  thenexprs = c(
 #'  #    if_else_device(
-#'  #      testexpr = qe(runif(dplyr::n()) >= 0.5),
+#'  #      testexpr = qe(runif(n()) >= 0.5),
 #'  #      thenexprs = qae(a := 0),
 #'  #      elseexprs = qae(b := 0)),
 #'  #    qae(edited := TRUE)))
