@@ -1,5 +1,4 @@
 
-Push a change requested by the rlang package team ( https://github.com/WinVector/seplyr/issues/3 ).
 
 ## Test environments
 
