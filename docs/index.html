@@ -130,8 +130,6 @@ datasets<span class="op">::</span>mtcars <span class="op">%.&gt;%</span><span cl
 <p>The concept is: in writing re-usable code or scripts you pretend you do not know the actual column names you will be asked to work with (that these will be supplied as values later at analysis time). This forces you to write scripts that can be used even if data changes, and are re-usable on new data you did not know about when writing the script.</p>
 <p>To install this package please either install from <a href="https://CRAN.R-project.org/package=seplyr">CRAN</a> with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   <span class="kw">install.packages</span>(<span class="st">'seplyr'</span>)</code></pre></div>
-<p>or from <a href="https://github.com/WinVector/seplyr"><code>GitHub</code></a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'WinVector/seplyr'</span>)</code></pre></div>
 <p>Please see <a href="https://winvector.github.io/wrapr/reference/dot_arrow.html"><code>help("%.&gt;%", package="wrapr")</code></a> for details on “dot pipe.”</p>
 <p>In addition to standard interface adapters <code>seplyr</code> supplies some non-trivial statement transforms:</p>
 <ul>

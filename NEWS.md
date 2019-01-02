@@ -1,5 +1,5 @@
 
-# seplyr 0.8.3 2018-12-31
+# seplyr 0.8.3 2019-01-02
 
  * work around https://github.com/tidyverse/dplyr/issues/4062 .
  * more select_nse() work.
