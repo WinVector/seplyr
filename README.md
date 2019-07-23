@@ -1,10 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-The [`R`](https://www.r-project.org) package [`seplyr`](https://github.com/WinVector/seplyr) supplies improved *s*tandard *e*valuation interfaces for some common `dplyr` data plying tasks.
+
+The [`R`](https://www.r-project.org) package
+[`seplyr`](https://github.com/WinVector/seplyr) supplies improved
+*s*tandard *e*valuation interfaces for some common `dplyr` data plying
+tasks.
 
 ![](https://github.com/WinVector/seplyr/raw/master/tools/safety.png)
 
-To get started we suggest visiting the [`seplyr` site](https://winvector.github.io/seplyr/), and checking out [some examples](https://winvector.github.io/seplyr/articles/seplyr.html).
+To get started we suggest visiting the [`seplyr`
+site](https://winvector.github.io/seplyr/), and checking out [some
+examples](https://winvector.github.io/seplyr/articles/seplyr.html).
 
 One quick example:
 
@@ -31,22 +37,36 @@ datasets::mtcars %.>%
  #  6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
 ```
 
-The concept is: in writing re-usable code or scripts you pretend you do not know the actual column names you will be asked to work with (that these will be supplied as values later at analysis time). This forces you to write scripts that can be used even if data changes, and are re-usable on new data you did not know about when writing the script.
+The concept is: in writing re-usable code or scripts you pretend you do
+not know the actual column names you will be asked to work with (that
+these will be supplied as values later at analysis time). This forces
+you to write scripts that can be used even if data changes, and are
+re-usable on new data you did not know about when writing the script.
 
-To install this package please either install from [CRAN](https://CRAN.R-project.org/package=seplyr) with:
+To install this package please either install from
+[CRAN](https://CRAN.R-project.org/package=seplyr) with:
 
 ``` r
    install.packages('seplyr')
 ```
 
-Please see [`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/dot_arrow.html) for details on "dot pipe."
+Please see [`help("%.>%",
+package="wrapr")`](https://winvector.github.io/wrapr/reference/dot_arrow.html)
+for details on “dot pipe.”
 
-In addition to standard interface adapters `seplyr` supplies some non-trivial statement transforms:
+In addition to standard interface adapters `seplyr` supplies some
+non-trivial statement
+    transforms:
 
--   [`partition_mutate_se()`](https://winvector.github.io/seplyr/reference/partition_mutate_se.html): [vignette](https://winvector.github.io/seplyr/articles/MutatePartitioner.html), and [article](http://winvector.github.io/FluidData/partition_mutate.html).
--   [`if_else_device()`](https://winvector.github.io/seplyr/reference/if_else_device.html): [article](http://winvector.github.io/FluidData/partition_mutate_ex2.html).
+  - [`partition_mutate_se()`](https://winvector.github.io/seplyr/reference/partition_mutate_se.html):
+    [vignette](https://winvector.github.io/seplyr/articles/MutatePartitioner.html),
+    and
+    [article](http://winvector.github.io/FluidData/partition_mutate.html).
+  - [`if_else_device()`](https://winvector.github.io/seplyr/reference/if_else_device.html):
+    [article](http://winvector.github.io/FluidData/partition_mutate_ex2.html).
 
-Note
-----
+## Note
 
-Note: `seplyr` is meant only for "tame names", that is: variables and column names that are also valid *simple* (without quotes) `R` variables names.
+Note: `seplyr` is meant only for “tame names”, that is: variables and
+column names that are also valid *simple* (without quotes) `R` variables
+names.

@@ -1,4 +1,8 @@
 
+# seplyr 0.8.4 2019-07-23
+
+ * Adjust license.
+
 # seplyr 0.8.3 2019-01-02
 
  * work around https://github.com/tidyverse/dplyr/issues/4062 .
