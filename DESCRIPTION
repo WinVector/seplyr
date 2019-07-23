@@ -20,7 +20,7 @@ Description: The 'seplyr' (standard evaluation plying) package supplies improved
     per-group identifiers to a 'data.frame' without depending on row-order),
     'partition_mutate_qt()' (which optimizes mutate sequences), and 'if_else_device()'
     (which simulates per-row if-else blocks in expression sequences).
-License: GPL-3
+License: GPL-2 | GPL-3
 Encoding: UTF-8
 Depends:
     R (>= 3.4.0),
