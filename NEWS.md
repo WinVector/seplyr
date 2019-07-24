@@ -1,5 +1,5 @@
 
-# seplyr 0.8.4 2019-07-23
+# seplyr 0.8.4 2019-07-24
 
  * Adjust license.
 

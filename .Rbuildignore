@@ -10,5 +10,6 @@
 ^extras$
 ^derby.log$
 ^logs$
+^LICENSE$
 
 
