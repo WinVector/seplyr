@@ -5,11 +5,9 @@
 \alias{summarise_se}
 \title{summarize standard interface.}
 \usage{
-summarize_se(.data, summarizeTerms, ..., warn = TRUE,
-  env = parent.frame())
+summarize_se(.data, summarizeTerms, ..., warn = TRUE, env = parent.frame())
 
-summarise_se(.data, summarizeTerms, ..., warn = TRUE,
-  env = parent.frame())
+summarise_se(.data, summarizeTerms, ..., warn = TRUE, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}

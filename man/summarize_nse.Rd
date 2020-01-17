@@ -5,11 +5,9 @@
 \alias{summarise_nse}
 \title{summarize non-standard evaluation interface.}
 \usage{
-summarize_nse(.data, ..., summarize_nse_warn = TRUE,
-  env = parent.frame())
+summarize_nse(.data, ..., summarize_nse_warn = TRUE, env = parent.frame())
 
-summarise_nse(.data, ..., summarize_nse_warn = TRUE,
-  env = parent.frame())
+summarise_nse(.data, ..., summarize_nse_warn = TRUE, env = parent.frame())
 }
 \arguments{
 \item{.data}{data.frame}

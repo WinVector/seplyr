@@ -4,8 +4,15 @@
 \alias{mutate_se}
 \title{mutate standard evaluation interface.}
 \usage{
-mutate_se(.data, mutateTerms, ..., splitTerms = TRUE, warn = TRUE,
-  env = parent.frame(), printPlan = FALSE)
+mutate_se(
+  .data,
+  mutateTerms,
+  ...,
+  splitTerms = TRUE,
+  warn = TRUE,
+  env = parent.frame(),
+  printPlan = FALSE
+)
 }
 \arguments{
 \item{.data}{data.frame}

@@ -4,9 +4,17 @@
 \alias{gather_se}
 \title{Distribute columns into blocks of rows.}
 \usage{
-gather_se(data, ..., key = "key", value = "value", columns = NULL,
-  na.rm = FALSE, convert = FALSE, factor_key = FALSE,
-  use_one_of = TRUE)
+gather_se(
+  data,
+  ...,
+  key = "key",
+  value = "value",
+  columns = NULL,
+  na.rm = FALSE,
+  convert = FALSE,
+  factor_key = FALSE,
+  use_one_of = TRUE
+)
 }
 \arguments{
 \item{data}{data.frame to take values from.}

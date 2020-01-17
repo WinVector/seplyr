@@ -3,7 +3,6 @@
 \docType{package}
 \name{seplyr}
 \alias{seplyr}
-\alias{seplyr-package}
 \title{\code{seplyr}: Standard Evaluation Improved Interfaces for Common Data Manipulatio Tasks}
 \description{
 The \code{seplyr} (standard evaluation \code{dplyr}) package supplies improved

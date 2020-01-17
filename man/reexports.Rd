@@ -27,6 +27,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{dplyr}{\code{\link[dplyr]{all_equal}}, \code{\link[dplyr]{bind_rows}}, \code{\link[dplyr]{bind_cols}}, \code{\link[dplyr]{inner_join}}, \code{\link[dplyr]{left_join}}, \code{\link[dplyr]{right_join}}, \code{\link[dplyr]{full_join}}, \code{\link[dplyr]{semi_join}}, \code{\link[dplyr]{anti_join}}, \code{\link[dplyr]{ungroup}}, \code{\link[dplyr]{distinct}}, \code{\link[dplyr]{compute}}, \code{\link[dplyr]{collect}}, \code{\link[dplyr]{tbl}}, \code{\link[dplyr]{is.tbl}}, \code{\link[dplyr]{as.tbl}}, \code{\link[dplyr]{copy_to}}}
+  \item{dplyr}{\code{\link[dplyr]{all_equal}}, \code{\link[dplyr]{anti_join}}, \code{\link[dplyr]{as.tbl}}, \code{\link[dplyr]{bind_cols}}, \code{\link[dplyr]{bind_rows}}, \code{\link[dplyr]{collect}}, \code{\link[dplyr]{compute}}, \code{\link[dplyr]{copy_to}}, \code{\link[dplyr]{distinct}}, \code{\link[dplyr]{full_join}}, \code{\link[dplyr]{inner_join}}, \code{\link[dplyr]{is.tbl}}, \code{\link[dplyr]{left_join}}, \code{\link[dplyr]{right_join}}, \code{\link[dplyr]{semi_join}}, \code{\link[dplyr]{tbl}}, \code{\link[dplyr]{ungroup}}}
 }}
 

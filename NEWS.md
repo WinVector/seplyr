@@ -1,4 +1,8 @@
 
+# seplyr 0.8.5 2020-01-16
+
+ * Add grouped extend.
+
 # seplyr 0.8.4 2019-07-24
 
  * Adjust license.

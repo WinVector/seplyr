@@ -1,23 +1,23 @@
 
-#' group_by and summarize as an atomic action.
+#' group_by and transmute as an atomic action.
 #'
 #' Group a data frame by the groupingVars and compute user summaries on
 #' this data frame (user summaries specified in ...).  Enforces the
 #' good dplyr pipeline design principle of keeping group_by and
-#' summarize close together.
+#' transmute close together.
 #' Author: John Mount, Win-Vector LLC.
 #'
 #' @param d data.frame
 #' @param groupingVars character vector of column names to group by.
-#' @param ... list of dplyr::mutate() expressions.
+#' @param ... list of dplyr::transmute() expressions.
 #' @param arrangeTerms character optional vector of quoted column expressions to arrange by.
 #' @param env environment to work in.
-#' @return d summarized by groups
+#' @return d transmuteed by groups
 #'
 #' @examples
 #'
 #'
-#' group_summarize(datasets::mtcars,
+#' group_transmute(datasets::mtcars,
 #'                     c("cyl", "gear"),
 #'                     group_mean_mpg = mean(mpg),
 #'                     group_mean_disp = mean(disp)) %.>%
@@ -25,17 +25,17 @@
 #'
 #' @export
 #'
-group_summarize <- function(d, groupingVars, ...,
+group_transmute <- function(d, groupingVars, ...,
                             arrangeTerms = NULL,
                             env = parent.frame()) {
   if(!(is.data.frame(d) || dplyr::is.tbl(d))) {
-    stop("seplyr::group_summarize first argument must be a data.frame or tbl")
+    stop("seplyr::group_transmute first argument must be a data.frame or tbl")
   }
   force(env)
   d <- dplyr::ungroup(d) # just in case
   if(length(groupingVars)>0) {
     if(!is.character(groupingVars)) {
-      stop("seplyr::group_summarize groupingVars must be a character vector")
+      stop("seplyr::group_transmute groupingVars must be a character vector")
     }
     # convert char vector into spliceable vector
     groupingSyms <- rlang::syms(groupingVars)
@@ -47,7 +47,7 @@ group_summarize <- function(d, groupingVars, ...,
     # from: https://github.com/tidyverse/rlang/issues/116
     # updated: https://github.com/WinVector/seplyr/issues/3
     if(!is.character(arrangeTerms)) {
-      stop("seplyr::group_summarize arrangeTerms must be length 0, or character")
+      stop("seplyr::group_transmute arrangeTerms must be length 0, or character")
     }
     arrangeQ <- lapply(arrangeTerms,
                        function(si) {
@@ -56,12 +56,8 @@ group_summarize <- function(d, groupingVars, ...,
                        })
     dg <- dplyr::arrange(dg, !!!arrangeQ)
   }
-  ds <- dplyr::summarize(dg, ...)
+  ds <- dplyr::transmute(dg, ...)
   # work around https://github.com/tidyverse/dplyr/issues/2963
   dplyr::ungroup(ds)
 }
 
-
-#' @rdname group_summarize
-#' @export
-group_summarise <- group_summarize

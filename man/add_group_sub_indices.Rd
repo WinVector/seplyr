@@ -4,8 +4,14 @@
 \alias{add_group_sub_indices}
 \title{Group a data frame and add in-group indices as a column.}
 \usage{
-add_group_sub_indices(.data, ..., groupingVars, orderColumn,
-  arrangeTerms = NULL, env = parent.frame())
+add_group_sub_indices(
+  .data,
+  ...,
+  groupingVars,
+  orderColumn,
+  arrangeTerms = NULL,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{.data}{data.frame}

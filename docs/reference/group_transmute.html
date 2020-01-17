@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mutate non-standard evaluation interface. — mutate_nse • seplyr</title>
+<title>group_by and transmute as an atomic action. — group_transmute • seplyr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,12 @@
 
 
 
-<meta property="og:title" content="mutate non-standard evaluation interface. — mutate_nse" />
-<meta property="og:description" content="Mutate a data frame by the mutate terms from ...." />
+<meta property="og:title" content="group_by and transmute as an atomic action. — group_transmute" />
+<meta property="og:description" content="Group a data frame by the groupingVars and compute user summaries on
+this data frame (user summaries specified in ...).  Enforces the
+good dplyr pipeline design principle of keeping group_by and
+transmute close together.
+Author: John Mount, Win-Vector LLC." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,100 +133,79 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>mutate non-standard evaluation interface.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/WinVector/seplyr/blob/master/R/mutate_nse.R'><code>R/mutate_nse.R</code></a></small>
-    <div class="hidden name"><code>mutate_nse.Rd</code></div>
+    <h1>group_by and transmute as an atomic action.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/WinVector/seplyr/blob/master/R/group_transmute.R'><code>R/group_transmute.R</code></a></small>
+    <div class="hidden name"><code>group_transmute.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Mutate a data frame by the mutate terms from <code>...</code>.</p>
+    <p>Group a data frame by the groupingVars and compute user summaries on
+this data frame (user summaries specified in ...).  Enforces the
+good dplyr pipeline design principle of keeping group_by and
+transmute close together.
+Author: John Mount, Win-Vector LLC.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mutate_nse</span>(
-  <span class='no'>.data</span>,
+    <pre class="usage"><span class='fu'>group_transmute</span>(
+  <span class='no'>d</span>,
+  <span class='no'>groupingVars</span>,
   <span class='no'>...</span>,
-  <span class='kw'>mutate_nse_split_terms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>mutate_nse_env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(),
-  <span class='kw'>mutate_nse_warn</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>mutate_nse_printPlan</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>arrangeTerms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
+      <th>d</th>
       <td><p>data.frame</p></td>
     </tr>
     <tr>
+      <th>groupingVars</th>
+      <td><p>character vector of column names to group by.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>expressions to mutate by.</p></td>
+      <td><p>list of dplyr::transmute() expressions.</p></td>
     </tr>
     <tr>
-      <th>mutate_nse_split_terms</th>
-      <td><p>logical, if TRUE into separate mutates (if FALSE instead, pass all at once to dplyr).</p></td>
+      <th>arrangeTerms</th>
+      <td><p>character optional vector of quoted column expressions to arrange by.</p></td>
     </tr>
     <tr>
-      <th>mutate_nse_env</th>
+      <th>env</th>
       <td><p>environment to work in.</p></td>
-    </tr>
-    <tr>
-      <th>mutate_nse_warn</th>
-      <td><p>logical, if TRUE warn about name re-use.</p></td>
-    </tr>
-    <tr>
-      <th>mutate_nse_printPlan</th>
-      <td><p>logical, if TRUE print the expression plan</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>.data with altered columns.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Note: this method as the default setting <code>mutate_nse_split_terms = TRUE</code>, which is
-safer (avoiding certain known <code>dplyr</code>/<code>dblyr</code> issues)
-(please see the side-notes of <a href='http://winvector.github.io/FluidData/partition_mutate.html'>http://winvector.github.io/FluidData/partition_mutate.html</a> for some references).</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='mutate_se.html'>mutate_se</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></code>, <code><a href='https://rdrr.io/pkg/wrapr/man/named_map_builder.html'>:=</a></code></p></div>
+    <p>d transmuteed by groups</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='no'>limit</span> <span class='kw'>&lt;-</span> <span class='fl'>3.5</span>
-
-<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/iris.html'>iris</a></span> <span class='kw'>%.&gt;%</span>
-  <span class='fu'>mutate_nse</span>(<span class='no'>.</span>, <span class='no'>Sepal_Long</span> <span class='kw'>:=</span> <span class='no'>Sepal.Length</span> <span class='kw'>&gt;=</span> <span class='fl'>2</span> * <span class='no'>Sepal.Width</span>,
-                <span class='no'>Petal_Short</span> <span class='kw'>:=</span> <span class='no'>Petal.Length</span> <span class='kw'>&lt;=</span> <span class='no'>limit</span>) <span class='kw'>%.&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal_Long
-#&gt; 1          5.1         3.5          1.4         0.2  setosa      FALSE
-#&gt; 2          4.9         3.0          1.4         0.2  setosa      FALSE
-#&gt; 3          4.7         3.2          1.3         0.2  setosa      FALSE
-#&gt; 4          4.6         3.1          1.5         0.2  setosa      FALSE
-#&gt; 5          5.0         3.6          1.4         0.2  setosa      FALSE
-#&gt; 6          5.4         3.9          1.7         0.4  setosa      FALSE
-#&gt;   Petal_Short
-#&gt; 1        TRUE
-#&gt; 2        TRUE
-#&gt; 3        TRUE
-#&gt; 4        TRUE
-#&gt; 5        TRUE
-#&gt; 6        TRUE</div><div class='input'>
-<span class='co'># generates a warning</span>
-<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%.&gt;%</span>
-   <span class='fu'>mutate_nse</span>(<span class='no'>.</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: seplyr::mutate_se possible name conflicts in assigment</span></div><div class='output co'>#&gt;   x y
-#&gt; 1 2 2</div><div class='input'>
-</div></pre>
+<span class='fu'>group_transmute</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/mtcars.html'>mtcars</a></span>,
+                    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>),
+                    <span class='kw'>group_mean_mpg</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>mpg</span>),
+                    <span class='kw'>group_mean_disp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>disp</span>)) <span class='kw'>%.&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>.</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 4</span><span>
+#&gt;     cyl  gear group_mean_mpg group_mean_disp
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     6     4           19.8            164.
+#&gt; </span><span style='color: #555555;'>2</span><span>     6     4           19.8            164.
+#&gt; </span><span style='color: #555555;'>3</span><span>     4     4           26.9            103.
+#&gt; </span><span style='color: #555555;'>4</span><span>     6     3           19.8            242.
+#&gt; </span><span style='color: #555555;'>5</span><span>     8     3           15.0            358.
+#&gt; </span><span style='color: #555555;'>6</span><span>     6     3           19.8            242.</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

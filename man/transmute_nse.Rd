@@ -4,8 +4,12 @@
 \alias{transmute_nse}
 \title{transmute non-standard evaluation interface.}
 \usage{
-transmute_nse(.data, ..., transmute_nse_env = parent.frame(),
-  transmute_nse_warn = TRUE)
+transmute_nse(
+  .data,
+  ...,
+  transmute_nse_env = parent.frame(),
+  transmute_nse_warn = TRUE
+)
 }
 \arguments{
 \item{.data}{data.frame}

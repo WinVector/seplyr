@@ -4,9 +4,14 @@
 \alias{mutate_nse}
 \title{mutate non-standard evaluation interface.}
 \usage{
-mutate_nse(.data, ..., mutate_nse_split_terms = TRUE,
-  mutate_nse_env = parent.frame(), mutate_nse_warn = TRUE,
-  mutate_nse_printPlan = FALSE)
+mutate_nse(
+  .data,
+  ...,
+  mutate_nse_split_terms = TRUE,
+  mutate_nse_env = parent.frame(),
+  mutate_nse_warn = TRUE,
+  mutate_nse_printPlan = FALSE
+)
 }
 \arguments{
 \item{.data}{data.frame}
