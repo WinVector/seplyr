@@ -1,4 +1,8 @@
 
+# seplyr 0.8.6 2020-02-02
+
+ * Badges
+
 # seplyr 0.8.5 2020-01-16
 
  * Add grouped extend.
