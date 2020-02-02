@@ -172,7 +172,10 @@ functions of columns.  Does not look at argument names (so can not be used to re
 <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt;   y
 #&gt; 1 2</div><div class='input'>
 <span class='co'># returns x-column (very confusing!)</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt;   x
+<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt; <span class='message'>Note: Using an external vector in selections is ambiguous.</span>
+#&gt; <span class='message'><span style='color: #0000BB;'>ℹ</span><span> Use `all_of(y)` instead of `y` to silence this message.</span>
+#&gt; <span class='message'></span><span style='color: #0000BB;'>ℹ</span><span> See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span>
+#&gt; <span class='message'></span><span style='color: #555555;'>This message is displayed once per session.</span><span></span></div><div class='output co'>#&gt;   x
 #&gt; 1 1</div><div class='input'>
 <span class='co'># returns y-column</span>
 <span class='fu'>select_nse</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt;   y
@@ -184,13 +187,25 @@ functions of columns.  Does not look at argument names (so can not be used to re
 <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(
   <span class='fu'>select_nse</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='no'>y</span>),
   <span class='kw'>error</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>e</span>) { <span class='no'>e</span> }
-)</div><div class='output co'>#&gt; &lt;simpleError in .f(.x[[i]], ...): object 'y' not found&gt;</div><div class='input'>
+)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;'>&lt;error/vctrs_error_subscript_oob&gt;</span><span>
+#&gt; Can't subset columns that don't exist.
+#&gt; </span><span style='color: #BB0000;'>x</span><span> The column `y` doesn't exist.
+#&gt; </span><span style='font-weight: bold;'>Backtrace:</span><span>
+#&gt; </span><span style='color: #555555;'>  1. </span><span>base::tryCatch(...)
+#&gt; </span><span style='color: #555555;'> 60. </span><span>vctrs:::stop_subscript_oob(...)
+#&gt; </span><span style='color: #555555;'> 61. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
 <span class='co'>#' # throws when y is not the name of a column (good)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(
   <span class='fu'>select_nse</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>3</span>), -<span class='no'>y</span>),
   <span class='kw'>error</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>e</span>) { <span class='no'>e</span> }
-)</div><div class='output co'>#&gt; &lt;simpleError in is_character(x): object 'y' not found&gt;</div><div class='input'>
-</div></pre>
+)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;'>&lt;error/vctrs_error_subscript_oob&gt;</span><span>
+#&gt; Can't subset columns that don't exist.
+#&gt; </span><span style='color: #BB0000;'>x</span><span> The column `y` doesn't exist.
+#&gt; </span><span style='font-weight: bold;'>Backtrace:</span><span>
+#&gt; </span><span style='color: #555555;'>  1. </span><span>base::tryCatch(...)
+#&gt; </span><span style='color: #555555;'> 60. </span><span>vctrs:::stop_subscript_oob(...)
+#&gt; </span><span style='color: #555555;'> 61. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

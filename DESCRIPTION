@@ -24,7 +24,7 @@ License: GPL-2 | GPL-3
 Encoding: UTF-8
 Depends:
     R (>= 3.4.0),
-    wrapr (>= 1.9.3)
+    wrapr (>= 1.9.6)
 Imports:
     dplyr (>= 0.7.0),
     rlang (>= 0.2.0), 

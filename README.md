@@ -1,4 +1,7 @@
 
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/seplyr)](https://cran.r-project.org/package=seplyr)
+[![status](https://tinyverse.netlify.com/badge/seplyr)](https://CRAN.R-project.org/package=seplyr)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 The [`R`](https://www.r-project.org) package
