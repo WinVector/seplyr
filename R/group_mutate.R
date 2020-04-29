@@ -25,7 +25,7 @@
 #'
 #' group_mutate(datasets::mtcars,
 #'                     c("cyl", "gear"),
-#'                     rank = row_number(),
+#'                     rank = dplyr::row_number(),
 #'                     arrangeTerms = "-disp") %.>%
 #'   head(.)
 #'
