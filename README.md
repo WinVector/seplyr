@@ -9,6 +9,13 @@ The [`R`](https://www.r-project.org) package
 *s*tandard *e*valuation interfaces for some common `dplyr` data plying
 tasks.
 
+This project is used in production to avoid exposing all of the details
+of [`rlang`](https://CRAN.R-project.org/package=rlang) at the user
+level, and a demonstration of what can be done through value-oriented
+programming. Alternately one could use another value-oriented data
+manipulation system
+[‘rquery’](https://CRAN.R-project.org/package=rquery)/[‘rqdatatable’](https://CRAN.R-project.org/package=rqdatatable).
+
 ![](https://github.com/WinVector/seplyr/raw/master/tools/safety.png)
 
 To get started we suggest visiting the [`seplyr`

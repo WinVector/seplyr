@@ -191,34 +191,33 @@ is a reserved column name for this procedure.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
- <span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"dplyr"</span>))
- <span class='co'># Example: clear one of a or b in any row where both are set.</span>
- <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>),
-                 <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>),
-                 <span class='kw'>edited</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='co'># Example: clear one of a or b in any row where both are set.</span>
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>),
+                <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>),
+                <span class='kw'>edited</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
- <span class='no'>program</span> <span class='kw'>&lt;-</span> <span class='fu'>if_else_device</span>(
-   <span class='kw'>testexpr</span> <span class='kw'>=</span> <span class='st'>'(a+b)&gt;1'</span>,
-   <span class='kw'>thenexprs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
-     <span class='fu'>if_else_device</span>(
-       <span class='kw'>testexpr</span> <span class='kw'>=</span> <span class='st'>'runif(n()) &gt;= 0.5'</span>,
-       <span class='kw'>thenexprs</span> <span class='kw'>=</span> <span class='st'>'a'</span> <span class='kw'>:=</span> <span class='st'>'0'</span>,
-       <span class='kw'>elseexprs</span> <span class='kw'>=</span> <span class='st'>'b'</span> <span class='kw'>:=</span> <span class='st'>'0'</span>),
-     <span class='st'>'edited'</span> <span class='kw'>:=</span> <span class='st'>'TRUE'</span>))
- <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>program</span>)</div><div class='output co'>#&gt;                                                          ifebtest_u7fd78yvg5fi 
-#&gt;                                                                      "(a+b)&gt;1" 
+<span class='no'>program</span> <span class='kw'>&lt;-</span> <span class='fu'>if_else_device</span>( <span class='co'># detect rows with both a and b set</span>
+  <span class='kw'>testexpr</span> <span class='kw'>=</span> <span class='fu'>qe</span>((<span class='no'>a</span>+<span class='no'>b</span>)<span class='kw'>&gt;</span><span class='fl'>1</span>),
+  <span class='kw'>thenexprs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+    <span class='fu'>if_else_device</span>( <span class='co'># randomly clear one of a or b</span>
+      <span class='kw'>testexpr</span> <span class='kw'>=</span> <span class='fu'>qe</span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/n.html'>n</a></span>()) <span class='kw'>&gt;=</span> <span class='fl'>0.5</span>),
+      <span class='kw'>thenexprs</span> <span class='kw'>=</span> <span class='fu'>qae</span>(<span class='no'>a</span> <span class='kw'>:=</span> <span class='fl'>0</span>),
+      <span class='kw'>elseexprs</span> <span class='kw'>=</span> <span class='fu'>qae</span>(<span class='no'>b</span> <span class='kw'>:=</span> <span class='fl'>0</span>)),
+    <span class='fu'>qae</span>(<span class='no'>edited</span> <span class='kw'>:=</span> <span class='fl'>TRUE</span>)))
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>program</span>)</div><div class='output co'>#&gt;                                                          ifebtest_u7fd78yvg5fi 
+#&gt;                                                                  "(a + b) &gt; 1" 
 #&gt;                                                          ifebtest_wl4dieexombe 
-#&gt;                                                            "runif(n()) &gt;= 0.5" 
+#&gt;                                                     "runif(dplyr::n()) &gt;= 0.5" 
 #&gt;                                                                              a 
 #&gt;      "ifelse( ifebtest_u7fd78yvg5fi, ifelse( ifebtest_wl4dieexombe, 0, a), a)" 
 #&gt;                                                                              b 
 #&gt; "ifelse( ifebtest_u7fd78yvg5fi, ifelse( !( ifebtest_wl4dieexombe ), 0, b), b)" 
 #&gt;                                                                         edited 
 #&gt;                                 "ifelse( ifebtest_u7fd78yvg5fi, TRUE, edited)" </div><div class='input'>
- <span class='no'>plan</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='partition_mutate_se.html'>partition_mutate_se</a></span>(<span class='no'>program</span>)
- <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>plan</span>)</div><div class='output co'>#&gt; $group00001
-#&gt; ifebtest_u7fd78yvg5fi ifebtest_wl4dieexombe 
-#&gt;             "(a+b)&gt;1"   "runif(n()) &gt;= 0.5" 
+<span class='no'>plan</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='partition_mutate_se.html'>partition_mutate_se</a></span>(<span class='no'>program</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>plan</span>)</div><div class='output co'>#&gt; $group00001
+#&gt;      ifebtest_u7fd78yvg5fi      ifebtest_wl4dieexombe 
+#&gt;              "(a + b) &gt; 1" "runif(dplyr::n()) &gt;= 0.5" 
 #&gt; 
 #&gt; $group00002
 #&gt;                                                                              a 
@@ -228,10 +227,10 @@ is a reserved column name for this procedure.</p>
 #&gt;                                                                         edited 
 #&gt;                                 "ifelse( ifebtest_u7fd78yvg5fi, TRUE, edited)" 
 #&gt; </div><div class='input'>
- <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='no'>d</span> <span class='kw'>%.&gt;%</span>
-   <span class='fu'><a href='mutate_seb.html'>mutate_seb</a></span>(<span class='no'>.</span>, <span class='no'>plan</span>) <span class='kw'>%.&gt;%</span>
-   <span class='fu'><a href='select_se.html'>select_se</a></span>(<span class='no'>.</span>, <span class='fu'>grepdf</span>(<span class='st'>'^ifebtest_.*'</span>, <span class='no'>.</span>, <span class='kw'>invert</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
- <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt;    a b edited
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='no'>d</span> <span class='kw'>%.&gt;%</span>
+  <span class='fu'><a href='mutate_seb.html'>mutate_seb</a></span>(<span class='no'>.</span>, <span class='no'>plan</span>) <span class='kw'>%.&gt;%</span>
+  <span class='fu'><a href='select_se.html'>select_se</a></span>(<span class='no'>.</span>, <span class='fu'>grepdf</span>(<span class='st'>'^ifebtest_.*'</span>, <span class='no'>.</span>, <span class='kw'>invert</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt;    a b edited
 #&gt; 1  0 0  FALSE
 #&gt; 2  0 1  FALSE
 #&gt; 3  1 0  FALSE
@@ -242,17 +241,6 @@ is a reserved column name for this procedure.</p>
 #&gt; 8  1 0   TRUE
 #&gt; 9  1 0   TRUE
 #&gt; 10 0 1   TRUE</div><div class='input'>
- ## Note: with wrapr version 1.0.2 or greater
- ## you can write this without quotes code as:
- # program &lt;- if_else_device(
- #  testexpr = qe((a+b)&gt;1),
- #  thenexprs = c(
- #    if_else_device(
- #      testexpr = qe(runif(n()) &gt;= 0.5),
- #      thenexprs = qae(a := 0),
- #      elseexprs = qae(b := 0)),
- #    qae(edited := TRUE)))
-
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

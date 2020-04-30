@@ -5,7 +5,10 @@
 ### Windows
 
     rhub::check_for_cran()
-
+    E  checking package dependencies
+        Packages required but not available: 'dplyr', 'rlang', 'tidyr'
+   
+    devtools::check_win_devel()
 
 ### OSX
 
