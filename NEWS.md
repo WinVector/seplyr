@@ -1,6 +1,8 @@
 
-# seplyr 0.8.6 2020-02-02
+# seplyr 0.8.6 2020-04-30
 
+ * Patches for dplyr 1.0.0
+ * Improve tests
  * Badges
 
 # seplyr 0.8.5 2020-01-16
