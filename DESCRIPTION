@@ -24,16 +24,16 @@ License: GPL-2 | GPL-3
 Encoding: UTF-8
 Depends:
     R (>= 3.4.0),
-    wrapr (>= 1.9.6)
+    wrapr (>= 2.0.0),
+    datasets
 Imports:
-    dplyr (>= 0.7.0),
-    rlang (>= 0.2.0), 
+    dplyr (>= 0.8.5),
+    rlang, 
     tidyr
 LazyData: true
 RoxygenNote: 7.1.0
 Suggests: knitr,
     rmarkdown,
-    testthat,
-    datasets
+    testthat
 VignetteBuilder: knitr
 ByteCompile: true

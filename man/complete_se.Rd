@@ -25,23 +25,21 @@ Complete a data frame with missing combinations of data. Turns implicit missing 
 This is a standard evaluation interface for \code{tidyr::complete()}. The purpose of the function is to be able to use a vector of characters (column names) as the argument for expanding the data frame.
 }
 \examples{
+
 # data frame used to illustrate tidyr::complete()
-library(dplyr, warn.conflicts = FALSE)
-library(tidyr) # for nesting()
-df <- tibble(
-group = c(1:2, 1),
-item_id = c(1:2, 2),
-item_name = c("a", "b", "b"),
-value1 = 1:3,
-value2 = 4:6)
+df <- wrapr::build_frame(
+  "group"  , "item_id", "item_name", "value1", "value2" |
+    1      , 1        , "a"        , 1L      , 4L       |
+    2      , 2        , "b"        , 2L      , 5L       |
+    1      , 2        , "b"        , 3L      , 6L       )
 
 # columns to complete by
-col_terms <- c("group", "item_id", "item_name")
+col_terms <- qc(group, item_id, item_name)
 df \%.>\% complete_se(., col_terms)
 df \%.>\% complete_se(., col_terms, fill = list(value1 = 0))
 
 # with nesting
-col_terms <- c("group", "nesting(item_id, item_name)")
+col_terms <- c("group", "tidyr::nesting(item_id, item_name)")
 df \%.>\% complete_se(., col_terms)
 df \%.>\% complete_se(., col_terms, fill = list(value1 = 0))
 df \%.>\% complete_se(., col_terms, fill = list(value1 = 0, value2 = 0))
