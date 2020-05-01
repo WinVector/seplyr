@@ -1,4 +1,8 @@
 
+# seplyr 0.8.7 2020-05-01
+
+ * Fix datasets dependency
+ 
 # seplyr 0.8.6 2020-04-30
 
  * Patches for dplyr 1.0.0
