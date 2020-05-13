@@ -17,7 +17,7 @@
 #' @name seplyr
 NULL
 
-#' @importFrom wrapr := let lambda %.>%
+#' @importFrom wrapr := let %.>%
 NULL
 
 # make . not look like an undefined ref
