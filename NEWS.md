@@ -1,4 +1,9 @@
 
+
+# seplyr 0.8.8 2020-05-23
+
+ * Fix datasets dependency again
+ 
 # seplyr 0.8.7 2020-05-13
 
  * Fix datasets dependency

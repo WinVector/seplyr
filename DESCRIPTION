@@ -1,8 +1,8 @@
 Package: seplyr
 Type: Package
 Title: Improved Standard Evaluation Interfaces for Common Data Manipulation Tasks
-Version: 0.8.7
-Date: 2020-05-13
+Version: 0.8.8
+Date: 2020-05-23
 Authors@R: c(
     person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),
     person(family = "Win-Vector LLC", role = c("cph"))
@@ -28,8 +28,7 @@ Depends:
 Imports:
     dplyr (>= 0.8.5),
     rlang, 
-    tidyr,
-    datasets
+    tidyr
 LazyData: true
 RoxygenNote: 7.1.0
 Suggests: knitr,
