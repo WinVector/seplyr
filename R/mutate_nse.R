@@ -8,7 +8,7 @@
 #'
 #' Note: this method as the default setting \code{mutate_nse_split_terms = TRUE}, which is
 #' safer (avoiding certain known \code{dplyr}/\code{dblyr} issues)
-#' (please see the side-notes of \url{http://winvector.github.io/FluidData/partition_mutate.html} for some references).
+#' (please see the side-notes of \url{https://winvector.github.io/FluidData/partition_mutate.html} for some references).
 #'
 #' @seealso \code{\link{mutate_se}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{mutate_at}}, \code{\link[wrapr]{:=}}
 #'

@@ -1,4 +1,7 @@
 
+# seplyr 1.0.0 2020-08-12
+
+ * http: to https: where feasible.
 
 # seplyr 0.8.8 2020-05-23
 

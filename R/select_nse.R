@@ -3,7 +3,7 @@
 #' Select column that are exactly the names captured unevaluated from \code{...}.
 #' This is to provide a simple interface that reliably uses non-standard captured names
 #' (and not consequences of further evaluation).  Please see
-#' \url{http://www.win-vector.com/blog/2018/09/a-subtle-flaw-in-some-popular-r-nse-interfaces/}
+#' \url{https://win-vector.com/2018/09/23/a-subtle-flaw-in-some-popular-r-nse-interfaces/}
 #' for some discussion.  Also accepts -name notation, but not integers or
 #' functions of columns.  Does not look at argument names (so can not be used to rename columns).
 #'

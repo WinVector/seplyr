@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seplyr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://www.win-vector.com/">Sponsor: Win-Vector LLC</a>
+  <a href="https://win-vector.com/">Sponsor: Win-Vector LLC</a>
 </li>
       </ul>
 </div>
@@ -88,13 +88,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="named_map_builder_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Named Map Builder</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2020-05-23</h4>
+            <h4 class="date">2020-08-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr/blob/master/vignettes/named_map_builder.Rmd"><code>vignettes/named_map_builder.Rmd</code></a></small>
       <div class="hidden name"><code>named_map_builder.Rmd</code></div>
@@ -135,6 +135,10 @@
   <span class="fu"><a href="../reference/group_by_se.html">group_by_se</a></span>(<span class="no">.</span>, <span class="st">"Species"</span>) <span class="kw">%.&gt;%</span>
   <span class="fu"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="no">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Mean_Sepal_Length"</span> <span class="kw">:=</span> <span class="st">"mean(Sepal.Length)"</span>,
                     <span class="st">"Mean_Sepal_Width"</span> <span class="kw">:=</span> <span class="st">"mean(Sepal.Width)"</span>))</pre></body></html></div>
+<pre><code>## Warning: The `add` argument of `group_by()` is deprecated as of dplyr 1.0.0.
+## Please use the `.add` argument instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## # A tibble: 3 x 3
 ##   Species    Mean_Sepal_Length Mean_Sepal_Width
 ##   &lt;fct&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
@@ -142,7 +146,7 @@
 ## 2 versicolor              5.94             2.77
 ## 3 virginica               6.59             2.97</code></pre>
 <p>Or even parametric code such as:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">resultColumn</span> <span class="kw">&lt;-</span> <span class="st">"summary_value"</span>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">resultColumn</span> <span class="kw">&lt;-</span> <span class="st">"summary_value"</span>
 <span class="kw pkg">datasets</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/r/datasets/iris.html">iris</a></span> <span class="kw">%.&gt;%</span>
   <span class="fu"><a href="../reference/group_by_se.html">group_by_se</a></span>(<span class="no">.</span>, <span class="st">"Species"</span>) <span class="kw">%.&gt;%</span>
   <span class="fu"><a href="../reference/summarize_se.html">summarize_se</a></span>(<span class="no">.</span>, <span class="no">resultColumn</span> <span class="kw">:=</span> <span class="st">"mean(Sepal.Length)"</span>)</pre></body></html></div>

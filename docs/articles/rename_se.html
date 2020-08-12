@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seplyr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://www.win-vector.com/">Sponsor: Win-Vector LLC</a>
+  <a href="https://win-vector.com/">Sponsor: Win-Vector LLC</a>
 </li>
       </ul>
 </div>
@@ -88,13 +88,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="rename_se_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>rename_se</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2020-05-23</h4>
+            <h4 class="date">2020-08-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr/blob/master/vignettes/rename_se.Rmd"><code>vignettes/rename_se.Rmd</code></a></small>
       <div class="hidden name"><code>rename_se.Rmd</code></div>
@@ -104,11 +104,11 @@
     
     
 <p><a href="https://github.com/WinVector/seplyr"><code>seplyr</code></a> is an attempt to work with the <a href="https://CRAN.R-project.org/package=dplyr"><code>dplyr</code> <code>0.7.*</code></a> <a href="https://www.r-project.org"><code>R</code></a> package through standard evaluation interfaces with a minimum of change and minimum of cognitive friction. Beyond championing standard evaluation it attempts to introduce as few of its own opinions as possible.</p>
-<p>A case in point is <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>/<code><a href="../reference/rename_se.html">seplyr::rename_se()</a></code>. <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> is used as follows.</p>
+<p>A case in point is <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename()</a></code>/<code><a href="../reference/rename_se.html">seplyr::rename_se()</a></code>. <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename()</a></code> is used as follows.</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"dplyr"</span>))
 
 <span class="kw pkg">datasets</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/r/datasets/mtcars.html">mtcars</a></span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(<span class="kw">cylinders</span> <span class="kw">=</span> <span class="no">cyl</span>, <span class="kw">gears</span> <span class="kw">=</span> <span class="no">gear</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span>(<span class="kw">cylinders</span> <span class="kw">=</span> <span class="no">cyl</span>, <span class="kw">gears</span> <span class="kw">=</span> <span class="no">gear</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>()</pre></body></html></div>
 <pre><code>##                    mpg cylinders disp  hp drat    wt  qsec vs am gears carb
 ## Mazda RX4         21.0         6  160 110 3.90 2.620 16.46  0  1     4    4
@@ -117,12 +117,12 @@
 ## Hornet 4 Drive    21.4         6  258 110 3.08 3.215 19.44  1  0     3    1
 ## Hornet Sportabout 18.7         8  360 175 3.15 3.440 17.02  0  0     3    2
 ## Valiant           18.1         6  225 105 2.76 3.460 20.22  1  0     3    1</code></pre>
-<p>Notice <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> renamings are written as assignments making them very similar to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>. This is the reverse from how <code>R</code> usually handles list or mapping structures. In named vectors or named lists keys are written on the left and values are written on the right as follows.</p>
+<p>Notice <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename()</a></code> renamings are written as assignments making them very similar to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>. This is the reverse from how <code>R</code> usually handles list or mapping structures. In named vectors or named lists keys are written on the left and values are written on the right as follows.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">mp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cyl"</span> <span class="kw">=</span> <span class="st">"cylinders"</span>, <span class="st">"gear"</span> <span class="kw">=</span> <span class="st">"gears"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">mp</span>)</pre></body></html></div>
 <pre><code>##         cyl        gear 
 ## "cylinders"     "gears"</code></pre>
-<p>Because <code>seplyr</code> is intended to be a set of adapters for <code>dplyr</code> we simply adopt <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code>’s convention. This allows the user to mechanically translate their experience and expectations from scripting over <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::rename()</a></code> to directly use <code><a href="../reference/rename_se.html">seplyr::rename_se()</a></code> as follows.</p>
+<p>Because <code>seplyr</code> is intended to be a set of adapters for <code>dplyr</code> we simply adopt <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename()</a></code>’s convention. This allows the user to mechanically translate their experience and expectations from scripting over <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename()</a></code> to directly use <code><a href="../reference/rename_se.html">seplyr::rename_se()</a></code> as follows.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"seplyr"</span>)</pre></body></html></div>
 <pre><code>## Loading required package: wrapr</code></pre>
 <pre><code>## 

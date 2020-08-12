@@ -18,7 +18,7 @@ We assume the sequence of expressions is in a valid order
 into ordered longest "no new value used blocks" by greedily scanning forward
 remaining expressions in order taking any that: have all their values available from earlier groups,
 do not use a value formed in the current group, and do not overwrite a value formed in the current group.
-For an example please see \url{http://winvector.github.io/FluidData/partition_mutate.html}.
+For an example please see \url{https://winvector.github.io/FluidData/partition_mutate.html}.
 }
 \examples{
 

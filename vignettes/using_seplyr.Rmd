@@ -4,7 +4,7 @@ author: "John Mount"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using seplyr}
+  %\VignetteIndexEntry{Using seplyr to Program Over dplyr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -32,7 +32,7 @@ starwars %>%
 
 The above is colloquially called "an interactive script."  The name comes from the fact that we directly use names of variables (such as "`homeworld`", which would only be known from looking at the data directly) in our analysis code.  Only somebody interacting with the data could write such a script (hence the name).
 
-It has long been considered a point of discomfort to convert such an interactive `dplyr` pipeline into a re-usable script or function.  That is a script or function that specifies column names in some [parametric](http://www.win-vector.com/blog/2017/04/programming-over-r/) or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).
+It has long been considered a point of discomfort to convert such an interactive `dplyr` pipeline into a re-usable script or function.  That is a script or function that specifies column names in some [parametric](https://win-vector.com/2017/04/21/programming-over-r/) or re-usable fashion. Roughly it means the names of the data columns are not yet known when we are writing the code (and this is what makes the code re-usable).
 
 This inessential (or conquerable) difficulty is largely a due to the strong preference for [non-standard evaluation interfaces](http://adv-r.had.co.nz/Computing-on-the-language.html) (that is interfaces that capture and inspect un-evaluated expressions from their calling interface) in the design `dplyr`.  The common tooling to work around `dplyr`'s non-standard interfaces is a system called alternately `rlang` (a name which is perhaps a bit overly ambitious as `rlang` is not the `R` language) or tidyeval (a name which is perhaps a bit derogatory, incorrectly labeling `R` itself as the "non-tidy" dialect relative to tidyeval).  We, on the other hand, recommend using either the superior tooling offered by [`wrapr::let()`](https://winvector.github.io/wrapr/reference/let.html) (which actual pre-dates `rlang` and can be used with any package, not just those that are designed around it) or to avoid non-standard interface foibles by using a standard evaluation adapter for `dplyr` called [`seplyr`]( https://CRAN.R-project.org/package=seplyr) (which we will discuss here).
 

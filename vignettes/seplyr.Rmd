@@ -65,11 +65,11 @@ datasets::mtcars %.>%
   head(.)
 ```
 
-The idea is: the above code looks very much like simple `dplyr` code used running an analysis, and yet is very easy to [parameterize](http://www.win-vector.com/blog/2016/12/parametric-variable-names-and-dplyr/) and re-use in a script or package.
+The idea is: the above code looks very much like simple `dplyr` code used running an analysis, and yet is very easy to [parameterize](https://win-vector.com/2016/12/03/parametric-variable-names-and-dplyr/) and re-use in a script or package.
 
 ******
 
-`seplyr::arrange_se()` performs the wrapping for you without you having to work through the details of `rlang`.  If you are interested in the details `seplyr` itself is a good tutorial.  For example you can examine `seplyr`'s implementation to see the necessary notations (using a command such as `print(arrange_se)`). And, of course, we try to supply some usable help entries, such as: `help(arrange_se)`.  Some more discussion of the ideas can be found [here](http://www.win-vector.com/blog/2017/07/dplyr-0-7-made-simpler/).
+`seplyr::arrange_se()` performs the wrapping for you without you having to work through the details of `rlang`.  If you are interested in the details `seplyr` itself is a good tutorial.  For example you can examine `seplyr`'s implementation to see the necessary notations (using a command such as `print(arrange_se)`). And, of course, we try to supply some usable help entries, such as: `help(arrange_se)`.  Some more discussion of the ideas can be found [here](https://win-vector.com/2017/07/15/dplyr-0-7-made-simpler/).
 
 The current set of SE adapters includes (all commands of the form `NAME_se()` being adapters for a `dplyr::NAME()` method):
 
@@ -111,8 +111,8 @@ In addition to the series of adapters we also supply a number of useful new verb
  * `add_group_indices()` Adds a column of per-group ids to data.
  * `add_group_sub_indices()` Adds a column of in-group rank ids to data.
  * `add_rank_indices()` Adds rank indices to data.
- * [`partition_mutate_se()`](https://winvector.github.io/seplyr/reference/partition_mutate_se.html): [vignette](https://winvector.github.io/seplyr/articles/MutatePartitioner.html), and [article](http://winvector.github.io/FluidData/partition_mutate.html).
- * [`if_else_device()`](https://winvector.github.io/seplyr/reference/if_else_device.html): [article](http://winvector.github.io/FluidData/partition_mutate_ex2.html).
+ * [`partition_mutate_se()`](https://winvector.github.io/seplyr/reference/partition_mutate_se.html): [vignette](https://winvector.github.io/seplyr/articles/MutatePartitioner.html), and [article](https://winvector.github.io/FluidData/partition_mutate.html).
+ * [`if_else_device()`](https://winvector.github.io/seplyr/reference/if_else_device.html): [article](https://winvector.github.io/FluidData/partition_mutate_ex2.html).
 
 
 `seplyr` is designed to be a thin package that passes work to `dplyr`.  If you want a package that works around `dplyr` implementation differences on different data sources I suggest trying our own [`replyr`]( https://CRAN.R-project.org/package=replyr) package. Another alternative is using [`wrapr::let()`](https://github.com/WinVector/wrapr/blob/master/README.md).

@@ -76,7 +76,7 @@ such as &quot;gear + carb&quot; deliberately error-out)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seplyr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -121,7 +121,7 @@ such as &quot;gear + carb&quot; deliberately error-out)." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://www.win-vector.com/">Sponsor: Win-Vector LLC</a>
+  <a href="https://win-vector.com/">Sponsor: Win-Vector LLC</a>
 </li>
       </ul>
       
@@ -187,13 +187,13 @@ such as "gear + carb" deliberately error-out).</p>
     <pre class="examples"><div class='input'>
 <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/mtcars.html'>mtcars</a></span> <span class='kw'>%.&gt;%</span>
   <span class='fu'>arrange_se</span>(<span class='no'>.</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"desc(gear)"</span>)) <span class='kw'>%.&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-#&gt; 1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-#&gt; 2 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-#&gt; 3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-#&gt; 4 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-#&gt; 5 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-#&gt; 6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</div><div class='input'><span class='co'># equivilent to dplyr/magrittr pipeline</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+#&gt; Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+#&gt; Lotus Europa  30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+#&gt; Datsun 710    22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+#&gt; Merc 240D     24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+#&gt; Merc 230      22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+#&gt; Fiat 128      32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</div><div class='input'><span class='co'># equivilent to dplyr/magrittr pipeline</span>
 <span class='co'># arrange(datasets::mtcars, cyl, desc(gear)) %&gt;% head()</span>
 
 <span class='co'># Note: arranging in the presence of groups is subtle.</span>

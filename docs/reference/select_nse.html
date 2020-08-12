@@ -43,7 +43,7 @@
 <meta property="og:description" content="Select column that are exactly the names captured unevaluated from ....
 This is to provide a simple interface that reliably uses non-standard captured names
 (and not consequences of further evaluation).  Please see
-http://www.win-vector.com/blog/2018/09/a-subtle-flaw-in-some-popular-r-nse-interfaces/
+https://win-vector.com/2018/09/23/a-subtle-flaw-in-some-popular-r-nse-interfaces/
 for some discussion.  Also accepts -name notation, but not integers or
 functions of columns.  Does not look at argument names (so can not be used to rename columns)." />
 
@@ -77,7 +77,7 @@ functions of columns.  Does not look at argument names (so can not be used to re
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seplyr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -122,7 +122,7 @@ functions of columns.  Does not look at argument names (so can not be used to re
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://www.win-vector.com/">Sponsor: Win-Vector LLC</a>
+  <a href="https://win-vector.com/">Sponsor: Win-Vector LLC</a>
 </li>
       </ul>
       
@@ -146,7 +146,7 @@ functions of columns.  Does not look at argument names (so can not be used to re
     <p>Select column that are exactly the names captured unevaluated from <code>...</code>.
 This is to provide a simple interface that reliably uses non-standard captured names
 (and not consequences of further evaluation).  Please see
-<a href='http://www.win-vector.com/blog/2018/09/a-subtle-flaw-in-some-popular-r-nse-interfaces/'>http://www.win-vector.com/blog/2018/09/a-subtle-flaw-in-some-popular-r-nse-interfaces/</a>
+<a href='https://win-vector.com/2018/09/23/a-subtle-flaw-in-some-popular-r-nse-interfaces/'>https://win-vector.com/2018/09/23/a-subtle-flaw-in-some-popular-r-nse-interfaces/</a>
 for some discussion.  Also accepts -name notation, but not integers or
 functions of columns.  Does not look at argument names (so can not be used to rename columns).</p>
     </div>
@@ -192,22 +192,72 @@ functions of columns.  Does not look at argument names (so can not be used to re
   <span class='kw'>error</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>e</span>) { <span class='no'>e</span> }
 )</div><div class='output co'>#&gt; </span><span style='font-weight: bold;'>&lt;error/vctrs_error_subscript_oob&gt;</span><span>
 #&gt; Can't subset columns that don't exist.
-#&gt; </span><span style='color: #BB0000;'>x</span><span> The column `y` doesn't exist.
+#&gt; </span><span style='color: #BB0000;'>x</span><span> Column `y` doesn't exist.
 #&gt; </span><span style='font-weight: bold;'>Backtrace:</span><span>
 #&gt; </span><span style='color: #555555;'>  1. </span><span>base::tryCatch(...)
-#&gt; </span><span style='color: #555555;'> 60. </span><span>vctrs:::stop_subscript_oob(...)
-#&gt; </span><span style='color: #555555;'> 61. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
+#&gt; </span><span style='color: #555555;'> 13. </span><span>pkgdown::build_site(...)
+#&gt; </span><span style='color: #555555;'> 14. </span><span>pkgdown:::build_site_local(...)
+#&gt; </span><span style='color: #555555;'> 15. </span><span>pkgdown::build_reference(...)
+#&gt; </span><span style='color: #555555;'> 16. </span><span>purrr::map(...)
+#&gt; </span><span style='color: #555555;'> 17. </span><span>pkgdown:::.f(.x[[i]], ...)
+#&gt; </span><span style='color: #555555;'> 18. </span><span>pkgdown:::data_reference_topic(...)
+#&gt; </span><span style='color: #555555;'> 19. </span><span>pkgdown:::run_examples(...)
+#&gt; </span><span style='color: #555555;'> 20. </span><span>pkgdown:::highlight_examples(code, topic, env = env)
+#&gt; </span><span style='color: #555555;'> 21. </span><span>evaluate::evaluate(x, child_env(env), new_device = TRUE)
+#&gt; </span><span style='color: #555555;'> 22. </span><span>evaluate:::evaluate_call(...)
+#&gt; </span><span style='color: #555555;'> 32. </span><span>[ base::eval(...) ]</span><span style='color: #555555;'> with 1 more call</span><span>
+#&gt; </span><span style='color: #555555;'> 38. </span><span>seplyr::select_nse(data.frame(x = 1), y)
+#&gt; </span><span style='color: #555555;'> 39. </span><span>seplyr::select_se(.data, colNames)
+#&gt; </span><span style='color: #555555;'> 41. </span><span>dplyr:::select.data.frame(.data, !!!colSyms)
+#&gt; </span><span style='color: #555555;'> 42. </span><span>tidyselect::eval_select(expr(c(...)), .data)
+#&gt; </span><span style='color: #555555;'> 43. </span><span>tidyselect:::eval_select_impl(...)
+#&gt; </span><span style='color: #555555;'> 51. </span><span>tidyselect:::vars_select_eval(...)
+#&gt; </span><span style='color: #555555;'> 52. </span><span>tidyselect:::walk_data_tree(expr, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 53. </span><span>tidyselect:::eval_c(expr, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 54. </span><span>tidyselect:::reduce_sels(node, data_mask, context_mask, init = init)
+#&gt; </span><span style='color: #555555;'> 55. </span><span>tidyselect:::walk_data_tree(new, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 56. </span><span>tidyselect:::as_indices_sel_impl(...)
+#&gt; </span><span style='color: #555555;'> 57. </span><span>tidyselect:::as_indices_impl(x, vars, strict = strict)
+#&gt; </span><span style='color: #555555;'> 58. </span><span>tidyselect:::chr_as_locations(x, vars)
+#&gt; </span><span style='color: #555555;'> 59. </span><span>vctrs::vec_as_location(x, n = length(vars), names = vars)
+#&gt; </span><span style='color: #555555;'> 61. </span><span>vctrs:::stop_subscript_oob(...)
+#&gt; </span><span style='color: #555555;'> 62. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
 <span class='co'>#' # throws when y is not the name of a column (good)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(
   <span class='fu'>select_nse</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>3</span>), -<span class='no'>y</span>),
   <span class='kw'>error</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>e</span>) { <span class='no'>e</span> }
 )</div><div class='output co'>#&gt; </span><span style='font-weight: bold;'>&lt;error/vctrs_error_subscript_oob&gt;</span><span>
 #&gt; Can't subset columns that don't exist.
-#&gt; </span><span style='color: #BB0000;'>x</span><span> The column `y` doesn't exist.
+#&gt; </span><span style='color: #BB0000;'>x</span><span> Column `y` doesn't exist.
 #&gt; </span><span style='font-weight: bold;'>Backtrace:</span><span>
 #&gt; </span><span style='color: #555555;'>  1. </span><span>base::tryCatch(...)
-#&gt; </span><span style='color: #555555;'> 60. </span><span>vctrs:::stop_subscript_oob(...)
-#&gt; </span><span style='color: #555555;'> 61. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
+#&gt; </span><span style='color: #555555;'> 13. </span><span>pkgdown::build_site(...)
+#&gt; </span><span style='color: #555555;'> 14. </span><span>pkgdown:::build_site_local(...)
+#&gt; </span><span style='color: #555555;'> 15. </span><span>pkgdown::build_reference(...)
+#&gt; </span><span style='color: #555555;'> 16. </span><span>purrr::map(...)
+#&gt; </span><span style='color: #555555;'> 17. </span><span>pkgdown:::.f(.x[[i]], ...)
+#&gt; </span><span style='color: #555555;'> 18. </span><span>pkgdown:::data_reference_topic(...)
+#&gt; </span><span style='color: #555555;'> 19. </span><span>pkgdown:::run_examples(...)
+#&gt; </span><span style='color: #555555;'> 20. </span><span>pkgdown:::highlight_examples(code, topic, env = env)
+#&gt; </span><span style='color: #555555;'> 21. </span><span>evaluate::evaluate(x, child_env(env), new_device = TRUE)
+#&gt; </span><span style='color: #555555;'> 22. </span><span>evaluate:::evaluate_call(...)
+#&gt; </span><span style='color: #555555;'> 32. </span><span>[ base::eval(...) ]</span><span style='color: #555555;'> with 1 more call</span><span>
+#&gt; </span><span style='color: #555555;'> 38. </span><span>seplyr::select_nse(data.frame(x = 1, z = 3), -y)
+#&gt; </span><span style='color: #555555;'> 39. </span><span>seplyr::select_se(.data, colNames)
+#&gt; </span><span style='color: #555555;'> 41. </span><span>dplyr:::select.data.frame(.data, !!!colSyms)
+#&gt; </span><span style='color: #555555;'> 42. </span><span>tidyselect::eval_select(expr(c(...)), .data)
+#&gt; </span><span style='color: #555555;'> 43. </span><span>tidyselect:::eval_select_impl(...)
+#&gt; </span><span style='color: #555555;'> 51. </span><span>tidyselect:::vars_select_eval(...)
+#&gt; </span><span style='color: #555555;'> 52. </span><span>tidyselect:::walk_data_tree(expr, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 53. </span><span>tidyselect:::eval_c(expr, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 54. </span><span>tidyselect:::reduce_sels(node, data_mask, context_mask, init = init)
+#&gt; </span><span style='color: #555555;'> 55. </span><span>tidyselect:::walk_data_tree(new, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 56. </span><span>tidyselect:::as_indices_sel_impl(...)
+#&gt; </span><span style='color: #555555;'> 57. </span><span>tidyselect:::as_indices_impl(x, vars, strict = strict)
+#&gt; </span><span style='color: #555555;'> 58. </span><span>tidyselect:::chr_as_locations(x, vars)
+#&gt; </span><span style='color: #555555;'> 59. </span><span>vctrs::vec_as_location(x, n = length(vars), names = vars)
+#&gt; </span><span style='color: #555555;'> 61. </span><span>vctrs:::stop_subscript_oob(...)
+#&gt; </span><span style='color: #555555;'> 62. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

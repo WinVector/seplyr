@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">seplyr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://www.win-vector.com/">Sponsor: Win-Vector LLC</a>
+  <a href="https://win-vector.com/">Sponsor: Win-Vector LLC</a>
 </li>
       </ul>
 </div>
@@ -120,13 +120,13 @@
 <span class="kw pkg">datasets</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/r/datasets/mtcars.html">mtcars</a></span> <span class="kw">%.&gt;%</span>
   <span class="fu"><a href="reference/arrange_se.html">arrange_se</a></span>(<span class="no">.</span>, <span class="no">orderTerms</span>) <span class="kw">%.&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">.</span>)
- <span class="co">#     mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
- <span class="co">#  1 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span>
- <span class="co">#  2 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span>
- <span class="co">#  3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span>
- <span class="co">#  4 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span>
- <span class="co">#  5 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span>
- <span class="co">#  6 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span></pre></div>
+ <span class="co">#                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
+ <span class="co">#  Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span>
+ <span class="co">#  Lotus Europa  30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span>
+ <span class="co">#  Datsun 710    22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span>
+ <span class="co">#  Merc 240D     24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span>
+ <span class="co">#  Merc 230      22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span>
+ <span class="co">#  Fiat 128      32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span></pre></div>
 <p>The concept is: in writing re-usable code or scripts you pretend you do not know the actual column names you will be asked to work with (that these will be supplied as values later at analysis time). This forces you to write scripts that can be used even if data changes, and are re-usable on new data you did not know about when writing the script.</p>
 <p>To install this package please either install from <a href="https://CRAN.R-project.org/package=seplyr">CRAN</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="r">   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'seplyr'</span>)</pre></div>
@@ -134,9 +134,9 @@
 <p>In addition to standard interface adapters <code>seplyr</code> supplies some non-trivial statement transforms:</p>
 <ul>
 <li>
-<a href="https://winvector.github.io/seplyr/reference/partition_mutate_se.html"><code><a href="reference/partition_mutate_se.html">partition_mutate_se()</a></code></a>: <a href="https://winvector.github.io/seplyr/articles/MutatePartitioner.html">vignette</a>, and <a href="http://winvector.github.io/FluidData/partition_mutate.html">article</a>.</li>
+<a href="https://winvector.github.io/seplyr/reference/partition_mutate_se.html"><code><a href="reference/partition_mutate_se.html">partition_mutate_se()</a></code></a>: <a href="https://winvector.github.io/seplyr/articles/MutatePartitioner.html">vignette</a>, and <a href="https://winvector.github.io/FluidData/partition_mutate.html">article</a>.</li>
 <li>
-<a href="https://winvector.github.io/seplyr/reference/if_else_device.html"><code><a href="reference/if_else_device.html">if_else_device()</a></code></a>: <a href="http://winvector.github.io/FluidData/partition_mutate_ex2.html">article</a>.</li>
+<a href="https://winvector.github.io/seplyr/reference/if_else_device.html"><code><a href="reference/if_else_device.html">if_else_device()</a></code></a>: <a href="https://winvector.github.io/FluidData/partition_mutate_ex2.html">article</a>.</li>
 </ul>
 <div id="note" class="section level2">
 <h2 class="hasAnchor">
