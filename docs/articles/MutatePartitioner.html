@@ -94,7 +94,7 @@
       <h1 data-toc-skip>Mutate Partitioner</h1>
                         <h4 class="author">John Mount, Win-Vector LLC</h4>
             
-            <h4 class="date">2020-08-12</h4>
+            <h4 class="date">2020-09-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr/blob/master/vignettes/MutatePartitioner.Rmd"><code>vignettes/MutatePartitioner.Rmd</code></a></small>
       <div class="hidden name"><code>MutatePartitioner.Rmd</code></div>
@@ -103,59 +103,62 @@
 
     
     
-<p><a href="https://winvector.github.io/seplyr/reference/partition_mutate_qt.html"><code><a href="../reference/partition_mutate_qt.html">seplyr::partition_mutate_qt()</a></code></a> is a service supplied by the package <a href="https://winvector.github.io/seplyr/"><code>seplyr</code></a> (version <code>0.5.0</code> or higher).</p>
-<p><code><a href="../reference/partition_mutate_qt.html">seplyr::partition_mutate_qt()</a></code> can partition a sequence of assignments so that no statement is using any value created in the same partition element or group. The partitions are in a format accepted by <a href="https://winvector.github.io/seplyr/reference/mutate_se.html"><code><a href="../reference/mutate_se.html">seplyr::mutate_se()</a></code></a> for execution.</p>
+<p><a href="https://winvector.github.io/seplyr/reference/partition_mutate_qt.html"><code>seplyr::partition_mutate_qt()</code></a> is a service supplied by the package <a href="https://winvector.github.io/seplyr/"><code>seplyr</code></a> (version <code>0.5.0</code> or higher).</p>
+<p><code><a href="../reference/partition_mutate_qt.html">seplyr::partition_mutate_qt()</a></code> can partition a sequence of assignments so that no statement is using any value created in the same partition element or group. The partitions are in a format accepted by <a href="https://winvector.github.io/seplyr/reference/mutate_se.html"><code>seplyr::mutate_se()</code></a> for execution.</p>
 <p>For such a partition the evaluation result does not depend on the order of execution of the statements in each group (as they are all independent of each other’s left-hand-sides). A no-dependency small number of groups partition is <em>very</em> helpful when executing expressions on <code>SQL</code> based data interfaces (such as <code>Apache Spark</code>).</p>
 <p>The method used to partition expressions is to scan the remaining expressions in order taking any that: have all their values available from earlier groups, do not use a value formed in the current group, and do not overwrite a value formed in the current group.</p>
 <p>This partitioning method can lead to far fewer groups than the straightforward method of breaking up the sequence of expressions at each new-value use.</p>
 <p>Here is a non-trivial example (notice we use <code>:=</code> for assignment, that is a requirement of <code><a href="../reference/mutate_se.html">seplyr::mutate_se()</a></code>):</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"seplyr"</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="#base/library.html">library</a></span>(<span class="st"><a href="https://github.com/WinVector/seplyr/">"seplyr"</a></span>)
 <span class="co">#&gt; Loading required package: wrapr</span>
+<span class="co">#&gt; Warning: replacing previous import 'vctrs::data_frame' by 'tibble::data_frame'</span>
+<span class="co">#&gt; when loading 'dplyr'</span>
 
-<span class="no">plan</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/partition_mutate_qt.html">partition_mutate_qt</a></span>(
-  <span class="no">rand_a</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice_a</span> <span class="kw">:=</span> <span class="no">rand_a</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 1</span>
-    <span class="no">a_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_a</span>, <span class="co"># first use of a new value 2</span>
-                  <span class="st">'treatment'</span>,
+<span class="kw">plan</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/partition_mutate_qt.html">partition_mutate_qt</a></span>(
+  <span class="kw">rand_a</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice_a</span> <span class="op">:=</span> <span class="kw">rand_a</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 1</span>
+    <span class="kw">a_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_a</span>, <span class="co"># first use of a new value 2</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">a_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_a</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">a_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_a</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
-  <span class="no">rand_b</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice_b</span> <span class="kw">:=</span> <span class="no">rand_b</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 3</span>
-    <span class="no">b_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_b</span>, <span class="co"># first use of a new value 4</span>
-                  <span class="st">'treatment'</span>,
+  <span class="kw">rand_b</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice_b</span> <span class="op">:=</span> <span class="kw">rand_b</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 3</span>
+    <span class="kw">b_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_b</span>, <span class="co"># first use of a new value 4</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">b_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_b</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">b_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_b</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
-  <span class="no">rand_c</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice_c</span> <span class="kw">:=</span> <span class="no">rand_c</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 5</span>
-    <span class="no">c_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_c</span>, <span class="co"># first use of a new value 6</span>
-                  <span class="st">'treatment'</span>,
+  <span class="kw">rand_c</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice_c</span> <span class="op">:=</span> <span class="kw">rand_c</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 5</span>
+    <span class="kw">c_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_c</span>, <span class="co"># first use of a new value 6</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">c_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_c</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">c_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_c</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
-  <span class="no">rand_d</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice_d</span> <span class="kw">:=</span> <span class="no">rand_d</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 7</span>
-    <span class="no">d_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_d</span>, <span class="co"># first use of a new value 8</span>
-                  <span class="st">'treatment'</span>,
+  <span class="kw">rand_d</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice_d</span> <span class="op">:=</span> <span class="kw">rand_d</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 7</span>
+    <span class="kw">d_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_d</span>, <span class="co"># first use of a new value 8</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">d_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_d</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">d_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_d</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
-  <span class="no">rand_e</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice_e</span> <span class="kw">:=</span> <span class="no">rand_e</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 9</span>
-    <span class="no">e_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_e</span>, <span class="co"># first use of a new value 10</span>
-                  <span class="st">'treatment'</span>,
+  <span class="kw">rand_e</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice_e</span> <span class="op">:=</span> <span class="kw">rand_e</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 9</span>
+    <span class="kw">e_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_e</span>, <span class="co"># first use of a new value 10</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">e_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice_e</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">e_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice_e</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>)
   )
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">plan</span>)
+<span class="fu"><a href="#base/print.html">print</a></span>(<span class="kw">plan</span>)
 <span class="co">#&gt; $group00001</span>
 <span class="co">#&gt;   rand_a   rand_b   rand_c   rand_d   rand_e </span>
 <span class="co">#&gt; "rand()" "rand()" "rand()" "rand()" "rand()" </span>
@@ -184,56 +187,58 @@
 <span class="co">#&gt;                                            e_1 </span>
 <span class="co">#&gt; "ifelse(choice_e, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                            e_2 </span>
-<span class="co">#&gt; "ifelse(choice_e, \"control\", \"treatment\")"</span></pre></body></html></div>
+<span class="co">#&gt; "ifelse(choice_e, \"control\", \"treatment\")"</span></pre></div>
 <p>Notice <code><a href="../reference/partition_mutate_qt.html">seplyr::partition_mutate_qt()</a></code> split the work into 3 groups. The straightforward method (with no statement re-ordering) of splitting into non-dependent groups would have to split the mutate at each first use of a new value: yielding 10 splits or 11 mutate stages. For why a low number of execution stages is important please see <a href="https://winvector.github.io/FluidData/partition_mutate.html">here</a>.</p>
 <p>To execute the statements on a data-item “<code>d</code>” (either an in-memory <code>data.frame</code> or a remote database or <code>Sparklyr</code> handle) we would do something like the following:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mutate_seb.html">mutate_seb</a></span>(<span class="no">d</span>, <span class="no">plan</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mutate_seb.html">mutate_seb</a></span>(<span class="kw">d</span>, <span class="kw">plan</span>)</pre></div>
 <p>A fully worked version of this example can be found <a href="https://winvector.github.io/FluidData/partition_mutate_ex2.html">here</a>.</p>
 <p>Note re-using variable values does limit the planner’s ability to efficiently partition the the statement. The planner still emits safe and correct code, but unless it were to be allowed to introduce new variable names it must break sequences in more places (note prior to <code>seplyr</code> version <code>0.5.2</code> some dependencies were missed, leading to possibly unsafe code). We show this effect below.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">plan</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/partition_mutate_qt.html">partition_mutate_qt</a></span>(
-  <span class="no">rand</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice</span> <span class="kw">:=</span> <span class="no">rand</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 1</span>
-    <span class="no">a_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>, <span class="co"># first use of a new value 2</span>
-                  <span class="st">'treatment'</span>,
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">plan</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/partition_mutate_qt.html">partition_mutate_qt</a></span>(
+  <span class="kw">rand</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice</span> <span class="op">:=</span> <span class="kw">rand</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 1</span>
+    <span class="kw">a_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, <span class="co"># first use of a new value 2</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">a_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">a_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
-  <span class="no">rand</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice</span> <span class="kw">:=</span> <span class="no">rand</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 3</span>
-    <span class="no">b_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>, <span class="co"># first use of a new value 4</span>
-                  <span class="st">'treatment'</span>,
+  <span class="kw">rand</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice</span> <span class="op">:=</span> <span class="kw">rand</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 3</span>
+    <span class="kw">b_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, <span class="co"># first use of a new value 4</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">b_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">b_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
-  <span class="no">rand</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice</span> <span class="kw">:=</span> <span class="no">rand</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 5</span>
-    <span class="no">c_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>, <span class="co"># first use of a new value 6</span>
-                  <span class="st">'treatment'</span>,
+  <span class="kw">rand</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice</span> <span class="op">:=</span> <span class="kw">rand</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 5</span>
+    <span class="kw">c_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, <span class="co"># first use of a new value 6</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">c_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">c_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
-  <span class="no">rand</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice</span> <span class="kw">:=</span> <span class="no">rand</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 7</span>
-    <span class="no">d_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>, <span class="co"># first use of a new value 8</span>
-                  <span class="st">'treatment'</span>,
+  <span class="kw">rand</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice</span> <span class="op">:=</span> <span class="kw">rand</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 7</span>
+    <span class="kw">d_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, <span class="co"># first use of a new value 8</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">d_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">d_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>),
-  <span class="no">rand</span> <span class="kw">:=</span> <span class="fu">rand</span>(),
-   <span class="no">choice</span> <span class="kw">:=</span> <span class="no">rand</span><span class="kw">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 9</span>
-    <span class="no">e_1</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>, <span class="co"># first use of a new value 10</span>
-                  <span class="st">'treatment'</span>,
+  <span class="kw">rand</span> <span class="op">:=</span> <span class="fu">rand</span>(),
+   <span class="kw">choice</span> <span class="op">:=</span> <span class="kw">rand</span><span class="op">&gt;=</span><span class="fl">0.5</span>, <span class="co"># first use of a new value 9</span>
+    <span class="kw">e_1</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, <span class="co"># first use of a new value 10</span>
+                  <span class="st">'treatment'</span>, 
                   <span class="st">'control'</span>),
-    <span class="no">e_2</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">choice</span>,
-                  <span class="st">'control'</span>,
+    <span class="kw">e_2</span> <span class="op">:=</span> <span class="fu"><a href="#base/ifelse.html">ifelse</a></span>(<span class="kw">choice</span>, 
+                  <span class="st">'control'</span>, 
                   <span class="st">'treatment'</span>)
   )
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">plan</span>)
+<span class="fu"><a href="#base/print.html">print</a></span>(<span class="kw">plan</span>)
 <span class="co">#&gt; $group00001</span>
 <span class="co">#&gt;     rand </span>
 <span class="co">#&gt; "rand()" </span>
@@ -294,7 +299,7 @@
 <span class="co">#&gt;                                          e_1 </span>
 <span class="co">#&gt; "ifelse(choice, \"treatment\", \"control\")" </span>
 <span class="co">#&gt;                                          e_2 </span>
-<span class="co">#&gt; "ifelse(choice, \"control\", \"treatment\")"</span></pre></body></html></div>
+<span class="co">#&gt; "ifelse(choice, \"control\", \"treatment\")"</span></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -310,7 +315,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

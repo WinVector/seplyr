@@ -141,7 +141,7 @@
     <p>Group a data frame by the groupingVars and add group labels.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>group_indices_se</span>(<span class='no'>.data</span>, <span class='no'>groupingVars</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>group_indices_se</span>(<span class='kw'>.data</span>, <span class='kw'>groupingVars</span>, add = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,7 +169,8 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>group_indices_se</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/mtcars.html'>mtcars</a></span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: The `...` argument of `group_keys()` is deprecated as of dplyr 1.0.0.</span>
+<span class='fu'>group_indices_se</span>(<span class='kw'>datasets</span>::<span class='kw'><a href='#datasets/mtcars.html'>mtcars</a></span>, <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>))
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The `...` argument of `group_keys()` is deprecated as of dplyr 1.0.0.</span>
 #&gt; <span class='warning'>Please `group_by()` first</span>
 #&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
 #&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt;  [1] 5 5 2 4 7 4 7 2 2 5 5 7 7 7 7 7 7 2 2 2 1 7 7 7 7 2 3 3 8 6 8 2</div><div class='input'>
@@ -189,7 +190,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

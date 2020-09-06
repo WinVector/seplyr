@@ -143,7 +143,7 @@ transmuteTerms to allow forms such as &quot;Sepal.Length &amp;gt;= 2 * Sepal.Wid
 transmuteTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>transmute_se</span>(<span class='no'>.data</span>, <span class='no'>transmuteTerms</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(), <span class='kw'>warn</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>transmute_se</span>(<span class='kw'>.data</span>, <span class='kw'>transmuteTerms</span>, env = <span class='fu'><a href='#base/sys.parent.html'>parent.frame</a></span>(), warn = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,15 +171,16 @@ transmuteTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".</p>
     <p>.data transumuted by transmuteTerms.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>transmute</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>transmute_at</a></code>, <code><a href='https://rdrr.io/pkg/wrapr/man/named_map_builder.html'>:=</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>transmute</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>transmute_at</a></code>, <code><a href='https://winvector.github.io/wrapr//reference/named_map_builder.html'>:=</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/iris.html'>iris</a></span> <span class='kw'>%.&gt;%</span>
-  <span class='fu'>transmute_se</span>(<span class='no'>.</span>, <span class='fu'>qae</span>(<span class='no'>Sepal_Long</span> <span class='kw'>:=</span> <span class='no'>Sepal.Length</span> <span class='kw'>&gt;=</span> <span class='fl'>2</span> * <span class='no'>Sepal.Width</span>,
-                      <span class='no'>Petal_Short</span> <span class='kw'>:=</span> <span class='no'>Petal.Length</span> <span class='kw'>&lt;=</span> <span class='fl'>3.5</span>)) <span class='kw'>%.&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>.</span>)</div><div class='output co'>#&gt;  Sepal_Long      Petal_Short    
+<span class='kw'>datasets</span>::<span class='kw'><a href='#datasets/iris.html'>iris</a></span> <span class='op'>%.&gt;%</span>
+  <span class='fu'>transmute_se</span>(<span class='kw'>.</span>, <span class='fu'>qae</span>(<span class='kw'>Sepal_Long</span> <span class='op'>:=</span> <span class='kw'>Sepal.Length</span> <span class='op'>&gt;=</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='kw'>Sepal.Width</span>,
+                      <span class='kw'>Petal_Short</span> <span class='op'>:=</span> <span class='kw'>Petal.Length</span> <span class='op'>&lt;=</span> <span class='fl'>3.5</span>)) <span class='op'>%.&gt;%</span>
+  <span class='fu'><a href='#base/summary.html'>summary</a></span>(<span class='kw'>.</span>)
+</div><div class='output co'>#&gt;  Sepal_Long      Petal_Short    
 #&gt;  Mode :logical   Mode :logical  
 #&gt;  FALSE:66        FALSE:95       
 #&gt;  TRUE :84        TRUE :55       </div><div class='input'>
@@ -200,7 +201,7 @@ transmuteTerms to allow forms such as "Sepal.Length &gt;= 2 * Sepal.Width".</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

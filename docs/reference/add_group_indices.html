@@ -141,7 +141,7 @@
     <p>Group a data frame and add per-group indices as a column.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_group_indices</span>(<span class='no'>.data</span>, <span class='no'>groupingVars</span>, <span class='no'>indexColumn</span>)</pre>
+    <pre class="usage"><span class='fu'>add_group_indices</span>(<span class='kw'>.data</span>, <span class='kw'>groupingVars</span>, <span class='kw'>indexColumn</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,7 +166,8 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>add_group_indices</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/mtcars.html'>mtcars</a></span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>), <span class='st'>'groupID'</span>)</div><div class='output co'>#&gt;     mpg cyl  disp  hp drat    wt  qsec vs am gear carb groupID
+<span class='fu'>add_group_indices</span>(<span class='kw'>datasets</span>::<span class='kw'><a href='#datasets/mtcars.html'>mtcars</a></span>, <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>), <span class='st'>'groupID'</span>)
+</div><div class='output co'>#&gt;     mpg cyl  disp  hp drat    wt  qsec vs am gear carb groupID
 #&gt; 1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4       5
 #&gt; 2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4       5
 #&gt; 3  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1       2
@@ -215,7 +216,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

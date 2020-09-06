@@ -142,12 +142,12 @@
     </div>
 
     <pre class="usage"><span class='fu'>add_group_sub_indices</span>(
-  <span class='no'>.data</span>,
-  <span class='no'>...</span>,
-  <span class='no'>groupingVars</span>,
-  <span class='no'>orderColumn</span>,
-  <span class='kw'>arrangeTerms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>()
+  <span class='kw'>.data</span>,
+  <span class='kw'>...</span>,
+  <span class='kw'>groupingVars</span>,
+  <span class='kw'>orderColumn</span>,
+  arrangeTerms = <span class='kw'>NULL</span>,
+  env = <span class='fu'><a href='#base/sys.parent.html'>parent.frame</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -186,34 +186,35 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='no'>groupingVars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>)
+<span class='kw'>groupingVars</span> <span class='op'>=</span> <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>)
 
-<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/mtcars.html'>mtcars</a></span> <span class='kw'>%.&gt;%</span>
+<span class='kw'>datasets</span>::<span class='kw'><a href='#datasets/mtcars.html'>mtcars</a></span> <span class='op'>%.&gt;%</span>
   <span class='co'># dplyr doesn't currently export tibble::rownames_to_column()</span>
-  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='no'>.</span>, <span class='st'>"CarName"</span> <span class='kw'>:=</span> <span class='st'>"rownames(.)"</span> ) <span class='kw'>%.&gt;%</span>
-  <span class='fu'><a href='select_se.html'>select_se</a></span>(<span class='no'>.</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'CarName'</span>, <span class='st'>'cyl'</span>, <span class='st'>'gear'</span>, <span class='st'>'hp'</span>, <span class='st'>'wt'</span>)) <span class='kw'>%.&gt;%</span>
-  <span class='fu'><a href='add_group_indices.html'>add_group_indices</a></span>(<span class='no'>.</span>, <span class='kw'>groupingVars</span> <span class='kw'>=</span> <span class='no'>groupingVars</span>,
-                    <span class='kw'>indexColumn</span> <span class='kw'>=</span> <span class='st'>'groupID'</span>) <span class='kw'>%.&gt;%</span>
-  <span class='fu'>add_group_sub_indices</span>(<span class='no'>.</span>, <span class='kw'>groupingVars</span> <span class='kw'>=</span> <span class='no'>groupingVars</span>,
-                       <span class='kw'>arrangeTerms</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'desc(hp)'</span>, <span class='st'>'wt'</span>),
-                       <span class='kw'>orderColumn</span> <span class='kw'>=</span> <span class='st'>'orderInGroup'</span>) <span class='kw'>%.&gt;%</span>
-  <span class='fu'><a href='arrange_se.html'>arrange_se</a></span>(<span class='no'>.</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'groupID'</span>, <span class='st'>'orderInGroup'</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: The `add` argument of `group_by()` is deprecated as of dplyr 1.0.0.</span>
+  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='kw'>.</span>, <span class='st'>"CarName"</span> <span class='op'>:=</span> <span class='st'>"rownames(.)"</span> ) <span class='op'>%.&gt;%</span>
+  <span class='fu'><a href='select_se.html'>select_se</a></span>(<span class='kw'>.</span>, <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>'CarName'</span>, <span class='st'>'cyl'</span>, <span class='st'>'gear'</span>, <span class='st'>'hp'</span>, <span class='st'>'wt'</span>)) <span class='op'>%.&gt;%</span>
+  <span class='fu'><a href='add_group_indices.html'>add_group_indices</a></span>(<span class='kw'>.</span>, groupingVars = <span class='kw'>groupingVars</span>,
+                    indexColumn = <span class='st'>'groupID'</span>) <span class='op'>%.&gt;%</span>
+  <span class='fu'>add_group_sub_indices</span>(<span class='kw'>.</span>, groupingVars = <span class='kw'>groupingVars</span>,
+                       arrangeTerms = <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>'desc(hp)'</span>, <span class='st'>'wt'</span>),
+                       orderColumn = <span class='st'>'orderInGroup'</span>) <span class='op'>%.&gt;%</span>
+  <span class='fu'><a href='arrange_se.html'>arrange_se</a></span>(<span class='kw'>.</span>, <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>'groupID'</span>, <span class='st'>'orderInGroup'</span>))
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The `add` argument of `group_by()` is deprecated as of dplyr 1.0.0.</span>
 #&gt; <span class='warning'>Please use the `.add` argument instead.</span>
 #&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 7</span><span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 32 x 7</span><span>
 #&gt;    CarName          cyl  gear    hp    wt groupID orderInGroup
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Toyota Corona      4     3    97  2.46       1            1
-#&gt; </span><span style='color: #555555;'> 2</span><span> Volvo 142E         4     4   109  2.78       2            1
-#&gt; </span><span style='color: #555555;'> 3</span><span> Merc 230           4     4    95  3.15       2            2
-#&gt; </span><span style='color: #555555;'> 4</span><span> Datsun 710         4     4    93  2.32       2            3
-#&gt; </span><span style='color: #555555;'> 5</span><span> Fiat X1-9          4     4    66  1.94       2            4
-#&gt; </span><span style='color: #555555;'> 6</span><span> Fiat 128           4     4    66  2.2        2            5
-#&gt; </span><span style='color: #555555;'> 7</span><span> Toyota Corolla     4     4    65  1.84       2            6
-#&gt; </span><span style='color: #555555;'> 8</span><span> Merc 240D          4     4    62  3.19       2            7
-#&gt; </span><span style='color: #555555;'> 9</span><span> Honda Civic        4     4    52  1.62       2            8
-#&gt; </span><span style='color: #555555;'>10</span><span> Lotus Europa       4     5   113  1.51       3            1
-#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Toyota Corona      4     3    97  2.46       1            1
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Volvo 142E         4     4   109  2.78       2            1
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Merc 230           4     4    95  3.15       2            2
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Datsun 710         4     4    93  2.32       2            3
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Fiat X1-9          4     4    66  1.94       2            4
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> Fiat 128           4     4    66  2.2        2            5
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> Toyota Corolla     4     4    65  1.84       2            6
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Merc 240D          4     4    62  3.19       2            7
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> Honda Civic        4     4    52  1.62       2            8
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Lotus Europa       4     5   113  1.51       3            1
+#&gt; </span><span style='color: #949494;'># … with 22 more rows</span><span></div><div class='input'>
 
 </div></span></pre>
   </div>
@@ -231,7 +232,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

@@ -141,7 +141,7 @@
     <p>Group a data frame and add per-group indices as a column.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>distinct_se</span>(<span class='no'>.data</span>, <span class='no'>groupingVars</span>, <span class='kw'>.keep_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>distinct_se</span>(<span class='kw'>.data</span>, <span class='kw'>groupingVars</span>, .keep_all = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,7 +170,8 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/mtcars.html'>mtcars</a></span> <span class='kw'>%.&gt;%</span> <span class='fu'>distinct_se</span>(<span class='no'>.</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>))</div><div class='output co'>#&gt;                   cyl gear
+<span class='kw'>datasets</span>::<span class='kw'><a href='#datasets/mtcars.html'>mtcars</a></span> <span class='op'>%.&gt;%</span> <span class='fu'>distinct_se</span>(<span class='kw'>.</span>, <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>))
+</div><div class='output co'>#&gt;                   cyl gear
 #&gt; Mazda RX4           6    4
 #&gt; Datsun 710          4    4
 #&gt; Hornet 4 Drive      6    3
@@ -195,7 +196,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

@@ -141,7 +141,7 @@
     <p>Generate a name with a prefix disjoint from a set of names</p>
     </div>
 
-    <pre class="usage"><span class='fu'>novelName</span>(<span class='no'>prefix</span>, <span class='no'>names</span>)</pre>
+    <pre class="usage"><span class='fu'>novelName</span>(<span class='kw'>prefix</span>, <span class='kw'>names</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,32 +163,34 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># basic op</span>
-<span class='fu'>novelName</span>(<span class='st'>'b'</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'a'</span>, <span class='st'>'b'</span>, <span class='st'>'c'</span>))</div><div class='output co'>#&gt; [1] "b_1"</div><div class='input'>
+<span class='fu'>novelName</span>(<span class='st'>'b'</span>, <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>'a'</span>, <span class='st'>'b'</span>, <span class='st'>'c'</span>))
+</div><div class='output co'>#&gt; [1] "b_1"</div><div class='input'>
 
 
 <span class='co'># complex application (converting logistic</span>
 <span class='co'># links to probabilities).</span>
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='kw'>exampleId</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>),
-  <span class='kw'>resultLabel</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'a'</span>, <span class='st'>'b'</span> , <span class='st'>'a'</span>, <span class='st'>'b'</span>),
-  <span class='kw'>linkValue</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>, <span class='fl'>2</span>, -<span class='fl'>2</span>, -<span class='fl'>1</span>),
-  <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='kw'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='#base/data.frame.html'>data.frame</a></span>(
+  exampleId = <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>),
+  resultLabel = <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>'a'</span>, <span class='st'>'b'</span> , <span class='st'>'a'</span>, <span class='st'>'b'</span>),
+  linkValue = <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>),
+  stringsAsFactors = <span class='fl'>FALSE</span>)
 
-<span class='no'>totColName</span> <span class='kw'>&lt;-</span> <span class='fu'>novelName</span>(<span class='st'>'t'</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>d</span>))
+<span class='kw'>totColName</span> <span class='op'>&lt;-</span> <span class='fu'>novelName</span>(<span class='st'>'t'</span>, <span class='fu'><a href='#base/colnames.html'>colnames</a></span>(<span class='kw'>d</span>))
 
-<span class='no'>d</span> <span class='kw'>-&gt;</span><span class='no'>.</span>;
-  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='no'>.</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>totColName</span> <span class='kw'>:=</span> <span class='st'>"exp(linkValue)"</span>)) <span class='kw'>-&gt;</span><span class='no'>.</span>;
-  <span class='fu'><a href='group_by_se.html'>group_by_se</a></span>(<span class='no'>.</span>, <span class='st'>"exampleId"</span>) <span class='kw'>-&gt;</span><span class='no'>.</span>;
-  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='no'>.</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"probability"</span> <span class='kw'>:=</span>
-                <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>totColName</span>, <span class='st'>'/sum('</span>, <span class='no'>totColName</span>, <span class='st'>')'</span>))) <span class='kw'>-&gt;</span><span class='no'>.</span>;
-  <span class='fu'><a href='deselect.html'>deselect</a></span>(<span class='no'>.</span>, <span class='no'>totColName</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 4</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   exampleId [2]</span><span>
+<span class='kw'>d</span> <span class='op'>-&gt;</span><span class='kw'>.</span>;
+  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='kw'>.</span>, <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='kw'>totColName</span> <span class='op'>:=</span> <span class='st'>"exp(linkValue)"</span>)) <span class='op'>-&gt;</span><span class='kw'>.</span>;
+  <span class='fu'><a href='group_by_se.html'>group_by_se</a></span>(<span class='kw'>.</span>, <span class='st'>"exampleId"</span>) <span class='op'>-&gt;</span><span class='kw'>.</span>;
+  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='kw'>.</span>, <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>"probability"</span> <span class='op'>:=</span>
+                <span class='fu'><a href='#base/paste.html'>paste0</a></span>(<span class='kw'>totColName</span>, <span class='st'>'/sum('</span>, <span class='kw'>totColName</span>, <span class='st'>')'</span>))) <span class='op'>-&gt;</span><span class='kw'>.</span>;
+  <span class='fu'><a href='deselect.html'>deselect</a></span>(<span class='kw'>.</span>, <span class='kw'>totColName</span>)
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 4</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   exampleId [2]</span><span>
 #&gt;   exampleId resultLabel linkValue probability
-#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>         1 a                  -</span><span style='color: #BB0000;'>5</span><span>    0.000</span><span style='text-decoration: underline;'>911</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span>         1 b                   2    0.999   
-#&gt; </span><span style='color: #555555;'>3</span><span>         2 a                  -</span><span style='color: #BB0000;'>2</span><span>    0.269   
-#&gt; </span><span style='color: #555555;'>4</span><span>         2 b                  -</span><span style='color: #BB0000;'>1</span><span>    0.731   </div><div class='input'>
+#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>         1 a                  -</span><span style='color: #BB0000;'>5</span><span>    0.000</span><span style='text-decoration: underline;'>911</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>         1 b                   2    0.999   
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>         2 a                  -</span><span style='color: #BB0000;'>2</span><span>    0.269   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>         2 b                  -</span><span style='color: #BB0000;'>1</span><span>    0.731   </div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -205,7 +207,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

@@ -151,7 +151,7 @@ for some discussion.  Also accepts -name notation, but not integers or
 functions of columns.  Does not look at argument names (so can not be used to rename columns).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>select_nse</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>select_nse</span>(<span class='kw'>.data</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,95 +169,101 @@ functions of columns.  Does not look at argument names (so can not be used to re
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='st'>"x"</span>
+<span class='kw'>y</span> <span class='op'>&lt;-</span> <span class='st'>"x"</span>
 
 <span class='co'># returns y-column</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt;   y
+<span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'><a href='#base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>, y = <span class='fl'>2</span>), <span class='kw'>y</span>)
+</div><div class='output co'>#&gt;   y
 #&gt; 1 2</div><div class='input'>
 <span class='co'># returns x-column (very confusing!)</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt; <span class='message'>Note: Using an external vector in selections is ambiguous.</span>
+<span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'><a href='#base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>), <span class='kw'>y</span>)
+</div><div class='output co'>#&gt; <span class='message'>Note: Using an external vector in selections is ambiguous.</span>
 #&gt; <span class='message'><span style='color: #0000BB;'>ℹ</span><span> Use `all_of(y)` instead of `y` to silence this message.</span>
 #&gt; <span class='message'></span><span style='color: #0000BB;'>ℹ</span><span> See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span>
 #&gt; <span class='message'></span><span style='color: #555555;'>This message is displayed once per session.</span><span></span></div><div class='output co'>#&gt;   x
 #&gt; 1 1</div><div class='input'>
 <span class='co'># returns y-column</span>
-<span class='fu'>select_nse</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='no'>y</span>)</div><div class='output co'>#&gt;   y
+<span class='fu'>select_nse</span>(<span class='fu'><a href='#base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>, y = <span class='fl'>2</span>), <span class='kw'>y</span>)
+</div><div class='output co'>#&gt;   y
 #&gt; 1 2</div><div class='input'>
 <span class='co'># deletes wrong column!</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>3</span>), -<span class='no'>y</span>)</div><div class='output co'>#&gt;   z
+<span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='fu'><a href='#base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>, z = <span class='fl'>3</span>), <span class='op'>-</span><span class='kw'>y</span>)
+</div><div class='output co'>#&gt;   z
 #&gt; 1 3</div><div class='input'>
 <span class='co'># throws when y is not the name of a column (good)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(
-  <span class='fu'>select_nse</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='no'>y</span>),
-  <span class='kw'>error</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>e</span>) { <span class='no'>e</span> }
-)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;'>&lt;error/vctrs_error_subscript_oob&gt;</span><span>
+<span class='fu'><a href='#base/conditions.html'>tryCatch</a></span>(
+  <span class='fu'>select_nse</span>(<span class='fu'><a href='#base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>), <span class='kw'>y</span>),
+  error = <span class='fu'>function</span>(<span class='kw'>e</span>) { <span class='kw'>e</span> }
+)
+</div><div class='output co'>#&gt; </span><span style='font-weight: bold;'>&lt;error/vctrs_error_subscript_oob&gt;</span><span>
 #&gt; Can't subset columns that don't exist.
 #&gt; </span><span style='color: #BB0000;'>x</span><span> Column `y` doesn't exist.
 #&gt; </span><span style='font-weight: bold;'>Backtrace:</span><span>
-#&gt; </span><span style='color: #555555;'>  1. </span><span>base::tryCatch(...)
-#&gt; </span><span style='color: #555555;'> 13. </span><span>pkgdown::build_site(...)
-#&gt; </span><span style='color: #555555;'> 14. </span><span>pkgdown:::build_site_local(...)
-#&gt; </span><span style='color: #555555;'> 15. </span><span>pkgdown::build_reference(...)
-#&gt; </span><span style='color: #555555;'> 16. </span><span>purrr::map(...)
-#&gt; </span><span style='color: #555555;'> 17. </span><span>pkgdown:::.f(.x[[i]], ...)
-#&gt; </span><span style='color: #555555;'> 18. </span><span>pkgdown:::data_reference_topic(...)
-#&gt; </span><span style='color: #555555;'> 19. </span><span>pkgdown:::run_examples(...)
-#&gt; </span><span style='color: #555555;'> 20. </span><span>pkgdown:::highlight_examples(code, topic, env = env)
-#&gt; </span><span style='color: #555555;'> 21. </span><span>evaluate::evaluate(x, child_env(env), new_device = TRUE)
-#&gt; </span><span style='color: #555555;'> 22. </span><span>evaluate:::evaluate_call(...)
-#&gt; </span><span style='color: #555555;'> 32. </span><span>[ base::eval(...) ]</span><span style='color: #555555;'> with 1 more call</span><span>
-#&gt; </span><span style='color: #555555;'> 38. </span><span>seplyr::select_nse(data.frame(x = 1), y)
-#&gt; </span><span style='color: #555555;'> 39. </span><span>seplyr::select_se(.data, colNames)
-#&gt; </span><span style='color: #555555;'> 41. </span><span>dplyr:::select.data.frame(.data, !!!colSyms)
-#&gt; </span><span style='color: #555555;'> 42. </span><span>tidyselect::eval_select(expr(c(...)), .data)
-#&gt; </span><span style='color: #555555;'> 43. </span><span>tidyselect:::eval_select_impl(...)
-#&gt; </span><span style='color: #555555;'> 51. </span><span>tidyselect:::vars_select_eval(...)
-#&gt; </span><span style='color: #555555;'> 52. </span><span>tidyselect:::walk_data_tree(expr, data_mask, context_mask)
-#&gt; </span><span style='color: #555555;'> 53. </span><span>tidyselect:::eval_c(expr, data_mask, context_mask)
-#&gt; </span><span style='color: #555555;'> 54. </span><span>tidyselect:::reduce_sels(node, data_mask, context_mask, init = init)
-#&gt; </span><span style='color: #555555;'> 55. </span><span>tidyselect:::walk_data_tree(new, data_mask, context_mask)
-#&gt; </span><span style='color: #555555;'> 56. </span><span>tidyselect:::as_indices_sel_impl(...)
-#&gt; </span><span style='color: #555555;'> 57. </span><span>tidyselect:::as_indices_impl(x, vars, strict = strict)
-#&gt; </span><span style='color: #555555;'> 58. </span><span>tidyselect:::chr_as_locations(x, vars)
-#&gt; </span><span style='color: #555555;'> 59. </span><span>vctrs::vec_as_location(x, n = length(vars), names = vars)
-#&gt; </span><span style='color: #555555;'> 61. </span><span>vctrs:::stop_subscript_oob(...)
-#&gt; </span><span style='color: #555555;'> 62. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
+#&gt; </span><span style='color: #555555;'>  1. </span><span>pkgdown::build_site(new_process = FALSE)
+#&gt; </span><span style='color: #555555;'>  2. </span><span>pkgdown:::build_site_local(...)
+#&gt; </span><span style='color: #555555;'>  3. </span><span>pkgdown::build_reference(...)
+#&gt; </span><span style='color: #555555;'>  4. </span><span>purrr::map(...)
+#&gt; </span><span style='color: #555555;'>  5. </span><span>pkgdown:::.f(.x[[i]], ...)
+#&gt; </span><span style='color: #555555;'>  7. </span><span>pkgdown:::data_reference_topic(...)
+#&gt; </span><span style='color: #555555;'>  8. </span><span>pkgdown:::run_examples(...)
+#&gt; </span><span style='color: #555555;'>  9. </span><span>pkgdown:::highlight_examples(code, topic, env = env)
+#&gt; </span><span style='color: #555555;'> 10. </span><span>downlit::evaluate_and_highlight(...)
+#&gt; </span><span style='color: #555555;'> 11. </span><span>evaluate::evaluate(code, child_env(env), new_device = TRUE) </span><span style='color: #555555;'>/Users/johnmount/Documents/work/downlit/R/evaluate.R:25:2</span><span>
+#&gt; </span><span style='color: #555555;'> 12. </span><span>evaluate:::evaluate_call(...)
+#&gt; </span><span style='color: #555555;'> 22. </span><span>[ base::eval(...) ]</span><span style='color: #555555;'> with 1 more call</span><span>
+#&gt; </span><span style='color: #555555;'> 28. </span><span>seplyr::select_nse(data.frame(x = 1), y)
+#&gt; </span><span style='color: #555555;'> 29. </span><span>seplyr::select_se(.data, colNames)
+#&gt; </span><span style='color: #555555;'> 31. </span><span>dplyr:::select.data.frame(.data, !!!colSyms)
+#&gt; </span><span style='color: #555555;'> 32. </span><span>tidyselect::eval_select(expr(c(...)), .data)
+#&gt; </span><span style='color: #555555;'> 33. </span><span>tidyselect:::eval_select_impl(...)
+#&gt; </span><span style='color: #555555;'> 41. </span><span>tidyselect:::vars_select_eval(...)
+#&gt; </span><span style='color: #555555;'> 42. </span><span>tidyselect:::walk_data_tree(expr, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 43. </span><span>tidyselect:::eval_c(expr, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 44. </span><span>tidyselect:::reduce_sels(node, data_mask, context_mask, init = init)
+#&gt; </span><span style='color: #555555;'> 45. </span><span>tidyselect:::walk_data_tree(new, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 46. </span><span>tidyselect:::as_indices_sel_impl(...)
+#&gt; </span><span style='color: #555555;'> 47. </span><span>tidyselect:::as_indices_impl(x, vars, strict = strict)
+#&gt; </span><span style='color: #555555;'> 48. </span><span>tidyselect:::chr_as_locations(x, vars)
+#&gt; </span><span style='color: #555555;'> 49. </span><span>vctrs::vec_as_location(x, n = length(vars), names = vars)
+#&gt; </span><span style='color: #555555;'> 51. </span><span>vctrs:::stop_subscript_oob(...)
+#&gt; </span><span style='color: #555555;'> 52. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
 <span class='co'>#' # throws when y is not the name of a column (good)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(
-  <span class='fu'>select_nse</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>3</span>), -<span class='no'>y</span>),
-  <span class='kw'>error</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>e</span>) { <span class='no'>e</span> }
-)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;'>&lt;error/vctrs_error_subscript_oob&gt;</span><span>
+<span class='fu'><a href='#base/conditions.html'>tryCatch</a></span>(
+  <span class='fu'>select_nse</span>(<span class='fu'><a href='#base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>, z = <span class='fl'>3</span>), <span class='op'>-</span><span class='kw'>y</span>),
+  error = <span class='fu'>function</span>(<span class='kw'>e</span>) { <span class='kw'>e</span> }
+)
+</div><div class='output co'>#&gt; </span><span style='font-weight: bold;'>&lt;error/vctrs_error_subscript_oob&gt;</span><span>
 #&gt; Can't subset columns that don't exist.
 #&gt; </span><span style='color: #BB0000;'>x</span><span> Column `y` doesn't exist.
 #&gt; </span><span style='font-weight: bold;'>Backtrace:</span><span>
-#&gt; </span><span style='color: #555555;'>  1. </span><span>base::tryCatch(...)
-#&gt; </span><span style='color: #555555;'> 13. </span><span>pkgdown::build_site(...)
-#&gt; </span><span style='color: #555555;'> 14. </span><span>pkgdown:::build_site_local(...)
-#&gt; </span><span style='color: #555555;'> 15. </span><span>pkgdown::build_reference(...)
-#&gt; </span><span style='color: #555555;'> 16. </span><span>purrr::map(...)
-#&gt; </span><span style='color: #555555;'> 17. </span><span>pkgdown:::.f(.x[[i]], ...)
-#&gt; </span><span style='color: #555555;'> 18. </span><span>pkgdown:::data_reference_topic(...)
-#&gt; </span><span style='color: #555555;'> 19. </span><span>pkgdown:::run_examples(...)
-#&gt; </span><span style='color: #555555;'> 20. </span><span>pkgdown:::highlight_examples(code, topic, env = env)
-#&gt; </span><span style='color: #555555;'> 21. </span><span>evaluate::evaluate(x, child_env(env), new_device = TRUE)
-#&gt; </span><span style='color: #555555;'> 22. </span><span>evaluate:::evaluate_call(...)
-#&gt; </span><span style='color: #555555;'> 32. </span><span>[ base::eval(...) ]</span><span style='color: #555555;'> with 1 more call</span><span>
-#&gt; </span><span style='color: #555555;'> 38. </span><span>seplyr::select_nse(data.frame(x = 1, z = 3), -y)
-#&gt; </span><span style='color: #555555;'> 39. </span><span>seplyr::select_se(.data, colNames)
-#&gt; </span><span style='color: #555555;'> 41. </span><span>dplyr:::select.data.frame(.data, !!!colSyms)
-#&gt; </span><span style='color: #555555;'> 42. </span><span>tidyselect::eval_select(expr(c(...)), .data)
-#&gt; </span><span style='color: #555555;'> 43. </span><span>tidyselect:::eval_select_impl(...)
-#&gt; </span><span style='color: #555555;'> 51. </span><span>tidyselect:::vars_select_eval(...)
-#&gt; </span><span style='color: #555555;'> 52. </span><span>tidyselect:::walk_data_tree(expr, data_mask, context_mask)
-#&gt; </span><span style='color: #555555;'> 53. </span><span>tidyselect:::eval_c(expr, data_mask, context_mask)
-#&gt; </span><span style='color: #555555;'> 54. </span><span>tidyselect:::reduce_sels(node, data_mask, context_mask, init = init)
-#&gt; </span><span style='color: #555555;'> 55. </span><span>tidyselect:::walk_data_tree(new, data_mask, context_mask)
-#&gt; </span><span style='color: #555555;'> 56. </span><span>tidyselect:::as_indices_sel_impl(...)
-#&gt; </span><span style='color: #555555;'> 57. </span><span>tidyselect:::as_indices_impl(x, vars, strict = strict)
-#&gt; </span><span style='color: #555555;'> 58. </span><span>tidyselect:::chr_as_locations(x, vars)
-#&gt; </span><span style='color: #555555;'> 59. </span><span>vctrs::vec_as_location(x, n = length(vars), names = vars)
-#&gt; </span><span style='color: #555555;'> 61. </span><span>vctrs:::stop_subscript_oob(...)
-#&gt; </span><span style='color: #555555;'> 62. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
+#&gt; </span><span style='color: #555555;'>  1. </span><span>pkgdown::build_site(new_process = FALSE)
+#&gt; </span><span style='color: #555555;'>  2. </span><span>pkgdown:::build_site_local(...)
+#&gt; </span><span style='color: #555555;'>  3. </span><span>pkgdown::build_reference(...)
+#&gt; </span><span style='color: #555555;'>  4. </span><span>purrr::map(...)
+#&gt; </span><span style='color: #555555;'>  5. </span><span>pkgdown:::.f(.x[[i]], ...)
+#&gt; </span><span style='color: #555555;'>  7. </span><span>pkgdown:::data_reference_topic(...)
+#&gt; </span><span style='color: #555555;'>  8. </span><span>pkgdown:::run_examples(...)
+#&gt; </span><span style='color: #555555;'>  9. </span><span>pkgdown:::highlight_examples(code, topic, env = env)
+#&gt; </span><span style='color: #555555;'> 10. </span><span>downlit::evaluate_and_highlight(...)
+#&gt; </span><span style='color: #555555;'> 11. </span><span>evaluate::evaluate(code, child_env(env), new_device = TRUE) </span><span style='color: #555555;'>/Users/johnmount/Documents/work/downlit/R/evaluate.R:25:2</span><span>
+#&gt; </span><span style='color: #555555;'> 12. </span><span>evaluate:::evaluate_call(...)
+#&gt; </span><span style='color: #555555;'> 22. </span><span>[ base::eval(...) ]</span><span style='color: #555555;'> with 1 more call</span><span>
+#&gt; </span><span style='color: #555555;'> 28. </span><span>seplyr::select_nse(data.frame(x = 1, z = 3), -y)
+#&gt; </span><span style='color: #555555;'> 29. </span><span>seplyr::select_se(.data, colNames)
+#&gt; </span><span style='color: #555555;'> 31. </span><span>dplyr:::select.data.frame(.data, !!!colSyms)
+#&gt; </span><span style='color: #555555;'> 32. </span><span>tidyselect::eval_select(expr(c(...)), .data)
+#&gt; </span><span style='color: #555555;'> 33. </span><span>tidyselect:::eval_select_impl(...)
+#&gt; </span><span style='color: #555555;'> 41. </span><span>tidyselect:::vars_select_eval(...)
+#&gt; </span><span style='color: #555555;'> 42. </span><span>tidyselect:::walk_data_tree(expr, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 43. </span><span>tidyselect:::eval_c(expr, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 44. </span><span>tidyselect:::reduce_sels(node, data_mask, context_mask, init = init)
+#&gt; </span><span style='color: #555555;'> 45. </span><span>tidyselect:::walk_data_tree(new, data_mask, context_mask)
+#&gt; </span><span style='color: #555555;'> 46. </span><span>tidyselect:::as_indices_sel_impl(...)
+#&gt; </span><span style='color: #555555;'> 47. </span><span>tidyselect:::as_indices_impl(x, vars, strict = strict)
+#&gt; </span><span style='color: #555555;'> 48. </span><span>tidyselect:::chr_as_locations(x, vars)
+#&gt; </span><span style='color: #555555;'> 49. </span><span>vctrs::vec_as_location(x, n = length(vars), names = vars)
+#&gt; </span><span style='color: #555555;'> 51. </span><span>vctrs:::stop_subscript_oob(...)
+#&gt; </span><span style='color: #555555;'> 52. </span><span>vctrs:::stop_subscript(...)</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -274,7 +280,7 @@ functions of columns.  Does not look at argument names (so can not be used to re
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
