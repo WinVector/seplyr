@@ -33,7 +33,7 @@ group_by_se <- function(.data, groupingVars, add = FALSE) {
     }
     # convert char vector into spliceable vector
     groupingSyms <- rlang::syms(groupingVars)
-    .data <- dplyr::group_by(.data = .data, !!!groupingSyms, add = add)
+    .data <- dplyr::group_by(.data = .data, !!!groupingSyms)
   }
   .data
 }

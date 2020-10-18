@@ -1,4 +1,9 @@
 
+# seplyr 1.0.1 2020-10-18
+
+ * Switch to tinytest.
+ * Deal with add deprecation in dplyr.
+
 # seplyr 1.0.0 2020-08-12
 
  * http: to https: where feasible.

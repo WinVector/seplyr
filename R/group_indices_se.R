@@ -23,8 +23,11 @@ group_indices_se <- function(.data, groupingVars, add = FALSE) {
   if(!is.character(groupingVars)) {
     stop("seplyr::group_indices_se groupingVars must be a character vector")
   }
+  if(!add) {
+    .data <- dplyr::ungroup(.data)
+  }
   # convert char vector into spliceable vector
   groupingSyms <- rlang::syms(groupingVars)
-  dplyr::group_indices(.data = .data, !!!groupingSyms, add = add)
+  dplyr::group_indices(.data = .data, !!!groupingSyms)
 }
 

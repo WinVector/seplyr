@@ -1,12 +1,5 @@
-library('seplyr')
 
-context("basictest")
-
-test_that("test_basic.R", {
-  if(!requireNamespace('datasets', quietly = TRUE)) {
-    return(invisible(NULL))
-  }
-
+if(requireNamespace('datasets', quietly = TRUE)) {
   groupingCols <- c("cyl", "gear")
   r1 <- datasets::mtcars %.>%
     group_summarize(.,
@@ -27,7 +20,7 @@ test_that("test_basic.R", {
       8    , 3     , 15.05           , 357.6             |
       8    , 5     , 15.4            , 326               )
 
-  testthat::expect_equal(r1, r2, tolerance = 0.01)
+  expect_equal(r1, r2, tolerance = 0.01)
 
 
   r1 <- datasets::mtcars %.>%
@@ -74,7 +67,6 @@ test_that("test_basic.R", {
       32.4 , 4    , 78.7  , 66  , 4.08  , 2.2  , 19.47 , 1   , 1   , 4     , 1     ,  6L    |
       33.9 , 4    , 71.1  , 65  , 4.22  , 1.835, 19.9  , 1   , 1   , 4     , 1     ,  8L    )
 
-  testthat::expect_equal(r1, r2, tolerance = 0.01)
+  expect_equal(r1, r2, tolerance = 0.01)
+}
 
-  invisible(NULL)
-})
