@@ -1,4 +1,8 @@
 
+# seplyr 1.0.2 2021-06-11
+
+ * Remove LazyData decl
+
 # seplyr 1.0.1 2020-10-18
 
  * Switch to tinytest.
