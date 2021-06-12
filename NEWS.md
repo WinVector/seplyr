@@ -1,5 +1,5 @@
 
-# seplyr 1.0.2 2021-06-11
+# seplyr 1.0.2 2021-06-12
 
  * Remove LazyData decl
 

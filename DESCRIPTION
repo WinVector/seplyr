@@ -1,8 +1,8 @@
 Package: seplyr
 Type: Package
 Title: Improved Standard Evaluation Interfaces for Common Data Manipulation Tasks
-Version: 1.0.2
-Date: 2020-06-11
+Version: 1.0.3
+Date: 2021-06-12
 Authors@R: c(
     person("John", "Mount", email = "jmount@win-vector.com", role = c("aut", "cre")),
     person(family = "Win-Vector LLC", role = c("cph"))
@@ -24,7 +24,7 @@ License: GPL-2 | GPL-3
 Encoding: UTF-8
 Depends:
     R (>= 3.4.0),
-    wrapr (>= 2.0.2)
+    wrapr (>= 2.0.7)
 Imports:
     dplyr (>= 0.8.5),
     rlang, 

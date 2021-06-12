@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seplyr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -141,7 +141,7 @@
     <p>Arrange a data frame and rank indexes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_rank_indices</span>(<span class='kw'>.data</span>, <span class='kw'>...</span>, arrangeTerms = <span class='kw'>NULL</span>, <span class='kw'>orderColumn</span>)</pre>
+    <pre class="usage"><span class='fu'>add_rank_indices</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span>, arrangeTerms <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>orderColumn</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,46 +171,46 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='kw'>datasets</span>::<span class='kw'><a href='#datasets/mtcars.html'>mtcars</a></span> <span class='op'>%.&gt;%</span>
+<span class='fu'>datasets</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/r/datasets/mtcars.html'>mtcars</a></span> <span class='op'>%.&gt;%</span>
   <span class='co'># tibble::rownames_to_column() not currently re-exported by dplyr</span>
-  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span>(<span class='kw'>.</span>, <span class='st'>"CarName"</span> <span class='op'>:=</span> <span class='st'>"rownames(.)"</span> ) <span class='op'>%.&gt;%</span>
-  <span class='fu'><a href='select_se.html'>select_se</a></span>(<span class='kw'>.</span>, <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>'CarName'</span>, <span class='st'>'hp'</span>, <span class='st'>'wt'</span>)) <span class='op'>%.&gt;%</span>
-  <span class='fu'>add_rank_indices</span>(<span class='kw'>.</span>, arrangeTerms = <span class='fu'><a href='#base/c.html'>c</a></span>(<span class='st'>'desc(hp)'</span>, <span class='st'>'wt'</span>),
-                   orderColumn = <span class='st'>'rankID'</span>) <span class='op'>%.&gt;%</span>
-  <span class='fu'><a href='arrange_se.html'>arrange_se</a></span>(<span class='kw'>.</span>, <span class='st'>'rankID'</span>)
-</div><div class='output co'>#&gt;                CarName  hp    wt rankID
-#&gt; 1        Maserati Bora 335 3.570      1
-#&gt; 2       Ford Pantera L 264 3.170      2
-#&gt; 3           Duster 360 245 3.570      3
-#&gt; 4           Camaro Z28 245 3.840      4
-#&gt; 5    Chrysler Imperial 230 5.345      5
-#&gt; 6  Lincoln Continental 215 5.424      6
-#&gt; 7   Cadillac Fleetwood 205 5.250      7
-#&gt; 8           Merc 450SL 180 3.730      8
-#&gt; 9          Merc 450SLC 180 3.780      9
-#&gt; 10          Merc 450SE 180 4.070     10
-#&gt; 11        Ferrari Dino 175 2.770     11
-#&gt; 12   Hornet Sportabout 175 3.440     12
-#&gt; 13    Pontiac Firebird 175 3.845     13
-#&gt; 14         AMC Javelin 150 3.435     14
-#&gt; 15    Dodge Challenger 150 3.520     15
-#&gt; 16            Merc 280 123 3.440     16
-#&gt; 17           Merc 280C 123 3.440     17
-#&gt; 18        Lotus Europa 113 1.513     18
-#&gt; 19           Mazda RX4 110 2.620     19
-#&gt; 20       Mazda RX4 Wag 110 2.875     20
-#&gt; 21      Hornet 4 Drive 110 3.215     21
-#&gt; 22          Volvo 142E 109 2.780     22
-#&gt; 23             Valiant 105 3.460     23
-#&gt; 24       Toyota Corona  97 2.465     24
-#&gt; 25            Merc 230  95 3.150     25
-#&gt; 26          Datsun 710  93 2.320     26
-#&gt; 27       Porsche 914-2  91 2.140     27
-#&gt; 28           Fiat X1-9  66 1.935     28
-#&gt; 29            Fiat 128  66 2.200     29
-#&gt; 30      Toyota Corolla  65 1.835     30
-#&gt; 31           Merc 240D  62 3.190     31
-#&gt; 32         Honda Civic  52 1.615     32</div><div class='input'>
+  <span class='fu'><a href='mutate_se.html'>mutate_se</a></span><span class='op'>(</span><span class='va'>.</span>, <span class='st'>"CarName"</span> <span class='op'>:=</span> <span class='st'>"rownames(.)"</span> <span class='op'>)</span> <span class='op'>%.&gt;%</span>
+  <span class='fu'><a href='select_se.html'>select_se</a></span><span class='op'>(</span><span class='va'>.</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'CarName'</span>, <span class='st'>'hp'</span>, <span class='st'>'wt'</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%.&gt;%</span>
+  <span class='fu'>add_rank_indices</span><span class='op'>(</span><span class='va'>.</span>, arrangeTerms <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'desc(hp)'</span>, <span class='st'>'wt'</span><span class='op'>)</span>,
+                   orderColumn <span class='op'>=</span> <span class='st'>'rankID'</span><span class='op'>)</span> <span class='op'>%.&gt;%</span>
+  <span class='fu'><a href='arrange_se.html'>arrange_se</a></span><span class='op'>(</span><span class='va'>.</span>, <span class='st'>'rankID'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                 CarName  hp    wt rankID
+#&gt; Maserati Bora             Maserati Bora 335 3.570      1
+#&gt; Ford Pantera L           Ford Pantera L 264 3.170      2
+#&gt; Duster 360                   Duster 360 245 3.570      3
+#&gt; Camaro Z28                   Camaro Z28 245 3.840      4
+#&gt; Chrysler Imperial     Chrysler Imperial 230 5.345      5
+#&gt; Lincoln Continental Lincoln Continental 215 5.424      6
+#&gt; Cadillac Fleetwood   Cadillac Fleetwood 205 5.250      7
+#&gt; Merc 450SL                   Merc 450SL 180 3.730      8
+#&gt; Merc 450SLC                 Merc 450SLC 180 3.780      9
+#&gt; Merc 450SE                   Merc 450SE 180 4.070     10
+#&gt; Ferrari Dino               Ferrari Dino 175 2.770     11
+#&gt; Hornet Sportabout     Hornet Sportabout 175 3.440     12
+#&gt; Pontiac Firebird       Pontiac Firebird 175 3.845     13
+#&gt; AMC Javelin                 AMC Javelin 150 3.435     14
+#&gt; Dodge Challenger       Dodge Challenger 150 3.520     15
+#&gt; Merc 280                       Merc 280 123 3.440     16
+#&gt; Merc 280C                     Merc 280C 123 3.440     17
+#&gt; Lotus Europa               Lotus Europa 113 1.513     18
+#&gt; Mazda RX4                     Mazda RX4 110 2.620     19
+#&gt; Mazda RX4 Wag             Mazda RX4 Wag 110 2.875     20
+#&gt; Hornet 4 Drive           Hornet 4 Drive 110 3.215     21
+#&gt; Volvo 142E                   Volvo 142E 109 2.780     22
+#&gt; Valiant                         Valiant 105 3.460     23
+#&gt; Toyota Corona             Toyota Corona  97 2.465     24
+#&gt; Merc 230                       Merc 230  95 3.150     25
+#&gt; Datsun 710                   Datsun 710  93 2.320     26
+#&gt; Porsche 914-2             Porsche 914-2  91 2.140     27
+#&gt; Fiat X1-9                     Fiat X1-9  66 1.935     28
+#&gt; Fiat 128                       Fiat 128  66 2.200     29
+#&gt; Toyota Corolla           Toyota Corolla  65 1.835     30
+#&gt; Merc 240D                     Merc 240D  62 3.190     31
+#&gt; Honda Civic                 Honda Civic  52 1.615     32</div><div class='input'>
 
 </div></pre>
   </div>
@@ -228,7 +228,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

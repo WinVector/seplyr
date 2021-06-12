@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">seplyr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
       </span>
     </div>
 
@@ -48,7 +48,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,31 +107,31 @@
 <p><img src="https://github.com/WinVector/seplyr/raw/master/tools/safety.png"></p>
 <p>To get started we suggest visiting the <a href="https://winvector.github.io/seplyr/"><code>seplyr</code> site</a>, and checking out <a href="https://winvector.github.io/seplyr/articles/seplyr.html">some examples</a>.</p>
 <p>One quick example:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># Assume this is set elsewhere,</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Assume this is set elsewhere,</span>
 <span class="co"># supplied by a user, function argument, or control file.</span>
-<span class="kw">orderTerms</span> <span class="op">&lt;-</span> <span class="fu"><a href="#base/c.html">c</a></span>(<span class="st">'cyl'</span>, <span class="st">'desc(gear)'</span>)
+<span class="va">orderTerms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cyl'</span>, <span class="st">'desc(gear)'</span><span class="op">)</span>
 
 <span class="co"># load packages</span>
-<span class="fu"><a href="#base/library.html">library</a></span>(<span class="st"><a href="https://github.com/WinVector/seplyr/">"seplyr"</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/WinVector/seplyr/">"seplyr"</a></span><span class="op">)</span>
  <span class="co">#  Loading required package: wrapr</span>
 
 <span class="co"># where we are actually working (perhaps in a re-usable</span>
 <span class="co"># script or function)</span>
-<span class="kw">datasets</span>::<span class="kw"><a href="#datasets/mtcars.html">mtcars</a></span> <span class="op">%.&gt;%</span> 
-  <span class="fu"><a href="reference/arrange_se.html">arrange_se</a></span>(<span class="kw">.</span>, <span class="kw">orderTerms</span>) <span class="op">%.&gt;%</span> 
-  <span class="fu"><a href="#utils/head.html">head</a></span>(<span class="kw">.</span>)
+<span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/mtcars.html">mtcars</a></span> <span class="op">%.&gt;%</span> 
+  <span class="fu"><a href="reference/arrange_se.html">arrange_se</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">orderTerms</span><span class="op">)</span> <span class="op">%.&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
  <span class="co">#                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
  <span class="co">#  Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span>
  <span class="co">#  Lotus Europa  30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span>
  <span class="co">#  Datsun 710    22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span>
  <span class="co">#  Merc 240D     24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span>
  <span class="co">#  Merc 230      22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span>
- <span class="co">#  Fiat 128      32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span></pre></div>
+ <span class="co">#  Fiat 128      32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span></code></pre></div>
 <p>The concept is: in writing re-usable code or scripts you pretend you do not know the actual column names you will be asked to work with (that these will be supplied as values later at analysis time). This forces you to write scripts that can be used even if data changes, and are re-usable on new data you did not know about when writing the script.</p>
 <p>To install this package please either install from <a href="https://CRAN.R-project.org/package=seplyr">CRAN</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-   <span class="fu"><a href="#utils/install.packages.html">install.packages</a></span>(<span class="st">'seplyr'</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R">   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'seplyr'</span><span class="op">)</span></code></pre></div>
 <p>Please see <a href="https://winvector.github.io/wrapr/reference/dot_arrow.html"><code>help("%.&gt;%", package="wrapr")</code></a> for details on “dot pipe.”</p>
 <p>In addition to standard interface adapters <code>seplyr</code> supplies some non-trivial statement transforms:</p>
 <ul>
@@ -192,7 +192,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
