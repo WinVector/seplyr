@@ -60,18 +60,18 @@ To install this package please either install from
    install.packages('seplyr')
 ```
 
-Please see [`help("%.>%",
-package="wrapr")`](https://winvector.github.io/wrapr/reference/dot_arrow.html)
+Please see
+[`help("%.>%", package="wrapr")`](https://winvector.github.io/wrapr/reference/dot_arrow.html)
 for details on “dot pipe.”
 
 In addition to standard interface adapters `seplyr` supplies some
 non-trivial statement transforms:
 
-  - [`partition_mutate_se()`](https://winvector.github.io/seplyr/reference/partition_mutate_se.html):
+-   [`partition_mutate_se()`](https://winvector.github.io/seplyr/reference/partition_mutate_se.html):
     [vignette](https://winvector.github.io/seplyr/articles/MutatePartitioner.html),
     and
     [article](https://winvector.github.io/FluidData/partition_mutate.html).
-  - [`if_else_device()`](https://winvector.github.io/seplyr/reference/if_else_device.html):
+-   [`if_else_device()`](https://winvector.github.io/seplyr/reference/if_else_device.html):
     [article](https://winvector.github.io/FluidData/partition_mutate_ex2.html).
 
 ## Note

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seplyr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
       <h1 data-toc-skip>seplyr</h1>
                         <h4 class="author">John Mount</h4>
             
-            <h4 class="date">2021-06-12</h4>
+            <h4 class="date">2021-08-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WinVector/seplyr/blob/master/vignettes/seplyr.Rmd"><code>vignettes/seplyr.Rmd</code></a></small>
       <div class="hidden name"><code>seplyr.Rmd</code></div>
@@ -126,33 +126,13 @@
 ## Merc 240D     24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
 ## Merc 230      22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
 ## Fiat 128      32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</code></pre>
-<p>In <code>dplyr</code> <code>0.7.*</code> if the names of the columns are coming from a variable set elsewhere you would to need to use a tool to substitute those names in. One such tool is <code>rlang</code>/<code>tidyeval</code> (though we strongly prefer <a href="https://github.com/WinVector/seplyr/blob/master/README.md"><code>seplyr</code></a> and <a href="https://github.com/WinVector/wrapr/blob/master/README.md"><code>wrapr::let()</code></a>)). <code>rlang</code>/<code>tidyeval</code> works as follows (for comparison only, this is <em>not</em> our suggested workflow).</p>
+<p>In <code>dplyr</code> <code>0.7.*</code> if the names of the columns are coming from a variable set elsewhere you would to need to use a tool to substitute those names in. One such tool is <code>rlang</code>/<code>tidyeval</code> (though we strongly prefer <a href="https://github.com/WinVector/seplyr/blob/master/README.md"><code>seplyr</code></a>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Assume this is set elsewhere,</span>
 <span class="co"># supplied by a user, function argument, or control file.</span>
-<span class="va">orderTerms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cyl'</span>, <span class="st">'desc(gear)'</span><span class="op">)</span>
-
-<span class="co"># Now convert into splice-able types, the idea is the user</span>
-<span class="co"># supplies variable names that we later convert to "quosures"</span>
-<span class="co"># for use in `dplyr` 0.7.* generic code.</span>
-<span class="co"># This code is near the pipe under the rule:</span>
-<span class="co"># "If you are close enough to form a quosure, </span>
-<span class="co">#  you are close enough to re-code the analysis"</span>
-<span class="va">orderQs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">orderTerms</span>,
-                  <span class="kw">function</span><span class="op">(</span><span class="va">si</span><span class="op">)</span> <span class="op">{</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/parse_expr.html">parse_expr</a></span><span class="op">(</span><span class="va">si</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
-<span class="co"># pipe</span>
-<span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/mtcars.html">mtcars</a></span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">orderQs</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>##                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-## Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-## Lotus Europa  30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-## Datsun 710    22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-## Merc 240D     24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-## Merc 230      22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-## Fiat 128      32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</code></pre>
+<span class="va">orderTerms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cyl'</span>, <span class="st">'desc(gear)'</span><span class="op">)</span></code></pre></div>
 <p>If you don’t want to try and digest entire theory of quasi-quoting and splicing (the <code>!!!</code> operator) then you can use <code>seplyr</code> which conveniently and legibly wraps the operations as follows:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/WinVector/seplyr/">"seplyr"</a></span><span class="op">)</span></code></pre></div>
 <pre><code>## Loading required package: wrapr</code></pre>
 <pre><code>## 
@@ -160,7 +140,7 @@
 <pre><code>## The following object is masked from 'package:dplyr':
 ## 
 ##     coalesce</code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/mtcars.html">mtcars</a></span> <span class="op">%.&gt;%</span> 
   <span class="fu"><a href="../reference/arrange_se.html">arrange_se</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">orderTerms</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span></code></pre></div>
@@ -198,7 +178,7 @@
 <li><code>rename_mp()</code></li>
 </ul>
 <p>Here is a example using <code><a href="../reference/summarize_se.html">seplyr::summarize_se()</a></code>.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/iris.html">iris</a></span> <span class="op">%.&gt;%</span>
   <span class="fu"><a href="../reference/group_by_se.html">group_by_se</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Species"</span><span class="op">)</span> <span class="op">%.&gt;%</span>
   <span class="fu"><a href="../reference/summarize_se.html">summarize_se</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Mean.Sepal.Length"</span> <span class="op">:=</span> <span class="st">"mean(Sepal.Length)"</span>, 

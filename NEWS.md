@@ -1,4 +1,9 @@
 
+
+# seplyr 1.0.4 2021-08-25
+
+ * Documentation fixes (catch up with rlang fixes).
+
 # seplyr 1.0.3 2021-06-12
 
  * Remove LazyData decl
