@@ -3,9 +3,7 @@ output: github_document
 ---
 
 
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/seplyr)](https://cran.r-project.org/package=seplyr)
-[![status](https://tinyverse.netlify.com/badge/seplyr)](https://CRAN.R-project.org/package=seplyr)
-
+This project has been removed from CRAN by the request of the author. The functions it supplied are now better supplied by rquery and rqdatatable.
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
